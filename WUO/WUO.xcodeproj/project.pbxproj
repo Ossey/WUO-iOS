@@ -1,0 +1,948 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
+		181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381781E1B4AC0001E8264 /* XYDynamicTableView.m */; };
+		1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813817B1E1B882E001E8264 /* XYPictureCollectionView.m */; };
+		1813817F1E1BF49E001E8264 /* XYDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813817E1E1BF49E001E8264 /* XYDynamicViewModel.m */; };
+		183F93901E18BFA200875416 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F938F1E18BFA200875416 /* main.m */; };
+		183F939B1E18BFA200875416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183F939A1E18BFA200875416 /* Assets.xcassets */; };
+		183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93D71E18F2A400875416 /* AppDelegate.m */; };
+		183F93E41E18F2B500875416 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E11E18F2B500875416 /* Reachability.m */; };
+		183F93E51E18F2B500875416 /* XYNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E31E18F2B500875416 /* XYNetworkRequest.m */; };
+		183F93E81E18F44200875416 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E71E18F44200875416 /* MainTabBarController.m */; };
+		183F93EB1E18F47E00875416 /* XYComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93EA1E18F47E00875416 /* XYComposeViewController.m */; };
+		183F93EE1E18F49900875416 /* XYDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93ED1E18F49900875416 /* XYDynamicViewController.m */; };
+		183F93F11E18F4A800875416 /* XYFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93F01E18F4A800875416 /* XYFindViewController.m */; };
+		183F93F41E18F4D100875416 /* XYInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93F31E18F4D100875416 /* XYInvestViewController.m */; };
+		183F93F71E18F4E500875416 /* XYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93F61E18F4E500875416 /* XYMineViewController.m */; };
+		183F93FB1E18F96800875416 /* UIImage+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93FA1E18F96800875416 /* UIImage+XYExtension.m */; };
+		183F93FF1E19173B00875416 /* MainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93FE1E19173B00875416 /* MainTabBar.m */; };
+		183F94021E19182500875416 /* XYConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F94011E19182500875416 /* XYConstant.m */; };
+		183F94051E191CBA00875416 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F94041E191CBA00875416 /* MainNavigationController.m */; };
+		183F940F1E194B7400875416 /* launch.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 183F940E1E194B6500875416 /* launch.mp4 */; };
+		183F941F1E195B8500875416 /* XYProfileBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F941C1E195B8500875416 /* XYProfileBaseController.m */; };
+		183F94201E195B8500875416 /* XYCustomNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F941E1E195B8500875416 /* XYCustomNavController.m */; };
+		18C90B4C1E1C88BA00B88D61 /* WUOLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B4B1E1C88BA00B88D61 /* WUOLabel.m */; };
+		18C90B4F1E1C950000B88D61 /* NSString+WUO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B4E1E1C950000B88D61 /* NSString+WUO.m */; };
+		18C90B521E1CB51C00B88D61 /* WUOToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B511E1CB51C00B88D61 /* WUOToolView.m */; };
+		18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */; };
+		18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21D51E19FC22005F1C87 /* UIView+XYExtension.m */; };
+		18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21DC1E1A1693005F1C87 /* XYLaunchPlayerController.m */; };
+		18CA21E81E1A1693005F1C87 /* XYLoginRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21DE1E1A1693005F1C87 /* XYLoginRegisterController.m */; };
+		18CA21E91E1A1693005F1C87 /* XYLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21E11E1A1693005F1C87 /* XYLaunchView.m */; };
+		18CA21EA1E1A1693005F1C87 /* XYLoginRegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CA21E21E1A1693005F1C87 /* XYLoginRegisterView.xib */; };
+		18CA21EB1E1A1693005F1C87 /* XYLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21E41E1A1693005F1C87 /* XYLoginView.m */; };
+		18CA21EC1E1A1693005F1C87 /* XYThirdPartyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21E61E1A1693005F1C87 /* XYThirdPartyLoginView.m */; };
+		18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21F61E1A1EE4005F1C87 /* NSString+MD5.m */; };
+		18CA21FB1E1A2496005F1C87 /* UIViewController+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21FA1E1A2496005F1C87 /* UIViewController+XYExtension.m */; };
+		18CA22011E1A24A7005F1C87 /* NSObject+XYHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21FE1E1A24A7005F1C87 /* NSObject+XYHUD.m */; };
+		18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22001E1A24A7005F1C87 /* UIViewController+XYHUD.m */; };
+		18CA22061E1A258B005F1C87 /* UIImageView+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22051E1A258B005F1C87 /* UIImageView+XYExtension.m */; };
+		18CA22141E1A3CBC005F1C87 /* XYDynamicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22121E1A3CBC005F1C87 /* XYDynamicViewCell.m */; };
+		18CA22181E1A4C83005F1C87 /* XYDynamicToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22171E1A4C83005F1C87 /* XYDynamicToolButton.m */; };
+		18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA221D1E1A6728005F1C87 /* XYUserInfoItem.m */; };
+		18CA22211E1A6749005F1C87 /* XYLoginInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22201E1A6749005F1C87 /* XYLoginInfoItem.m */; };
+		18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */; };
+		18CA22271E1AB5D5005F1C87 /* XYDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */; };
+		18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */; };
+		4CA5914E2A31A0C3F72B5603 /* libPods-WUO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86081FDC45251230ADAA5EE /* libPods-WUO.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
+		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
+		181381771E1B4AC0001E8264 /* XYDynamicTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicTableView.h; sourceTree = "<group>"; };
+		181381781E1B4AC0001E8264 /* XYDynamicTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicTableView.m; sourceTree = "<group>"; };
+		1813817A1E1B882E001E8264 /* XYPictureCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPictureCollectionView.h; sourceTree = "<group>"; };
+		1813817B1E1B882E001E8264 /* XYPictureCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPictureCollectionView.m; sourceTree = "<group>"; };
+		1813817D1E1BF49E001E8264 /* XYDynamicViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewModel.h; sourceTree = "<group>"; };
+		1813817E1E1BF49E001E8264 /* XYDynamicViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewModel.m; sourceTree = "<group>"; };
+		183F938B1E18BFA200875416 /* WUO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WUO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		183F938F1E18BFA200875416 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		183F939A1E18BFA200875416 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		183F939F1E18BFA200875416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		183F93D61E18F2A400875416 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		183F93D71E18F2A400875416 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		183F93E01E18F2B500875416 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		183F93E11E18F2B500875416 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		183F93E21E18F2B500875416 /* XYNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYNetworkRequest.h; sourceTree = "<group>"; };
+		183F93E31E18F2B500875416 /* XYNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYNetworkRequest.m; sourceTree = "<group>"; };
+		183F93E61E18F44200875416 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		183F93E71E18F44200875416 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		183F93E91E18F47E00875416 /* XYComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYComposeViewController.h; sourceTree = "<group>"; };
+		183F93EA1E18F47E00875416 /* XYComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYComposeViewController.m; sourceTree = "<group>"; };
+		183F93EC1E18F49900875416 /* XYDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewController.h; sourceTree = "<group>"; };
+		183F93ED1E18F49900875416 /* XYDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewController.m; sourceTree = "<group>"; };
+		183F93EF1E18F4A800875416 /* XYFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFindViewController.h; sourceTree = "<group>"; };
+		183F93F01E18F4A800875416 /* XYFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFindViewController.m; sourceTree = "<group>"; };
+		183F93F21E18F4D100875416 /* XYInvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYInvestViewController.h; sourceTree = "<group>"; };
+		183F93F31E18F4D100875416 /* XYInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInvestViewController.m; sourceTree = "<group>"; };
+		183F93F51E18F4E500875416 /* XYMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMineViewController.h; sourceTree = "<group>"; };
+		183F93F61E18F4E500875416 /* XYMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMineViewController.m; sourceTree = "<group>"; };
+		183F93F91E18F96800875416 /* UIImage+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XYExtension.h"; sourceTree = "<group>"; };
+		183F93FA1E18F96800875416 /* UIImage+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XYExtension.m"; sourceTree = "<group>"; };
+		183F93FC1E18F99E00875416 /* WUO.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WUO.pch; sourceTree = "<group>"; };
+		183F93FD1E19173B00875416 /* MainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBar.h; sourceTree = "<group>"; };
+		183F93FE1E19173B00875416 /* MainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBar.m; sourceTree = "<group>"; };
+		183F94001E19182500875416 /* XYConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYConstant.h; sourceTree = "<group>"; };
+		183F94011E19182500875416 /* XYConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYConstant.m; sourceTree = "<group>"; };
+		183F94031E191CBA00875416 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		183F94041E191CBA00875416 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		183F940E1E194B6500875416 /* launch.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = launch.mp4; sourceTree = "<group>"; };
+		183F941B1E195B8500875416 /* XYProfileBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYProfileBaseController.h; sourceTree = "<group>"; };
+		183F941C1E195B8500875416 /* XYProfileBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYProfileBaseController.m; sourceTree = "<group>"; };
+		183F941D1E195B8500875416 /* XYCustomNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCustomNavController.h; sourceTree = "<group>"; };
+		183F941E1E195B8500875416 /* XYCustomNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCustomNavController.m; sourceTree = "<group>"; };
+		18C90B4A1E1C88BA00B88D61 /* WUOLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUOLabel.h; sourceTree = "<group>"; };
+		18C90B4B1E1C88BA00B88D61 /* WUOLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUOLabel.m; sourceTree = "<group>"; };
+		18C90B4D1E1C950000B88D61 /* NSString+WUO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WUO.h"; sourceTree = "<group>"; };
+		18C90B4E1E1C950000B88D61 /* NSString+WUO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WUO.m"; sourceTree = "<group>"; };
+		18C90B501E1CB51C00B88D61 /* WUOToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUOToolView.h; sourceTree = "<group>"; };
+		18C90B511E1CB51C00B88D61 /* WUOToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUOToolView.m; sourceTree = "<group>"; };
+		18CA21C91E19EFBB005F1C87 /* WUOHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUOHTTPRequest.h; sourceTree = "<group>"; };
+		18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUOHTTPRequest.m; sourceTree = "<group>"; };
+		18CA21D41E19FC22005F1C87 /* UIView+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XYExtension.h"; sourceTree = "<group>"; };
+		18CA21D51E19FC22005F1C87 /* UIView+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XYExtension.m"; sourceTree = "<group>"; };
+		18CA21DB1E1A1693005F1C87 /* XYLaunchPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLaunchPlayerController.h; sourceTree = "<group>"; };
+		18CA21DC1E1A1693005F1C87 /* XYLaunchPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLaunchPlayerController.m; sourceTree = "<group>"; };
+		18CA21DD1E1A1693005F1C87 /* XYLoginRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLoginRegisterController.h; sourceTree = "<group>"; };
+		18CA21DE1E1A1693005F1C87 /* XYLoginRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLoginRegisterController.m; sourceTree = "<group>"; };
+		18CA21E01E1A1693005F1C87 /* XYLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLaunchView.h; sourceTree = "<group>"; };
+		18CA21E11E1A1693005F1C87 /* XYLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLaunchView.m; sourceTree = "<group>"; };
+		18CA21E21E1A1693005F1C87 /* XYLoginRegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYLoginRegisterView.xib; sourceTree = "<group>"; };
+		18CA21E31E1A1693005F1C87 /* XYLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLoginView.h; sourceTree = "<group>"; };
+		18CA21E41E1A1693005F1C87 /* XYLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLoginView.m; sourceTree = "<group>"; };
+		18CA21E51E1A1693005F1C87 /* XYThirdPartyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYThirdPartyLoginView.h; sourceTree = "<group>"; };
+		18CA21E61E1A1693005F1C87 /* XYThirdPartyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYThirdPartyLoginView.m; sourceTree = "<group>"; };
+		18CA21F51E1A1EE4005F1C87 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		18CA21F61E1A1EE4005F1C87 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		18CA21F91E1A2496005F1C87 /* UIViewController+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+XYExtension.h"; sourceTree = "<group>"; };
+		18CA21FA1E1A2496005F1C87 /* UIViewController+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+XYExtension.m"; sourceTree = "<group>"; };
+		18CA21FD1E1A24A7005F1C87 /* NSObject+XYHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+XYHUD.h"; sourceTree = "<group>"; };
+		18CA21FE1E1A24A7005F1C87 /* NSObject+XYHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+XYHUD.m"; sourceTree = "<group>"; };
+		18CA21FF1E1A24A7005F1C87 /* UIViewController+XYHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+XYHUD.h"; sourceTree = "<group>"; };
+		18CA22001E1A24A7005F1C87 /* UIViewController+XYHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+XYHUD.m"; sourceTree = "<group>"; };
+		18CA22041E1A258B005F1C87 /* UIImageView+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+XYExtension.h"; sourceTree = "<group>"; };
+		18CA22051E1A258B005F1C87 /* UIImageView+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+XYExtension.m"; sourceTree = "<group>"; };
+		18CA22111E1A3CBC005F1C87 /* XYDynamicViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewCell.h; sourceTree = "<group>"; };
+		18CA22121E1A3CBC005F1C87 /* XYDynamicViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewCell.m; sourceTree = "<group>"; };
+		18CA22161E1A4C83005F1C87 /* XYDynamicToolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicToolButton.h; sourceTree = "<group>"; };
+		18CA22171E1A4C83005F1C87 /* XYDynamicToolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicToolButton.m; sourceTree = "<group>"; };
+		18CA221C1E1A6728005F1C87 /* XYUserInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserInfoItem.h; sourceTree = "<group>"; };
+		18CA221D1E1A6728005F1C87 /* XYUserInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserInfoItem.m; sourceTree = "<group>"; };
+		18CA221F1E1A6749005F1C87 /* XYLoginInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLoginInfoItem.h; sourceTree = "<group>"; };
+		18CA22201E1A6749005F1C87 /* XYLoginInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLoginInfoItem.m; sourceTree = "<group>"; };
+		18CA22221E1AB405005F1C87 /* XYDynamicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicInfo.h; sourceTree = "<group>"; };
+		18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicInfo.m; sourceTree = "<group>"; };
+		18CA22251E1AB5D5005F1C87 /* XYDynamicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicItem.h; sourceTree = "<group>"; };
+		18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicItem.m; sourceTree = "<group>"; };
+		18CA22291E1ACA0A005F1C87 /* XYRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifHeader.h; sourceTree = "<group>"; };
+		18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifHeader.m; sourceTree = "<group>"; };
+		67309620AA4EBE37FE0F0D03 /* Pods-WUO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WUO.release.xcconfig"; path = "Pods/Target Support Files/Pods-WUO/Pods-WUO.release.xcconfig"; sourceTree = "<group>"; };
+		E86081FDC45251230ADAA5EE /* libPods-WUO.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WUO.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6E3676299F1A792BF557646 /* Pods-WUO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WUO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WUO/Pods-WUO.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		183F93881E18BFA200875416 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CA5914E2A31A0C3F72B5603 /* libPods-WUO.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		183F93821E18BFA200875416 = {
+			isa = PBXGroup;
+			children = (
+				183F938D1E18BFA200875416 /* WUO */,
+				183F938C1E18BFA200875416 /* Products */,
+				3BA65E9CF7E4969E5806F138 /* Pods */,
+				6D3CB787A37CF772A8328C05 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		183F938C1E18BFA200875416 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				183F938B1E18BFA200875416 /* WUO.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		183F938D1E18BFA200875416 /* WUO */ = {
+			isa = PBXGroup;
+			children = (
+				183F93DE1E18F2B500875416 /* Util */,
+				183F93DD1E18F2AD00875416 /* Resources */,
+				183F93C41E18F2A400875416 /* Classes */,
+				183F93A71E18CD3F00875416 /* Other */,
+				183F938E1E18BFA200875416 /* Supporting Files */,
+			);
+			path = WUO;
+			sourceTree = "<group>";
+		};
+		183F938E1E18BFA200875416 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				183F938F1E18BFA200875416 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		183F93A71E18CD3F00875416 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				183F93C11E18F1E900875416 /* Category */,
+				183F93C21E18F1E900875416 /* Constant */,
+				183F93C31E18F1E900875416 /* Libs */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		183F93C11E18F1E900875416 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22031E1A258B005F1C87 /* UIImageView */,
+				18CA21FC1E1A24A7005F1C87 /* HUD */,
+				18CA21F81E1A2496005F1C87 /* UIViewController */,
+				18CA21F01E1A1D6D005F1C87 /* Nsstring */,
+				18CA21D31E19FC22005F1C87 /* UIView */,
+				183F93F81E18F96800875416 /* UIImage */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		183F93C21E18F1E900875416 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				183F93FC1E18F99E00875416 /* WUO.pch */,
+				183F94001E19182500875416 /* XYConstant.h */,
+				183F94011E19182500875416 /* XYConstant.m */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		183F93C31E18F1E900875416 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22071E1A3790005F1C87 /* CatagoryTitleView */,
+				183F94131E195B4A00875416 /* CustomNav */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		183F93C41E18F2A400875416 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				183F94071E191F9F00875416 /* LoginRegister */,
+				183F93C51E18F2A400875416 /* Compose */,
+				183F93C91E18F2A400875416 /* Dynamic */,
+				183F93CD1E18F2A400875416 /* Find */,
+				183F93D11E18F2A400875416 /* Invest */,
+				183F93D51E18F2A400875416 /* Main */,
+				183F93D81E18F2A400875416 /* Mine */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		183F93C51E18F2A400875416 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				183F93C61E18F2A400875416 /* Model */,
+				183F93C71E18F2A400875416 /* View */,
+				183F93C81E18F2A400875416 /* ViewController */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
+		183F93C61E18F2A400875416 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		183F93C71E18F2A400875416 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		183F93C81E18F2A400875416 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				183F93E91E18F47E00875416 /* XYComposeViewController.h */,
+				183F93EA1E18F47E00875416 /* XYComposeViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		183F93C91E18F2A400875416 /* Dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				183F93CA1E18F2A400875416 /* Model */,
+				183F93CB1E18F2A400875416 /* View */,
+				183F93CC1E18F2A400875416 /* ViewController */,
+			);
+			path = Dynamic;
+			sourceTree = "<group>";
+		};
+		183F93CA1E18F2A400875416 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22221E1AB405005F1C87 /* XYDynamicInfo.h */,
+				18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */,
+				18CA22251E1AB5D5005F1C87 /* XYDynamicItem.h */,
+				18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */,
+				1813817D1E1BF49E001E8264 /* XYDynamicViewModel.h */,
+				1813817E1E1BF49E001E8264 /* XYDynamicViewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		183F93CB1E18F2A400875416 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22111E1A3CBC005F1C87 /* XYDynamicViewCell.h */,
+				18CA22121E1A3CBC005F1C87 /* XYDynamicViewCell.m */,
+				18C90B4A1E1C88BA00B88D61 /* WUOLabel.h */,
+				18C90B4B1E1C88BA00B88D61 /* WUOLabel.m */,
+				1813817A1E1B882E001E8264 /* XYPictureCollectionView.h */,
+				1813817B1E1B882E001E8264 /* XYPictureCollectionView.m */,
+				18C90B501E1CB51C00B88D61 /* WUOToolView.h */,
+				18C90B511E1CB51C00B88D61 /* WUOToolView.m */,
+				18CA22161E1A4C83005F1C87 /* XYDynamicToolButton.h */,
+				18CA22171E1A4C83005F1C87 /* XYDynamicToolButton.m */,
+				181381771E1B4AC0001E8264 /* XYDynamicTableView.h */,
+				181381781E1B4AC0001E8264 /* XYDynamicTableView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		183F93CC1E18F2A400875416 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				183F93EC1E18F49900875416 /* XYDynamicViewController.h */,
+				183F93ED1E18F49900875416 /* XYDynamicViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		183F93CD1E18F2A400875416 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				183F93CE1E18F2A400875416 /* Model */,
+				183F93CF1E18F2A400875416 /* View */,
+				183F93D01E18F2A400875416 /* ViewController */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		183F93CE1E18F2A400875416 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		183F93CF1E18F2A400875416 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		183F93D01E18F2A400875416 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				183F93EF1E18F4A800875416 /* XYFindViewController.h */,
+				183F93F01E18F4A800875416 /* XYFindViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		183F93D11E18F2A400875416 /* Invest */ = {
+			isa = PBXGroup;
+			children = (
+				183F93D21E18F2A400875416 /* Model */,
+				183F93D31E18F2A400875416 /* View */,
+				183F93D41E18F2A400875416 /* ViewController */,
+			);
+			path = Invest;
+			sourceTree = "<group>";
+		};
+		183F93D21E18F2A400875416 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		183F93D31E18F2A400875416 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		183F93D41E18F2A400875416 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				183F93F21E18F4D100875416 /* XYInvestViewController.h */,
+				183F93F31E18F4D100875416 /* XYInvestViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		183F93D51E18F2A400875416 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				183F93D61E18F2A400875416 /* AppDelegate.h */,
+				183F93D71E18F2A400875416 /* AppDelegate.m */,
+				183F93E61E18F44200875416 /* MainTabBarController.h */,
+				183F93E71E18F44200875416 /* MainTabBarController.m */,
+				183F94031E191CBA00875416 /* MainNavigationController.h */,
+				183F94041E191CBA00875416 /* MainNavigationController.m */,
+				183F93FD1E19173B00875416 /* MainTabBar.h */,
+				183F93FE1E19173B00875416 /* MainTabBar.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		183F93D81E18F2A400875416 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				183F93D91E18F2A400875416 /* Model */,
+				183F93DA1E18F2A400875416 /* View */,
+				183F93DB1E18F2A400875416 /* ViewController */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		183F93D91E18F2A400875416 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18CA221C1E1A6728005F1C87 /* XYUserInfoItem.h */,
+				18CA221D1E1A6728005F1C87 /* XYUserInfoItem.m */,
+				18CA221F1E1A6749005F1C87 /* XYLoginInfoItem.h */,
+				18CA22201E1A6749005F1C87 /* XYLoginInfoItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		183F93DA1E18F2A400875416 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		183F93DB1E18F2A400875416 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				183F93F51E18F4E500875416 /* XYMineViewController.h */,
+				183F93F61E18F4E500875416 /* XYMineViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		183F93DD1E18F2AD00875416 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				183F939A1E18BFA200875416 /* Assets.xcassets */,
+				183F939F1E18BFA200875416 /* Info.plist */,
+				183F940E1E194B6500875416 /* launch.mp4 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		183F93DE1E18F2B500875416 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22281E1AC9EA005F1C87 /* Refresh */,
+				183F93DF1E18F2B500875416 /* Network */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		183F93DF1E18F2B500875416 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				183F93E01E18F2B500875416 /* Reachability.h */,
+				183F93E11E18F2B500875416 /* Reachability.m */,
+				183F93E21E18F2B500875416 /* XYNetworkRequest.h */,
+				183F93E31E18F2B500875416 /* XYNetworkRequest.m */,
+				18CA21C91E19EFBB005F1C87 /* WUOHTTPRequest.h */,
+				18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		183F93F81E18F96800875416 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				183F93F91E18F96800875416 /* UIImage+XYExtension.h */,
+				183F93FA1E18F96800875416 /* UIImage+XYExtension.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		183F94071E191F9F00875416 /* LoginRegister */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21DA1E1A1693005F1C87 /* Controller */,
+				18CA21DF1E1A1693005F1C87 /* View */,
+			);
+			path = LoginRegister;
+			sourceTree = "<group>";
+		};
+		183F94131E195B4A00875416 /* CustomNav */ = {
+			isa = PBXGroup;
+			children = (
+				183F941B1E195B8500875416 /* XYProfileBaseController.h */,
+				183F941C1E195B8500875416 /* XYProfileBaseController.m */,
+				183F941D1E195B8500875416 /* XYCustomNavController.h */,
+				183F941E1E195B8500875416 /* XYCustomNavController.m */,
+			);
+			path = CustomNav;
+			sourceTree = "<group>";
+		};
+		18CA21D31E19FC22005F1C87 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21D41E19FC22005F1C87 /* UIView+XYExtension.h */,
+				18CA21D51E19FC22005F1C87 /* UIView+XYExtension.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		18CA21DA1E1A1693005F1C87 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21DB1E1A1693005F1C87 /* XYLaunchPlayerController.h */,
+				18CA21DC1E1A1693005F1C87 /* XYLaunchPlayerController.m */,
+				18CA21DD1E1A1693005F1C87 /* XYLoginRegisterController.h */,
+				18CA21DE1E1A1693005F1C87 /* XYLoginRegisterController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18CA21DF1E1A1693005F1C87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21E01E1A1693005F1C87 /* XYLaunchView.h */,
+				18CA21E11E1A1693005F1C87 /* XYLaunchView.m */,
+				18CA21E21E1A1693005F1C87 /* XYLoginRegisterView.xib */,
+				18CA21E31E1A1693005F1C87 /* XYLoginView.h */,
+				18CA21E41E1A1693005F1C87 /* XYLoginView.m */,
+				18CA21E51E1A1693005F1C87 /* XYThirdPartyLoginView.h */,
+				18CA21E61E1A1693005F1C87 /* XYThirdPartyLoginView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18CA21F01E1A1D6D005F1C87 /* Nsstring */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21F51E1A1EE4005F1C87 /* NSString+MD5.h */,
+				18CA21F61E1A1EE4005F1C87 /* NSString+MD5.m */,
+				18C90B4D1E1C950000B88D61 /* NSString+WUO.h */,
+				18C90B4E1E1C950000B88D61 /* NSString+WUO.m */,
+			);
+			path = Nsstring;
+			sourceTree = "<group>";
+		};
+		18CA21F81E1A2496005F1C87 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21F91E1A2496005F1C87 /* UIViewController+XYExtension.h */,
+				18CA21FA1E1A2496005F1C87 /* UIViewController+XYExtension.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		18CA21FC1E1A24A7005F1C87 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				18CA21FD1E1A24A7005F1C87 /* NSObject+XYHUD.h */,
+				18CA21FE1E1A24A7005F1C87 /* NSObject+XYHUD.m */,
+				18CA21FF1E1A24A7005F1C87 /* UIViewController+XYHUD.h */,
+				18CA22001E1A24A7005F1C87 /* UIViewController+XYHUD.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		18CA22031E1A258B005F1C87 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22041E1A258B005F1C87 /* UIImageView+XYExtension.h */,
+				18CA22051E1A258B005F1C87 /* UIImageView+XYExtension.m */,
+			);
+			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		18CA22071E1A3790005F1C87 /* CatagoryTitleView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CatagoryTitleView;
+			sourceTree = "<group>";
+		};
+		18CA22281E1AC9EA005F1C87 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				18CA22291E1ACA0A005F1C87 /* XYRefreshGifHeader.h */,
+				18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */,
+				181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */,
+				181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		3BA65E9CF7E4969E5806F138 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6E3676299F1A792BF557646 /* Pods-WUO.debug.xcconfig */,
+				67309620AA4EBE37FE0F0D03 /* Pods-WUO.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D3CB787A37CF772A8328C05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E86081FDC45251230ADAA5EE /* libPods-WUO.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		183F938A1E18BFA200875416 /* WUO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 183F93A21E18BFA200875416 /* Build configuration list for PBXNativeTarget "WUO" */;
+			buildPhases = (
+				86EBC32E07DD46C42B22A2C4 /* [CP] Check Pods Manifest.lock */,
+				183F93871E18BFA200875416 /* Sources */,
+				183F93881E18BFA200875416 /* Frameworks */,
+				183F93891E18BFA200875416 /* Resources */,
+				6F643281186188F49CE2E499 /* [CP] Embed Pods Frameworks */,
+				28CE3CC824AC3B760D8410BD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WUO;
+			productName = WUO;
+			productReference = 183F938B1E18BFA200875416 /* WUO.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		183F93831E18BFA200875416 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = com.test.demo;
+				TargetAttributes = {
+					183F938A1E18BFA200875416 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = P46TQQZ3AS;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 183F93861E18BFA200875416 /* Build configuration list for PBXProject "WUO" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 183F93821E18BFA200875416;
+			productRefGroup = 183F938C1E18BFA200875416 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				183F938A1E18BFA200875416 /* WUO */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		183F93891E18BFA200875416 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				183F940F1E194B7400875416 /* launch.mp4 in Resources */,
+				183F939B1E18BFA200875416 /* Assets.xcassets in Resources */,
+				18CA21EA1E1A1693005F1C87 /* XYLoginRegisterView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		28CE3CC824AC3B760D8410BD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WUO/Pods-WUO-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F643281186188F49CE2E499 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WUO/Pods-WUO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86EBC32E07DD46C42B22A2C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		183F93871E18BFA200875416 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C90B4C1E1C88BA00B88D61 /* WUOLabel.m in Sources */,
+				1813817F1E1BF49E001E8264 /* XYDynamicViewModel.m in Sources */,
+				18CA22141E1A3CBC005F1C87 /* XYDynamicViewCell.m in Sources */,
+				18CA21EC1E1A1693005F1C87 /* XYThirdPartyLoginView.m in Sources */,
+				18CA22061E1A258B005F1C87 /* UIImageView+XYExtension.m in Sources */,
+				18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */,
+				183F93EE1E18F49900875416 /* XYDynamicViewController.m in Sources */,
+				183F94201E195B8500875416 /* XYCustomNavController.m in Sources */,
+				183F94021E19182500875416 /* XYConstant.m in Sources */,
+				18CA21E91E1A1693005F1C87 /* XYLaunchView.m in Sources */,
+				181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */,
+				18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */,
+				18CA22181E1A4C83005F1C87 /* XYDynamicToolButton.m in Sources */,
+				18CA21EB1E1A1693005F1C87 /* XYLoginView.m in Sources */,
+				18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */,
+				183F93F41E18F4D100875416 /* XYInvestViewController.m in Sources */,
+				183F93901E18BFA200875416 /* main.m in Sources */,
+				183F941F1E195B8500875416 /* XYProfileBaseController.m in Sources */,
+				18C90B521E1CB51C00B88D61 /* WUOToolView.m in Sources */,
+				18CA21FB1E1A2496005F1C87 /* UIViewController+XYExtension.m in Sources */,
+				183F93E81E18F44200875416 /* MainTabBarController.m in Sources */,
+				18CA22011E1A24A7005F1C87 /* NSObject+XYHUD.m in Sources */,
+				18CA22211E1A6749005F1C87 /* XYLoginInfoItem.m in Sources */,
+				183F93E41E18F2B500875416 /* Reachability.m in Sources */,
+				183F93FB1E18F96800875416 /* UIImage+XYExtension.m in Sources */,
+				18C90B4F1E1C950000B88D61 /* NSString+WUO.m in Sources */,
+				183F93F11E18F4A800875416 /* XYFindViewController.m in Sources */,
+				183F93E51E18F2B500875416 /* XYNetworkRequest.m in Sources */,
+				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
+				18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */,
+				183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */,
+				181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */,
+				18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */,
+				18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */,
+				1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */,
+				18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */,
+				183F93EB1E18F47E00875416 /* XYComposeViewController.m in Sources */,
+				183F93F71E18F4E500875416 /* XYMineViewController.m in Sources */,
+				18CA21E81E1A1693005F1C87 /* XYLoginRegisterController.m in Sources */,
+				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
+				18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */,
+				18CA22271E1AB5D5005F1C87 /* XYDynamicItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		183F93A01E18BFA200875416 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		183F93A11E18BFA200875416 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		183F93A31E18BFA200875416 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6E3676299F1A792BF557646 /* Pods-WUO.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = P46TQQZ3AS;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WUO/Other/Constant/WUO.pch;
+				INFOPLIST_FILE = WUO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sey.WUO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		183F93A41E18BFA200875416 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67309620AA4EBE37FE0F0D03 /* Pods-WUO.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = P46TQQZ3AS;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WUO/Other/Constant/WUO.pch;
+				INFOPLIST_FILE = WUO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sey.WUO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		183F93861E18BFA200875416 /* Build configuration list for PBXProject "WUO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				183F93A01E18BFA200875416 /* Debug */,
+				183F93A11E18BFA200875416 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		183F93A21E18BFA200875416 /* Build configuration list for PBXNativeTarget "WUO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				183F93A31E18BFA200875416 /* Debug */,
+				183F93A41E18BFA200875416 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 183F93831E18BFA200875416 /* Project object */;
+}
