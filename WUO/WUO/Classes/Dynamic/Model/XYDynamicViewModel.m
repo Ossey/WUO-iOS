@@ -55,31 +55,39 @@
     x += SIZE_HEADERWH + SIZE_GAP_PADDING;
     
     // 图片
-    CGSize picSize = [self caculatePicViewSize:self.item.imgCount];
-    self.picCollectionViewFrame = CGRectMake(x, y, picSize.width, picSize.height);
-    y += picSize.height + SIZE_PIC_BOTTOM;
+    if (self.item.imgCount == 0) {
+        self.picCollectionViewFrame = CGRectZero;
+        y += 0;
+    } else {
+        CGSize picSize = [self caculatePicViewSize:self.item.imgCount];
+        self.picCollectionViewFrame = CGRectMake(x, y, picSize.width, picSize.height);
+        y += picSize.height + SIZE_PIC_BOTTOM;
+
+    }
+    
     
     // 标题
     CGSize titleSize = CGSizeZero;
     if (self.item.title.length == 0) {
         self.title_labelFrame = CGRectZero;
+        y += titleSize.height;
     } else {
         titleSize = [self.item.title boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(SIZE_FONT_TITLE)} context:nil].size;
         self.title_labelFrame = CGRectMake(x, y, titleSize.width, titleSize.height);
+        y += titleSize.height + SIZE_GAP_PADDING;
     }
     
-    y += titleSize.height + SIZE_GAP_PADDING;
    
     // 内容
     CGSize contentSize = CGSizeZero;
     if (self.item.content.length == 0) {
         self.contentLableFrame = CGRectZero;
+        y += contentSize.height;
     } else {
         contentSize = [self.item.content boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(SIZE_FONT_CONTENT)} context:nil].size;
         self.contentLableFrame = CGRectMake(x, y, contentSize.width, contentSize.height);
+        y += contentSize.height + SIZE_PIC_BOTTOM;
     }
-    
-    y += contentSize.height + SIZE_PIC_BOTTOM;
     
     // 浏览人数
     CGFloat readCountW = 80;

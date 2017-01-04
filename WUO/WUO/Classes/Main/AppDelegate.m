@@ -64,9 +64,13 @@
     if (isLogin) {
         
         self.window.rootViewController = self.mainVc;
+        [self.customNav.view removeFromSuperview];
+        self.customNav = nil;
     } else {
         
         self.window.rootViewController = self.customNav;
+        [self.mainVc.view removeFromSuperview];
+        self.mainVc = nil;
     }
     
 }

@@ -66,7 +66,7 @@
                 AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 delegate.isLogin = YES;
                 
-                [self clear];
+            
             });
         }
         
@@ -84,10 +84,6 @@
     }
 }
 
-- (void)clear {
-    
-    [super removeFromSuperview];
-}
 
 #pragma mark - Events
 - (void)textFieldDidChange:(UITextField *)tf {
@@ -125,5 +121,10 @@
     return strlength;
 }
 
+- (void)dealloc {
+    
+    NSLog(@"%s", __FUNCTION__);
+    
+}
 
 @end
