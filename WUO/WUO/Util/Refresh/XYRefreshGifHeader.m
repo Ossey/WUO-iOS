@@ -18,8 +18,8 @@
         self.stateLabel.hidden = YES;
         
         NSMutableArray *images = [NSMutableArray arrayWithCapacity:16];
-        for (NSInteger i = 1; i < 17; i++) {
-            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"refresh_%ld", i]];
+        for (int i = 1; i < 17; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"refresh_%d", i]];
             [images addObject:image];
         }
         

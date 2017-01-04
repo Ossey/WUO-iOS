@@ -32,6 +32,10 @@
 		18C90B4F1E1C950000B88D61 /* NSString+WUO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B4E1E1C950000B88D61 /* NSString+WUO.m */; };
 		18C90B521E1CB51C00B88D61 /* WUOToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B511E1CB51C00B88D61 /* WUOToolView.m */; };
 		18C90B831E1D0C8500B88D61 /* XYDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B821E1D0C8500B88D61 /* XYDynamicViewController.m */; };
+		18C90DB01E1D57E600B88D61 /* XYImageSeeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90DAF1E1D57E600B88D61 /* XYImageSeeController.m */; };
+		18C90DE91E1D857300B88D61 /* ESPictureBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90DE41E1D857300B88D61 /* ESPictureBrowser.m */; };
+		18C90DEA1E1D857300B88D61 /* ESPictureProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90DE61E1D857300B88D61 /* ESPictureProgressView.m */; };
+		18C90DEB1E1D857300B88D61 /* ESPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90DE81E1D857300B88D61 /* ESPictureView.m */; };
 		18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */; };
 		18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21D51E19FC22005F1C87 /* UIView+XYExtension.m */; };
 		18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21DC1E1A1693005F1C87 /* XYLaunchPlayerController.m */; };
@@ -106,6 +110,14 @@
 		18C90B511E1CB51C00B88D61 /* WUOToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUOToolView.m; sourceTree = "<group>"; };
 		18C90B811E1D0C8500B88D61 /* XYDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewController.h; sourceTree = "<group>"; };
 		18C90B821E1D0C8500B88D61 /* XYDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewController.m; sourceTree = "<group>"; };
+		18C90DAE1E1D57E600B88D61 /* XYImageSeeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYImageSeeController.h; sourceTree = "<group>"; };
+		18C90DAF1E1D57E600B88D61 /* XYImageSeeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYImageSeeController.m; sourceTree = "<group>"; };
+		18C90DE31E1D857300B88D61 /* ESPictureBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPictureBrowser.h; sourceTree = "<group>"; };
+		18C90DE41E1D857300B88D61 /* ESPictureBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPictureBrowser.m; sourceTree = "<group>"; };
+		18C90DE51E1D857300B88D61 /* ESPictureProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPictureProgressView.h; sourceTree = "<group>"; };
+		18C90DE61E1D857300B88D61 /* ESPictureProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPictureProgressView.m; sourceTree = "<group>"; };
+		18C90DE71E1D857300B88D61 /* ESPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPictureView.h; sourceTree = "<group>"; };
+		18C90DE81E1D857300B88D61 /* ESPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPictureView.m; sourceTree = "<group>"; };
 		18CA21C91E19EFBB005F1C87 /* WUOHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUOHTTPRequest.h; sourceTree = "<group>"; };
 		18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUOHTTPRequest.m; sourceTree = "<group>"; };
 		18CA21D41E19FC22005F1C87 /* UIView+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XYExtension.h"; sourceTree = "<group>"; };
@@ -236,6 +248,7 @@
 		183F93C31E18F1E900875416 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				18C90DB11E1D669300B88D61 /* PhotoBrower */,
 				18CA22071E1A3790005F1C87 /* CatagoryTitleView */,
 				183F94131E195B4A00875416 /* CustomNav */,
 			);
@@ -245,6 +258,7 @@
 		183F93C41E18F2A400875416 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				18C90D281E1D48D800B88D61 /* ImageSee */,
 				183F94071E191F9F00875416 /* LoginRegister */,
 				183F93C51E18F2A400875416 /* Compose */,
 				183F93C91E18F2A400875416 /* Dynamic */,
@@ -519,6 +533,36 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		18C90D281E1D48D800B88D61 /* ImageSee */ = {
+			isa = PBXGroup;
+			children = (
+				18C90DAE1E1D57E600B88D61 /* XYImageSeeController.h */,
+				18C90DAF1E1D57E600B88D61 /* XYImageSeeController.m */,
+			);
+			path = ImageSee;
+			sourceTree = "<group>";
+		};
+		18C90DB11E1D669300B88D61 /* PhotoBrower */ = {
+			isa = PBXGroup;
+			children = (
+				18C90DE21E1D857300B88D61 /* ESPictureBrowser */,
+			);
+			path = PhotoBrower;
+			sourceTree = "<group>";
+		};
+		18C90DE21E1D857300B88D61 /* ESPictureBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				18C90DE31E1D857300B88D61 /* ESPictureBrowser.h */,
+				18C90DE41E1D857300B88D61 /* ESPictureBrowser.m */,
+				18C90DE51E1D857300B88D61 /* ESPictureProgressView.h */,
+				18C90DE61E1D857300B88D61 /* ESPictureProgressView.m */,
+				18C90DE71E1D857300B88D61 /* ESPictureView.h */,
+				18C90DE81E1D857300B88D61 /* ESPictureView.m */,
+			);
+			path = ESPictureBrowser;
+			sourceTree = "<group>";
+		};
 		18CA21D31E19FC22005F1C87 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C90B4C1E1C88BA00B88D61 /* WUOLabel.m in Sources */,
+				18C90DEB1E1D857300B88D61 /* ESPictureView.m in Sources */,
 				1813817F1E1BF49E001E8264 /* XYDynamicViewModel.m in Sources */,
 				18CA22141E1A3CBC005F1C87 /* XYDynamicViewCell.m in Sources */,
 				18CA21EC1E1A1693005F1C87 /* XYThirdPartyLoginView.m in Sources */,
@@ -759,6 +804,7 @@
 				18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */,
 				183F94201E195B8500875416 /* XYCustomNavController.m in Sources */,
 				183F94021E19182500875416 /* XYConstant.m in Sources */,
+				18C90DB01E1D57E600B88D61 /* XYImageSeeController.m in Sources */,
 				18CA21E91E1A1693005F1C87 /* XYLaunchView.m in Sources */,
 				181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */,
 				18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */,
@@ -777,7 +823,9 @@
 				183F93E41E18F2B500875416 /* Reachability.m in Sources */,
 				183F93FB1E18F96800875416 /* UIImage+XYExtension.m in Sources */,
 				18C90B4F1E1C950000B88D61 /* NSString+WUO.m in Sources */,
+				18C90DEA1E1D857300B88D61 /* ESPictureProgressView.m in Sources */,
 				183F93F11E18F4A800875416 /* XYFindViewController.m in Sources */,
+				18C90DE91E1D857300B88D61 /* ESPictureBrowser.m in Sources */,
 				183F93E51E18F2B500875416 /* XYNetworkRequest.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
 				18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */,

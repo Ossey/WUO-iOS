@@ -42,6 +42,11 @@
 
 - (CGFloat)cellHeight {
     
+    if (_cellHeight != 0) {
+        // 当已计算好时，就不再计算
+        return _cellHeight;
+    }
+    
     CGFloat x = SIZE_GAP_MARGIN;
     CGFloat y = 0.0;
     

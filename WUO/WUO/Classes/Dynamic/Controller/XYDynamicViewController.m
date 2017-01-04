@@ -8,6 +8,7 @@
 
 #import "XYDynamicViewController.h"
 #import "XYDynamicTableView.h"
+#import "XYImageSeeController.h"
 
 @interface XYDynamicViewController ()
 
@@ -26,6 +27,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_Home_goldCoin_new"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(goldCoinClick)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Home_Icon"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(meaasgeClick)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectImgNote:) name:WUODynamicDidSelectImgNote object:nil];
 }
 
 
@@ -49,4 +52,17 @@
     
 }
 
+- (void)didSelectImgNote:(NSNotification *)note {
+    
+//    XYImageSeeController *imgSeeVc = [[XYImageSeeController alloc] initWithImgItems:note.userInfo[WUODynamicImgItemsKey] indexPath:note.userInfo[WUODynamicSelectImgIndexPathKey]];
+//    
+//    [self presentViewController:imgSeeVc animated:YES completion:nil];
+//    
+//    NSLog(@"%@--%@", note.userInfo[WUODynamicImgItemsKey], note.userInfo[WUODynamicSelectImgIndexPathKey]);
+}
+
+- (void)dealloc {
+    
+    
+}
 @end

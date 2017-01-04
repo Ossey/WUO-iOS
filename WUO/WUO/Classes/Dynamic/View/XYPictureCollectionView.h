@@ -15,6 +15,7 @@
 
 @end
 
+
 @interface XYPictureCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) XYDynamicImgItem *imgItem;

@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 // 重复点击tabBarButton的通知
-UIKIT_EXTERN NSString * const XYTabBarButtonDidRepeatClickNotification;
+UIKIT_EXTERN NSNotificationName const XYTabBarButtonDidRepeatClickNotification;
 // 用户登录状态
-UIKIT_EXTERN NSString * const XYUserLoginStatuKey;
-UIKIT_EXTERN NSString * const XYDynamicViewCellHeightDidChangeNote;
+UIKIT_EXTERN NSNotificationName const XYUserLoginStatuKey;
+UIKIT_EXTERN NSNotificationName const XYDynamicViewCellHeightDidChangeNote;
+UIKIT_EXTERN NSNotificationName const WUODynamicDidSelectImgNote;
+UIKIT_EXTERN NSString * const WUODynamicImgItemsKey;
+UIKIT_EXTERN NSString * const WUODynamicSelectImgIndexPathKey;
