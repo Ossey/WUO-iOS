@@ -94,6 +94,7 @@
     [super viewDidDisappear:animated];
     
     [self.player pause];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)playerPlayToEndTime:(NSNotification *)note {
@@ -118,8 +119,10 @@
 - (void)dealloc {
     
     NSLog(@"%s", __FUNCTION__);
+    [self.player pause];
+    self.player = nil;
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 @end

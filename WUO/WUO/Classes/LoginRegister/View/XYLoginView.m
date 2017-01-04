@@ -28,8 +28,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-
-    
     self.loginBtn.layer.cornerRadius = 5;
     [self.loginBtn.layer setMasksToBounds:YES];
     
@@ -67,6 +65,8 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 delegate.isLogin = YES;
+                
+                [self clear];
             });
         }
         
@@ -84,6 +84,10 @@
     }
 }
 
+- (void)clear {
+    
+    [super removeFromSuperview];
+}
 
 #pragma mark - Events
 - (void)textFieldDidChange:(UITextField *)tf {
