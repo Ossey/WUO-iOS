@@ -15,21 +15,12 @@
 
 @property (nonatomic, strong, nullable)UIView *currentView;
 @property (nonatomic, strong, nullable)NSArray *currentArray;
-/** 此数组中缓存的imageView是为了传给ESPictureBrowser 用来展示图片的 */
-@property (nonatomic, strong) NSMutableArray<UIImageView *> *imageViews;
+
 @end
 
 @implementation XYPictureCollectionView
 
 static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
-
-- (NSMutableArray<UIImageView *> *)imageViews {
-    
-    if (_imageViews == nil) {
-        _imageViews = [NSMutableArray arrayWithCapacity:1];
-    }
-    return _imageViews;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     
@@ -63,11 +54,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     _dynamicItem = dynamicItem;
     
     [self reloadData];
-    
-    for (NSInteger i = 0; i < dynamicItem.imgList.count; ++i) {
-        UIImageView *imageView = [[UIImageView alloc] init];
-        [self.imageViews addObject:imageView];
-    }
+
 }
 
 
@@ -89,7 +76,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     ESPictureBrowser *browser = [[ESPictureBrowser alloc] init];
     [browser setDelegate:self];
@@ -113,7 +100,10 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
  @return 视图
  */
 - (UIView *)pictureView:(ESPictureBrowser *)pictureBrowser viewForIndex:(NSInteger)index {
-    return [self.imageViews objectAtIndex:index];
+    // 获取要结束的view
+    XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[self cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+//    return [self.imageViews objectAtIndex:index];
+    return cell;
 }
 
 /**
@@ -131,24 +121,6 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     return model.imgSize;
 }
 
-/**
- 获取对应索引默认图片，可以是占位图片，可以是缩略图
- 
- @param pictureBrowser 图片浏览器
- @param index          索引
- 
- @return 图片
- */
-- (UIImage *)pictureView:(ESPictureBrowser *)pictureBrowser defaultImageForIndex:(NSInteger)index {
-    UIImage *image;
-    UIImageView *imageView =  [self.imageViews objectAtIndex:index];
-    if (imageView.subviews.count == 1) {
-        image = imageView.image;
-    }else {
-        image = imageView.image;
-    }
-    return image;
-}
 
 /**
  获取对应索引的高质量图片地址字符串
