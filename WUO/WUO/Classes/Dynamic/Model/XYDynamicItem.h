@@ -41,6 +41,7 @@
 // 扩展属性
 @property (nonatomic, strong) NSURL *headerImageURL;
 @property (nonatomic, strong)XYDynamicInfo *info;
+@property (nonatomic, strong) NSArray<NSString *> *imageUrls;
 
 - (instancetype)initWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;
 + (instancetype)dynamicItemWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;

@@ -9,9 +9,9 @@
 #import "XYPictureCollectionView.h"
 #import "XYDynamicItem.h"
 #import <UIImageView+WebCache.h>
-#import "ESPictureBrowser.h"
+#import "XYImageViewer.h"
 
-@interface XYPictureCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ESPictureBrowserDelegate>
+@interface XYPictureCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong, nullable)UIView *currentView;
 @property (nonatomic, strong, nullable)NSArray *currentArray;
@@ -78,63 +78,15 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     
     XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    ESPictureBrowser *browser = [[ESPictureBrowser alloc] init];
-    [browser setDelegate:self];
-    [browser setLongPressBlock:^(NSInteger index) {
-        NSLog(@"%zd", index);
+    [[XYImageViewer shareInstance] prepareImageURLStrList:self.dynamicItem.imageUrls endView:^UIView *(NSIndexPath *indexPath) {
+        return [collectionView cellForItemAtIndexPath:indexPath];
     }];
-    [browser showFromView:cell picturesCount:self.dynamicItem.imgList.count currentPictureIndex:indexPath.row];
+    
+    [[XYImageViewer shareInstance] show:cell currentImgIndex:indexPath.row];
     
 }
 
 
-#pragma mark - ESPictureBrowserDelegate
-
-
-/**
- 获取对应索引的视图
- 
- @param pictureBrowser 图片浏览器
- @param index          索引
- 
- @return 视图
- */
-- (UIView *)pictureView:(ESPictureBrowser *)pictureBrowser viewForIndex:(NSInteger)index {
-    // 获取要结束的view
-    XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[self cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-//    return [self.imageViews objectAtIndex:index];
-    return cell;
-}
-
-/**
- 获取对应索引的图片大小
- 
- @param pictureBrowser 图片浏览器
- @param index          索引
- 
- @return 图片大小
- */
-- (CGSize)pictureView:(ESPictureBrowser *)pictureBrowser imageSizeForIndex:(NSInteger)index {
-    
-    XYDynamicImgItem *model = self.dynamicItem.imgList[index];
-
-    return model.imgSize;
-}
-
-
-/**
- 获取对应索引的高质量图片地址字符串
- 
- @param pictureBrowser 图片浏览器
- @param index          索引
- 
- @return 图片的 url 字符串
- */
-- (NSString *)pictureView:(ESPictureBrowser *)pictureBrowser highQualityUrlStringForIndex:(NSInteger)index {
-    
-    XYDynamicImgItem *model = self.dynamicItem.imgList[index];
-    return model.imgFullURL.absoluteString;
-}
 
 
 @end

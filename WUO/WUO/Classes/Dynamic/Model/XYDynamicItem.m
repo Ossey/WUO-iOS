@@ -49,6 +49,15 @@
     return [NSURL URLWithString:fullPath];
 }
 
+- (NSArray<NSString *> *)imageUrls {
+    
+    NSMutableArray<NSString *> *tempArrM = [NSMutableArray arrayWithCapacity:1];
+    for (XYDynamicImgItem *imgItem in self.imgList) {
+        [tempArrM addObject:imgItem.imgFullURL.absoluteString];
+    }
+    return [tempArrM mutableCopy];
+}
+
 @end
 
 @implementation XYDynamicImgItem
