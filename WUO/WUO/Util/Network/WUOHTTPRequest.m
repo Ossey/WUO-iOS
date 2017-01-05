@@ -76,4 +76,13 @@ static id _instance;
     return [XYLoginInfoItem loginInfoItemWithDict:loginInfoDict];
 }
 
+// 广告接口
++ (void)advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/base/advert";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"found" forKey:@"type"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
 @end

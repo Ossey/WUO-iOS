@@ -19,7 +19,8 @@
     // 描述矩形
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     // 开启位图上下文
-    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 1.0);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+//    UIGraphicsBeginImageContext(rect.size);
     // 获取位图上下文
     CGContextRef contexRef = UIGraphicsGetCurrentContext();
     // 使用color演示填充上下文
@@ -59,18 +60,6 @@
     return [self imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
-
-// 使用runtime交换方法
-//+ (void)load {
-//
-//    // 获取需要交换的两个方法
-//    Method imageNamedMethod = class_getClassMethod(self, @selector(imageNamed:));
-//    Method imageWithOrignalModeImageNameMethod = class_getClassMethod(self, @selector(imageWithOrignalModeImageName:));
-//    
-//    // 交换两个方法的实现
-//    method_exchangeImplementations(imageNamedMethod, imageWithOrignalModeImageNameMethod);
-//
-//}
 
 - (instancetype)xy_circleImage {
 

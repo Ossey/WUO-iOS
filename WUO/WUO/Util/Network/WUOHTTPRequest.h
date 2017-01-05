@@ -29,4 +29,7 @@
 
 // 获取登录用户信息模型
 + (XYLoginInfoItem *)userLoginInfoItem;
+
+// 广告接口
++ (void)advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

@@ -80,7 +80,11 @@
         _scrollView.backgroundColor = [UIColor whiteColor];
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.contentSize = CGSizeMake(0, CGRectGetHeight(self.view.frame) + 1);
+        // alwaysBounceVertical默认值为NO，如果该值设为YES，并且bounces也设置为YES，那么，即使设置的contentSize比scrollView的size小，那么也是可以拖动的
+        _scrollView.alwaysBounceVertical = YES;
+        // 键盘的消失模式 UIScrollViewKeyboardDismissModeOnDrag: 拖动scrollView时键盘消失
+        _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+        _scrollView.bounces = YES;
         _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
     }

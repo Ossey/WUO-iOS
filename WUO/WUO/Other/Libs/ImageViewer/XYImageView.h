@@ -19,17 +19,17 @@
 
 @interface XYImageView : UIScrollView
 
-// 当前视图所在的索引
+/// 当前视图所在的索引
 @property (nonatomic, assign) NSInteger index;
-// 图片的大小
+/// 图片的大小
 @property (nonatomic, assign) CGSize pictureSize;
-// 显示的默认图片
+/// 显示的默认图片
 @property (nonatomic, strong) UIImage *placeholderImage;
-// 图片的地址 URL
+/// 图片的地址 URL
 @property (nonatomic, strong) NSString *urlString;
-// 当前显示图片的控件
+/// 当前显示图片的控件
 @property (nonatomic, strong, readonly) UIImageView *imageView;
-// 代理
+/// 代理
 @property (nonatomic, weak) id<XYImageViewDelegate> imageViewDelegate;
 
 

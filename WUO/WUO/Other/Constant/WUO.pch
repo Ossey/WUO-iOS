@@ -47,6 +47,7 @@
 #define kColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 #define kTabBarItemTextColor_Sel [UIColor colorWithRed:71/255.0 green:70/255.0 blue:73/255.0 alpha:1.0]
 #define kRandomColor kColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), 1.0)
+#define kTableViewBgColor kColor(238, 238, 238, 1.0)        // 所有tableView的背景颜色
 #define kColorTitleText kColor(35, 35, 35, 1.0)             // title的颜色
 #define kColorContentText kColor(125, 125, 125, 1.0)        // content颜色
 #define kColorJobText kColor(94, 167, 86, 1.0)              // job颜色

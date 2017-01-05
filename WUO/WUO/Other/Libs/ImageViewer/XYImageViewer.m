@@ -50,6 +50,7 @@ static id _instance = nil;
     return [XYImageViewer shareInstance] ;
 }
 
+#pragma mark - 
 - (XYImageBrowerView *)brower {
     if (_brower == nil) {
         _brower = [[XYImageBrowerView alloc] init];
@@ -65,6 +66,8 @@ static id _instance = nil;
     }
     return _brower;
 }
+
+#pragma mark - 公开方法
 
 - (__kindof UIView *)show:(UIView *)fromView currentImgIndex:(NSInteger)currentImgIndex {
 

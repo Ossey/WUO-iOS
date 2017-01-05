@@ -10,6 +10,11 @@
 		180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214B71E1E599C006605C2 /* XYImageBrowerView.m */; };
 		180214BD1E1E599C006605C2 /* XYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214B91E1E599C006605C2 /* XYImageView.m */; };
 		180214BE1E1E599C006605C2 /* XYImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214BB1E1E599C006605C2 /* XYImageViewer.m */; };
+		180214C31E1E6B7E006605C2 /* XRCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C11E1E6B7E006605C2 /* XRCarouselView.m */; };
+		180214C41E1E6B7E006605C2 /* XRPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 180214C21E1E6B7E006605C2 /* XRPlaceholder.png */; };
+		180214C71E1E6D7A006605C2 /* XYAdvertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C61E1E6D7A006605C2 /* XYAdvertView.m */; };
+		180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C91E1E6E1A006605C2 /* XYAdvertItem.m */; };
+		180214CD1E1E8A56006605C2 /* XYFindTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214CC1E1E8A56006605C2 /* XYFindTopicView.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
 		181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381781E1B4AC0001E8264 /* XYDynamicTableView.m */; };
 		1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813817B1E1B882E001E8264 /* XYPictureCollectionView.m */; };
@@ -66,6 +71,15 @@
 		180214B91E1E599C006605C2 /* XYImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYImageView.m; sourceTree = "<group>"; };
 		180214BA1E1E599C006605C2 /* XYImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYImageViewer.h; sourceTree = "<group>"; };
 		180214BB1E1E599C006605C2 /* XYImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYImageViewer.m; sourceTree = "<group>"; };
+		180214C01E1E6B7E006605C2 /* XRCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCarouselView.h; sourceTree = "<group>"; };
+		180214C11E1E6B7E006605C2 /* XRCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCarouselView.m; sourceTree = "<group>"; };
+		180214C21E1E6B7E006605C2 /* XRPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XRPlaceholder.png; sourceTree = "<group>"; };
+		180214C51E1E6D7A006605C2 /* XYAdvertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAdvertView.h; sourceTree = "<group>"; };
+		180214C61E1E6D7A006605C2 /* XYAdvertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAdvertView.m; sourceTree = "<group>"; };
+		180214C81E1E6E1A006605C2 /* XYAdvertItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAdvertItem.h; sourceTree = "<group>"; };
+		180214C91E1E6E1A006605C2 /* XYAdvertItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAdvertItem.m; sourceTree = "<group>"; };
+		180214CB1E1E8A56006605C2 /* XYFindTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFindTopicView.h; sourceTree = "<group>"; };
+		180214CC1E1E8A56006605C2 /* XYFindTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFindTopicView.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
 		181381771E1B4AC0001E8264 /* XYDynamicTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicTableView.h; sourceTree = "<group>"; };
@@ -187,6 +201,16 @@
 			path = ImageViewer;
 			sourceTree = "<group>";
 		};
+		180214BF1E1E6B7E006605C2 /* XRCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				180214C01E1E6B7E006605C2 /* XRCarouselView.h */,
+				180214C11E1E6B7E006605C2 /* XRCarouselView.m */,
+				180214C21E1E6B7E006605C2 /* XRPlaceholder.png */,
+			);
+			path = XRCarouselView;
+			sourceTree = "<group>";
+		};
 		183F93821E18BFA200875416 = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +285,7 @@
 		183F93C31E18F1E900875416 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				180214BF1E1E6B7E006605C2 /* XRCarouselView */,
 				180214B51E1E599C006605C2 /* ImageViewer */,
 				18CA22071E1A3790005F1C87 /* CatagoryTitleView */,
 				183F94131E195B4A00875416 /* CustomNav */,
@@ -371,6 +396,8 @@
 		183F93CE1E18F2A400875416 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				180214C81E1E6E1A006605C2 /* XYAdvertItem.h */,
+				180214C91E1E6E1A006605C2 /* XYAdvertItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +405,10 @@
 		183F93CF1E18F2A400875416 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				180214C51E1E6D7A006605C2 /* XYAdvertView.h */,
+				180214C61E1E6D7A006605C2 /* XYAdvertView.m */,
+				180214CB1E1E8A56006605C2 /* XYFindTopicView.h */,
+				180214CC1E1E8A56006605C2 /* XYFindTopicView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -727,6 +758,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				183F940F1E194B7400875416 /* launch.mp4 in Resources */,
+				180214C41E1E6B7E006605C2 /* XRPlaceholder.png in Resources */,
 				183F939B1E18BFA200875416 /* Assets.xcassets in Resources */,
 				18CA21EA1E1A1693005F1C87 /* XYLoginRegisterView.xib in Resources */,
 			);
@@ -809,6 +841,7 @@
 				183F941F1E195B8500875416 /* XYProfileBaseController.m in Sources */,
 				18C90B521E1CB51C00B88D61 /* WUOToolView.m in Sources */,
 				18CA21FB1E1A2496005F1C87 /* UIViewController+XYExtension.m in Sources */,
+				180214C31E1E6B7E006605C2 /* XRCarouselView.m in Sources */,
 				183F93E81E18F44200875416 /* MainTabBarController.m in Sources */,
 				18CA22011E1A24A7005F1C87 /* NSObject+XYHUD.m in Sources */,
 				18CA22211E1A6749005F1C87 /* XYLoginInfoItem.m in Sources */,
@@ -820,8 +853,10 @@
 				180214BD1E1E599C006605C2 /* XYImageView.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
+				180214CD1E1E8A56006605C2 /* XYFindTopicView.m in Sources */,
 				18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */,
 				183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */,
+				180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */,
 				181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */,
 				18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */,
 				18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */,
@@ -829,6 +864,7 @@
 				18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */,
 				183F93EB1E18F47E00875416 /* XYComposeViewController.m in Sources */,
 				183F93F71E18F4E500875416 /* XYMineViewController.m in Sources */,
+				180214C71E1E6D7A006605C2 /* XYAdvertView.m in Sources */,
 				18CA21E81E1A1693005F1C87 /* XYLoginRegisterController.m in Sources */,
 				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
 				18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */,
