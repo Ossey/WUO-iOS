@@ -47,6 +47,7 @@
     BOOL _scrollToToping;
     /** 将每一种标题类型的数据组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据 */
     NSMutableDictionary<NSString *,NSMutableArray<XYDynamicViewModel *> *> *_dataList;
+    NSMutableDictionary<NSString *, NSNumber *> *_cnameDict;
 }
 
 static NSString * const cellIdentifier = @"XYDynamicViewCell";
@@ -63,6 +64,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [[NSMutableArray alloc] init];
+        _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
         [self registerClass:[XYDynamicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
@@ -132,6 +134,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 }
 
 - (void)drawCell:(XYDynamicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+    
+//    NSLog(@"%@", indexPath);
     if (_dataList[self.serachLabel].count == 0) {
         return;
     }
@@ -255,6 +259,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableViewDidScroll:)]) {
         [self.dynamicDelegate dynamicTableViewDidScroll:self];
     }
+    
+    NSLog(@"contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 /// 触摸scrollView并拖拽画面，再松开时，触发该函数
@@ -265,9 +271,13 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     // 当没有产生减速效果时，不会调用scrollView的scrollViewDidEndDecelerating方法，这里就需要记录最终偏移量
     if (!decelerate) {
-        // 记录停止拖拽时rendTableView的偏移量
-        XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
-        viewModel.previousContentOffset = scrollView.contentOffset;
+        // 当标题栏在顶部固定的时候，才去记录偏移量
+//        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+            // 记录停止拖拽时rendTableView的偏移量
+            XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+            viewModel.previousContentOffset = scrollView.contentOffset;
+            
+//        }
     }
 }
 
@@ -277,10 +287,14 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self.dynamicDelegate dynamicTableViewDidEndDecelerating:scrollView];
     }
     
-    // 记录停止拖拽时rendTableView的偏移量
-    XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
-    viewModel.previousContentOffset = scrollView.contentOffset;
+    // 当标题栏在顶部固定的时候，才去记录偏移量
+//    if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+        // 记录停止拖拽时rendTableView的偏移量
+        XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+        viewModel.previousContentOffset = scrollView.contentOffset;
 
+//    }
+    
 }
 
 
@@ -320,6 +334,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
     _serachLabel = serachLabel;
     
+    // 创建数据源容器：根据用户选择的标题信息，创建对应的容器
     if (_dataList.count == 0) {
         // 不包含就创建一个容器存放数据，然后再将容器添加到大数组dataList中
         NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:0];
@@ -333,27 +348,53 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             [_dataList setValue:arrM forKey:serachLabel];
         }
     }
+
+    // 判断用户是否是第一次点击serachLabel标题栏对应的按钮
+    if (![_cnameDict objectForKey:serachLabel]) {
+        // 从key取出的是空的，说明是第一次被点击serachLabel对应的按钮，记录第一次被点击了，1是第一次被点击，2是被点击多次了
+        [_cnameDict setValue:@1 forKey:serachLabel];
+    }
     
     // 直接调beginRefreshing，每次点击标题按钮都会让tableView回到顶部，体验不好的感觉
     //    [self.mj_header beginRefreshing];
     // 每次点击标题按钮时等于刷新数据，需要重置idstamp，不然某些界面因参数问题，是无法获取到完整数据
     _dynamicInfo.idstamp = 0;
     [self loadDataFromNetwork];
- 
-    if (self.contentOffset.y > kTrendTableViewOriginalOffsetY) {
-        // 由于所有的子标题对应的数据源都是在一个tableView上展示的，这样每次切换数据源时再切回去时，用户上一次查看的页面被刷新了，数据也就从头开始了，目的是让tableView滚动到用户上一次查看的位置
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            // 取出上一次偏移量
-            XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
-//            CGFloat temp = kTrendTableViewOriginalOffsetY;
-//            if (viewModel.contentOffset.y < temp) {
-//                CGPoint contentOffset = viewModel.contentOffset;
-//                contentOffset.y = temp;
-//                viewModel.contentOffset = contentOffset;
-//            }
+    
+    // 取出模型，第一个模型保存了偏移量
+    XYDynamicViewModel *viewModel = _dataList[serachLabel].firstObject;
+    // 当是第一次点击时
+    if ([[_cnameDict objectForKey:serachLabel] integerValue] == 1) {
+       
+        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+            // 由于所有的子标题对应的数据源都是在一个tableView上展示的，这样每次切换数据源时再切回去时，用户上一次查看的页面被刷新了，数据也就从头开始了，目的是让tableView滚动到用户上一次查看的位置
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [self setContentOffset:CGPointMake(0, kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) animated:YES];
+                
+                
+            });
+        } else {
             [self setContentOffset:viewModel.previousContentOffset animated:YES];
-        });
+        }
+        
+        // 第一次被点击后，记录下, 告诉下次就属于多次点击
+        [_cnameDict setValue:@2 forKey:serachLabel];
+        return;
     }
+
+    if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
+        
+        if (self.contentOffset.y >= kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+            if (viewModel.previousContentOffset.y == 0) {
+                return;
+            }
+            [self setContentOffset:viewModel.previousContentOffset animated:YES];
+        } else {
+            [self setContentOffset:viewModel.previousContentOffset animated:YES];
+        }
+    }
+    
+    NSLog(@"%d", [[_cnameDict objectForKey:serachLabel] boolValue]);
     
 }
 

@@ -9,10 +9,6 @@
 #import "WUOFindHeaderView.h"
 
 
-//#define kTrendLabelViewHeight 44
-//#define kTopicViewHeight 170
-//#define kHeaderFooterViewInsetMargin 8
-
 @interface WUOFindHeaderView ()
 
 @property (nonatomic, strong) XYFindTopicView *headerView;
