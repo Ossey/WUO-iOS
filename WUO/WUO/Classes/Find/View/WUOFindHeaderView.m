@@ -9,9 +9,9 @@
 #import "WUOFindHeaderView.h"
 
 
-#define kTrendLabelViewHeight 44
-#define kTopicViewHeight 170
-#define kHeaderFooterViewInsetMargin 8
+//#define kTrendLabelViewHeight 44
+//#define kTopicViewHeight 170
+//#define kHeaderFooterViewInsetMargin 8
 
 @interface WUOFindHeaderView ()
 

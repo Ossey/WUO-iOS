@@ -29,6 +29,7 @@
 @property (nonatomic, assign) CGFloat contentWidth;
 @property (nonatomic, assign) CGFloat picItemWH;
 
-
+/** 记录模型所在的tableViewview上次滚动的偏移量 */
+@property (nonatomic, assign) CGPoint previousContentOffset;
 + (instancetype)dynamicViewModelWithItem:(XYDynamicItem *)item info:(XYDynamicInfo *)info;
 @end

@@ -9,13 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class XYDynamicTableView;
-//@protocol XYDynamicTableViewDataSource <NSObject>
-
-//@required
-//- (NSArray *)dynamicTableViewDataSource;
-//
-//@end
-
 @protocol XYDynamicTableViewDelegate <UITableViewDelegate>
 
 @optional
@@ -42,7 +35,6 @@
 @interface XYDynamicTableView : UITableView
 
 @property (nonatomic, weak) id<XYDynamicTableViewDelegate> dynamicDelegate;
-//@property (nonatomic, weak) id<XYDynamicTableViewDataSource> dynamicDataSource;
 
 /**
  网络请求的数据类型，1 是动态界面 2 是发现界面

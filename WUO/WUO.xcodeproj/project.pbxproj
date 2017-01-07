@@ -406,7 +406,7 @@
 			children = (
 				183F93CE1E18F2A400875416 /* Model */,
 				183F93CF1E18F2A400875416 /* View */,
-				183F93D01E18F2A400875416 /* ViewController */,
+				183F93D01E18F2A400875416 /* Controller */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -441,12 +441,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		183F93D01E18F2A400875416 /* ViewController */ = {
+		183F93D01E18F2A400875416 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				183F93EF1E18F4A800875416 /* XYFindViewController.h */,
 				183F93F01E18F4A800875416 /* XYFindViewController.m */,
 			);
+			name = Controller;
 			path = ViewController;
 			sourceTree = "<group>";
 		};

@@ -44,17 +44,22 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _dynamicInfo.idstamp = 0;
-            [self loadDataFromNetwork];
+            [self loadData];
         }];
         
         
-        self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadDataFromNetwork)];
+        self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         
         [self.mj_header beginRefreshing];
+    
+        
     }
     return self;
 }
 
+- (void)loadData {
+    [self loadDataFromNetwork];
+}
 
 - (void)loadDataFromNetwork {
     
@@ -249,13 +254,9 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     self.dataType = type;
     self.serachLabel = serachLabel;
-    if (_dynamicList.count) {
-        
-        [_dynamicList removeAllObjects];
-    }
     // 当type或serachLabel发生改变时，重新加载网络
-//    [self loadDataFromNetwork];
-    [self.mj_header beginRefreshing];
+    [self loadDataFromNetwork];
+    
 }
 
 - (void)setSerachLabel:(NSString *)serachLabel {
@@ -264,13 +265,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
     
     _serachLabel = serachLabel;
-    if (_dynamicList.count) {
-        
-        [_dynamicList removeAllObjects];
-    }
-//    [self loadDataFromNetwork];
-    
-    [self.mj_header beginRefreshing];
+    [self loadDataFromNetwork];
 }
 
 

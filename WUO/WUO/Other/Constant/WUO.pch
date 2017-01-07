@@ -43,6 +43,15 @@
 /*************** 动态界面 ***************/
 
 
+/**************** 查找界面 *****************/
+#define kAdvertViewHeight 210
+#define kTrendLabelViewHeight 44
+#define kTopicViewHeight 170
+#define kHeaderFooterViewInsetMargin 8
+#define kScrollVoewOriginalOffsetY 0
+#define kTrendTableViewOriginalOffsetY -(kAdvertViewHeight + kTrendLabelViewHeight + kTopicViewHeight + kHeaderFooterViewInsetMargin) // tableView最原始的点
+/**************** 查找界面 *****************/
+
 /*************** 颜色 ***************/
 #define kColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 #define kTabBarItemTextColor_Sel [UIColor colorWithRed:71/255.0 green:70/255.0 blue:73/255.0 alpha:1.0]
