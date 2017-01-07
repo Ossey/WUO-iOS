@@ -54,6 +54,7 @@
 #define kColorCountText kColor(205, 205, 205, 1.0)          // 工具条的各种数量文本颜色
 #define kColorReadCountText kColor(180, 180, 180, 1.0)      // 阅读数量颜色
 #define kColorLightBlue kColor(106, 140, 181, 1.0)          // 浅蓝色
+#define kAppGlobalColor [UIColor colorWithRed:57/255.0 green:217/255.0 blue:146/255.0 alpha:1.0]
 /*************** 颜色 ***************/
 
 #define kLoginInfoPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"loginInfo.plist"]

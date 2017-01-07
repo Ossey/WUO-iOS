@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-NSString * const XYTabBarButtonDidRepeatClickNotification = @"XYTabBarButtonDidRepeatClickNotification";
-NSString * const XYUserLoginStatuKey = @"XYUserLoginStatuKey";
-NSString * const XYDynamicViewCellHeightDidChangeNote = @"XYDynamicViewCellHeightDidChangeNote";
+NSNotificationName const XYTabBarButtonDidRepeatClickNotification = @"XYTabBarButtonDidRepeatClickNotification";
+NSNotificationName const XYUserLoginStatuKey = @"XYUserLoginStatuKey";
+NSNotificationName const XYDynamicViewCellHeightDidChangeNote = @"XYDynamicViewCellHeightDidChangeNote";
+NSNotificationName const WUODynamicDidSelectImgNote = @"WUODynamicDidSelectImgNote";
+NSString * const WUODynamicImgItemsKey = @"WUODynamicImgItemsKey";
+NSString * const WUODynamicSelectImgIndexPathKey = @"WUODynamicSelectImgIndexPathKey";
+// 停止拖拽scrollView的通知
+NSNotificationName const XYTrendTableViewDidEndDraggingNote = @"XYTrendTableViewDidEndDraggingNote";
+// scrollView停止减速的通知
+NSNotificationName const XYTrendTableViewDidEndDeceleratingNote = @"XYTrendTableViewDidEndDeceleratingNote";
+NSNotificationName const XYTrendTableViewDidScrollNote = @"XYTrendTableViewDidScrollNote";

@@ -107,7 +107,7 @@
         return;
     }
     [WUOHTTPRequest setActivityIndicator:YES];
-    [WUOHTTPRequest dynamicWithIdstamp:@"" finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest dynamicWithIdstamp:@"" type:1 serachLabel:@"" finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         [WUOHTTPRequest setActivityIndicator:NO];
         NSInteger code = [responseObject[@"code"] integerValue];;
         NSInteger codeDB = [loginCode integerValue];

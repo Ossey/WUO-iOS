@@ -46,6 +46,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             [self loadData];
         }];
         
+        
         self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         
         [self.mj_header beginRefreshing];
@@ -63,7 +64,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     [WUOHTTPRequest setActivityIndicator:YES];
     
-    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] type:[self getNetworkType] serachLabel:[self getSerachLabel] finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
@@ -101,7 +102,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;
-    if (_needLoadList.count>0&&[_needLoadList indexOfObject:indexPath]==NSNotFound) {
+    if (_needLoadList.count>0 && [_needLoadList indexOfObject:indexPath] == NSNotFound) {
         [cell clear];
         return;
     }
@@ -140,11 +141,27 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     NSLog(@"%@", NSStringFromCGRect([tableView dequeueReusableCellWithIdentifier:cellIdentifier].frame));
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    CGFloat height = 0.0;
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:heightForHeaderInSection:)]) {
+        height = [self.dynamicDelegate dynamicTableView:self heightForHeaderInSection:section];
+    }
+    return height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = nil;
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:viewForHeaderInSection:)]) {
+        view = [self.dynamicDelegate dynamicTableView:self viewForHeaderInSection:section];
+    }
+    return view;
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [_needLoadList removeAllObjects];
 }
 
-//按需加载 - 如果目标行与当前行相差超过指定行数，只在目标滚动范围的前后指定3行加载。
+/// 按需加载 - 如果目标行与当前行相差超过指定行数，只在目标滚动范围的前后指定3行加载。
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     NSIndexPath *ip = [self indexPathForRowAtPoint:CGPointMake(0, targetContentOffset->y)];
     NSIndexPath *cip = [[self indexPathsForVisibleRows] firstObject];
@@ -186,7 +203,25 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     [self loadContent];
 }
 
-//用户触摸时第一时间加载内容
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableViewDidScroll:)]) {
+        [self.dynamicDelegate dynamicTableViewDidScroll:self];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableViewDidEndDragging:willDecelerate:)]) {
+        [self.dynamicDelegate dynamicTableViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableViewDidEndDecelerating:)]) {
+        [self.dynamicDelegate dynamicTableViewDidEndDecelerating:scrollView];
+    }
+}
+
+/// 用户触摸时第一时间加载内容
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     if (!_scrollToToping) {
         [_needLoadList removeAllObjects];
@@ -208,6 +243,15 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             [cell draw];
         }
     }
+}
+
+
+- (NSInteger)getNetworkType {
+    return 1;
+}
+
+- (NSString *)getSerachLabel {
+    return @"";
 }
 
 

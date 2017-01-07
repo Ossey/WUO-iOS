@@ -16,3 +16,7 @@ UIKIT_EXTERN NSNotificationName const XYDynamicViewCellHeightDidChangeNote;
 UIKIT_EXTERN NSNotificationName const WUODynamicDidSelectImgNote;
 UIKIT_EXTERN NSString * const WUODynamicImgItemsKey;
 UIKIT_EXTERN NSString * const WUODynamicSelectImgIndexPathKey;
+UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidEndDraggingNote;
+// scrollView停止减速的通知
+UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidEndDeceleratingNote;
+UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidScrollNote;

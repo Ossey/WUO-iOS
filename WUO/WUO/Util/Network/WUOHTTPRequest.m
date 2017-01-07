@@ -52,7 +52,7 @@ static id _instance;
 }
 
 // 动态接口
-+ (void)dynamicWithIdstamp:(NSString *)idstamp finished:(FinishedCallBack)finishedCallBack {
++ (void)dynamicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
     
     XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     // 设置请求头部
@@ -63,18 +63,13 @@ static id _instance;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setValue:idstamp forKey:@"idstamp"];
     [parameters setValue:@15 forKey:@"pageNum"];
-    [parameters setValue:@1 forKey:@"type"];
+    [parameters setValue:@(type) forKey:@"type"];
+    [parameters setValue:serachLabel forKey:@"serachLabel"];
     
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
-// 获取用户登录的信息，并转换为模型
-+ (XYLoginInfoItem *)userLoginInfoItem {
-    
-    NSDictionary *loginInfoDict = [NSDictionary dictionaryWithContentsOfFile:kLoginInfoPath];
-    
-    return [XYLoginInfoItem loginInfoItemWithDict:loginInfoDict];
-}
+
 
 // 广告接口
 + (void)advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
@@ -85,4 +80,23 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
+// 发现界面 分类标题接口
++ (void)getHotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/label/getHotTrendLabel";
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", loginInfoItem.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:loginInfoItem.userInfo.token forHTTPHeaderField:@"token"];
+    
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:nil progress:nil finished:finishedCallBack];
+}
+
+
+// 获取用户登录的信息，并转换为模型
++ (XYLoginInfoItem *)userLoginInfoItem {
+    
+    NSDictionary *loginInfoDict = [NSDictionary dictionaryWithContentsOfFile:kLoginInfoPath];
+    
+    return [XYLoginInfoItem loginInfoItemWithDict:loginInfoDict];
+}
 @end

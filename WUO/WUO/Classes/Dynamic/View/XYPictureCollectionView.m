@@ -105,7 +105,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     if (self = [super initWithFrame:frame]) {
         _imageView = [[UIImageView alloc] init];
         [self.contentView addSubview:_imageView];
-        _imageView.contentMode = UIViewContentModeScaleToFill;
+        _imageView.contentMode = UIViewContentModeRedraw;
         _imageView.clipsToBounds = YES;
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.contentView);
