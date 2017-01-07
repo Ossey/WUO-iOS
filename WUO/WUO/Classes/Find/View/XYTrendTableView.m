@@ -10,37 +10,29 @@
 
 @interface XYTrendTableView () <XYDynamicTableViewDelegate>
 
-@property (nonatomic, copy) NSString *cname;
 
 @end
 
 @implementation XYTrendTableView
 
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame dataType:(NSInteger)type
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:frame style:UITableViewStyleGrouped];
     if (self) {
-        
+        self.dataType = type;
         self.dynamicDelegate = self;
+        
+        __weak typeof(self) weak_self = self;
+        self.cnameBlock = ^(NSString *cname) {
+            weak_self.serachLabel = cname;
+        };
+        
     }
     return self;
 }
 
-- (NSInteger)getNetworkType {
-    return 2;
-}
 
-
-- (NSString *)getSerachLabel {
-    
-    __block NSString *str = @"";
-    [self setCnameBlock:^(NSString *cname) {
-        str = cname;
-    }];
-
-    return @"推荐";
-}
 
 
 #pragma mark - XYDynamicTableViewDelegate

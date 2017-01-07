@@ -10,6 +10,6 @@
 
 @interface XYTrendTableView : XYDynamicTableView
 
-@property (nonatomic, copy) void (^cnameBlock)(NSString *cname);
-
+@property (nonatomic, copy) void (^cnameBlock)(NSString *serachLabel);
+- (instancetype)initWithFrame:(CGRect)frame dataType:(NSInteger)type;
 @end

@@ -15,6 +15,7 @@
 
 
 @interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource>
+
 @end
 
 @implementation XYDynamicTableView {
@@ -27,7 +28,7 @@
 }
 
 static NSString * const cellIdentifier = @"XYDynamicViewCell";
-
+@synthesize serachLabel = _serachLabel;
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
     if (self = [super initWithFrame:frame style:style]) {
@@ -43,28 +44,23 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _dynamicInfo.idstamp = 0;
-            [self loadData];
+            [self loadDataFromNetwork];
         }];
         
         
-        self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+        self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadDataFromNetwork)];
         
         [self.mj_header beginRefreshing];
-    
-        
     }
     return self;
 }
 
-- (void)loadData {
-    [self loadDataFromNetwork];
-}
 
 - (void)loadDataFromNetwork {
     
     [WUOHTTPRequest setActivityIndicator:YES];
     
-    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] type:[self getNetworkType] serachLabel:[self getSerachLabel] finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
@@ -212,7 +208,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableViewDidEndDragging:willDecelerate:)]) {
-        [self.dynamicDelegate dynamicTableViewDidEndDragging:scrollView willDecelerate:decelerate];
+        [self.dynamicDelegate dynamicTableViewDidEndDragging:self willDecelerate:decelerate];
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -245,15 +241,47 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
 }
 
-
-- (NSInteger)getNetworkType {
-    return 1;
+- (void)setDataType:(NSInteger)type serachLabel:(NSString *)serachLabel {
+    
+    if (self.dataType == type && [self.serachLabel isEqualToString:serachLabel]) {
+        return;
+    }
+    
+    self.dataType = type;
+    self.serachLabel = serachLabel;
+    if (_dynamicList.count) {
+        
+        [_dynamicList removeAllObjects];
+    }
+    // 当type或serachLabel发生改变时，重新加载网络
+//    [self loadDataFromNetwork];
+    [self.mj_header beginRefreshing];
 }
 
-- (NSString *)getSerachLabel {
-    return @"";
+- (void)setSerachLabel:(NSString *)serachLabel {
+    if ([_serachLabel isEqualToString:serachLabel]) {
+        return;
+    }
+    
+    _serachLabel = serachLabel;
+    if (_dynamicList.count) {
+        
+        [_dynamicList removeAllObjects];
+    }
+//    [self loadDataFromNetwork];
+    
+    [self.mj_header beginRefreshing];
 }
 
+
+- (NSInteger)dataType {
+    
+    return _dataType ?: 1;
+}
+
+- (NSString *)serachLabel {
+    return _serachLabel ?: @"";
+}
 
 - (void)dealloc {
     

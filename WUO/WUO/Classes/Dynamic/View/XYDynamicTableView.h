@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class XYDynamicTableView;
+//@protocol XYDynamicTableViewDataSource <NSObject>
+
+//@required
+//- (NSArray *)dynamicTableViewDataSource;
+//
+//@end
+
 @protocol XYDynamicTableViewDelegate <UITableViewDelegate>
 
 @optional
@@ -35,7 +42,14 @@
 @interface XYDynamicTableView : UITableView
 
 @property (nonatomic, weak) id<XYDynamicTableViewDelegate> dynamicDelegate;
+//@property (nonatomic, weak) id<XYDynamicTableViewDataSource> dynamicDataSource;
 
-- (NSInteger)getNetworkType;
-- (NSString *)getSerachLabel;
+/**
+ 网络请求的数据类型，1 是动态界面 2 是发现界面
+*/
+@property (nonatomic, assign) NSInteger dataType;
+@property (nonatomic, copy) NSString *serachLabel;
+- (void)setDataType:(NSInteger)type serachLabel:(NSString *)serachLabel;
+- (void)setSerachLabel:(NSString *)serachLabel;
+
 @end
