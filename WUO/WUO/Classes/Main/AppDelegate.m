@@ -151,7 +151,7 @@
     
     switch (currentState) {
         case XYNetworkStateNone:
-            tip = @"当前无网络, 请检查您的网络";
+            tip = @"请检查网络状况";
             break;
         case XYNetworkState2G:
             tip = @"已切换到2G网络";

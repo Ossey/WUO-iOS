@@ -8,14 +8,14 @@
 
 #import "XYPlayerViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "XYPlayerProgressView.h"
+#import "XYPlayerControl.h"
 
 @interface XYPlayerViewController () {
     NSURL *_videoURL;
     AVPlayer *_player;
     AVPlayerItem *_playerItem;
     AVPlayerLayer *_playerLayer;
-    XYPlayerProgressView *_progressView;
+    XYPlayerControl *_playerControl;
 }
 @end
 
@@ -43,38 +43,38 @@
     _playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
     _player = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+    // 设置画面缩放模式
+    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     _playerLayer.frame = self.view.bounds;
     [self.view.layer addSublayer:_playerLayer];
     
-
-    
     CGFloat progressViewH = 25;
-    CGFloat bottomMargin = 10;
-    _progressView = [[XYPlayerProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - progressViewH - bottomMargin, CGRectGetWidth(self.view.frame), progressViewH) player:_player];
-    [self.view addSubview:_progressView];
+    CGFloat bottomMargin = 15;
+    _playerControl = [[XYPlayerControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - progressViewH - bottomMargin, CGRectGetWidth(self.view.frame), progressViewH) player:_player];
+    [self.view addSubview:_playerControl];
     
-    [self initObserver];
+    
 }
 
-- (void)initObserver {
-    
-}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    UITouch *touch = touches.anyObject;
+    // 获取手指在view上的位置
+    CGPoint point = [touch locationInView:self.view];
+    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件
+    if (point.y < _playerControl.frame.origin.y) {
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            [_playerControl pause];
+        }];
+    }
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [_player pause];
-}
 
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
 
 @end
