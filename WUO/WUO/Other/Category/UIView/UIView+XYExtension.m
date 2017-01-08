@@ -139,7 +139,7 @@
  modal的展现方式需要取到控制器的根视图
  */
 
-+ (UIViewController *)currentViewController {
+- (UIViewController *)currentViewController {
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     // modal展现方式的底层视图不同

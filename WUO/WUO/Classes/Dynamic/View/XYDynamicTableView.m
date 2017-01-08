@@ -51,8 +51,11 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         
         [self.mj_header beginRefreshing];
-    
         
+        // 当点击再次刷新时调用
+        [self gzwLoading:^{
+            [self loadData];
+        }];
     }
     return self;
 }
@@ -63,29 +66,37 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (void)loadDataFromNetwork {
     
+    self.loading = YES;
+    
     [WUOHTTPRequest setActivityIndicator:YES];
     
-    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    
+    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
             [self.mj_footer endRefreshing];
             [WUOHTTPRequest setActivityIndicator:NO];
             [self xy_showMessage:@"网络请求失败"];
+            self.loading = NO;
             return;
         }
         
         _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
         
         if ([responseObject[@"code"] integerValue] == 0) {
-            
-            for (id obj in responseObject[@"datas"]) {
-                if ([obj isKindOfClass:[NSDictionary class]]) {
-                    
-                    XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:_dynamicInfo];
-                    XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
-                    [_dynamicList addObject:viewModel];
+            if ([responseObject[@"datas"] count] == 0) {
+                [self xy_showMessage:@"没有更多数据了"];
+            } else {
+                for (id obj in responseObject[@"datas"]) {
+                    if ([obj isKindOfClass:[NSDictionary class]]) {
+                        
+                        XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:_dynamicInfo];
+                        XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
+                        [_dynamicList addObject:viewModel];
+                    }
                 }
+                
             }
         }
         
@@ -93,7 +104,9 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         [self.mj_header endRefreshing];
         [self.mj_footer endRefreshing];
+        
         [self reloadData];
+        self.loading = NO;
         
     }];
 }

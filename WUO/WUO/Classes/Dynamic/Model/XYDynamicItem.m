@@ -58,6 +58,24 @@
     return [tempArrM mutableCopy];
 }
 
+- (NSURL *)videoFullURL {
+    if (self.videoUrl.length) {
+        /// 将网址进行 UTF8 转码，避免有些汉字会变乱码
+        NSString *urlStr = [self.videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        return [NSURL URLWithString:[self.info.basePath stringByAppendingString:urlStr]];
+    }
+    return nil;
+}
+
+- (NSURL *)videoImgFullURL {
+    if (self.videoImg.length) {
+        /// 将网址进行 UTF8 转码，避免有些汉字会变乱码
+        NSString *urlStr = [self.videoImg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        return [NSURL URLWithString:[self.info.basePath stringByAppendingString:urlStr]];
+    }
+    return nil;
+}
+
 @end
 
 @implementation XYDynamicImgItem
@@ -80,8 +98,9 @@
 - (NSURL *)imgFullURL {
     
     if (self.imgUrl) {
-        
-        return [NSURL URLWithString:[self.info.basePath stringByAppendingString:self.imgUrl]];
+        /// 将网址进行 UTF8 转码，避免有些汉字会变乱码
+        NSString *urlStr = [self.imgUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        return [NSURL URLWithString:[self.info.basePath stringByAppendingString:urlStr]];
     }
     
     return nil;

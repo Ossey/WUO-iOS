@@ -70,6 +70,19 @@
 
     }
     
+    // 视频图片
+    CGFloat videoImgH = 0.0;
+    if (self.item.videoImg.length == 0) {
+        // 注意：有视频时，就没有图片，反之亦然
+        videoImgH = 0.0;
+        self.videoImgViewFrame = CGRectZero;
+        y += 0;
+    } else {
+        videoImgH = 160.0;
+        self.videoImgViewFrame = CGRectMake(x, y, self.contentWidth, videoImgH);
+        y += videoImgH + SIZE_PIC_BOTTOM;
+    }
+    
     
     // 标题
     CGSize titleSize = CGSizeZero;
@@ -117,8 +130,7 @@
     if (count == 0) {
         return CGSizeZero;
     }
-    
-    
+
     if (count == 1) {
         
         return CGSizeMake(self.picItemWH, self.picItemWH);

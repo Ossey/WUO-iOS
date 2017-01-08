@@ -42,6 +42,8 @@
 @property (nonatomic, strong) NSURL *headerImageURL;
 @property (nonatomic, strong)XYDynamicInfo *info;
 @property (nonatomic, strong) NSArray<NSString *> *imageUrls;
+@property (nonatomic, strong) NSURL *videoFullURL;     // 用户发布动态的视频url，当有视频时没有图片，反之亦然
+@property (nonatomic, strong) NSURL *videoImgFullURL;   // 视频的封面图片
 
 - (instancetype)initWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;
 + (instancetype)dynamicItemWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;

@@ -163,7 +163,7 @@
             tip = @"已切换到4G网络";
             break;
         case XYNetworkStateWIFI:
-            tip = @"WIFI状态";
+            tip = nil;
             break;
             
         default:

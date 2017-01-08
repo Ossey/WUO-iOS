@@ -99,7 +99,7 @@
 
 - (void)playerPlayToEndTime:(NSNotification *)note {
     
-    [self.playerItem seekToTime:CMTimeMake(0, 1)];
+    [self.playerItem seekToTime:CMTimeMake(0, _player.currentItem.currentTime.timescale)];
     [self.player play];
 }
 
@@ -121,7 +121,7 @@
     NSLog(@"%s", __FUNCTION__);
     [self.player pause];
     self.player = nil;
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 

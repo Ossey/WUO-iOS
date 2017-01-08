@@ -8,13 +8,14 @@
 
 #import "XYDynamicViewCell.h"
 #import <UIButton+WebCache.h>
+//#import <UIImageView+WebCache.h>
 #import "XYDynamicViewModel.h"
 #import "UIImage+XYExtension.h"
 #import "XYPictureCollectionView.h"
 #import "WUOLabel.h"
 #import "NSString+WUO.h"
 #import "WUOToolView.h"
-
+#import "XYVideoImgView.h"
 @class XYPictureCollectionViewLayout;
 @interface XYDynamicViewCell () {
     BOOL _isDrawing;
@@ -37,7 +38,7 @@
 @property (strong, nonatomic)  XYPictureCollectionView *pictureCollectionView;
 @property (strong, nonatomic)  WUOToolView *toolView;
 @property (strong, nonatomic)  UIImageView *cornerImageView;
-
+@property (strong, nonatomic)  XYVideoImgView *videoImgView;
 
 @end
 
@@ -96,6 +97,14 @@
     self.pictureCollectionView.backgroundColor = [self getBackgroundColor];
     [self.contentView addSubview:self.pictureCollectionView];
     
+    // 视频图片展示
+    self.videoImgView = [[XYVideoImgView alloc] init];
+    self.videoImgView.hidden = YES;
+    self.videoImgView.tag = NSIntegerMax;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.videoImgView.backgroundColor = [self getBackgroundColor];
+    [self.contentView addSubview:self.videoImgView];
+    
     // 阅读数量
 //    self.readCountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [self.readCountBtn setTitleColor:kColorCountText forState:UIControlStateNormal];
@@ -120,9 +129,10 @@
     self.pictureCollectionView.dynamicItem = item;
     self.pictureCollectionView.hidden = item.imgCount == 0;
     
-    
     [self.headerView setBackgroundImage:nil forState:UIControlStateNormal];
     [self.headerView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
+    
+    self.videoImgView.viewModel = viewModel;
     
     self.jobLabel.text = item.job;
     self.nameLabel.text = item.name;
@@ -218,6 +228,16 @@
         float size = kScreenW-leftX;
         [self.viewModel.item.job drawInContext:context withPosition:CGPointMake(fromX, y) andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:rect.size.height andWidth:size];
         
+    
+        
+        
+//        // 播放按钮，当有视频时才需要绘制, 这样产生的问题: 绘制的图片被videoImgView遮住了
+//        if (self.videoImgView.hidden == NO) {
+//            CGSize size = CGSizeMake(40, 40);
+//            CGPoint point = CGPointMake((CGRectGetWidth(self.viewModel.videoImgViewFrame) - size.width) * 0.5, (CGRectGetHeight(self.viewModel.videoImgViewFrame) - size.height) * 0.5);
+//            
+//            [[UIImage imageNamed:@"dynamic_listPlayerVideo"] drawInRect:CGRectMake(point.x, point.y, size.width, size.height) blendMode:kCGBlendModeNormal alpha:1.0];
+//        }
         
         // read
         float readCounX = kScreenW - self.investBtn.frame.size.width - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;

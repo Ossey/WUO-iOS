@@ -16,6 +16,7 @@
 #import "UIView+XYExtension.h"
 #import "NSString+MD5.h"
 #import "NSObject+XYHUD.h"
+#import "GzwTableViewLoading.h"
 
 #define kScreenW  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kScreenH CGRectGetHeight([UIScreen mainScreen].bounds)

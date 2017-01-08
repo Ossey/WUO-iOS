@@ -84,6 +84,11 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             weak_self.serachLabel = cname;
         };
         
+        // 当点击再次刷新时调用
+        [self gzwLoading:^{
+            [self loadData];
+        }];
+        
     }
     return self;
 }
@@ -96,6 +101,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (void)loadDataFromNetwork {
     
+    self.loading = YES; // 正在加载中提示
     [WUOHTTPRequest setActivityIndicator:YES];
     
     [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
@@ -105,21 +111,25 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             [self.mj_footer endRefreshing];
             [WUOHTTPRequest setActivityIndicator:NO];
             [self xy_showMessage:@"网络请求失败"];
+            self.loading = NO;
             return;
         }
         
         _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
         
         if ([responseObject[@"code"] integerValue] == 0) {
-
-            for (id obj in responseObject[@"datas"]) {
-                if ([obj isKindOfClass:[NSDictionary class]]) {
-                    
-                    XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:_dynamicInfo];
-                    XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
-                    
-                    // 将数据添加到对应的容器中，避免产生循环引用
-                    [_dataList[self.serachLabel] addObject:viewModel];
+            if ([responseObject[@"datas"] count] == 0) {
+                [self xy_showMessage:@"没有更多数据了"];
+            } else {
+                for (id obj in responseObject[@"datas"]) {
+                    if ([obj isKindOfClass:[NSDictionary class]]) {
+                        
+                        XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:_dynamicInfo];
+                        XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
+                        
+                        // 将数据添加到对应的容器中，避免产生循环引用
+                        [_dataList[self.serachLabel] addObject:viewModel];
+                    }
                 }
             }
         }
@@ -129,14 +139,14 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self.mj_header endRefreshing];
         [self.mj_footer endRefreshing];
         [self reloadData];
-        
+        self.loading = NO;
     }];
 }
 
 - (void)drawCell:(XYDynamicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
 //    NSLog(@"%@", indexPath);
-    if (_dataList[self.serachLabel].count == 0) {
+    if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
         return;
     }
     XYDynamicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
@@ -175,8 +185,13 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     if (_dataList[self.serachLabel].count) {
         
         NSArray *datas = _dataList[self.serachLabel];
-        XYDynamicViewModel *viewModel = datas[indexPath.row];
-        cellHeight = viewModel.cellHeight;
+#warning TODO 目前存在的问题1： cell循环利用了，每个子标题对应的数据，来回滑动有错乱的问题
+        // 导致的问题2：cell的indexPath、row超出了数据源的长度，取值时就会引发崩溃，先解决此问题，再解决问题1
+        if (indexPath.row < datas.count - 1) {
+            
+            XYDynamicViewModel *viewModel = datas[indexPath.row];
+            cellHeight = viewModel.cellHeight;
+        }
     }
     
     return cellHeight;
@@ -190,6 +205,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat height = 0.0;
+    
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:heightForHeaderInSection:)]) {
         height = [self.dynamicDelegate dynamicTableView:self heightForHeaderInSection:section];
     }
@@ -201,6 +217,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UIView *view = nil;
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:viewForHeaderInSection:)]) {
         view = [self.dynamicDelegate dynamicTableView:self viewForHeaderInSection:section];
@@ -260,7 +277,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self.dynamicDelegate dynamicTableViewDidScroll:self];
     }
     
-    NSLog(@"contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
+//    NSLog(@"contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 /// 触摸scrollView并拖拽画面，再松开时，触发该函数
@@ -363,38 +380,50 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     // 取出模型，第一个模型保存了偏移量
     XYDynamicViewModel *viewModel = _dataList[serachLabel].firstObject;
-    // 当是第一次点击时
+    // 当前点击标题按钮如果第一次点击时，第一次被点击的时候，而且标题栏已经在导航条下面固定时，点击其他标题按钮时，让子标题对应的cell，从标题栏下面开始显示，也就是说，第一次被点击的时候，用户并未滑动当前标题对应的cell，就从第一个开始显示
     if ([[_cnameDict objectForKey:serachLabel] integerValue] == 1) {
-       
+        
         if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
             // 由于所有的子标题对应的数据源都是在一个tableView上展示的，这样每次切换数据源时再切回去时，用户上一次查看的页面被刷新了，数据也就从头开始了，目的是让tableView滚动到用户上一次查看的位置
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [self setContentOffset:CGPointMake(0, kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) animated:YES];
                 
-                
+                [self setContentOffset:CGPointMake(0, kTopicViewHeight + kAdvertViewHeight +    kHeaderFooterViewInsetMargin - kNavigationBarHeight) animated:YES];
             });
+            
         } else {
-            [self setContentOffset:viewModel.previousContentOffset animated:YES];
+            if (viewModel.previousContentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    [self setContentOffset:viewModel.previousContentOffset animated:YES];
+                });
+            }
         }
         
         // 第一次被点击后，记录下, 告诉下次就属于多次点击
         [_cnameDict setValue:@2 forKey:serachLabel];
         return;
     }
-
+    
     if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
         
-        if (self.contentOffset.y >= kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
             if (viewModel.previousContentOffset.y == 0) {
                 return;
             }
-            [self setContentOffset:viewModel.previousContentOffset animated:YES];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                [self setContentOffset:viewModel.previousContentOffset animated:YES];
+            });
         } else {
-            [self setContentOffset:viewModel.previousContentOffset animated:YES];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                
+                [self setContentOffset:viewModel.previousContentOffset animated:YES];
+            });
+        
         }
     }
     
-    NSLog(@"%d", [[_cnameDict objectForKey:serachLabel] boolValue]);
+    NSLog(@"%ld", [[_cnameDict objectForKey:serachLabel] integerValue]);
     
 }
 
