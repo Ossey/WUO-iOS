@@ -7,8 +7,9 @@
 //
 
 #import "XYFindTopicView.h"
-#import "XYTopicItem.h"
+#import "XYActivityTopicItem.h"
 #import <UIImageView+WebCache.h>
+#import "XYTopicDetailController.h"
 
 #define titleBtnHeight 30
 #define leftMargin  8
@@ -95,7 +96,7 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
     _layout.itemSize = CGSizeMake(w, h);
 }
 
-- (void)setTopicItemList:(NSArray<XYTopicItem *> *)topicItemList {
+- (void)setTopicItemList:(NSArray<XYActivityTopicItem *> *)topicItemList {
     _topicItemList = topicItemList;
     
     [self.collectionView reloadData];
@@ -118,6 +119,10 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
 }
 
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [XYTopicDetailController pushWithItem:self.topicItemList[indexPath.row]];
+}
 
 @end
 
@@ -156,7 +161,8 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
     }];
 }
 
-- (void)setTopicItem:(XYTopicItem *)topicItem {
+
+- (void)setTopicItem:(XYActivityTopicItem *)topicItem {
     _topicItem = topicItem;
     
     [_imageView sd_setImageWithURL:topicItem.logoFullURL];

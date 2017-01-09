@@ -15,7 +15,9 @@
 		180214C71E1E6D7A006605C2 /* XYAdvertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C61E1E6D7A006605C2 /* XYAdvertView.m */; };
 		180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C91E1E6E1A006605C2 /* XYAdvertItem.m */; };
 		180214CD1E1E8A56006605C2 /* XYFindTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214CC1E1E8A56006605C2 /* XYFindTopicView.m */; };
-		180A0E721E2373B900B7F6A2 /* XYTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A0E711E2373B900B7F6A2 /* XYTopicItem.m */; };
+		180A0E721E2373B900B7F6A2 /* XYActivityTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A0E711E2373B900B7F6A2 /* XYActivityTopicItem.m */; };
+		180A0E751E23883400B7F6A2 /* XYTopicDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A0E741E23883400B7F6A2 /* XYTopicDetailController.m */; };
+		180A0E781E2389F700B7F6A2 /* XYTopicDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A0E771E2389F700B7F6A2 /* XYTopicDetailHeaderView.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
 		181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381781E1B4AC0001E8264 /* XYDynamicTableView.m */; };
 		1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813817B1E1B882E001E8264 /* XYPictureCollectionView.m */; };
@@ -93,8 +95,12 @@
 		180214C91E1E6E1A006605C2 /* XYAdvertItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAdvertItem.m; sourceTree = "<group>"; };
 		180214CB1E1E8A56006605C2 /* XYFindTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFindTopicView.h; sourceTree = "<group>"; };
 		180214CC1E1E8A56006605C2 /* XYFindTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFindTopicView.m; sourceTree = "<group>"; };
-		180A0E701E2373B900B7F6A2 /* XYTopicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicItem.h; sourceTree = "<group>"; };
-		180A0E711E2373B900B7F6A2 /* XYTopicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicItem.m; sourceTree = "<group>"; };
+		180A0E701E2373B900B7F6A2 /* XYActivityTopicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYActivityTopicItem.h; sourceTree = "<group>"; };
+		180A0E711E2373B900B7F6A2 /* XYActivityTopicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYActivityTopicItem.m; sourceTree = "<group>"; };
+		180A0E731E23883400B7F6A2 /* XYTopicDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicDetailController.h; sourceTree = "<group>"; };
+		180A0E741E23883400B7F6A2 /* XYTopicDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicDetailController.m; sourceTree = "<group>"; };
+		180A0E761E2389F700B7F6A2 /* XYTopicDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicDetailHeaderView.h; sourceTree = "<group>"; };
+		180A0E771E2389F700B7F6A2 /* XYTopicDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicDetailHeaderView.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
 		181381771E1B4AC0001E8264 /* XYDynamicTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicTableView.h; sourceTree = "<group>"; };
@@ -443,8 +449,8 @@
 				180214C91E1E6E1A006605C2 /* XYAdvertItem.m */,
 				18F404FC1E1F459800E0837A /* XYTrendLabelItem.h */,
 				18F404FD1E1F459800E0837A /* XYTrendLabelItem.m */,
-				180A0E701E2373B900B7F6A2 /* XYTopicItem.h */,
-				180A0E711E2373B900B7F6A2 /* XYTopicItem.m */,
+				180A0E701E2373B900B7F6A2 /* XYActivityTopicItem.h */,
+				180A0E711E2373B900B7F6A2 /* XYActivityTopicItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,6 +468,8 @@
 				18F405001E1F636900E0837A /* XYTrendTableView.m */,
 				18F405081E207C6900E0837A /* WUOFindHeaderView.h */,
 				18F405091E207C6900E0837A /* WUOFindHeaderView.m */,
+				180A0E761E2389F700B7F6A2 /* XYTopicDetailHeaderView.h */,
+				180A0E771E2389F700B7F6A2 /* XYTopicDetailHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -471,6 +479,8 @@
 			children = (
 				183F93EF1E18F4A800875416 /* XYFindViewController.h */,
 				183F93F01E18F4A800875416 /* XYFindViewController.m */,
+				180A0E731E23883400B7F6A2 /* XYTopicDetailController.h */,
+				180A0E741E23883400B7F6A2 /* XYTopicDetailController.m */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -923,7 +933,7 @@
 				180214C31E1E6B7E006605C2 /* XRCarouselView.m in Sources */,
 				183F93E81E18F44200875416 /* MainTabBarController.m in Sources */,
 				18CA22011E1A24A7005F1C87 /* NSObject+XYHUD.m in Sources */,
-				180A0E721E2373B900B7F6A2 /* XYTopicItem.m in Sources */,
+				180A0E721E2373B900B7F6A2 /* XYActivityTopicItem.m in Sources */,
 				18CA22211E1A6749005F1C87 /* XYLoginInfoItem.m in Sources */,
 				183F93E41E18F2B500875416 /* Reachability.m in Sources */,
 				1862E6A51E2211C90031D063 /* XYPlayerViewController.m in Sources */,
@@ -934,6 +944,7 @@
 				18F404FB1E1F26FD00E0837A /* XYCateTitleView.m in Sources */,
 				180214BD1E1E599C006605C2 /* XYImageView.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
+				180A0E781E2389F700B7F6A2 /* XYTopicDetailHeaderView.m in Sources */,
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
 				180214CD1E1E8A56006605C2 /* XYFindTopicView.m in Sources */,
 				1862E69F1E21DB530031D063 /* UITableView+Gzw.m in Sources */,
@@ -942,6 +953,7 @@
 				180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */,
 				181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */,
 				18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */,
+				180A0E751E23883400B7F6A2 /* XYTopicDetailController.m in Sources */,
 				18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */,
 				1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */,
 				18F4050A1E207C6900E0837A /* WUOFindHeaderView.m in Sources */,

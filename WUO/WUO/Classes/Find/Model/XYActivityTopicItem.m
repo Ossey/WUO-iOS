@@ -6,10 +6,10 @@
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicItem.h"
+#import "XYActivityTopicItem.h"
 
 
-@implementation XYTopicItem
+@implementation XYActivityTopicItem
 
 - (instancetype)initWithDict:(NSDictionary *)dict infoItem:(XYDynamicInfo *)infoItem {
     if (self = [super init]) {
@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (instancetype)topicItemWithDict:(NSDictionary *)dict infoItem:(XYDynamicInfo *)infoItem {
++ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict infoItem:(XYDynamicInfo *)infoItem {
     
     return [[self alloc] initWithDict:dict infoItem:infoItem];
 }
@@ -50,4 +50,24 @@
     
     return [NSString stringWithFormat:@"#%@#", self.title];
 }
+
+//- (CGFloat)topicDetailHeaderHeight {
+//    
+//    if (_topicDetailHeaderHeight != 0) {
+//        // 当已计算好时，就不再计算
+//        return _topicDetailHeaderHeight;
+//    }
+//    
+//    CGFloat x = SIZE_MARGIN;
+//    CGFloat y = SIZE_MARGIN;
+//    
+//    
+//    // 头像
+//    self.topicDetailAvatarFrame = CGRectMake(x, y, SIZE_HEADERWH, SIZE_HEADERWH);
+//    
+//    // 昵称
+//    self.topicDetailNameFrame = CGRectMake(SIZE_MARGIN+SIZE_HEADERWH+SIZE_MARGIN, y, <#CGFloat width#>, <#CGFloat height#>)
+//    
+//   
+//}
 @end

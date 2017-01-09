@@ -24,7 +24,6 @@
 @property (nonatomic, assign) CGRect readCountBtnFrame;
 @property (nonatomic, assign) CGRect toolViewFrame;
 @property (nonatomic, assign) CGRect nameLabelFrame;
-@property (nonatomic, assign) CGRect headerViewFrame;
 @property (nonatomic, assign) CGRect videoImgViewFrame;
 
 @property (nonatomic, assign) CGFloat contentWidth;

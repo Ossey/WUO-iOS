@@ -35,8 +35,8 @@
 
 
 /**
- * @explain 获取当前屏幕显示的控制器
+ * @explain 获取当前屏幕显示的主控制器
  *
  */
-- (UIViewController *)getCurrentViewController;
++ (UIViewController *)getCurrentViewController;
 @end

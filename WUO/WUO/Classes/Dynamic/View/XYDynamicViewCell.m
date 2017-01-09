@@ -18,9 +18,11 @@
 #import "XYVideoImgView.h"
 @class XYPictureCollectionViewLayout;
 @interface XYDynamicViewCell () {
+    // 是否正在绘制中
     BOOL _isDrawing;
+    // 标记绘制颜色
     NSInteger _drawColorFlag;
-    CGRect _readFrame;
+//    CGRect _readFrame;
 //    CGRect _shareCountRect;
 //    CGRect _commentCountRect;
 //    CGRect _rewardCountRect;
@@ -30,7 +32,7 @@
 @property (strong, nonatomic)  UIImageView *postBGView;
 @property (strong, nonatomic)  UIButton *investBtn;
 @property (strong, nonatomic)  UIButton *headerView;
-@property (strong, nonatomic)  UILabel *nameLabel;
+//@property (strong, nonatomic)  UILabel *nameLabel;
 @property (strong, nonatomic)  WUOLabel *title_label;
 @property (strong, nonatomic)  WUOLabel *contentLabel;
 @property (strong, nonatomic)  UIButton *readCountBtn;
@@ -68,7 +70,7 @@
     self.headerView.clipsToBounds = YES;
     [self.contentView addSubview:self.headerView];
     
-    // 圆形图片，目的是让头像变圆
+    // 圆形图片，目的是让头像显示为圆形
     self.cornerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SIZE_HEADERWH+5, SIZE_HEADERWH+5)];
     self.cornerImageView.center = self.headerView.center;
     self.cornerImageView.image = [UIImage imageNamed:@"corner_circle"];
@@ -135,7 +137,7 @@
     self.videoImgView.viewModel = viewModel;
     
     self.jobLabel.text = item.job;
-    self.nameLabel.text = item.name;
+//    self.nameLabel.text = item.name;
 
     self.jobLabel.hidden = !item.job.length;
     self.title_label.hidden = !item.title.length || item.title == nil || [item.title isEqualToString:@""];
@@ -167,6 +169,7 @@
         self.title_label = nil;
     }
     
+    /// 由于标题或正文中有时可能会有连接，需要点击事件，所以不去绘制
     // 标题
     self.title_label = [[WUOLabel alloc] initWithFrame:self.viewModel.title_labelFrame];
     self.title_label.textColor = kColorTitleText;
