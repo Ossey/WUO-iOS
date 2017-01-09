@@ -242,7 +242,7 @@
         // read
         float readCounX = kScreenW - self.investBtn.frame.size.width - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;
         
-        NSString *readCountStr = [NSString stringWithFormat:@"%ld人阅读", self.viewModel.item.readCount];
+        NSString *readCountStr = [NSString stringWithFormat:@"%ld人预览", self.viewModel.item.readCount];
         CGSize readCounSize = [readCountStr sizeWithConstrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) fromFont:kFontWithSize(8) lineSpace:5];
         
         readCounX += readCounSize.width;

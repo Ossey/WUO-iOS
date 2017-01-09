@@ -16,12 +16,13 @@
 
 @interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) XYDynamicInfo *dynamicInfo;
+
 @end
 
 @implementation XYDynamicTableView {
         
     NSMutableArray<XYDynamicViewModel *> *_dynamicList;
-    XYDynamicInfo *_dynamicInfo;
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
     
@@ -82,12 +83,13 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             return;
         }
         
-        _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
-        
         if ([responseObject[@"code"] integerValue] == 0) {
             if ([responseObject[@"datas"] count] == 0) {
                 [self xy_showMessage:@"没有更多数据了"];
             } else {
+                
+                // 当有数据时，才更新dynamic，避免无数据时idstamp为空，就导致下次请求数据时，又重新开始请求了
+                _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
@@ -97,6 +99,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
                     }
                 }
                 
+                [self reloadData];
+                self.loading = NO;
             }
         }
         
@@ -104,9 +108,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         [self.mj_header endRefreshing];
         [self.mj_footer endRefreshing];
-        
-        [self reloadData];
-        self.loading = NO;
+
         
     }];
 }
@@ -280,6 +282,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     _serachLabel = serachLabel;
     [self loadDataFromNetwork];
 }
+
 
 
 - (NSInteger)dataType {
