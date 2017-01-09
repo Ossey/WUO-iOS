@@ -30,6 +30,7 @@
 
 static NSString * const cellIdentifier = @"XYDynamicViewCell";
 @synthesize serachLabel = _serachLabel;
+
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
     if (self = [super initWithFrame:frame style:style]) {
@@ -45,6 +46,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _dynamicInfo.idstamp = 0;
+            // 当下拉刷新时，移除数据，不然idstamp = 0时，又会将数据重新添加到数组中
+            [_dynamicList removeAllObjects];
             [self loadData];
         }];
         

@@ -11,7 +11,7 @@
 
 @interface WUOFindHeaderView ()
 
-@property (nonatomic, strong) XYFindTopicView *headerView;
+@property (nonatomic, strong) XYFindTopicView *topicView;
 @property (nonatomic, strong) XYTrendLabelView *trendLabelView;
 
 @end
@@ -30,11 +30,11 @@
 }
 
 - (XYFindTopicView *)headerView {
-    if (_headerView == nil) {
-        _headerView = [XYFindTopicView new];
-        [self.contentView addSubview:_headerView];
+    if (_topicView == nil) {
+        _topicView = [XYFindTopicView new];
+        [self.contentView addSubview:_topicView];
     }
-    return _headerView;
+    return _topicView;
 }
 
 - (XYTrendLabelView *)trendLabelView {
@@ -50,10 +50,10 @@
         [_trendLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.left.right.equalTo(self.contentView);
             make.height.mas_equalTo(kTrendLabelViewHeight);
-            make.top.equalTo(_headerView.mas_bottom).mas_offset(kHeaderFooterViewInsetMargin);
+            make.top.equalTo(_topicView.mas_bottom).mas_offset(kHeaderFooterViewInsetMargin);
         }];
         
-        [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_topicView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.equalTo(self.contentView);
             make.height.mas_equalTo(kTopicViewHeight).priorityLow();
         }];

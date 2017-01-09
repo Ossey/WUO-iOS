@@ -72,7 +72,7 @@ static id _instance;
 
 
 // 广告接口
-+ (void)advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
++ (void)find_advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
     
     NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/base/advert";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -81,7 +81,7 @@ static id _instance;
 }
 
 // 发现界面 分类标题接口
-+ (void)getHotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
++ (void)find_hotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
     
     XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/label/getHotTrendLabel";
@@ -89,6 +89,23 @@ static id _instance;
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:loginInfoItem.userInfo.token forHTTPHeaderField:@"token"];
     
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:nil progress:nil finished:finishedCallBack];
+}
+
+// 发现界面 -- 活动话题接口
++ (void)find_allTopicWithFinishedCallBack:(FinishedCallBack)finishedCallBack  {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStrl = @"http://me.api.kfit.com.cn/me-api/rest/api/topic/getAll";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:0];
+    [parameters setValue:@"" forKey:@"idstamp"];
+    [parameters setValue:@"" forKey:@"keyWords"];
+    [parameters setValue:@20 forKey:@"pageNum"];
+    [parameters setValue:@1 forKey:@"type"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStrl parameters:parameters progress:nil finished:finishedCallBack];
 }
 
 

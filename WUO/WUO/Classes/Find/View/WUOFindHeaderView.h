@@ -15,7 +15,7 @@
     NSArray *_trendLabelList;
 }
 
-@property (nonatomic, strong, readonly) XYFindTopicView *headerView;
+@property (nonatomic, strong, readonly) XYFindTopicView *topicView;
 @property (nonatomic, strong, readonly) XYTrendLabelView *trendLabelView;
 - (void)setTrendLabelList:(NSArray *)trendLabelList;
 @end

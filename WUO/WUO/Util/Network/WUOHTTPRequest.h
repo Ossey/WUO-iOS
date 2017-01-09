@@ -33,8 +33,11 @@
 + (XYLoginInfoItem *)userLoginInfoItem;
 
 // 广告接口
-+ (void)advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
++ (void)find_advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 
 // 发现界面 分类标题接口 getHotTrendLabel
-+ (void)getHotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
++ (void)find_hotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
+
+// 发现界面 -- 活动话题接口
++ (void)find_allTopicWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

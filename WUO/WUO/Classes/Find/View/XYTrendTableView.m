@@ -95,7 +95,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     return self;
 }
 
-
+#pragma mark - 数据请求
 
 - (void)loadData {
     [self loadDataFromNetwork];
@@ -304,7 +304,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self.dynamicDelegate dynamicTableViewDidScroll:self];
     }
     
-    NSLog(@"scrollView.contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
+//    NSLog(@"scrollView.contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 /// 触摸scrollView并拖拽画面，再松开时，触发该函数

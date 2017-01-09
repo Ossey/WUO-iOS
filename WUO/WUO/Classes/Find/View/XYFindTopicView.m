@@ -7,6 +7,8 @@
 //
 
 #import "XYFindTopicView.h"
+#import "XYTopicItem.h"
+#import <UIImageView+WebCache.h>
 
 #define titleBtnHeight 30
 #define leftMargin  8
@@ -93,18 +95,29 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
     _layout.itemSize = CGSizeMake(w, h);
 }
 
+- (void)setTopicItemList:(NSArray<XYTopicItem *> *)topicItemList {
+    _topicItemList = topicItemList;
+    
+    [self.collectionView reloadData];
+}
+
+
 #pragma mark - <UICollectionViewDelegate, UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 20;
+    return self.topicItemList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     XYFindTopicViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
+    cell.topicItem = self.topicItemList[indexPath.row];
+    
     return cell;
 }
+
+
 
 @end
 
@@ -119,11 +132,12 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
     self = [super initWithFrame:frame];
     if (self) {
         _imageView = [[UIImageView alloc] init];
-        _imageView.backgroundColor = [UIColor orangeColor];
         [self.contentView addSubview:_imageView];
         
         _topicNameLabel = [[UILabel alloc] init];
-        _topicNameLabel.backgroundColor = [UIColor redColor];
+        _topicNameLabel.textColor = kColorTitleText;
+        _topicNameLabel.textAlignment = NSTextAlignmentCenter;
+        _topicNameLabel.font = kFontWithSize(13);
         [self.contentView addSubview:_topicNameLabel];
     }
     return self;
@@ -140,6 +154,14 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
         make.left.top.right.equalTo(self.contentView);
         make.bottom.equalTo(_topicNameLabel.mas_top).mas_offset(5);
     }];
+}
+
+- (void)setTopicItem:(XYTopicItem *)topicItem {
+    _topicItem = topicItem;
+    
+    [_imageView sd_setImageWithURL:topicItem.logoFullURL];
+    
+    _topicNameLabel.text = topicItem.Title;
 }
 
 @end
