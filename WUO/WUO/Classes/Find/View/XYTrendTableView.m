@@ -70,7 +70,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self registerClass:[XYDynamicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
-//            self.dynamicInfo.idstamp = 0;
+            [_dataList[self.serachLabel] removeAllObjects];
             [self loadData];
         }];
         
@@ -120,8 +120,38 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             return;
         }
         
-        if ([responseObject[@"code"] integerValue] == 0) {
-            if ([responseObject[@"datas"] count] == 0) {
+//        if ([responseObject[@"code"] integerValue] == 0 && [responseObject isKindOfClass:[NSDictionary class]]) {
+//            // code==0 请求数据成功
+//            
+//             // 字段中如果包含idstamp ，说明下次还有新的数据，如果不包含，说明下次没有数据
+//            if ([[responseObject allKeys] containsObject:@"idstamp"]) {
+//                NSLog(@"%ld---%ld", self.dynamicInfo.idstamp, [responseObject[@"idstamp"] integerValue]);
+//                // 当上次的idstamp与本地的相同时，说明下次没有数据了，如果再请求数据就重复了
+//                if (self.dynamicInfo.idstamp == [responseObject[@"idstamp"] integerValue]) {
+//                    [self xy_showMessage:@"没有更多数据了"];
+//                    
+//                } else {
+//                    XYDynamicInfo *info = [XYDynamicInfo dynamicInfoWithDict:responseObject];
+//                    
+//                    for (id obj in responseObject[@"datas"]) {
+//                        if ([obj isKindOfClass:[NSDictionary class]]) {
+//                            
+//                            XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:info];
+//                            XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:info];
+//                            
+//                            // 将数据添加到对应的容器中，避免被循环利用，数据错乱
+//                            [_dataList[self.serachLabel] addObject:viewModel];
+//                        }
+//                    }
+//                }
+//               
+//                [self reloadData];
+//                self.loading = NO;
+//            }
+//        }
+        
+        if ([responseObject[@"code"] integerValue] == 0) { // code 为0 说明 请求数据成功
+            if ([responseObject[@"datas"] count] == 0) {  // datas 字段是数据 如果数组数量有值，说明有数据
                 [self xy_showMessage:@"没有更多数据了"];
                 /**
                  问题1.：当没有数据的时候，再次上拉拉加载更多时，数据重复
@@ -132,10 +162,13 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
                  原因：经打印内存地址，发现self.dynamicInfo取的确实是self.serachLabel标题对应的info，最关键的错误是，我在每次开始刷新时:self.dynamicInfo.idstamp = 0;当为0时再加载数据又重新开始请求新的的数据了导致数据重复问题；
                  解决方法：不手动更新self.dynamicInfo.idstamp即解决此问题，其实不需要这样，因为我是从_dataList[self.serachLabel]中取info的，当_dataList为空的时候，dynamicInfo为nil，idstamp就为0了
                  问题4：切换子标题数据源时，cell的高度不能及时更新
+                 问题5：除了动漫界面外，其他数据下拉刷新时还是重复的
+                 原因：问题出在dynamicInfo取值get方法中，每次获取的self.dynamicInfo都是相同的，所以当请求到新的数据时，让self.dynamicInfo更新，使用set方法更新，所以还是重复请求数据, _dataList[self.serachLabel][0].info这里每次更新数据时，第0个模型始终不会改变的，所以取出的info还是同一个info
+                解决方法：由于数组添加数据是往后面添加的，第0个元素一直不会改变，所以每次取info时，取最后一个info就可动态获取info的idstamp了，这样请求的数据就不会重复了
                  */
                 
             } else {
-//                _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
+                
                 XYDynamicInfo *info = [XYDynamicInfo dynamicInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
@@ -153,7 +186,6 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         }
         
         [WUOHTTPRequest setActivityIndicator:NO];
-        
         [self.mj_header endRefreshing];
         [self.mj_footer endRefreshing];
         
@@ -452,7 +484,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 - (XYDynamicInfo *)dynamicInfo {
     // 防止数据错乱，每次请求时，去对应子标题的数据源中取info
     if (_dataList[self.serachLabel].count) {
-        return _dataList[self.serachLabel][0].info;
+        return _dataList[self.serachLabel].lastObject.info;
     } else {
         return nil;
     }

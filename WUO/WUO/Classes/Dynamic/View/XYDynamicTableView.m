@@ -71,7 +71,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     [WUOHTTPRequest setActivityIndicator:YES];
     
-    
+    NSLog(@"%ld", (long)_dynamicInfo.idstamp);
     [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
