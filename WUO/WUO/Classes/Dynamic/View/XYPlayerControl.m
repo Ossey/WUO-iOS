@@ -330,7 +330,7 @@
     // 监听播放器在缓冲数据的状态
     if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         if (playerItem.playbackBufferEmpty == YES) {
-            NSLog(@"缓存不足，强制暂停了");
+            NSLog(@"缓存不足，强制暂停");
             [self pause];
         }
     }
@@ -366,12 +366,13 @@
     // 还原以下数据
     [self seekVideoToPos:0];
     _playPauseBtn.selected = NO;
-    //    _slider.value = 0;
-    [_slider setValue:0 animated:YES];
+    [_slider setValue:0.00 animated:YES];
     self.currentPlayerTime = 0;
     self.remainingTime = CMTimeGetSeconds(_player.currentItem.duration);
     
     [self stopDisplayLink];
+    
+#warning TODO 当视频播放完成后，应显示视频的第一帧
 }
 
 /**
