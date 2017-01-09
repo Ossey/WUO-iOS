@@ -18,7 +18,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.contentMode = UIViewContentModeScaleAspectFill;
         self.userInteractionEnabled = YES;
+        [self setClipsToBounds:YES];
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_btn];
         [_btn mas_makeConstraints:^(MASConstraintMaker *make) {

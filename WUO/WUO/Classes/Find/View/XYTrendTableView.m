@@ -120,36 +120,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             return;
         }
         
-//        if ([responseObject[@"code"] integerValue] == 0 && [responseObject isKindOfClass:[NSDictionary class]]) {
-//            // code==0 请求数据成功
-//            
-//             // 字段中如果包含idstamp ，说明下次还有新的数据，如果不包含，说明下次没有数据
-//            if ([[responseObject allKeys] containsObject:@"idstamp"]) {
-//                NSLog(@"%ld---%ld", self.dynamicInfo.idstamp, [responseObject[@"idstamp"] integerValue]);
-//                // 当上次的idstamp与本地的相同时，说明下次没有数据了，如果再请求数据就重复了
-//                if (self.dynamicInfo.idstamp == [responseObject[@"idstamp"] integerValue]) {
-//                    [self xy_showMessage:@"没有更多数据了"];
-//                    
-//                } else {
-//                    XYDynamicInfo *info = [XYDynamicInfo dynamicInfoWithDict:responseObject];
-//                    
-//                    for (id obj in responseObject[@"datas"]) {
-//                        if ([obj isKindOfClass:[NSDictionary class]]) {
-//                            
-//                            XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:info];
-//                            XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:info];
-//                            
-//                            // 将数据添加到对应的容器中，避免被循环利用，数据错乱
-//                            [_dataList[self.serachLabel] addObject:viewModel];
-//                        }
-//                    }
-//                }
-//               
-//                [self reloadData];
-//                self.loading = NO;
-//            }
-//        }
-        
+        // code==0 请求数据成功
+        // 字段中如果包含idstamp ，说明下次还有新的数据，如果不包含，说明下次没有数据
         if ([responseObject[@"code"] integerValue] == 0) { // code 为0 说明 请求数据成功
             if ([responseObject[@"datas"] count] == 0) {  // datas 字段是数据 如果数组数量有值，说明有数据
                 [self xy_showMessage:@"没有更多数据了"];
@@ -161,7 +133,10 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
                  问题3: 下拉加载时有问题： 切换页面后，再切换回来 self.dynamicInfo.idstamp为0了
                  原因：经打印内存地址，发现self.dynamicInfo取的确实是self.serachLabel标题对应的info，最关键的错误是，我在每次开始刷新时:self.dynamicInfo.idstamp = 0;当为0时再加载数据又重新开始请求新的的数据了导致数据重复问题；
                  解决方法：不手动更新self.dynamicInfo.idstamp即解决此问题，其实不需要这样，因为我是从_dataList[self.serachLabel]中取info的，当_dataList为空的时候，dynamicInfo为nil，idstamp就为0了
-                 问题4：切换子标题数据源时，cell的高度不能及时更新
+                 问题4: tableViewCell的最后一个cell高度不正确，导致无法显示出来
+                 原因：因之前数据重复请求，导致数组发生越界情况，此前我做了层判断，导致最后一个cell不会被加载高度，最终导致高度为0
+                 解决方法：删除heightForRow数据源方法的那个判断即解决
+
                  问题5：除了动漫界面外，其他数据下拉刷新时还是重复的
                  原因：问题出在dynamicInfo取值get方法中，每次获取的self.dynamicInfo都是相同的，所以当请求到新的数据时，让self.dynamicInfo更新，使用set方法更新，所以还是重复请求数据, _dataList[self.serachLabel][0].info这里每次更新数据时，第0个模型始终不会改变的，所以取出的info还是同一个info
                 解决方法：由于数组添加数据是往后面添加的，第0个元素一直不会改变，所以每次取info时，取最后一个info就可动态获取info的idstamp了，这样请求的数据就不会重复了
@@ -195,8 +170,8 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 - (void)drawCell:(XYDynamicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
     //    NSLog(@"%@", indexPath);
-    // 防止数据错乱时，引发数组越界问题崩溃
-    if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
+    // 防止数据错乱时，引发数组越界问题崩溃  , 数据重复请求并添加，导致数据越界问题已经解决，所以不需要在这判断了
+    if (_dataList[self.serachLabel].count == 0/* || indexPath.row > _dataList[self.serachLabel].count - 1*/) {
         return;
     }
     XYDynamicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
@@ -236,15 +211,14 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     if (_dataList[self.serachLabel].count) {
         
         NSArray *datas = _dataList[self.serachLabel];
-#warning TODO 目前存在的问题1： 上拉拉时数据存在重复，每个子标题对应的数据，来回滑动有错乱的问题
-        // 问题1原因：点击子标题按钮时可获取对应的字段去服务器请求数据，而上拉时并不知道字段，问题1已解决
-        // 导致的问题2：cell的indexPath、row超出了数据源的长度，取值时就会引发崩溃，先解决此问题，再解决问题1
-        // 问题4：切换子标题数据源时，cell的高度不能及时更新
-        if (indexPath.row < datas.count - 1) {
-            
-            XYDynamicViewModel *viewModel = datas[indexPath.row];
-            cellHeight = viewModel.cellHeight;
-        }
+        // cell最后一个高度错误，导致最后一个cell不能显示出啦，问题出在了这里的判断，
+        // 为什么我要在这里判断: 因为之前各标题对应的数据源请求和加载时数据存在重复，导致了这里取值时，数组越界产生奔溃
+        // 现在问题解决了，不需要这里错误判断了
+        //        if (indexPath.row < datas.count - 1) {
+        
+        XYDynamicViewModel *viewModel = datas[indexPath.row];
+        cellHeight = viewModel.cellHeight;
+        //        }
     }
     
     return cellHeight;
@@ -484,6 +458,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 - (XYDynamicInfo *)dynamicInfo {
     // 防止数据错乱，每次请求时，去对应子标题的数据源中取info
     if (_dataList[self.serachLabel].count) {
+        // 每次取最后一个info，保证是服务器最新返回的info
         return _dataList[self.serachLabel].lastObject.info;
     } else {
         return nil;
