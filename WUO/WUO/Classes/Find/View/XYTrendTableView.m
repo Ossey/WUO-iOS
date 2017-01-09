@@ -107,7 +107,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     [WUOHTTPRequest setActivityIndicator:YES];
 #warning TODO 已解决此问题 此处下拉加载时有问题： 切换页面后，再切换回来 self.dynamicInfo.idstamp为0了
     
-    NSLog(@"%@--%ld", self.dynamicInfo, self.dynamicInfo.idstamp);
+//    NSLog(@"%@--%ld", self.dynamicInfo, self.dynamicInfo.idstamp);
     
     [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
@@ -171,7 +171,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
     //    NSLog(@"%@", indexPath);
     // 防止数据错乱时，引发数组越界问题崩溃  , 数据重复请求并添加，导致数据越界问题已经解决，所以不需要在这判断了
-    if (_dataList[self.serachLabel].count == 0/* || indexPath.row > _dataList[self.serachLabel].count - 1*/) {
+    if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
         return;
     }
     XYDynamicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
@@ -214,11 +214,11 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         // cell最后一个高度错误，导致最后一个cell不能显示出啦，问题出在了这里的判断，
         // 为什么我要在这里判断: 因为之前各标题对应的数据源请求和加载时数据存在重复，导致了这里取值时，数组越界产生奔溃
         // 现在问题解决了，不需要这里错误判断了
-        //        if (indexPath.row < datas.count - 1) {
-        
-        XYDynamicViewModel *viewModel = datas[indexPath.row];
-        cellHeight = viewModel.cellHeight;
-        //        }
+        if (indexPath.row < datas.count) {
+            
+            XYDynamicViewModel *viewModel = datas[indexPath.row];
+            cellHeight = viewModel.cellHeight;
+        }
     }
     
     return cellHeight;
@@ -304,7 +304,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         [self.dynamicDelegate dynamicTableViewDidScroll:self];
     }
     
-//    NSLog(@"contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
+    NSLog(@"scrollView.contentOffset--%@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 /// 触摸scrollView并拖拽画面，再松开时，触发该函数
@@ -316,12 +316,12 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     // 当没有产生减速效果时，不会调用scrollView的scrollViewDidEndDecelerating方法，这里就需要记录最终偏移量
     if (!decelerate) {
         // 当标题栏在顶部固定的时候，才去记录偏移量
-//        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
             // 记录停止拖拽时rendTableView的偏移量
             XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
             viewModel.previousContentOffset = scrollView.contentOffset;
             
-//        }
+        }
     }
 }
 
@@ -332,12 +332,12 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
     
     // 当标题栏在顶部固定的时候，才去记录偏移量
-//    if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
+    if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
         // 记录停止拖拽时rendTableView的偏移量
         XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
         viewModel.previousContentOffset = scrollView.contentOffset;
 
-//    }
+    }
     
 }
 
@@ -392,9 +392,9 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             [_dataList setValue:arrM forKey:serachLabel];
         }
     }
-
-    // 判断用户是否是第一次点击serachLabel标题栏对应的按钮
-    if (![_cnameDict objectForKey:serachLabel]) {
+    
+    // 判断用户是否是第一次点击serachLabel标题栏对应的按钮，当字典_cnameDict中所有的key不包含当前的子标题，就是没被点击过
+    if (![_cnameDict.allKeys containsObject:serachLabel]) {
         // 从key取出的是空的，说明是第一次被点击serachLabel对应的按钮，记录第一次被点击了，1是第一次被点击，2是被点击多次了
         [_cnameDict setValue:@1 forKey:serachLabel];
     }
@@ -402,57 +402,59 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     // 直接调beginRefreshing，每次点击标题按钮都会让tableView回到顶部，体验不好的感觉
     //    [self.mj_header beginRefreshing];
     // 每次点击标题按钮时等于刷新数据，需要重置idstamp，不然某些界面因参数问题，是无法获取到完整数据
-//    _dynamicInfo.idstamp = 0;
-//    self.dynamicInfo.idstamp = 0;
+    //    _dynamicInfo.idstamp = 0;
+    //    self.dynamicInfo.idstamp = 0;
     [self loadDataFromNetwork];
-//    
-//    // 取出模型，第一个模型保存了偏移量
-//    XYDynamicViewModel *viewModel = _dataList[serachLabel].firstObject;
+    
+    
+    /**
+     思路：
+     先 取出当前子标题对象的第一个模型，tableView上次的偏移量保存在每个子标题对应的第一个模型的previousContentOffset中
+     第一次被点击时，取出所有模型中存储的上次偏移量值，判断如果有其中任何一个大于导航条底部的位置，就让所有的上次偏移量等于导航条底部的位置
+     第二次被点击时，根据上次的偏移决定
+     */
+
+    
+    // 需要比较的偏移量
+    CGFloat compareOffsetY = kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight;
+    [self setContentOffset:CGPointMake(self.contentOffset.x, compareOffsetY) animated:YES];
+#warning TODO 待解决问题：有时切换子标题数据源时，tableView的偏移量变为负数，导致滚动到下面看不见了，比如滚动多滚动当前界面几页后，再滚到其他界面后，scrollView就滚没了😡
 //    // 当前点击标题按钮如果第一次点击时，第一次被点击的时候，而且标题栏已经在导航条下面固定时，点击其他标题按钮时，让子标题对应的cell，从标题栏下面开始显示，也就是说，第一次被点击的时候，用户并未滑动当前标题对应的cell，就从第一个开始显示
 //    if ([[_cnameDict objectForKey:serachLabel] integerValue] == 1) {
 //        
-//        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
-//            // 由于所有的子标题对应的数据源都是在一个tableView上展示的，这样每次切换数据源时再切回去时，用户上一次查看的页面被刷新了，数据也就从头开始了，目的是让tableView滚动到用户上一次查看的位置
-//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                
-//                [self setContentOffset:CGPointMake(0, kTopicViewHeight + kAdvertViewHeight +    kHeaderFooterViewInsetMargin - kNavigationBarHeight) animated:YES];
-//            });
-//            
-//        } else {
-//            if (viewModel.previousContentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
-//                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                    
-//                    [self setContentOffset:viewModel.previousContentOffset animated:YES];
-//                });
+//        __block CGFloat tempOffsetY = 0.0;
+//        // 遍历数据源，判断有没有其中任何一个上次偏移量大于了compareOffsetY，只要有就停止遍历，让所有的都移动到compareOffsetY
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//            for (NSString *key in _dataList) {
+//                NSArray<XYDynamicViewModel *> *arrValue = _dataList[key];
+//                NSLog(@"%f--compareOffsetY=%f", arrValue.firstObject.previousContentOffset.y, compareOffsetY);
+//                if (arrValue.firstObject.previousContentOffset.y > compareOffsetY) {
+//                    tempOffsetY = compareOffsetY;
+//                    break;
+//                }
 //            }
-//        }
+//            // 由于所有的子标题对应的数据源都是在一个tableView上展示的，这样每次切换数据源时再切回去时，用户上一次查看的页面被刷新了，数据也就从头开始了，目的是让tableView滚动到用户上一次查看的位置
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSLog(@"tempOffsetY---%f", tempOffsetY);
+//                [self setContentOffset:CGPointMake(self.contentOffset.x, tempOffsetY) animated:YES];
+//            });
+//        });
+//        
 //        
 //        // 第一次被点击后，记录下, 告诉下次就属于多次点击
 //        [_cnameDict setValue:@2 forKey:serachLabel];
-//        return;
-//    }
-//    
-//    if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
 //        
-//        if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
-//            if (viewModel.previousContentOffset.y == 0) {
-//                return;
-//            }
-//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                
-//                [self setContentOffset:viewModel.previousContentOffset animated:YES];
-//            });
-//        } else {
-//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                
-//                [self setContentOffset:viewModel.previousContentOffset animated:YES];
-//            });
-//        
+//    } else if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
+//        // 取出模型，第一个模型保存了偏移量
+//        XYDynamicViewModel *viewModel = _dataList[serachLabel].firstObject;
+//        if (viewModel.previousContentOffset.y > compareOffsetY) {
+//
+//            [self setContentOffset:viewModel.previousContentOffset animated:YES];
 //        }
 //    }
-//    
+//
 //    NSLog(@"%ld", [[_cnameDict objectForKey:serachLabel] integerValue]);
-//    
+    
 }
 
 - (XYDynamicInfo *)dynamicInfo {
