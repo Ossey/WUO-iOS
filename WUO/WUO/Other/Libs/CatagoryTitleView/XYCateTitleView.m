@@ -407,6 +407,10 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     _selectedIndex = selectedIndex;
     
+    if (selectedIndex > self.items.count - 1) {
+        NSLog(@"选中的按钮索引已超出按钮的数量");
+        return;
+    }
     [self selecteTitleItemWithIndex:selectedIndex];
 }
 

@@ -21,6 +21,8 @@
         self.trendLabelView.hidden = NO;
 //        [_trendLabelView setItemWidth:50];
 //        [_trendLabelView setUnderLineWidth:20];
+        // 默认选中的是1
+        
     }
     return self;
 }

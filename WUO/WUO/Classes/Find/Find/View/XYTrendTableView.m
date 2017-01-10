@@ -65,7 +65,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         self.showsHorizontalScrollIndicator = NO;
         
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
-        _needLoadList = [[NSMutableArray alloc] init];
+        _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
         [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
@@ -108,7 +108,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     
 //    NSLog(@"%@--%ld", self.dynamicInfo, self.dynamicInfo.idstamp);
     
-    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType topicID:0 serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];

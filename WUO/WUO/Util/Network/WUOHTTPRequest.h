@@ -28,7 +28,7 @@
  * @parm    topicID  用于请求话题详情的
  * @parm    serachLabel 查找界面的动态数据 根据serachLabel传入的字段请求对应的数据
  */
-+ (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type topicID:(NSInteger)topicID serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack;
++ (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack;
 
 // 获取登录用户信息模型
 + (XYLoginInfoItem *)userLoginInfoItem;
@@ -44,4 +44,7 @@
 
 // 发现界面 -- 话题详情 接口
 + (void)find_topicDetailByID:(NSInteger)topicID finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+// 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
++ (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSString *)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

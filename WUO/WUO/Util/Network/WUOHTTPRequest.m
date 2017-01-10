@@ -52,7 +52,7 @@ static id _instance;
 }
 
 // 获取帖子 接口
-+ (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type topicID:(NSInteger)topicID serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
++ (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
     
     XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     // 设置请求头部
@@ -65,7 +65,6 @@ static id _instance;
     [parameters setValue:@15 forKey:@"pageNum"];
     [parameters setValue:@(type) forKey:@"type"];
     [parameters setValue:serachLabel forKey:@"serachLabel"];
-    [parameters setValue:@(topicID) forKey:@"topicID"];
     
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
@@ -123,19 +122,18 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
-// 话题数据 接口
-// idstamp=2&topicId=373&type=0
-+ (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSInteger)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack {
-    
+
+// 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
++ (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSString *)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack {
     XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
     
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
-    
+
     NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/topic/getTrendByTopicId";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:0];
-    [parameters setValue:@(topicID) forKey:@"topicID"];
-    [parameters setValue:@(idstamp) forKey:@"idstamp"];
+    [parameters setValue:@(topicID) forKey:@"topicId"];
+    [parameters setValue:idstamp forKey:@"idstamp"];
     [parameters setValue:@(type) forKey:@"type"];
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }

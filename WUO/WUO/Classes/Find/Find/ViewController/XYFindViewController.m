@@ -45,18 +45,10 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
     _trendLabelList = [NSMutableArray arrayWithCapacity:5];
     _topicList = [NSMutableArray arrayWithCapacity:1];
     
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     self.xy_topBar.backgroundColor = [UIColor clearColor];
     self.shadowLineView.backgroundColor = [UIColor clearColor];
     
-//    _titleLabel = [[UILabel alloc] init];
-//    _titleLabel.text = @"发现";
-//    [_titleLabel sizeToFit];
-//    _titleLabel.textColor = [UIColor colorWithWhite:0 alpha:0];
-//    self.navigationItem.titleView = titleLabel;
-//    self.xy_titleView = _titleLabel;
     self.xy_title = @"发现";
     self.xy_titleColor = [UIColor clearColor];
     
@@ -217,14 +209,8 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
         alpha = 0.99;
     }
     
-//    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-//    UILabel *titleView = (UILabel *)self.xy_titleButton.subviews.firstObject;
-//    _titleLabel.textColor = [UIColor colorWithWhite:0 alpha:alpha];
     self.xy_titleColor = [UIColor colorWithWhite:0 alpha:alpha];
-    
-//    UIImage *image = [UIImage xy_imageWithColor:[UIColor colorWithWhite:1 alpha:alpha]];
     self.xy_topBar.backgroundColor = [UIColor colorWithWhite:1 alpha:alpha];
-//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
 }
 

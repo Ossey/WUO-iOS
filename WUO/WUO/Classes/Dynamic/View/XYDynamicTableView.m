@@ -75,7 +75,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     [WUOHTTPRequest setActivityIndicator:YES];
     
     NSLog(@"%ld", (long)_dynamicInfo.idstamp);
-    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType topicID:0 serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
