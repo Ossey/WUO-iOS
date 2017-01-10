@@ -48,18 +48,31 @@
     }
     
     CGFloat x = SIZE_GAP_MARGIN;
-    CGFloat y = 0.0;
+    CGFloat y = SIZE_GAP_TOP;
+    
+    // 排名
+    if (self.item.ranking.length) {
+        CGFloat rankingHeight = 30;
+        CGFloat rankingWidth = 90;
+        // 有排名
+        self.rankingFrame = CGRectMake(-15, y, rankingWidth, rankingHeight);
+        y += rankingHeight + SIZE_GAP_TOP;
+    } else {
+        y = SIZE_GAP_TOP;
+        self.rankingFrame = CGRectZero;
+    }
     
     // 头部
-    CGFloat headerHeight = SIZE_GAP_MARGIN + SIZE_HEADERWH;
-
+    CGFloat headerHeight =  SIZE_HEADERWH;
     
-    y = headerHeight + SIZE_GAP_SMALL;
+    self.headerFrame = CGRectMake(x, y, headerHeight, headerHeight);
+    
+    y += headerHeight + SIZE_GAP_SMALL;
     x += SIZE_HEADERWH + SIZE_GAP_PADDING;
     
     // 昵称
     CGSize nameSize = [self.item.name boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
-    self.nameLabelFrame = CGRectMake(x, SIZE_GAP_TOP, nameSize.width, nameSize.height);
+    self.nameLabelFrame = CGRectMake(x, self.headerFrame.origin.y, nameSize.width, nameSize.height);
     CGRectMake(x, SIZE_GAP_MARGIN, 0, 0);
     
     // job

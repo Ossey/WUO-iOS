@@ -26,6 +26,8 @@
 @property (nonatomic, assign) CGRect nameLabelFrame;
 @property (nonatomic, assign) CGRect jobLabelFrame;
 @property (nonatomic, assign) CGRect videoImgViewFrame;
+@property (nonatomic, assign) CGRect rankingFrame;
+@property (nonatomic, assign) CGRect headerFrame;
 
 @property (nonatomic, assign) CGFloat contentWidth;
 @property (nonatomic, assign) CGFloat picItemWH;

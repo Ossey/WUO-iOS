@@ -517,7 +517,7 @@
     button.selected = YES;
     [_previousSelectedBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    [button setTitleColor:kAppGlobalColor forState:UIControlStateNormal];
+    [button setTitleColor:kAppGlobalGreenColor forState:UIControlStateNormal];
     
     [self setupTitleCenter:button];
     

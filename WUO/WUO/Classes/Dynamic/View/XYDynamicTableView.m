@@ -108,7 +108,6 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         }
         
         [WUOHTTPRequest setActivityIndicator:NO];
-        
         [self.mj_header endRefreshing];
         [self.mj_footer endRefreshing];
 
