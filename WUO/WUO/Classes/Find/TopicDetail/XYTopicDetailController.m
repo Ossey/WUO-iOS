@@ -81,8 +81,7 @@
             XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
             // 请求数据成功
             // 头部数据，内含第一次加载的帖子数组
-            _item = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
-            _tableView.activityTopicItem = _item;
+            _tableView.activityTopicItem = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
             
         }
         _tableView.loading = NO;

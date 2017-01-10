@@ -14,17 +14,23 @@
 #import "XYRefreshGifHeader.h"
 #import "XYRefreshGifFooter.h"
 #import "WUOHTTPRequest.h"
+#import "XYDynamicViewModel.h"
 
 @interface XYTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) XYTopicDetailHeaderView *headView;
 @property (nonatomic, strong) XYTopicDetailSelectView *selectView;
-@property (nonatomic, strong) NSMutableArray<XYTopicItem *> *trendList;
+@property (nonatomic, strong) NSMutableArray<XYDynamicViewModel *> *trendList;
 @end
 
 @implementation XYTopicDetailTableView {
     NSInteger _idStamp;
     BOOL _isFirst;
+    NSMutableArray *_needLoadList;
+    BOOL _scrollToToping;
+    /** 将每一种标题类型的数据数组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据，防止数据错乱 */
+    NSMutableDictionary<NSString *,NSMutableArray<XYDynamicViewModel *> *> *_dataList;
+    NSMutableDictionary<NSString *, NSNumber *> *_cnameDict;
 }
 
 @synthesize trendList = _trendList;
@@ -33,6 +39,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:UITableViewStylePlain]) {
         
+        _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _isFirst = YES;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.showsHorizontalScrollIndicator = NO;
@@ -42,7 +49,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
         [self registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
         [self registerClass:[XYTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
         
-         _trendList = [NSMutableArray<XYTopicItem *> arrayWithCapacity:0];
+         _trendList = [NSMutableArray<XYDynamicViewModel *> arrayWithCapacity:0];
     
         
         // 下拉刷新时请求帖子时_idStamp必须 为空 才能请求到新数据
@@ -82,9 +89,10 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
                 for (id obj in responseObject[@"data"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         // 帖子模型数
-                        [self.trendList addObject:[XYTopicItem topicItemWithDict:obj info:info]];
+                        [self.trendList addObject:[XYDynamicViewModel dynamicViewModelWithItem:[XYTopicItem topicItemWithDict:obj info:info] info:info]];
                     }
                 }
+                [self reloadData];
             }
             
         }
@@ -99,7 +107,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _trendList.count;
+    return self.trendList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,7 +168,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
     
 }
 
-- (NSMutableArray<XYTopicItem *> *)trendList {
+- (NSMutableArray<XYDynamicViewModel *> *)trendList {
     if (_trendList == nil) {
         _trendList = [NSMutableArray arrayWithCapacity:0];
     }

@@ -7,14 +7,12 @@
 //  find 页面 活动话题 模型
 
 #import <Foundation/Foundation.h>
-#import "XYTopicItem.h"
-#import "XYTopicInfo.h"
+#import "XYDynamicViewModel.h"
 
 #define SIZE_MARGIN 10
 #define SIZE_CORNERWH SIZE_HEADERWH+5
 #define SIZE_LOGOH 200
 
-@class XYTopicInfo, XYTopicItem;
 @interface XYActivityTopicItem : NSObject
 /** 活动创建时间 需要进行处理，当距离今日小于20时，显示比如【20天前】，1年内显示比如【11月30日】，跨年显示【2016年1月2日】 */
 @property (nonatomic, copy) NSString *createTime;
@@ -45,9 +43,9 @@
 @property (nonatomic, copy) NSString *startTime;
 /** 话题数组 */
 @property (nonatomic, assign) NSInteger totalAmount;
-@property (nonatomic, strong) NSMutableArray<XYTopicItem *> *trendList;
 @property (nonatomic, assign) NSInteger uid;
 @property (nonatomic, copy) NSString *videoImg;
+@property (nonatomic, strong) NSMutableArray<XYDynamicViewModel *> *trendList;
 
 /************ 扩展属性 *************/
 /** 用于处理上面的logo属性 */
