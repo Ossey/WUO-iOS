@@ -11,6 +11,8 @@
 
 @implementation XYActivityTopicItem
 
+@synthesize trendList = _trendList;
+
 - (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
     if (self = [super init]) {
         [self setValuesForKeysWithDictionary:dict];
@@ -18,6 +20,7 @@
         // 当dict[@"datas"]字段为数组类型时，说明datas字段是帖子，如果是字典类型时，datas字段为帖子详情，对应内部的trendList才为帖子数组
         if (dict[@"datas"] && [dict[@"datas"] count]) {
             
+            // 如果datas是数组，那里面装的都是帖子
             if ([dict[@"datas"] isKindOfClass:[NSArray class]]) {
                 for (id obj in dict[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
@@ -31,9 +34,11 @@
                         [self.trendList addObject:[XYTopicItem topicItemWithDict:dict info:info]];
                     }
                 }
-            }
+            } 
             
         }
+        
+        
     }
     return self;
 }
@@ -172,6 +177,13 @@
 - (CGRect)topicDetailHeaderBounds {
     
     return CGRectMake(0, 0, kScreenW, self.topicDetailHeaderHeight);
+}
+
+- (void)setTrendList:(NSMutableArray<XYTopicItem *> *)trendList {
+    _trendList = trendList;
+    
+    // 发布数据改变的通知，外界更新数据
+    [[NSNotificationCenter defaultCenter] postNotificationName:XYTrendListChangeNote object:trendList];
 }
 
 @end

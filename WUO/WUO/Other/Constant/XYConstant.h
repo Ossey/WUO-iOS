@@ -20,3 +20,4 @@ UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidEndDraggingNote;
 // scrollView停止减速的通知
 UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidEndDeceleratingNote;
 UIKIT_EXTERN NSNotificationName const XYTrendTableViewDidScrollNote;
+UIKIT_EXTERN NSNotificationName const XYTrendListChangeNote;

@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithFrame:(CGRect)frame
                      delegate:(id)delegate
-                 channelCates:(NSArray<NSDictionary *> *)channelCates
+                 channelCates:(NSArray<NSDictionary *> * _Nullable )channelCates
                 rightBtnWidth:(CGFloat)rightBtnWidth NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;

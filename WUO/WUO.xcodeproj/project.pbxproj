@@ -76,6 +76,8 @@
 		18E295411E24DE84006145E3 /* XYTopicDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E295351E24DE84006145E3 /* XYTopicDetailHeaderView.m */; };
 		18E295421E24DE84006145E3 /* XYTopicDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E295371E24DE84006145E3 /* XYTopicDetailTableView.m */; };
 		18E295441E24DED9006145E3 /* XYTrendLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E295431E24DED9006145E3 /* XYTrendLabelView.m */; };
+		18E295481E24E6B9006145E3 /* XYTopicDetailLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E295471E24E6B9006145E3 /* XYTopicDetailLabelView.m */; };
+		18E2954B1E24E7A9006145E3 /* XYTopicDetailSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2954A1E24E7A9006145E3 /* XYTopicDetailSelectView.m */; };
 		18F404FB1E1F26FD00E0837A /* XYCateTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F404F91E1F26FD00E0837A /* XYCateTitleView.m */; };
 		4CA5914E2A31A0C3F72B5603 /* libPods-WUO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86081FDC45251230ADAA5EE /* libPods-WUO.a */; };
 /* End PBXBuildFile section */
@@ -217,6 +219,10 @@
 		18E295371E24DE84006145E3 /* XYTopicDetailTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicDetailTableView.m; sourceTree = "<group>"; };
 		18E295431E24DED9006145E3 /* XYTrendLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTrendLabelView.m; sourceTree = "<group>"; };
 		18E295451E24DEE2006145E3 /* XYTrendLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYTrendLabelView.h; sourceTree = "<group>"; };
+		18E295461E24E6B9006145E3 /* XYTopicDetailLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicDetailLabelView.h; sourceTree = "<group>"; };
+		18E295471E24E6B9006145E3 /* XYTopicDetailLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicDetailLabelView.m; sourceTree = "<group>"; };
+		18E295491E24E7A9006145E3 /* XYTopicDetailSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicDetailSelectView.h; sourceTree = "<group>"; };
+		18E2954A1E24E7A9006145E3 /* XYTopicDetailSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicDetailSelectView.m; sourceTree = "<group>"; };
 		18F404F81E1F26FD00E0837A /* XYCateTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCateTitleView.h; sourceTree = "<group>"; };
 		18F404F91E1F26FD00E0837A /* XYCateTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCateTitleView.m; sourceTree = "<group>"; };
 		67309620AA4EBE37FE0F0D03 /* Pods-WUO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WUO.release.xcconfig"; path = "Pods/Target Support Files/Pods-WUO/Pods-WUO.release.xcconfig"; sourceTree = "<group>"; };
@@ -778,6 +784,10 @@
 				18E295351E24DE84006145E3 /* XYTopicDetailHeaderView.m */,
 				18E295361E24DE84006145E3 /* XYTopicDetailTableView.h */,
 				18E295371E24DE84006145E3 /* XYTopicDetailTableView.m */,
+				18E295461E24E6B9006145E3 /* XYTopicDetailLabelView.h */,
+				18E295471E24E6B9006145E3 /* XYTopicDetailLabelView.m */,
+				18E295491E24E7A9006145E3 /* XYTopicDetailSelectView.h */,
+				18E2954A1E24E7A9006145E3 /* XYTopicDetailSelectView.m */,
 			);
 			path = TopicDetail;
 			sourceTree = "<group>";
@@ -930,6 +940,7 @@
 				18E2953D1E24DE84006145E3 /* XYFindTopicView.m in Sources */,
 				18CA22141E1A3CBC005F1C87 /* XYTopicViewCell.m in Sources */,
 				18CA21EC1E1A1693005F1C87 /* XYThirdPartyLoginView.m in Sources */,
+				18E295481E24E6B9006145E3 /* XYTopicDetailLabelView.m in Sources */,
 				18CA22061E1A258B005F1C87 /* UIImageView+XYExtension.m in Sources */,
 				18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */,
 				183F94201E195B8500875416 /* XYCustomNavController.m in Sources */,
@@ -945,6 +956,7 @@
 				18CA22181E1A4C83005F1C87 /* XYDynamicToolButton.m in Sources */,
 				18CA21EB1E1A1693005F1C87 /* XYLoginView.m in Sources */,
 				18E2953C1E24DE84006145E3 /* XYAdvertView.m in Sources */,
+				18E2954B1E24E7A9006145E3 /* XYTopicDetailSelectView.m in Sources */,
 				18E2953B1E24DE84006145E3 /* WUOFindHeaderView.m in Sources */,
 				1862E6A21E2202450031D063 /* XYVideoImgView.m in Sources */,
 				18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */,

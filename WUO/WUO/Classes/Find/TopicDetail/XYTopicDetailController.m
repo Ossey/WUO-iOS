@@ -10,8 +10,8 @@
 #import "UIViewController+XYExtension.h"
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
-#import "XYTopicDetailHeaderView.h"
 #import "XYTopicDetailTableView.h"
+#import "XYRefreshGifHeader.h"
 
 @implementation XYTopicDetailController {
     
@@ -19,7 +19,6 @@
     XYActivityTopicItem *_activityTopicItem;
     NSMutableArray *_trendList;
     XYTopicDetailTableView *_tableView;
-    XYTopicDetailHeaderView *_headerView;
 }
 
 + (void)pushWithItem:(XYActivityTopicItem *)item {
@@ -56,16 +55,23 @@
         make.edges.equalTo(self.view);
     }];
     
-    
     // 第一次进入此页面时，请求话题详情数据，下次不管是下拉刷新还是上拉加载时，都是请求Trend
-    [self loadTopicDetail];
+    [self loadTopicHeaderDetail];
+    
+    // 下拉刷新时请求帖子
+    _tableView.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
+        [self loadTopic];
+    }];
+    
+
 }
 
-- (void)loadTopicDetail {
+- (void)loadTopicHeaderDetail {
     
     [WUOHTTPRequest find_topicDetailByID:self.item.topicId finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
             [self xy_showMessage:@"网络请求失败"];
+            [_tableView.mj_header endRefreshing];
             return;
         }
         if ([responseObject[@"code"] integerValue] == 0) {
@@ -74,9 +80,29 @@
             // 头部数据，内含第一次加载的帖子数组
             _activityTopicItem = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
             _tableView.activityTopicItem = _activityTopicItem;
-            if (responseObject[@"data"][@"trendList"] && [responseObject[@"data"][@"trendList"] count] > 0) {
+            
+        }
+        
+        [_tableView.mj_header endRefreshing];
+        
+    }];
+
+}
+
+- (void)loadTopic {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld", _activityTopicItem.info.idstamp] type:1 topicID:_activityTopicItem.topicId serachLabel:nil finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        if (error) {
+            [self xy_showMessage:@"网络请求失败"];
+            [_tableView.mj_header endRefreshing];
+            return;
+        }
+        if ([responseObject[@"code"] integerValue] == 0) {
+            XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
+            // 请求数据成功
+            if (responseObject[@"data"] && [responseObject[@"data"] count] > 0) {
+                
                 // 头像详情中有帖子数组
-                for (id obj in responseObject[@"data"][@"trendList"]) {
+                for (id obj in responseObject[@"data"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         // 帖子模型数
                         [_trendList addObject:[XYTopicItem topicItemWithDict:obj info:info]];
@@ -84,12 +110,9 @@
                 }
             }
             
-            
         }
-        
+        [_tableView.mj_header endRefreshing];
     }];
-
 }
-
 
 @end

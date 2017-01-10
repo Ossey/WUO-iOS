@@ -10,17 +10,20 @@
 #import "XYTopicDetailHeaderView.h"
 #import "XYTopicViewCell.h"
 #import "XYActivityTopicItem.h"
+#import "XYTopicDetailSelectView.h"
 
 @interface XYTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) XYTopicDetailHeaderView *headView;
+@property (nonatomic, strong) XYTopicDetailSelectView *selectView;
+@property (nonatomic, strong) NSMutableArray *_trendList;
 
 @end
 
 @implementation XYTopicDetailTableView
 
 static NSString * const cellIdentifier = @"XYTopicViewCell";
-static NSString * const headerIdentifier = @"XYTopicDetailHeaderView";
+static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:UITableViewStyleGrouped]) {
         
@@ -28,8 +31,8 @@ static NSString * const headerIdentifier = @"XYTopicDetailHeaderView";
         self.delegate = self;
         self.dataSource = self;
         [self registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
-      
-        
+        [self registerClass:[XYTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trendListChange:) name:XYTrendListChangeNote object:nil];
     }
     return self;
 }
@@ -43,8 +46,14 @@ static NSString * const headerIdentifier = @"XYTopicDetailHeaderView";
 }
 
 
+//// 数据改变时，更新cell
+//- (void)trendListChange:(NSNotification *)note {
+//    
+//    NSArray *arr = (NSArray *)note.object;
+//    NSLog(@"%@", arr);
+//}
 
-
+/// 数据改变时，更新头部
 - (void)setActivityTopicItem:(XYActivityTopicItem *)activityTopicItem {
     
     _activityTopicItem = activityTopicItem;
@@ -52,13 +61,19 @@ static NSString * const headerIdentifier = @"XYTopicDetailHeaderView";
     _headView.xy_height = activityTopicItem.topicDetailHeaderHeight;
     self.headView.item = activityTopicItem;
     
+    // 当有数据时才去设置selectView
+    NSDictionary *dict1 = @{@"labelName": @"最新"};
+    NSDictionary *dict2 = @{@"labelName": @"榜单"};
+    NSArray<NSDictionary *> *labelArr = @[dict1, dict2];
+    self.selectView.trendLabelView.channelCates = [labelArr mutableCopy];
+    
     [self reloadData];
 }
 
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    return 18;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -68,5 +83,14 @@ static NSString * const headerIdentifier = @"XYTopicDetailHeaderView";
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kTrendLabelViewHeight;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    XYTopicDetailSelectView *selectView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:selectViewIdentifier];
+    self.selectView = selectView;
+    return selectView;
+}
 
 @end

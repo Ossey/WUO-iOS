@@ -19,3 +19,4 @@ NSNotificationName const XYTrendTableViewDidEndDraggingNote = @"XYTrendTableView
 // scrollView停止减速的通知
 NSNotificationName const XYTrendTableViewDidEndDeceleratingNote = @"XYTrendTableViewDidEndDeceleratingNote";
 NSNotificationName const XYTrendTableViewDidScrollNote = @"XYTrendTableViewDidScrollNote";
+NSNotificationName const XYTrendListChangeNote = @"XYTrendListChangeNote";
