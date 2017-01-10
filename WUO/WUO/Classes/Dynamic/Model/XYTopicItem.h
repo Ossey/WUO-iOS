@@ -1,15 +1,15 @@
 //
-//  XYDynamicItem.h
+//  XYTopicItem.h
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//
+//  
 
 #import <Foundation/Foundation.h>
 
-@class XYDynamicInfo;
-@interface XYDynamicItem : NSObject
+@class XYTopicInfo;
+@interface XYTopicItem : NSObject
 
 @property (nonatomic, copy) NSString *content;        // 文本内容
 @property (nonatomic, copy) NSString *title;          // 标题
@@ -19,7 +19,7 @@
 @property (nonatomic, assign) NSInteger imgCount;     // 发布的图片数量
 @property (nonatomic, strong) NSArray *imgList;       // 发布的图片数组
 @property (nonatomic, assign) NSInteger isInvest;     // 是否被当前登录的用户投资
-@property (nonatomic, assign) NSInteger isPraise;     // 是否被当前登录用户赞
+@property (nonatomic, assign) BOOL isPraise;     // 是否被当前登录用户赞
 @property (nonatomic, copy) NSString *job;
 @property (nonatomic, copy) NSString *location;       // 用户位置
 @property (nonatomic, copy) NSString *name;           // 用户昵称
@@ -38,15 +38,28 @@
 @property (nonatomic, copy) NSString *videoImg;
 @property (nonatomic, copy) NSString *videoUrl;
 
+@property (nonatomic, assign) BOOL isCollect;
+@property (nonatomic, assign) BOOL isFollow;
+@property (nonatomic, assign) BOOL isOpenActivity;
+@property (nonatomic, assign) BOOL isRecommend;
+@property (nonatomic, assign) NSInteger lat;
+@property (nonatomic, assign) NSInteger lot;
+@property (nonatomic, assign) NSInteger reportCount;    // 报道数量
+@property (nonatomic, assign) NSInteger rewardGoldCoin;
+@property (nonatomic, assign) NSInteger rewardMoney;
+@property (nonatomic, assign) NSInteger state;
+@property (nonatomic, copy) NSString *url;
+
+
 // 扩展属性
 @property (nonatomic, strong) NSURL *headerImageURL;
-@property (nonatomic, strong)XYDynamicInfo *info;
+@property (nonatomic, strong)XYTopicInfo *info;
 @property (nonatomic, strong) NSArray<NSString *> *imageUrls;
 @property (nonatomic, strong) NSURL *videoFullURL;     // 用户发布动态的视频url，当有视频时没有图片，反之亦然
 @property (nonatomic, strong) NSURL *videoImgFullURL;   // 视频的封面图片
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;
-+ (instancetype)dynamicItemWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info;
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
++ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
 
 @end
 
@@ -59,7 +72,7 @@
 @property (nonatomic, assign) NSInteger uid;
 
 // 扩展属性
-@property (nonatomic, strong)XYDynamicInfo *info;
+@property (nonatomic, strong)XYTopicInfo *info;
 @property (nonatomic, strong) NSURL *imgFullURL;
 @property (nonatomic, assign) CGSize imgSize;            // 图片的原始尺寸
 

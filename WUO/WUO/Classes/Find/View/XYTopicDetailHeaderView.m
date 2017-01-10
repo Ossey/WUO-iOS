@@ -7,10 +7,9 @@
 //
 
 #import "XYTopicDetailHeaderView.h"
+#import "XYActivityTopicItem.h"
 
-#define SIZE_MARGIN 10
-#define SIZE_CORNERWH SIZE_HEADERWH+5
-#define SIZE_LOGOH 180
+
 
 @implementation XYTopicDetailHeaderView {
     

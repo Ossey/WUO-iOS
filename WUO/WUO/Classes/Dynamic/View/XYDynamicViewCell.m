@@ -127,7 +127,7 @@
     
     _viewModel = viewModel;
     
-    XYDynamicItem *item = viewModel.item;
+    XYTopicItem *item = viewModel.item;
     self.pictureCollectionView.dynamicItem = item;
     self.pictureCollectionView.hidden = item.imgCount == 0;
     

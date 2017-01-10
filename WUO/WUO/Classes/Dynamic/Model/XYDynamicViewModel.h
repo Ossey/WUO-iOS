@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYDynamicInfo.h"
-#import "XYDynamicItem.h"
+#import "XYTopicInfo.h"
+#import "XYTopicItem.h"
 
 
 @interface XYDynamicViewModel : NSObject
 
-@property (nonatomic, strong) XYDynamicInfo *info;
-@property (nonatomic, strong) XYDynamicItem *item;
+@property (nonatomic, strong) XYTopicInfo *info;
+@property (nonatomic, strong) XYTopicItem *item;
 
 @property (nonatomic, assign) CGRect cellBounds;
 @property (nonatomic, assign) CGFloat cellHeight;
@@ -31,5 +31,5 @@
 
 /** 记录模型所在的tableViewview上次滚动的偏移量 */
 @property (nonatomic, assign) CGPoint previousContentOffset;
-+ (instancetype)dynamicViewModelWithItem:(XYDynamicItem *)item info:(XYDynamicInfo *)info;
++ (instancetype)dynamicViewModelWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info;
 @end

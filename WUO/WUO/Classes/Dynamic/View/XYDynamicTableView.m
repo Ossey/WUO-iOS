@@ -16,7 +16,7 @@
 
 @interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) XYDynamicInfo *dynamicInfo;
+@property (nonatomic, strong) XYTopicInfo *dynamicInfo;
 
 @end
 
@@ -75,7 +75,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     [WUOHTTPRequest setActivityIndicator:YES];
     
     NSLog(@"%ld", (long)_dynamicInfo.idstamp);
-    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType topicID:0 serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
@@ -92,11 +92,11 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
             } else {
                 
                 // 当有数据时，才更新dynamic，避免无数据时idstamp为空，就导致下次请求数据时，又重新开始请求了
-                _dynamicInfo = [XYDynamicInfo dynamicInfoWithDict:responseObject];
+                _dynamicInfo = [XYTopicInfo topicInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
-                        XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:_dynamicInfo];
+                        XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:_dynamicInfo];
                         XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
                         [_dynamicList addObject:viewModel];
                     }

@@ -1,14 +1,14 @@
 //
-//  XYDynamicInfo.m
+//  XYTopicInfo.m
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYDynamicInfo.h"
+#import "XYTopicInfo.h"
 
-@implementation XYDynamicInfo
+@implementation XYTopicInfo
 
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
@@ -24,7 +24,7 @@
     
     return self;
 }
-+ (instancetype)dynamicInfoWithDict:(NSDictionary *)dict {
++ (instancetype)topicInfoWithDict:(NSDictionary *)dict {
     
     return [[self alloc] initWithDict:dict];
 }

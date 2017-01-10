@@ -68,8 +68,8 @@
 		18CA22181E1A4C83005F1C87 /* XYDynamicToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22171E1A4C83005F1C87 /* XYDynamicToolButton.m */; };
 		18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA221D1E1A6728005F1C87 /* XYUserInfoItem.m */; };
 		18CA22211E1A6749005F1C87 /* XYLoginInfoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22201E1A6749005F1C87 /* XYLoginInfoItem.m */; };
-		18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */; };
-		18CA22271E1AB5D5005F1C87 /* XYDynamicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */; };
+		18CA22241E1AB405005F1C87 /* XYTopicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22231E1AB405005F1C87 /* XYTopicInfo.m */; };
+		18CA22271E1AB5D5005F1C87 /* XYTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22261E1AB5D5005F1C87 /* XYTopicItem.m */; };
 		18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */; };
 		18F404FA1E1F26FD00E0837A /* XYTrendLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F404F71E1F26FD00E0837A /* XYTrendLabelView.m */; };
 		18F404FB1E1F26FD00E0837A /* XYCateTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F404F91E1F26FD00E0837A /* XYCateTitleView.m */; };
@@ -199,10 +199,10 @@
 		18CA221D1E1A6728005F1C87 /* XYUserInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserInfoItem.m; sourceTree = "<group>"; };
 		18CA221F1E1A6749005F1C87 /* XYLoginInfoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLoginInfoItem.h; sourceTree = "<group>"; };
 		18CA22201E1A6749005F1C87 /* XYLoginInfoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLoginInfoItem.m; sourceTree = "<group>"; };
-		18CA22221E1AB405005F1C87 /* XYDynamicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicInfo.h; sourceTree = "<group>"; };
-		18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicInfo.m; sourceTree = "<group>"; };
-		18CA22251E1AB5D5005F1C87 /* XYDynamicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicItem.h; sourceTree = "<group>"; };
-		18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicItem.m; sourceTree = "<group>"; };
+		18CA22221E1AB405005F1C87 /* XYTopicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicInfo.h; sourceTree = "<group>"; };
+		18CA22231E1AB405005F1C87 /* XYTopicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicInfo.m; sourceTree = "<group>"; };
+		18CA22251E1AB5D5005F1C87 /* XYTopicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicItem.h; sourceTree = "<group>"; };
+		18CA22261E1AB5D5005F1C87 /* XYTopicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicItem.m; sourceTree = "<group>"; };
 		18CA22291E1ACA0A005F1C87 /* XYRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifHeader.h; sourceTree = "<group>"; };
 		18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifHeader.m; sourceTree = "<group>"; };
 		18F404F61E1F26FD00E0837A /* XYTrendLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYTrendLabelView.h; path = ../../../Other/Libs/CatagoryTitleView/XYTrendLabelView.h; sourceTree = "<group>"; };
@@ -399,10 +399,10 @@
 		183F93CA1E18F2A400875416 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18CA22221E1AB405005F1C87 /* XYDynamicInfo.h */,
-				18CA22231E1AB405005F1C87 /* XYDynamicInfo.m */,
-				18CA22251E1AB5D5005F1C87 /* XYDynamicItem.h */,
-				18CA22261E1AB5D5005F1C87 /* XYDynamicItem.m */,
+				18CA22221E1AB405005F1C87 /* XYTopicInfo.h */,
+				18CA22231E1AB405005F1C87 /* XYTopicInfo.m */,
+				18CA22251E1AB5D5005F1C87 /* XYTopicItem.h */,
+				18CA22261E1AB5D5005F1C87 /* XYTopicItem.m */,
 				1813817D1E1BF49E001E8264 /* XYDynamicViewModel.h */,
 				1813817E1E1BF49E001E8264 /* XYDynamicViewModel.m */,
 			);
@@ -952,7 +952,7 @@
 				183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */,
 				180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */,
 				181381791E1B4AC0001E8264 /* XYDynamicTableView.m in Sources */,
-				18CA22241E1AB405005F1C87 /* XYDynamicInfo.m in Sources */,
+				18CA22241E1AB405005F1C87 /* XYTopicInfo.m in Sources */,
 				180A0E751E23883400B7F6A2 /* XYTopicDetailController.m in Sources */,
 				18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */,
 				1813817C1E1B882E001E8264 /* XYPictureCollectionView.m in Sources */,
@@ -965,7 +965,7 @@
 				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
 				18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */,
 				18F404FA1E1F26FD00E0837A /* XYTrendLabelView.m in Sources */,
-				18CA22271E1AB5D5005F1C87 /* XYDynamicItem.m in Sources */,
+				18CA22271E1AB5D5005F1C87 /* XYTopicItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

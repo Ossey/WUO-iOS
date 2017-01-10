@@ -52,7 +52,7 @@
 - (void)setViewModel:(XYDynamicViewModel *)viewModel {
     _viewModel = viewModel;
     
-    XYDynamicItem * item = viewModel.item;
+    XYTopicItem * item = viewModel.item;
     if (item.videoImgFullURL) {
         self.hidden = NO;
         [self sd_setImageWithURL:item.videoImgFullURL];

@@ -1,17 +1,17 @@
 //
-//  XYDynamicItem.m
+//  XYTopicItem.m
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYDynamicItem.h"
-#import "XYDynamicInfo.h"
+#import "XYTopicItem.h"
+#import "XYTopicInfo.h"
 
-@implementation XYDynamicItem
+@implementation XYTopicItem
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info {
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
     if (self = [super init]) {
 
         [self setValuesForKeysWithDictionary:dict];
@@ -32,7 +32,7 @@
     return self;
 }
 
-+ (instancetype)dynamicItemWithDict:(NSDictionary *)dict info:(XYDynamicInfo *)info {
++ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
     
     return [[self alloc] initWithDict:dict info:info];
 }

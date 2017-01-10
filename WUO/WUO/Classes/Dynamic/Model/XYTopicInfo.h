@@ -1,5 +1,5 @@
 //
-//  XYDynamicInfo.h
+//  XYTopicInfo.h
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface XYDynamicInfo : NSObject
+@interface XYTopicInfo : NSObject
 
 @property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, assign) NSInteger code;
@@ -17,6 +17,6 @@
 @property (nonatomic, assign) NSInteger idstamp;
 
 
-+ (instancetype)dynamicInfoWithDict:(NSDictionary *)dict;
++ (instancetype)topicInfoWithDict:(NSDictionary *)dict;
 
 @end

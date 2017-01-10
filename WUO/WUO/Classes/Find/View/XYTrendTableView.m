@@ -38,7 +38,7 @@
 
 @interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) XYDynamicInfo *dynamicInfo;
+@property (nonatomic, strong) XYTopicInfo *dynamicInfo;
 
 @end
 
@@ -109,7 +109,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
 //    NSLog(@"%@--%ld", self.dynamicInfo, self.dynamicInfo.idstamp);
     
-    [WUOHTTPRequest dynamicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType topicID:0 serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];
@@ -144,11 +144,11 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
                 
             } else {
                 
-                XYDynamicInfo *info = [XYDynamicInfo dynamicInfoWithDict:responseObject];
+                XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
-                        XYDynamicItem *item = [XYDynamicItem dynamicItemWithDict:obj info:info];
+                        XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
                         XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:info];
                         
                         // 将数据添加到对应的容器中，避免被循环利用，数据错乱
@@ -457,7 +457,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
 }
 
-- (XYDynamicInfo *)dynamicInfo {
+- (XYTopicInfo *)dynamicInfo {
     // 防止数据错乱，每次请求时，去对应子标题的数据源中取info
     if (_dataList[self.serachLabel].count) {
         // 每次取最后一个info，保证是服务器最新返回的info
@@ -478,9 +478,13 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 }
 
 - (void)dealloc {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    [_dataList removeAllObjects];
+    [_cnameDict removeAllObjects];
+    [_needLoadList removeAllObjects];
+    _needLoadList = nil;
+    _dataList = nil;
+    _cnameDict = nil;
     NSLog(@"%s", __func__);
 }
 

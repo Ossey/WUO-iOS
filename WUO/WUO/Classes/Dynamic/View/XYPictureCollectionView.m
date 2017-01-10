@@ -7,7 +7,7 @@
 //
 
 #import "XYPictureCollectionView.h"
-#import "XYDynamicItem.h"
+#import "XYTopicItem.h"
 #import <UIImageView+WebCache.h>
 #import "XYImageViewer.h"
 
@@ -49,7 +49,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     return self;
 }
 
-- (void)setDynamicItem:(XYDynamicItem *)dynamicItem {
+- (void)setDynamicItem:(XYTopicItem *)dynamicItem {
     
     _dynamicItem = dynamicItem;
     

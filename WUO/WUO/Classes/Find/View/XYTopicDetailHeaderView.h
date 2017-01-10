@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class XYActivityTopicItem;
+
 @interface XYTopicDetailHeaderView : UITableViewHeaderFooterView
+
+@property (nonatomic, strong) XYActivityTopicItem *item;
 
 @end

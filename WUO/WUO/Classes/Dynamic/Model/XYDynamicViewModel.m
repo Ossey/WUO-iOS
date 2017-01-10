@@ -10,7 +10,7 @@
 
 @implementation XYDynamicViewModel
 
-- (instancetype)initWithItem:(XYDynamicItem *)item info:(XYDynamicInfo *)info {
+- (instancetype)initWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info {
     if (self = [super init]) {
         self.item = item;
         self.info = info;
@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (instancetype)dynamicViewModelWithItem:(XYDynamicItem *)item info:(XYDynamicInfo *)info {
++ (instancetype)dynamicViewModelWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info {
     
     return [[self alloc] initWithItem:item info:info];
 }

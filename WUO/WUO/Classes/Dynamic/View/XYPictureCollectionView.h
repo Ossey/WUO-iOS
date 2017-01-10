@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYDynamicItem, XYDynamicImgItem;
+@class XYTopicItem, XYDynamicImgItem;
 @interface XYPictureCollectionView : UICollectionView
 
-@property (nonatomic, strong) XYDynamicItem *dynamicItem;
+@property (nonatomic, strong) XYTopicItem *dynamicItem;
 
 @end
 

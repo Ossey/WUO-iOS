@@ -1,5 +1,5 @@
 //
-//  XYTopicItem.m
+//  XYActivityTopicItem.m
 //  WUO
 //
 //  Created by mofeini on 17/1/9.
@@ -11,21 +11,46 @@
 
 @implementation XYActivityTopicItem
 
-- (instancetype)initWithDict:(NSDictionary *)dict infoItem:(XYDynamicInfo *)infoItem {
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
     if (self = [super init]) {
         [self setValuesForKeysWithDictionary:dict];
-        self.infoItem = infoItem;
+        self.info = info;
+        // 当dict[@"datas"]字段为数组类型时，说明datas字段是帖子，如果是字典类型时，datas字段为帖子详情，对应内部的trendList才为帖子数组
+        if (dict[@"datas"] && [dict[@"datas"] count]) {
+            
+            if ([dict[@"datas"] isKindOfClass:[NSArray class]]) {
+                for (id obj in dict[@"datas"]) {
+                    if ([obj isKindOfClass:[NSDictionary class]]) {
+                        
+                        [self.trendList addObject:[XYTopicItem topicItemWithDict:obj info:info]];
+                    }
+                }
+            } else if (dict[@"datas"][@"trendList"] && [dict[@"datas"][@"trendList"] isKindOfClass:[NSArray class]]) {
+                for (id obj in dict[@"datas"][@"trendList"]) {
+                    if ([obj isKindOfClass:[NSDictionary class]]) {
+                        [self.trendList addObject:[XYTopicItem topicItemWithDict:dict info:info]];
+                    }
+                }
+            }
+            
+        }
     }
     return self;
 }
 
-+ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict infoItem:(XYDynamicInfo *)infoItem {
++ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
     
-    return [[self alloc] initWithDict:dict infoItem:infoItem];
+    return [[self alloc] initWithDict:dict info:info];
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
 
+- (NSMutableArray<XYTopicItem *> *)trendList {
+    if (_trendList == nil) {
+        _trendList = [NSMutableArray array];
+    }
+    return _trendList;
+}
 
 - (NSURL *)logoFullURL {
     
@@ -40,7 +65,7 @@
     if ([logoStr containsString:@"http:"]) {
         logoFullStr = logoStr;
     } else {
-        logoFullStr = [self.infoItem.basePath stringByAppendingString:logoStr];
+        logoFullStr = [self.info.basePath stringByAppendingString:logoStr];
     }
     
     return [NSURL URLWithString:logoFullStr];

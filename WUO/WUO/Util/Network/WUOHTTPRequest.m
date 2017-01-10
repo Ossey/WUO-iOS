@@ -51,8 +51,8 @@ static id _instance;
     
 }
 
-// 动态接口
-+ (void)dynamicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
+// 获取帖子 接口
++ (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type topicID:(NSInteger)topicID serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
     
     XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     // 设置请求头部
@@ -65,6 +65,7 @@ static id _instance;
     [parameters setValue:@15 forKey:@"pageNum"];
     [parameters setValue:@(type) forKey:@"type"];
     [parameters setValue:serachLabel forKey:@"serachLabel"];
+    [parameters setValue:@(topicID) forKey:@"topicID"];
     
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
@@ -108,6 +109,36 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStrl parameters:parameters progress:nil finished:finishedCallBack];
 }
 
+// 话题详情 接口 第一次进入话题详情界面时，请求这个数据，以后每次都请求下面的话题数据接口
++ (void)find_topicDetailByID:(NSInteger)topicID finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/topic/getTopicById";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:0];
+    [parameters setValue:@(topicID) forKey:@"topicId"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
+// 话题数据 接口
+// idstamp=2&topicId=373&type=0
++ (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSInteger)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/topic/getTrendByTopicId";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:0];
+    [parameters setValue:@(topicID) forKey:@"topicID"];
+    [parameters setValue:@(idstamp) forKey:@"idstamp"];
+    [parameters setValue:@(type) forKey:@"type"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
 
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfoItem *)userLoginInfoItem {
