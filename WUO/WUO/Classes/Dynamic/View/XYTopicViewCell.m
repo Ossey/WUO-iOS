@@ -168,8 +168,7 @@
     self.title_label = [[WUOLabel alloc] initWithFrame:self.viewModel.title_labelFrame];
     self.title_label.textColor = kColorTitleText;
     self.title_label.text = @"标题";
-    
-    self.contentLabel.font = kFontWithSize(SIZE_FONT_TITLE);
+    self.title_label.font = kFontWithSize(SIZE_FONT_TITLE);
     [self.contentView addSubview:self.title_label];
     
     if (self.contentLabel) {
@@ -259,7 +258,7 @@
 }
 
 //将文本内容绘制到图片上
-- (void)drawText{
+- (void)drawText {
     if (self.title_label==nil||self.contentLabel==nil) {
         [self addLabel];
     }
@@ -274,7 +273,7 @@
 
 
 
-- (void)clear{
+- (void)clear {
     if (!_isDrawing) {
         return;
     }
