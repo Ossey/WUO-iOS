@@ -17,16 +17,16 @@ extern void backCompletionHandle(void(^ _Nullable callBack)());
 
 @interface XYProfileBaseController : UIViewController
 
-@property (nonatomic, strong, readonly) UIView *topBackgroundView;
+@property (nonatomic, strong, readonly) UIView *xy_topBar;
 
 @property (nonatomic, strong, readonly) UIView *shadowLineView;
 
-@property (nonatomic, weak) UIButton *rightButton;
+@property (nonatomic, weak) UIButton *xy_rightButton;
 
-/** 导航条自定义的titleView， 注意: 当设置了xy_customTitleView，属性title则无效 */
-@property (nonatomic, weak) UIView *xy_customTitleView;
+/** 导航条自定义的titleView， 注意: 当设置了xy_titleView，属性title则无效 */
+@property (nonatomic, weak) UIView *xy_titleView;
 
-/** 导航条title , 注意: 当设置了xy_title，属性xy_customTitleView则无效 */
+/** 导航条title , 注意: 当设置了xy_title，属性xy_titleView则无效 */
 @property (nonatomic, copy) NSString *xy_title;
 
 @property (nonatomic, strong) UIColor *xy_titleColor;

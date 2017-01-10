@@ -10,7 +10,7 @@
 
 @class XYActivityTopicItem;
 
-@interface XYTopicDetailHeaderView : UITableViewHeaderFooterView
+@interface XYTopicDetailHeaderView : UIView
 
 @property (nonatomic, strong) XYActivityTopicItem *item;
 

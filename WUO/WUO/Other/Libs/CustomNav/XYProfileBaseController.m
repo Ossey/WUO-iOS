@@ -10,21 +10,21 @@
 
 @interface XYProfileBaseController ()
 
-@property (nonatomic, strong) UIView *topBackgroundView;     // 导航条topBackgroundView
+@property (nonatomic, strong) UIView *xy_topBar;     // 导航条xy_topBar
 @property (nonatomic, strong) UIView *shadowLineView;        // 导航条阴影线
 @property (nonatomic, strong) UIImage *xy_backBarImage;      // 导航条左侧返回按钮的图片
 @property (nonatomic, assign) UIControlState xy_backBarState; // 导航条左侧返回按钮的状态
 @property (nonatomic, weak) UIButton *leftButton;            // 导航条左侧按钮
-@property (nonatomic, weak) UIButton *xy_titleView;          // 导航条titleView
+@property (nonatomic, weak) UIButton *xy_titleButton;          // 导航条titleView
 @property (nonatomic, copy) NSString *xy_backBarTitle;       // 导航条左侧返回按钮的文字，这个属性在当前控制器下有效
-@property (nonatomic, weak) NSLayoutConstraint *topBackgroundViewHConst;
+@property (nonatomic, weak) NSLayoutConstraint *xy_topBarHConst;
 @end
 
 @implementation XYProfileBaseController
 static id obj;
 
-@synthesize rightButton = _rightButton;
-@synthesize xy_titleView = _xy_titleView;
+@synthesize xy_rightButton = _xy_rightButton;
+@synthesize xy_titleButton = _xy_titleButton;
 @synthesize xy_title = _xy_title;
 @synthesize xy_backBarTitle = _xy_backBarTitle;
 @synthesize xy_backBarImage = _xy_backBarImage;
@@ -46,8 +46,8 @@ static id obj;
     
     obj = self;
     
-    // 显示在最顶部，防止子控制器的view添加子控件时盖住了topBackgroundView
-    [self.view bringSubviewToFront:self.topBackgroundView];
+    // 显示在最顶部，防止子控制器的view添加子控件时盖住了xy_topBar
+    [self.view bringSubviewToFront:self.xy_topBar];
     
     // 控制model和push时左侧返回按钮的隐藏和显示
     if (self.presentedViewController) {
@@ -86,7 +86,7 @@ static id obj;
 - (void)setXy_titleColor:(UIColor *)xy_titleColor {
     
     _xy_titleColor = xy_titleColor;
-    [self.xy_titleView setTitleColor:xy_titleColor forState:UIControlStateNormal];
+    [self.xy_titleButton setTitleColor:xy_titleColor forState:UIControlStateNormal];
 }
 
 - (UIFont *)xy_buttonFont {
@@ -102,17 +102,17 @@ static id obj;
     
     _xy_tintColor = xy_tintColor;
     [self.leftButton setTitleColor:xy_tintColor forState:UIControlStateNormal];
-    [self.rightButton setTitleColor:xy_tintColor forState:UIControlStateNormal];
+    [self.xy_rightButton setTitleColor:xy_tintColor forState:UIControlStateNormal];
 }
 
 - (void)setXy_title:(NSString *)xy_title {
     
     _xy_title = xy_title;
-    [self.xy_titleView setTitle:xy_title forState:UIControlStateNormal];
+    [self.xy_titleButton setTitle:xy_title forState:UIControlStateNormal];
     
-    if (_xy_customTitleView) {
-        [_xy_customTitleView removeFromSuperview];
-        _xy_customTitleView = nil;
+    if (_xy_titleView) {
+        [_xy_titleView removeFromSuperview];
+        _xy_titleView = nil;
     }
     
 }
@@ -133,75 +133,75 @@ static id obj;
     self.leftButton.hidden = hiddenLeftButton;
 }
 
-- (void)setXy_customTitleView:(UIView *)xy_customTitleView {
+- (void)setXy_titleView:(UIView *)xy_titleView {
     
-    _xy_customTitleView = xy_customTitleView;
-    if (_xy_title || _xy_titleView) {
-        // 为了避免自定义的titleView与xy_titleView产生冲突
+    _xy_titleView = xy_titleView;
+    if (_xy_title || _xy_titleButton) {
+        // 为了避免自定义的titleView与xy_titleButton产生冲突
         _xy_title = nil;
-        [_xy_titleView removeFromSuperview];
-        _xy_titleView = nil;
+        [_xy_titleButton removeFromSuperview];
+        _xy_titleButton = nil;
     }
-    if (!xy_customTitleView.superview && ![xy_customTitleView.superview isEqual:self.topBackgroundView]) {
-        if ([xy_customTitleView isKindOfClass:[UILabel class]]) {
-            UILabel *label = (UILabel *)xy_customTitleView;
+    if (!xy_titleView.superview && ![xy_titleView.superview isEqual:self.xy_topBar]) {
+        if ([xy_titleView isKindOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *)xy_titleView;
             label.textAlignment = NSTextAlignmentCenter;
         }
-        [self.topBackgroundView addSubview:xy_customTitleView];
-        xy_customTitleView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.xy_topBar addSubview:xy_titleView];
+        xy_titleView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
-    if ([xy_customTitleView isKindOfClass:[UIImageView class]]) {
-        UIImageView *imgView = (UIImageView *)xy_customTitleView;
+    if ([xy_titleView isKindOfClass:[UIImageView class]]) {
+        UIImageView *imgView = (UIImageView *)xy_titleView;
         imgView.contentMode = UIViewContentModeCenter;
     }
     
     
 }
 
-- (UIButton *)xy_titleView {
-    if (_xy_titleView == nil) {
+- (UIButton *)xy_titleButton {
+    if (_xy_titleButton == nil) {
         UIButton *titleView = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.topBackgroundView addSubview:titleView];
+        [self.xy_topBar addSubview:titleView];
         [titleView setTitle:self.xy_title forState:UIControlStateNormal];
         [titleView setTitleColor:self.xy_titleColor forState:UIControlStateNormal];
-        _xy_titleView = titleView;
+        _xy_titleButton = titleView;
         titleView.translatesAutoresizingMaskIntoConstraints = NO;
-        return _xy_titleView;
+        return _xy_titleButton;
     } else {
-        [_xy_titleView setTitleColor:self.xy_titleColor forState:UIControlStateNormal];
-        return _xy_titleView;
+        [_xy_titleButton setTitleColor:self.xy_titleColor forState:UIControlStateNormal];
+        return _xy_titleButton;
     }
 }
 
 
-- (void)setXy_titleView:(UIButton *)xy_titleView {
+- (void)setXy_titleButton:(UIButton *)xy_titleButton {
     
-    _xy_titleView = xy_titleView;
-    [xy_titleView removeFromSuperview];
-    if (!xy_titleView.superview && ![xy_titleView.superview isEqual:self.topBackgroundView]) {
-        [self.topBackgroundView addSubview:xy_titleView];
-        xy_titleView.userInteractionEnabled = NO;
-        xy_titleView.translatesAutoresizingMaskIntoConstraints = NO;
+    _xy_titleButton = xy_titleButton;
+    [xy_titleButton removeFromSuperview];
+    if (!xy_titleButton.superview && ![xy_titleButton.superview isEqual:self.xy_topBar]) {
+        [self.xy_topBar addSubview:xy_titleButton];
+        xy_titleButton.userInteractionEnabled = NO;
+        xy_titleButton.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
 
-- (UIButton *)rightButton {
-    if (_rightButton) {
+- (UIButton *)xy_rightButton {
+    if (_xy_rightButton) {
         
-        [_rightButton setTitleColor:self.xy_tintColor forState:UIControlStateNormal];
-        _rightButton.titleLabel.font = self.xy_buttonFont;
+        [_xy_rightButton setTitleColor:self.xy_tintColor forState:UIControlStateNormal];
+        _xy_rightButton.titleLabel.font = self.xy_buttonFont;
     }
-    return _rightButton;
+    return _xy_rightButton;
 }
 
-- (void)setRightButton:(UIButton *)rightButton {
+- (void)setXy_xy_rightButton:(UIButton *)xy_rightButton {
     
-    _rightButton = rightButton;
-    [rightButton removeFromSuperview];
-    if (!rightButton.superview && ![rightButton.superview isEqual:self.topBackgroundView]) {
-        [self.topBackgroundView addSubview:rightButton];
-        rightButton.translatesAutoresizingMaskIntoConstraints = NO;
+    _xy_rightButton = xy_rightButton;
+    [xy_rightButton removeFromSuperview];
+    if (!xy_rightButton.superview && ![xy_rightButton.superview isEqual:self.xy_topBar]) {
+        [self.xy_topBar addSubview:xy_rightButton];
+        xy_rightButton.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
 }
@@ -244,7 +244,7 @@ static id obj;
         leftButton.titleLabel.font = self.xy_buttonFont;
         [leftButton setTitleColor:self.xy_tintColor forState:UIControlStateNormal];
         [leftButton setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-        [self.topBackgroundView addSubview:leftButton];
+        [self.xy_topBar addSubview:leftButton];
         _leftButton = leftButton;
         leftButton.hidden = self.isHiddenLeftButton;
         leftButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -253,17 +253,17 @@ static id obj;
 }
 
 
-- (UIView *)topBackgroundView {
+- (UIView *)xy_topBar {
     
-    if (_topBackgroundView == nil) {
-        UIView *topBackgroundView = [[UIView alloc] init];
-        topBackgroundView.userInteractionEnabled = YES;
-        topBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:topBackgroundView];
-        [self.view bringSubviewToFront:topBackgroundView];
-        _topBackgroundView = topBackgroundView;
+    if (_xy_topBar == nil) {
+        UIView *xy_topBar = [[UIView alloc] init];
+        xy_topBar.userInteractionEnabled = YES;
+        xy_topBar.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:xy_topBar];
+        [self.view bringSubviewToFront:xy_topBar];
+        _xy_topBar = xy_topBar;
     }
-    return _topBackgroundView;
+    return _xy_topBar;
 }
 
 - (UIView *)shadowLineView {
@@ -271,8 +271,8 @@ static id obj;
     if (_shadowLineView == nil) {
         UIView *shadowLineView = [[UIView alloc] init];
         shadowLineView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.topBackgroundView addSubview:shadowLineView];
-        [self.topBackgroundView bringSubviewToFront:shadowLineView];
+        [self.xy_topBar addSubview:shadowLineView];
+        [self.xy_topBar bringSubviewToFront:shadowLineView];
         _shadowLineView = shadowLineView;
     }
     return _shadowLineView;
@@ -291,52 +291,52 @@ static id obj;
 #pragma mark - 私有方法
 - (void)makeConstr {
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_topBackgroundView, _shadowLineView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_xy_topBar, _shadowLineView);
     NSDictionary *metrics = @{@"leftButtonMaxW": @150, @"leftButtonLeftM": @10, @"leftBtnH": @44, @"rightBtnH": @44, @"rightBtnRightM": @10};
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_topBackgroundView]|" options:kNilOptions metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_topBackgroundView]" options:kNilOptions metrics:metrics views:views]];
-    // 根据屏幕是否旋转更新topBackgroundView的高度约束
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_xy_topBar]|" options:kNilOptions metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_xy_topBar]" options:kNilOptions metrics:metrics views:views]];
+    // 根据屏幕是否旋转更新xy_topBar的高度约束
     if (CGRectGetWidth([UIScreen mainScreen].bounds) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
-        [self.view removeConstraint:self.topBackgroundViewHConst];
-        NSLayoutConstraint *topBackgroundViewHConst = [NSLayoutConstraint constraintWithItem:self.topBackgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:44];
-        [self.view addConstraint:topBackgroundViewHConst];
-        self.topBackgroundViewHConst = topBackgroundViewHConst;
+        [self.view removeConstraint:self.xy_topBarHConst];
+        NSLayoutConstraint *xy_topBarHConst = [NSLayoutConstraint constraintWithItem:self.xy_topBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:44];
+        [self.view addConstraint:xy_topBarHConst];
+        self.xy_topBarHConst = xy_topBarHConst;
     } else {
-        [self.view removeConstraint:self.topBackgroundViewHConst];
-        NSLayoutConstraint *topBackgroundViewHConst = [NSLayoutConstraint constraintWithItem:self.topBackgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:64];
-        [self.view addConstraint:topBackgroundViewHConst];
-        self.topBackgroundViewHConst = topBackgroundViewHConst;
+        [self.view removeConstraint:self.xy_topBarHConst];
+        NSLayoutConstraint *xy_topBarHConst = [NSLayoutConstraint constraintWithItem:self.xy_topBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:64];
+        [self.view addConstraint:xy_topBarHConst];
+        self.xy_topBarHConst = xy_topBarHConst;
         
     }
     
-    [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_shadowLineView]|" options:kNilOptions metrics:metrics views:views]];
-    [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_shadowLineView(0.5)]|" options:kNilOptions metrics:metrics views:views]];
+    [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_shadowLineView]|" options:kNilOptions metrics:metrics views:views]];
+    [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_shadowLineView(0.5)]|" options:kNilOptions metrics:metrics views:views]];
     
     if (self.leftButton && self.leftButton.superview) {
         NSDictionary *views = NSDictionaryOfVariableBindings(_leftButton);
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leftButtonLeftM-[_leftButton(<=leftButtonMaxW)]" options:kNilOptions metrics:metrics views:views]];
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_leftButton(leftBtnH)]|" options:kNilOptions metrics:metrics views:views]];
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leftButtonLeftM-[_leftButton(<=leftButtonMaxW)]" options:kNilOptions metrics:metrics views:views]];
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_leftButton(leftBtnH)]|" options:kNilOptions metrics:metrics views:views]];
     }
     
-    if (self.rightButton && self.rightButton.superview) {
-        NSDictionary *views = NSDictionaryOfVariableBindings(_rightButton);
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightButton(<=leftButtonMaxW)]-rightBtnRightM-|" options:kNilOptions metrics:metrics views:views]];
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_rightButton(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
+    if (self.xy_rightButton && self.xy_rightButton.superview) {
+        NSDictionary *views = NSDictionaryOfVariableBindings(_xy_rightButton);
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_xy_rightButton(<=leftButtonMaxW)]-rightBtnRightM-|" options:kNilOptions metrics:metrics views:views]];
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_xy_rightButton(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
+    }
+    
+    if (self.xy_titleButton && self.xy_titleButton.superview) {
+        NSDictionary *views = NSDictionaryOfVariableBindings(_xy_titleButton);
+        [self.xy_topBar addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.xy_topBar attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+        [self.xy_topBar addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:150]];
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_xy_titleButton(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
     }
     
     if (self.xy_titleView && self.xy_titleView.superview) {
         NSDictionary *views = NSDictionaryOfVariableBindings(_xy_titleView);
-        [self.topBackgroundView addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.topBackgroundView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-        [self.topBackgroundView addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:150]];
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_xy_titleView(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
-    }
-    
-    if (self.xy_customTitleView && self.xy_customTitleView.superview) {
-        NSDictionary *views = NSDictionaryOfVariableBindings(_xy_customTitleView);
-        [self.topBackgroundView addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_customTitleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.topBackgroundView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-        [self.topBackgroundView addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_customTitleView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:150]];
-        [self.topBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_xy_customTitleView(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
+        [self.xy_topBar addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.xy_topBar attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+        [self.xy_topBar addConstraint:[NSLayoutConstraint constraintWithItem:self.xy_titleView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:kNilOptions attribute:kNilOptions multiplier:0.0 constant:150]];
+        [self.xy_topBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_xy_titleView(rightBtnH)]|" options:kNilOptions metrics:metrics views:views]];
         
     }
 }
@@ -344,7 +344,7 @@ static id obj;
 - (void)setupCustomBar {
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.topBackgroundView.backgroundColor = [UIColor colorWithWhite:242/255.0 alpha:0.7];
+    self.xy_topBar.backgroundColor = [UIColor colorWithWhite:242/255.0 alpha:0.7];
     
     self.shadowLineView.backgroundColor = [UIColor colorWithWhite:160/255.0 alpha:0.7];
     

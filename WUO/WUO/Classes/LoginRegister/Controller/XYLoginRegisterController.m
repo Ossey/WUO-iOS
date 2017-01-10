@@ -62,7 +62,7 @@
 
 - (void)setupNavBar {
     
-    self.topBackgroundView.backgroundColor = [UIColor whiteColor];
+    self.xy_topBar.backgroundColor = [UIColor whiteColor];
     self.shadowLineView.backgroundColor = [UIColor whiteColor];
     
     [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];

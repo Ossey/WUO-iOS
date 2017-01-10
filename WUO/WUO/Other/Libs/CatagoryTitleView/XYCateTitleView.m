@@ -371,23 +371,55 @@
     underLine.backgroundColor = self.underLineBackgroundColor;
     underLine.image = self.underLineImage;
     _underLine = underLine;
-    [self updateUnderLineFrame];
+    [self updateUnderLineFrameFromBtn:self.previousSelectedBtn];
 }
 
-- (void)updateUnderLineFrame {
+- (void)updateUnderLineFrameFromBtn:(UIButton *)btn {
     
-    CGRect frame = self.previousSelectedBtn.frame;
-#warning TODO 需修复
-    if (self.previousSelectItemIndex >= self.items.count) {
-        self.previousSelectItemIndex = self.items.count - 1;
-    } else {
-        self.previousSelectItemIndex = self.previousSelectedBtn.tag;
-    }
-    CGFloat x = self.btnContentMargin + CGRectGetWidth(frame) * self.previousSelectItemIndex;
+    // 计算差值
+    CGFloat less = self.underLineWidth - self.btnContentWidth;
+    
+    CGRect underLineFrame = self.underLine.frame;
+    underLineFrame.size.width = self.btnContentWidth + less;
+    underLineFrame.origin.x = btn.frame.origin.x + self.btnContentMargin - less * 0.5;
+    underLineFrame.origin.y = CGRectGetHeight(self.frame)-2;
+    underLineFrame.size.height = 2;
+    self.underLine.frame = underLineFrame;
+    
+//    CGRect frame = self.previousSelectedBtn.frame;
+//#warning TODO 需修复
+//    if (self.previousSelectItemIndex >= self.items.count) {
+//        self.previousSelectItemIndex = self.items.count - 1;
+//    } else {
+//        self.previousSelectItemIndex = self.previousSelectedBtn.tag;
+//    }
+//    CGFloat width = 0;
+//    CGFloat x = 0;
+//    // 判断当前文字是否有缩放，如果有缩放，就让下划线调整frame
+//    if (self.itemScale) {
+//        width = (self.itemScale + 1) * self.btnContentWidth;
+//        CGFloat temp = width - self.btnContentWidth; // 缩放后的差值
+//        x = self.btnContentMargin - temp  + CGRectGetWidth(frame) * self.previousSelectItemIndex - self.btnContentWidth * 0.5;
+//    } else {
+//        width = self.btnContentWidth;
+//        x = self.btnContentMargin + CGRectGetWidth(frame) * self.previousSelectItemIndex;
+//    }
+//
+//    
 //    NSLog(@"%ld--%ld--%f", self.previousSelectItemIndex, self.currentSelectItemIndex, x);
-    _underLine.frame = CGRectMake(x, CGRectGetHeight(self.frame)-2, self.btnContentWidth, 2);
+//    _underLine.frame = CGRectMake(x, CGRectGetHeight(self.frame)-2, width, 2);
 }
 
+- (CGFloat)underLineWidth {
+    if (!_underLineWidth) {
+        return self.btnContentWidth;
+    } else {
+        if (_underLineWidth > CGRectGetWidth(self.previousSelectedBtn.frame)) {
+            return self.btnContentWidth;
+        }
+        return _underLineWidth;
+    }
+}
 
 - (NSInteger)selectedIndex {
     
@@ -512,10 +544,7 @@
 
     
     [UIView animateWithDuration:0.15 animations:^{
-        CGRect underLineFrame = self.underLine.frame;
-        underLineFrame.size.width = self.btnContentWidth;
-        underLineFrame.origin.x = button.frame.origin.x + self.btnContentMargin;
-        self.underLine.frame = underLineFrame;
+        [self updateUnderLineFrameFromBtn:button];
     }];
 
     /// 将当前点击的按钮相关的频道信息写入到本地

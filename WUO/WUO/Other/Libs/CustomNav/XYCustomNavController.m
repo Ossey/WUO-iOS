@@ -15,12 +15,21 @@
 
 @implementation XYCustomNavController
 
++ (void)initialize {
+    if (self == [XYCustomNavController class]) {
+        UINavigationBar *bar = [UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[self]];
+        [bar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [bar setShadowImage:[UIImage new]];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarHidden:YES];
-
+    
+//    [self setNavigationBarHidden:YES];
+    
+    // 全屏滑动返回手势
     id target = self.interactivePopGestureRecognizer.delegate;
     self.interactivePopGestureRecognizer.enabled = NO;
     
@@ -40,7 +49,10 @@
             
             viewController.hiddenLeftButton = self.childViewControllers.count < 1;
         }
-        viewController.hidesBottomBarWhenPushed = self.childViewControllers.count > 0;
+        if (self.childViewControllers.count) {
+            viewController.hidesBottomBarWhenPushed = YES;
+            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:viewController action:@selector(leftBtnClick:)];
+        }
     }
     [super pushViewController:viewController animated:animated];
 }
@@ -56,6 +68,15 @@
     NSLog(@"%s", __FUNCTION__);
 }
 
+// 为了不上上面的代码报警告
+- (void)leftBtnClick:(UIBarButtonItem *)item {
+    
+}
+
+// 为了让上面的代码不报警告
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)pan {
+
+}
 
 @end
 

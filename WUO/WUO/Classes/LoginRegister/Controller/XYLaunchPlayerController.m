@@ -32,7 +32,7 @@
     [self initObserver];
     
     self.view.backgroundColor = [UIColor blackColor];
-    self.topBackgroundView.backgroundColor = [UIColor clearColor];
+    self.xy_topBar.backgroundColor = [UIColor clearColor];
     self.shadowLineView.backgroundColor = [UIColor clearColor];
 }
 

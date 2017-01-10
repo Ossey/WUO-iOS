@@ -14,7 +14,7 @@
 #import "XYDynamicViewController.h"
 #import "MainNavigationController.h"
 #import "MainTabBar.h"
-
+#import "XYCustomNavController.h"
 
 #define tabBarHeight CGRectGetHeight(self.tabBar.bounds)
 #define standOutHeight 12.0f // 中间突出部分的高度
@@ -42,7 +42,8 @@
     [super viewDidLoad];
     
     [self setupChildViewController:[XYDynamicViewController new]];
-    [self setupChildViewController:[XYFindViewController new]];
+    [self addChildViewController:[[XYCustomNavController alloc] initWithRootViewController:[XYFindViewController new]]];
+//    [self setupChildViewController:[XYFindViewController new]];
 //    [self setupChildViewController:[XYComposeViewController new]];
     [self setupChildViewController:[XYInvestViewController new]];
     [self setupChildViewController:[XYMineViewController new]];
@@ -78,7 +79,7 @@
     }
 }
 
-- (void)setupChildViewController:(UIViewController *)vc {
+- (void)setupChildViewController:(UIViewController *)vc  {
 
     MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:vc];
     [self addChildViewController:nav];

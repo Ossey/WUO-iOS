@@ -12,8 +12,6 @@
 
 @interface XYTopicDetailSelectView ()
 
-
-
 @end
 
 @implementation XYTopicDetailSelectView

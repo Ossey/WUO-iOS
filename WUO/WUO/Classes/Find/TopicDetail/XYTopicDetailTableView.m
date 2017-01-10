@@ -25,8 +25,10 @@
 static NSString * const cellIdentifier = @"XYTopicViewCell";
 static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
-    if (self = [super initWithFrame:frame style:UITableViewStyleGrouped]) {
+    if (self = [super initWithFrame:frame style:UITableViewStylePlain]) {
         
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.showsHorizontalScrollIndicator = NO;
         self.tableHeaderView = self.headView;
         self.delegate = self;
         self.dataSource = self;
@@ -39,7 +41,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 
 - (XYTopicDetailHeaderView *)headView {
     if (_headView == nil) {
-        _headView = [[XYTopicDetailHeaderView alloc] initWithReuseIdentifier:cellIdentifier];
+        _headView = [XYTopicDetailHeaderView new];
     }
     
     return _headView;
@@ -62,8 +64,8 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
     self.headView.item = activityTopicItem;
     
     // 当有数据时才去设置selectView
-    NSDictionary *dict1 = @{@"labelName": @"最新"};
-    NSDictionary *dict2 = @{@"labelName": @"榜单"};
+    NSDictionary *dict1 = @{@"labelName": @"最 新"};
+    NSDictionary *dict2 = @{@"labelName": @"榜 单"};
     NSArray<NSDictionary *> *labelArr = @[dict1, dict2];
     self.selectView.trendLabelView.channelCates = [labelArr mutableCopy];
     

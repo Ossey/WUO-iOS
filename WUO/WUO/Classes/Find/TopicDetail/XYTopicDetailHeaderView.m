@@ -29,12 +29,13 @@
 //    WUOLabel *_titleLabel;
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         self.clipsToBounds = YES;
         _postBGView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self.contentView insertSubview:_postBGView atIndex:0];
+        [self insertSubview:_postBGView atIndex:0];
         
         // 头像
         _avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -43,35 +44,34 @@
         _avatarView.hidden = NO;
         _avatarView.tag = NSIntegerMax;
         _avatarView.clipsToBounds = YES;
-        [self.contentView addSubview:_avatarView];
+        [self addSubview:_avatarView];
         
         // 目的是让头像显示为圆形
         _cornerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SIZE_CORNERWH, SIZE_CORNERWH)];
         _cornerView.center = _avatarView.center;
         _cornerView.image = [UIImage imageNamed:@"corner_circle"];
         _cornerView.tag = NSIntegerMax;
-        [self.contentView addSubview:_cornerView];
+        [self addSubview:_cornerView];
         
         // logo视图
         _logoView = [[UIImageView alloc] init];
         _logoView.tag = NSIntegerMax;
-        [self.contentView addSubview:_logoView];
-     
+        [self addSubview:_logoView];
+        
         // 标题
-//        _titleLabel = [[WUOLabel alloc] init];
-//        _titleLabel.textColor = kColorTitleText;
-//        _titleLabel.font = kFontWithSize(SIZE_FONT_TITLE);
-//        _titleLabel.lineSpace = 0;
-//        [self.contentView addSubview:_titleLabel];
-//        
+        //        _titleLabel = [[WUOLabel alloc] init];
+        //        _titleLabel.textColor = kColorTitleText;
+        //        _titleLabel.font = kFontWithSize(SIZE_FONT_TITLE);
+        //        _titleLabel.lineSpace = 0;
+        //        [self addSubview:_titleLabel];
+        //
         // 活动介绍
         _introduceLabel = [[WUOLabel alloc] init];
         _introduceLabel.textColor = kColorContentText;
         _introduceLabel.font = kFontWithSize(SIZE_FONT_CONTENT);
         _introduceLabel.lineSpace = 0;
-        [self.contentView addSubview:_introduceLabel];
+        [self addSubview:_introduceLabel];
     }
-    
     return self;
 }
 

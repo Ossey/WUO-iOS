@@ -121,6 +121,7 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     [XYTopicDetailController pushWithItem:self.topicItemList[indexPath.row]];
 }
 

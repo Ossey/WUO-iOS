@@ -75,6 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *itemNameKey;
 /** 按钮的图片应该按照什么key去字典中取图片的名称 */
 @property (nonatomic, copy) NSString *itemImageNameKey;
+/** 下划线的宽度： 默认是每个按钮内部内容的总宽度， 当超出按钮的宽度时，按默认值算*/
+@property (nonatomic, assign) CGFloat underLineWidth;
 @property (nonatomic, strong) UIColor *currentItemBackgroundColor;
 @property (nonatomic, strong) UIColor *otherItemBackgroundColor;
 @property (nonatomic, strong) UIColor *underLineBackgroundColor;
