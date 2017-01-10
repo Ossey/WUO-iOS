@@ -78,7 +78,7 @@
 
 - (NSString *)statTimeFormat {
 
-    return [NSString compareCurrentTime:self.startTime];
+    return [NSString compareCurrentTime:self.createTime];
 }
 
 - (NSString *)joinCounStr {
@@ -89,30 +89,30 @@
 
 - (CGFloat)topicDetailHeaderHeight {
     
-//    if (_topicDetailHeaderHeight != 0) {
-//        // 当已计算好时，就不再计算
-//        return _topicDetailHeaderHeight;
-//    }
+    if (_topicDetailHeaderHeight != 0) {
+        // 当已计算好时，就不再计算
+        return _topicDetailHeaderHeight;
+    }
     
     CGFloat x = SIZE_MARGIN;
     CGFloat y = SIZE_MARGIN;
     
     // 头像
     self.topicDetailAvatarFrame = CGRectMake(x, y, SIZE_HEADERWH, SIZE_HEADERWH);
-
-    {
-    // 昵称
-    CGSize nameSize = [self.name boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
-    self.topicDetailNameFrame = CGRectMake(SIZE_MARGIN+SIZE_HEADERWH+SIZE_MARGIN, SIZE_GAP_TOP, nameSize.width, nameSize.height);
-   // 发布时间
-    CGSize startTimeName = [self.statTimeFormat boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_SUBTITLE)} context:nil].size;
-    self.topicDetailStartTimeFrame = CGRectMake(self.topicDetailNameFrame.origin.x, CGRectGetMaxY(self.topicDetailNameFrame) + SIZE_GAP_SMALL, startTimeName.width, startTimeName.height);
     
-    // 加入人数
-    CGSize joinCounStrSize = [self.joinCounStr boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_JOINCOUNT)} context:nil].size;
-    CGFloat joinCounStrX = kScreenW - SIZE_GAP_SMALL*2 - joinCounStrSize.width - SIZE_MARGIN;
-    CGFloat joinCounStrY = (SIZE_HEADERWH - joinCounStrSize.height) * 0.5 + SIZE_GAP_MARGIN;
-    self.topicDetailJoinCountFrame = CGRectMake(joinCounStrX, joinCounStrY, joinCounStrSize.width, joinCounStrSize.height);
+    {
+        // 昵称
+        CGSize nameSize = [self.name boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
+        self.topicDetailNameFrame = CGRectMake(SIZE_MARGIN+SIZE_HEADERWH+SIZE_MARGIN, SIZE_GAP_TOP, nameSize.width, nameSize.height);
+        // 发布时间
+        CGSize startTimeName = [self.statTimeFormat boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_SUBTITLE)} context:nil].size;
+        self.topicDetailStartTimeFrame = CGRectMake(self.topicDetailNameFrame.origin.x, CGRectGetMaxY(self.topicDetailNameFrame) + SIZE_GAP_SMALL, startTimeName.width, startTimeName.height);
+        
+        // 加入人数
+        CGSize joinCounStrSize = [self.joinCounStr boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_JOINCOUNT)} context:nil].size;
+        CGFloat joinCounStrX = kScreenW - SIZE_GAP_SMALL*2 - joinCounStrSize.width - SIZE_MARGIN;
+        CGFloat joinCounStrY = (SIZE_HEADERWH - joinCounStrSize.height) * 0.5 + SIZE_GAP_MARGIN;
+        self.topicDetailJoinCountFrame = CGRectMake(joinCounStrX, joinCounStrY, joinCounStrSize.width, joinCounStrSize.height);
     }
     
     y += SIZE_HEADERWH + SIZE_MARGIN;
@@ -126,10 +126,10 @@
         logoW = 0;
         logoH = 0;
     }
-    self.topicDetailLogoFrame = CGRectMake(x, y, logoW, logoH);
+    self.topicDetailLogoFrame = CGRectMake(0, y, logoW, logoH);
     
     // title
-    y += self.topicDetailLogoFrame.size.height + SIZE_MARGIN;
+    y += logoH + SIZE_MARGIN;
     
     CGSize titleStrSize = [self.Title boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_TITLE)} context:nil].size;
     // 居中显示
@@ -139,11 +139,11 @@
     // 正文
     if (self.introduce.length) {
         y += titleStrSize.height + SIZE_GAP_MARGIN;
-        CGSize introduceSize = [self.introduce boundingRectWithSize:CGSizeMake((kScreenW-2*x)*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_CONTENT)} context:nil].size;
+        CGSize introduceSize = [self.introduce boundingRectWithSize:CGSizeMake(kScreenW-2*SIZE_MARGIN, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_CONTENT)} context:nil].size;
+        //        CGSize introduceSize = [self.introduce sizeWithFont:kFontWithSize(SIZE_FONT_CONTENT) constrainedToSize:CGSizeMake((kScreenW-2*x), MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
         self.topicDetailIntroduceFrame = CGRectMake(x, y, introduceSize.width, introduceSize.height);
     } else {
-        y += self.topicDetailLogoFrame.size.height + SIZE_MARGIN;
-        self.topicDetailTitleFrame = CGRectZero;
+        self.topicDetailIntroduceFrame = CGRectZero;
     }
     
     // 参加话题
@@ -154,7 +154,7 @@
     self.topicDetailJoinTopicFrame = CGRectMake(joinTopicX, y, joinTopicW, joinTopicH);
     
     // 距离底部的距离
-    y += joinTopicW + 20;
+    y += joinTopicH + 20;
     
     return y;
 }

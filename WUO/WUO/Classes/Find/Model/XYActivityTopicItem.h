@@ -16,7 +16,7 @@
 
 @class XYTopicInfo, XYTopicItem;
 @interface XYActivityTopicItem : NSObject
-/** 活动创建时间 */
+/** 活动创建时间 需要进行处理，当距离今日小于20时，显示比如【20天前】，1年内显示比如【11月30日】，跨年显示【2016年1月2日】 */
 @property (nonatomic, copy) NSString *createTime;
 /** 活动介绍，用于展示 活动详情页头部的内容文本 */
 @property (nonatomic, copy) NSString *introduce;
@@ -41,7 +41,7 @@
 @property (nonatomic, assign) BOOL isTop;
 @property (nonatomic, copy) NSString *job;
 @property (nonatomic, copy) NSString *name;
-/** 活动开始的时间， 需要进行处理，当距离今日小于20时，显示比如【20天前】，1年内显示比如【11月30日】，跨年显示【2016年1月2日】 */
+/** 活动开始的时间 */
 @property (nonatomic, copy) NSString *startTime;
 /** 话题数组 */
 @property (nonatomic, assign) NSInteger totalAmount;

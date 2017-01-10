@@ -11,7 +11,6 @@
 		180214BD1E1E599C006605C2 /* XYImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214B91E1E599C006605C2 /* XYImageView.m */; };
 		180214BE1E1E599C006605C2 /* XYImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214BB1E1E599C006605C2 /* XYImageViewer.m */; };
 		180214C31E1E6B7E006605C2 /* XRCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C11E1E6B7E006605C2 /* XRCarouselView.m */; };
-		180214C41E1E6B7E006605C2 /* XRPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 180214C21E1E6B7E006605C2 /* XRPlaceholder.png */; };
 		180214C71E1E6D7A006605C2 /* XYAdvertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C61E1E6D7A006605C2 /* XYAdvertView.m */; };
 		180214CA1E1E6E1A006605C2 /* XYAdvertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214C91E1E6E1A006605C2 /* XYAdvertItem.m */; };
 		180214CD1E1E8A56006605C2 /* XYFindTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180214CC1E1E8A56006605C2 /* XYFindTopicView.m */; };
@@ -90,7 +89,6 @@
 		180214BB1E1E599C006605C2 /* XYImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYImageViewer.m; sourceTree = "<group>"; };
 		180214C01E1E6B7E006605C2 /* XRCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCarouselView.h; sourceTree = "<group>"; };
 		180214C11E1E6B7E006605C2 /* XRCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCarouselView.m; sourceTree = "<group>"; };
-		180214C21E1E6B7E006605C2 /* XRPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XRPlaceholder.png; sourceTree = "<group>"; };
 		180214C51E1E6D7A006605C2 /* XYAdvertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAdvertView.h; sourceTree = "<group>"; };
 		180214C61E1E6D7A006605C2 /* XYAdvertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAdvertView.m; sourceTree = "<group>"; };
 		180214C81E1E6E1A006605C2 /* XYAdvertItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAdvertItem.h; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 			children = (
 				180214C01E1E6B7E006605C2 /* XRCarouselView.h */,
 				180214C11E1E6B7E006605C2 /* XRCarouselView.m */,
-				180214C21E1E6B7E006605C2 /* XRPlaceholder.png */,
 			);
 			path = XRCarouselView;
 			sourceTree = "<group>";
@@ -851,7 +848,6 @@
 			files = (
 				1862E69D1E21DB530031D063 /* placeholder_fancy@2x.png in Resources */,
 				183F940F1E194B7400875416 /* launch.mp4 in Resources */,
-				180214C41E1E6B7E006605C2 /* XRPlaceholder.png in Resources */,
 				183F939B1E18BFA200875416 /* Assets.xcassets in Resources */,
 				18CA21EA1E1A1693005F1C87 /* XYLoginRegisterView.xib in Resources */,
 				1862E69C1E21DB530031D063 /* placeholder_fancy.png in Resources */,

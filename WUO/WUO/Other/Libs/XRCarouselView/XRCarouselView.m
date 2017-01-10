@@ -156,7 +156,7 @@ static NSString *cache;
         } else if ([imageArray[i] isKindOfClass:[NSString class]]){
             //如果是网络图片，则先添加占位图片，下载完成后替换
             if (_placeholderImage) [_images addObject:_placeholderImage];
-            else [_images addObject:[UIImage imageNamed:@"XRPlaceholder"]];
+            else [_images addObject:[UIImage new]];
             [self downloadImages:i];
         }
     }

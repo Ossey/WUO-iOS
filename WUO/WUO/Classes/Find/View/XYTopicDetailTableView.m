@@ -45,9 +45,9 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 - (void)setActivityTopicItem:(XYActivityTopicItem *)activityTopicItem {
     
     _activityTopicItem = activityTopicItem;
-    _headView.item = activityTopicItem;
+    // 注意: 要先调用下topicDetailHeaderHeight的get，内部的子控件frame都是通过此方法计算的，不然传过去的模型的frame没有值的
     _headView.xy_height = activityTopicItem.topicDetailHeaderHeight;
-    // 画headerView
+    _headView.item = activityTopicItem;
     
     [self reloadData];
 }

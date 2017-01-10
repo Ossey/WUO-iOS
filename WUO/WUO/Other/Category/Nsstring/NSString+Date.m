@@ -11,11 +11,10 @@
 @implementation NSString (Date)
 
 + (NSString *)compareCurrentTime:(NSString *)str {
-    NSString *timeStr = @"2016-02-22 19:27:38";
     // 将时间字符串转换为NSDate
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyy-MM-dd HH:mm:ss"];
-    NSDate *timeDate = [dateFormatter dateFromString:timeStr];
+    NSDate *timeDate = [dateFormatter dateFromString:str];
     
     // 时区
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
@@ -31,7 +30,6 @@
     
     if (timeInterVal / 60 < 1) {
         resultStr = @"刚刚";
-        
     } else if ((temp = timeInterVal / 60) < 60) {
         resultStr = [NSString stringWithFormat:@"%ld分钟前", temp];
     } else if ((temp = temp / 60) < 24) {
@@ -40,7 +38,6 @@
         resultStr = [NSString stringWithFormat:@"%ld天前", temp];
     } else if ((temp = temp / 30) < 12) {
         resultStr = [NSString stringWithFormat:@"%ld月前", temp];
-        
     } else {
         temp = temp / 12;
         resultStr = [NSString stringWithFormat:@"%ld年前", temp];
