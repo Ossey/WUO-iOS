@@ -34,7 +34,7 @@
 #import "XYRefreshGifHeader.h"
 #import "XYDynamicViewModel.h"
 #import "WUOHTTPRequest.h"
-#import "XYDynamicViewCell.h"
+#import "XYTopicViewCell.h"
 
 @interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -52,7 +52,7 @@
 }
 
 
-static NSString * const cellIdentifier = @"XYDynamicViewCell";
+static NSString * const cellIdentifier = @"XYTopicViewCell";
 @synthesize serachLabel = _serachLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame dataType:(NSInteger)type
@@ -67,7 +67,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [[NSMutableArray alloc] init];
         _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
-        [self registerClass:[XYDynamicViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             [_dataList[self.serachLabel] removeAllObjects];
@@ -167,7 +167,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }];
 }
 
-- (void)drawCell:(XYDynamicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+- (void)drawCell:(XYTopicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
     //    NSLog(@"%@", indexPath);
     // 防止数据错乱时，引发数组越界问题崩溃  , 数据重复请求并添加，导致数据越界问题已经解决，所以不需要在这判断了
@@ -199,7 +199,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XYDynamicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
     
@@ -341,10 +341,6 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     
 }
 
-
-
-
-
 /// 用户触摸时第一时间加载内容
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     if (!_scrollToToping) {
@@ -363,7 +359,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
     if (self.visibleCells && self.visibleCells.count > 0 ) {
         for (id temp in [self.visibleCells copy]) {
-            XYDynamicViewCell *cell = (XYDynamicViewCell *)temp;
+            XYTopicViewCell *cell = (XYTopicViewCell *)temp;
             [cell draw];
         }
     }

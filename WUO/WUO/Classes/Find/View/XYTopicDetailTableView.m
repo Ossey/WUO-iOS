@@ -1,0 +1,69 @@
+//
+//  XYTopicDetailTableView.m
+//  WUO
+//
+//  Created by mofeini on 17/1/10.
+//  Copyright © 2017年 com.test.demo. All rights reserved.
+//
+
+#import "XYTopicDetailTableView.h"
+#import "XYTopicDetailHeaderView.h"
+#import "XYTopicViewCell.h"
+#import "XYActivityTopicItem.h"
+
+@interface XYTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) XYTopicDetailHeaderView *headView;
+
+@end
+
+@implementation XYTopicDetailTableView
+
+static NSString * const cellIdentifier = @"XYTopicViewCell";
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    if (self = [super initWithFrame:frame style:UITableViewStyleGrouped]) {
+        
+        self.tableHeaderView = self.headView;
+        self.delegate = self;
+        self.dataSource = self;
+        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    }
+    return self;
+}
+
+- (XYTopicDetailHeaderView *)headView {
+    if (_headView == nil) {
+        _headView = [XYTopicDetailHeaderView new];
+    }
+    
+    return _headView;
+}
+
+
+
+
+- (void)setActivityTopicItem:(XYActivityTopicItem *)activityTopicItem {
+    
+    _activityTopicItem = activityTopicItem;
+    _headView.item = activityTopicItem;
+    _headView.xy_height = activityTopicItem.topicDetailHeaderHeight;
+    // 画headerView
+    
+    [self reloadData];
+}
+
+#pragma mark - <UITableViewDelegate, UITableViewDataSource>
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    return cell;
+}
+
+
+@end

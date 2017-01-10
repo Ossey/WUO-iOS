@@ -1,12 +1,12 @@
 //
-//  XYDynamicViewCell.m
+//  XYTopicViewCell.m
 //  WUO
 //
 //  Created by mofeini on 17/1/2.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYDynamicViewCell.h"
+#import "XYTopicViewCell.h"
 #import <UIButton+WebCache.h>
 //#import <UIImageView+WebCache.h>
 #import "XYDynamicViewModel.h"
@@ -17,22 +17,16 @@
 #import "WUOToolView.h"
 #import "XYVideoImgView.h"
 @class XYPictureCollectionViewLayout;
-@interface XYDynamicViewCell () {
+@interface XYTopicViewCell () {
     // 是否正在绘制中
     BOOL _isDrawing;
     // 标记绘制颜色
     NSInteger _drawColorFlag;
-//    CGRect _readFrame;
-//    CGRect _shareCountRect;
-//    CGRect _commentCountRect;
-//    CGRect _rewardCountRect;
-//    CGRect _praiseCountRect;
 }
 
 @property (strong, nonatomic)  UIImageView *postBGView;
 @property (strong, nonatomic)  UIButton *investBtn;
 @property (strong, nonatomic)  UIButton *headerView;
-//@property (strong, nonatomic)  UILabel *nameLabel;
 @property (strong, nonatomic)  WUOLabel *title_label;
 @property (strong, nonatomic)  WUOLabel *contentLabel;
 @property (strong, nonatomic)  UIButton *readCountBtn;
@@ -44,7 +38,7 @@
 
 @end
 
-@implementation XYDynamicViewCell
+@implementation XYTopicViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -218,21 +212,13 @@
         CGContextFillRect(context, rect);
         
         // name
-        float leftX = SIZE_GAP_MARGIN+SIZE_HEADERWH+SIZE_GAP_PADDING;
-        float x = leftX;
-        float y = (SIZE_HEADERWH-(SIZE_FONT_NAME+SIZE_FONT_SUBTITLE+6))/2-2+SIZE_GAP_TOP+SIZE_GAP_SMALL-5;
-        [self.viewModel.item.name drawInContext:context withPosition:CGPointMake(x, y) andFont:kFontWithSize(SIZE_FONT_NAME)
-                                   andTextColor:[UIColor colorWithRed:106/255.0 green:140/255.0 blue:181/255.0 alpha:1]
-                                      andHeight:rect.size.height];
-        y += SIZE_FONT_NAME+5;
+        [self.viewModel.item.name drawInContext:context withPosition:self.viewModel.nameLabelFrame.origin andFont:kFontWithSize(SIZE_FONT_NAME)
+                                   andTextColor:kColorNameText
+                                      andHeight:self.viewModel.nameLabelFrame.size.height];
         
         // job
-        float fromX = leftX;
-        float size = kScreenW-leftX;
-        [self.viewModel.item.job drawInContext:context withPosition:CGPointMake(fromX, y) andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:rect.size.height andWidth:size];
-        
+        [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:self.viewModel.jobLabelFrame.size.height andWidth:self.viewModel.jobLabelFrame.size.width];
     
-        
         
 //        // 播放按钮，当有视频时才需要绘制, 这样产生的问题: 绘制的图片被videoImgView遮住了
 //        if (self.videoImgView.hidden == NO) {
@@ -268,6 +254,7 @@
         });
     });
     
+    // 当cell绘制完成后 再设置label
     [self drawText];
 }
 
@@ -284,6 +271,8 @@
         self.contentLabel.hidden = NO;
     }
 }
+
+
 
 - (void)clear{
     if (!_isDrawing) {

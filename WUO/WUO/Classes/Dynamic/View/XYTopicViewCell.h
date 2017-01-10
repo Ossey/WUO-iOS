@@ -1,5 +1,5 @@
 //
-//  XYDynamicViewCell.h
+//  XYTopicViewCell.h
 //  WUO
 //
 //  Created by mofeini on 17/1/2.
@@ -11,7 +11,7 @@
 @class XYDynamicViewModel;
 
 
-@interface XYDynamicViewCell : UITableViewCell
+@interface XYTopicViewCell : UITableViewCell
 
 @property (nonatomic, strong) XYDynamicViewModel *viewModel;
 

@@ -12,7 +12,7 @@
 
 #define SIZE_MARGIN 10
 #define SIZE_CORNERWH SIZE_HEADERWH+5
-#define SIZE_LOGOH 180
+#define SIZE_LOGOH 200
 
 @class XYTopicInfo, XYTopicItem;
 @interface XYActivityTopicItem : NSObject
@@ -41,6 +41,7 @@
 @property (nonatomic, assign) BOOL isTop;
 @property (nonatomic, copy) NSString *job;
 @property (nonatomic, copy) NSString *name;
+/** 活动开始的时间， 需要进行处理，当距离今日小于20时，显示比如【20天前】，1年内显示比如【11月30日】，跨年显示【2016年1月2日】 */
 @property (nonatomic, copy) NSString *startTime;
 /** 话题数组 */
 @property (nonatomic, assign) NSInteger totalAmount;
@@ -53,6 +54,12 @@
 @property (nonatomic, strong) NSURL *logoFullURL;
 /** 用于处理上面的title属性 */
 @property (nonatomic, copy) NSString *Title;
+/** 处理开始活动时间 */
+@property (nonatomic, copy) NSString *statTimeFormat;
+/** 对加入人数的处理 */
+@property (nonatomic, copy) NSString *joinCounStr;
+/** 对头像的URL的处理 */
+@property (nonatomic, strong) NSURL *headImgFullURL;
 
 /** 活动详情界面，头部的视图bounds */
 @property (nonatomic, assign) CGRect topicDetailHeaderBounds;
@@ -63,7 +70,9 @@
 /** 活动详情界面，头部视图中 昵称的frame */
 @property (nonatomic, assign) CGRect topicDetailNameFrame;
 /** 活动详情界面，头部视图中 发布时间的frame */
-@property (nonatomic, assign) CGRect topicDetailTimeFrame;
+@property (nonatomic, assign) CGRect topicDetailStartTimeFrame;
+/** 活动详情界面，头部视图中 结束时间的frame */
+@property (nonatomic, assign) CGRect topicDetailEndTimeFrame;
 /** 活动详情界面，头部视图中 参加人数的frame */
 @property (nonatomic, assign) CGRect topicDetailJoinCountFrame;
 /** 活动详情界面，头部视图中 Logo的frame */
@@ -71,7 +80,7 @@
 /** 活动详情界面，头部视图中 标题的frame */
 @property (nonatomic, assign) CGRect topicDetailTitleFrame;
 /** 活动详情界面，头部视图中 内容文字的frame */
-@property (nonatomic, assign) CGRect topicDetailContentFrame;
+@property (nonatomic, assign) CGRect topicDetailIntroduceFrame;
 /** 活动详情界面，头部视图中 参加话题的frame */
 @property (nonatomic, assign) CGRect topicDetailJoinTopicFrame;
 

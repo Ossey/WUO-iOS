@@ -14,4 +14,8 @@
 
 @property (nonatomic, strong) XYActivityTopicItem *item;
 
+- (void)clear;
+- (void)releaseMemory;
+- (void)draw;
+
 @end

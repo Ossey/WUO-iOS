@@ -10,15 +10,16 @@
 #import "UIViewController+XYExtension.h"
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
-#import "XYTrendTableView.h"
-
+#import "XYTopicDetailHeaderView.h"
+#import "XYTopicDetailTableView.h"
 
 @implementation XYTopicDetailController {
     
     // 话题详情页，头部的模型
     XYActivityTopicItem *_activityTopicItem;
     NSMutableArray *_trendList;
-    XYTrendTableView *_tableView;
+    XYTopicDetailTableView *_tableView;
+    XYTopicDetailHeaderView *_headerView;
 }
 
 + (void)pushWithItem:(XYActivityTopicItem *)item {
@@ -45,11 +46,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     _trendList = [NSMutableArray arrayWithCapacity:0];
     
-    _tableView = [[XYTrendTableView alloc] init];
+    _tableView = [[XYTopicDetailTableView alloc] init];
     [self.view addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     
     // 第一次进入此页面时，请求话题详情数据，下次不管是下拉刷新还是上拉加载时，都是请求Trend
     [self loadTopicDetail];
@@ -67,6 +71,7 @@
             // 请求数据成功
             // 头部数据，内含第一次加载的帖子数组
             _activityTopicItem = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
+            _tableView.activityTopicItem = _activityTopicItem;
             if (responseObject[@"data"][@"trendList"] && [responseObject[@"data"][@"trendList"] count] > 0) {
                 // 头像详情中有帖子数组
                 for (id obj in responseObject[@"data"][@"trendList"]) {

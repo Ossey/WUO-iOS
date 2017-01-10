@@ -54,10 +54,17 @@
     CGFloat headerHeight = SIZE_GAP_MARGIN + SIZE_HEADERWH;
 
     
-    self.nameLabelFrame = CGRectMake(x, SIZE_GAP_MARGIN, SIZE_HEADERWH, SIZE_HEADERWH);
-    
     y = headerHeight + SIZE_GAP_SMALL;
     x += SIZE_HEADERWH + SIZE_GAP_PADDING;
+    
+    // 昵称
+    CGSize nameSize = [self.item.name boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
+    self.nameLabelFrame = CGRectMake(x, SIZE_GAP_TOP, nameSize.width, nameSize.height);
+    CGRectMake(x, SIZE_GAP_MARGIN, 0, 0);
+    
+    // job
+    CGSize jobSize = [self.item.job boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_SUBTITLE)} context:nil].size;
+    self.jobLabelFrame = CGRectMake(x, CGRectGetMaxY(self.nameLabelFrame) + SIZE_GAP_SMALL, jobSize.width, jobSize.height);
     
     // 图片
     if (self.item.imgCount == 0) {

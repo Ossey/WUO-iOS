@@ -11,7 +11,7 @@
 #import "XYRefreshGifHeader.h"
 #import "XYDynamicViewModel.h"
 #import "WUOHTTPRequest.h"
-#import "XYDynamicViewCell.h"
+#import "XYTopicViewCell.h"
 
 
 @interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource>
@@ -28,7 +28,7 @@
     
 }
 
-static NSString * const cellIdentifier = @"XYDynamicViewCell";
+static NSString * const cellIdentifier = @"XYTopicViewCell";
 @synthesize serachLabel = _serachLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
@@ -42,7 +42,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
         _dynamicList = [NSMutableArray arrayWithCapacity:0];
         _needLoadList = [[NSMutableArray alloc] init];
         
-        [self registerClass:[XYDynamicViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _dynamicInfo.idstamp = 0;
@@ -116,7 +116,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }];
 }
 
-- (void)drawCell:(XYDynamicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+- (void)drawCell:(XYTopicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     XYDynamicViewModel *viewModel = [_dynamicList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
@@ -141,7 +141,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XYDynamicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
     
@@ -258,7 +258,7 @@ static NSString * const cellIdentifier = @"XYDynamicViewCell";
     }
     if (self.visibleCells && self.visibleCells.count > 0 ) {
         for (id temp in [self.visibleCells copy]) {
-            XYDynamicViewCell *cell = (XYDynamicViewCell *)temp;
+            XYTopicViewCell *cell = (XYTopicViewCell *)temp;
             [cell draw];
         }
     }
