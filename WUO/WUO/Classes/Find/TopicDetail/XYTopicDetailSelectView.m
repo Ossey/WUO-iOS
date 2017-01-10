@@ -19,6 +19,8 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         self.trendLabelView.hidden = NO;
+//        [_trendLabelView setItemWidth:50];
+//        [_trendLabelView setUnderLineWidth:20];
     }
     return self;
 }
@@ -34,7 +36,6 @@
         [_trendLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
-        
         
     }
     return _trendLabelView;

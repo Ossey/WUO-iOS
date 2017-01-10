@@ -60,20 +60,23 @@
 - (NSURL *)logoFullURL {
     
     NSString *logoFullStr;
-    
-    /**
-     注意：服务端返回logo路径，有些是完整的路径，有些需要拼接，这里做出来
-     */
-    
-    /// 将url进行 UTF8转码 避免服务端返回的有汉字 引发乱码
-    NSString *logoStr = [self.logo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    if ([logoStr containsString:@"http:"]) {
-        logoFullStr = logoStr;
-    } else {
-        logoFullStr = [self.info.basePath stringByAppendingString:logoStr];
+    if (self.logo.length) {
+        /**
+         注意：服务端返回logo路径，有些是完整的路径，有些需要拼接，这里做出来
+         */
+        
+        /// 将url进行 UTF8转码 避免服务端返回的有汉字 引发乱码
+        NSString *logoStr = [self.logo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if ([logoStr containsString:@"http:"]) {
+            logoFullStr = logoStr;
+        } else {
+            logoFullStr = [self.info.basePath stringByAppendingString:logoStr];
+        }
+        
+        return [NSURL URLWithString:logoFullStr];
+        
     }
-    
-    return [NSURL URLWithString:logoFullStr];
+    return nil;
 }
 
 - (NSString *)Title {
@@ -166,12 +169,15 @@
 
 - (NSURL *)headImgFullURL {
     NSString *fullPath = nil;
-    if ([self.head containsString:@"http://"]) {
-        fullPath = self.head;
-    } else {
-        fullPath = [self.info.basePath stringByAppendingString:self.head];
+    if (self.head.length) {
+        if ([self.head containsString:@"http://"]) {
+            fullPath = self.head;
+        } else {
+            fullPath = [self.info.basePath stringByAppendingString:self.head];
+        }
+        return [NSURL URLWithString:fullPath];
     }
-    return [NSURL URLWithString:fullPath];
+    return nil;
 }
 
 - (CGRect)topicDetailHeaderBounds {

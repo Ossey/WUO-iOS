@@ -152,7 +152,7 @@
 //        btn.frame = frame;
 //    }
 //    
-//    [self updateUnderLineFrame];
+//    [self updateUnderLineFrameFromBtn:self.previousSelectedBtn];
 //}
 
 - (CGFloat)itemWidth {
@@ -386,28 +386,6 @@
     underLineFrame.size.height = 2;
     self.underLine.frame = underLineFrame;
     
-//    CGRect frame = self.previousSelectedBtn.frame;
-//#warning TODO 需修复
-//    if (self.previousSelectItemIndex >= self.items.count) {
-//        self.previousSelectItemIndex = self.items.count - 1;
-//    } else {
-//        self.previousSelectItemIndex = self.previousSelectedBtn.tag;
-//    }
-//    CGFloat width = 0;
-//    CGFloat x = 0;
-//    // 判断当前文字是否有缩放，如果有缩放，就让下划线调整frame
-//    if (self.itemScale) {
-//        width = (self.itemScale + 1) * self.btnContentWidth;
-//        CGFloat temp = width - self.btnContentWidth; // 缩放后的差值
-//        x = self.btnContentMargin - temp  + CGRectGetWidth(frame) * self.previousSelectItemIndex - self.btnContentWidth * 0.5;
-//    } else {
-//        width = self.btnContentWidth;
-//        x = self.btnContentMargin + CGRectGetWidth(frame) * self.previousSelectItemIndex;
-//    }
-//
-//    
-//    NSLog(@"%ld--%ld--%f", self.previousSelectItemIndex, self.currentSelectItemIndex, x);
-//    _underLine.frame = CGRectMake(x, CGRectGetHeight(self.frame)-2, width, 2);
 }
 
 - (CGFloat)underLineWidth {
@@ -447,7 +425,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"addbutton"] forState:UIControlStateNormal];
         _rightButton = btn;
-//        NSLog(@"%f", self.rightBtnWidth);
+
         _rightButton.frame = CGRectMake(CGRectGetWidth(self.frame) - self.rightBtnWidth, 0, self.rightBtnWidth, CGRectGetHeight(self.frame));
         [_rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_rightButton];

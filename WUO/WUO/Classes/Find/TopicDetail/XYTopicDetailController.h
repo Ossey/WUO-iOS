@@ -11,7 +11,7 @@
 @class XYActivityTopicItem;
 @interface XYTopicDetailController : XYProfileBaseController
 
-/** 活动话题模型，用于进入此界面时，请求对应的话题数据的 */
+/** 活动话题模型，用于进入此界面时，请求对应的话题数据的, 当使用完毕后保存其他值 */
 @property (nonatomic, strong) XYActivityTopicItem *item;
 
 + (void)pushWithItem:(XYActivityTopicItem *)item;

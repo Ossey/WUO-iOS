@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYActivityTopicItem;
+@class XYActivityTopicItem, XYTopicItem;
 @interface XYTopicDetailTableView : UITableView
 
 /** 主要用于展示头部信息的模型 */
