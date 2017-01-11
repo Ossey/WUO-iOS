@@ -63,7 +63,7 @@
     }
     
     // 头部
-    CGFloat headerHeight =  SIZE_HEADERWH;
+    CGFloat headerHeight = SIZE_HEADERWH;
     
     self.headerFrame = CGRectMake(x, y, headerHeight, headerHeight);
     
