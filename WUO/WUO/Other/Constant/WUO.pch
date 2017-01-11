@@ -41,7 +41,6 @@
 #define SIZE_FONT_TITLE 15                      // 标题字体大小
 #define SIZE_FONT_CONTENT (SIZE_FONT_TITLE-3)   // 内容文本字体大小
 #define kFontWithSize(s) [UIFont fontWithName:@"HelveticaNeue-Light" size:s] // 全局字体
-/*************** 动态界面 ***************/
 
 
 /**************** 查找界面 *****************/
@@ -51,12 +50,11 @@
 #define kHeaderFooterViewInsetMargin 8
 #define kScrollVoewOriginalOffsetY 0
 #define kTrendTableViewOriginalOffsetY -(kAdvertViewHeight + kTrendLabelViewHeight + kTopicViewHeight + kHeaderFooterViewInsetMargin) // tableView最原始的点
-/**************** 查找界面 *****************/
+
 
 /**************** 话题详情 *****************/
 #define SIZE_FONT_JOINCOUNT (SIZE_FONT-6)
 
-/**************** 话题详情 *****************/
 
 /*************** 颜色 ***************/
 #define kColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
@@ -75,8 +73,19 @@
 #define kColorSeparator kColor(140, 140, 140, 0.6)          // 分隔符的颜色
 #define kColorGlobalCell kColor(250, 250, 250, 1.0)         // cell的全局颜色
 #define kColorGlobalGreen [UIColor colorWithRed:47/255.0 green:189/255.0 blue:169/255.0 alpha:1.0]
-/*************** 颜色 ***************/
+
+
+/*************** 用户详情页 ***************/
+#define SIZE_USER_DETAIL_AVATER_WH 70                       // 头像尺寸
+#define SIZE_USER_DETAIL_TOP 13                             // 顶部距离
+#define SIZE_USER_DETAIL_PADDING 10                         // 间距
+#define SIZE_USER_DETAIL_HEADERVIEW_H 260                   // tableHeaderView高度
+#define SIZE_USER_DETAIL_leftCentXMargin kScreenW * 0.5 * 0.5
+#define kColorDescriptionGray kColor(166, 166, 166, 1.0)    
+#define SIZE_FONT_USER_DETAIL_DESCRIPTION 12
+#define SIZE_FONT_USER_DETAIL_COUNT 10
 
 #define kLoginInfoPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"loginInfo.plist"]
 
 #endif /* WUO_pch */
+
