@@ -30,7 +30,7 @@
 		1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF8E1E2616C800918A2C /* XYDynamicTableView.m */; };
 		1810AF941E2616C800918A2C /* XYDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF901E2616C800918A2C /* XYDynamicViewController.m */; };
 		1810AF951E2616C800918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF921E2616C800918A2C /* XYPlayerViewController.m */; };
-		1810AFAD1E2616D700918A2C /* XYDynamicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF991E2616D700918A2C /* XYDynamicViewModel.m */; };
+		1810AFAD1E2616D700918A2C /* XYTopicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF991E2616D700918A2C /* XYTopicViewModel.m */; };
 		1810AFAE1E2616D700918A2C /* XYTopicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF9B1E2616D700918A2C /* XYTopicInfo.m */; };
 		1810AFAF1E2616D700918A2C /* XYTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF9D1E2616D700918A2C /* XYTopicItem.m */; };
 		1810AFB01E2616D700918A2C /* WUOLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA01E2616D700918A2C /* WUOLabel.m */; };
@@ -130,8 +130,8 @@
 		1810AF901E2616C800918A2C /* XYDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewController.m; sourceTree = "<group>"; };
 		1810AF911E2616C800918A2C /* XYPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerViewController.h; sourceTree = "<group>"; };
 		1810AF921E2616C800918A2C /* XYPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerViewController.m; sourceTree = "<group>"; };
-		1810AF981E2616D700918A2C /* XYDynamicViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewModel.h; sourceTree = "<group>"; };
-		1810AF991E2616D700918A2C /* XYDynamicViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewModel.m; sourceTree = "<group>"; };
+		1810AF981E2616D700918A2C /* XYTopicViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicViewModel.h; sourceTree = "<group>"; };
+		1810AF991E2616D700918A2C /* XYTopicViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicViewModel.m; sourceTree = "<group>"; };
 		1810AF9A1E2616D700918A2C /* XYTopicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicInfo.h; sourceTree = "<group>"; };
 		1810AF9B1E2616D700918A2C /* XYTopicInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicInfo.m; sourceTree = "<group>"; };
 		1810AF9C1E2616D700918A2C /* XYTopicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicItem.h; sourceTree = "<group>"; };
@@ -363,8 +363,8 @@
 		1810AF971E2616D700918A2C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1810AF981E2616D700918A2C /* XYDynamicViewModel.h */,
-				1810AF991E2616D700918A2C /* XYDynamicViewModel.m */,
+				1810AF981E2616D700918A2C /* XYTopicViewModel.h */,
+				1810AF991E2616D700918A2C /* XYTopicViewModel.m */,
 				1810AF9A1E2616D700918A2C /* XYTopicInfo.h */,
 				1810AF9B1E2616D700918A2C /* XYTopicInfo.m */,
 				1810AF9C1E2616D700918A2C /* XYTopicItem.h */,
@@ -972,7 +972,7 @@
 				1810AF951E2616C800918A2C /* XYPlayerViewController.m in Sources */,
 				183F93F41E18F4D100875416 /* XYInvestViewController.m in Sources */,
 				183F93901E18BFA200875416 /* main.m in Sources */,
-				1810AFAD1E2616D700918A2C /* XYDynamicViewModel.m in Sources */,
+				1810AFAD1E2616D700918A2C /* XYTopicViewModel.m in Sources */,
 				1810AF811E260A7A00918A2C /* WUOFindHeaderView.m in Sources */,
 				1810AF7F1E260A7A00918A2C /* XYAdvertItem.m in Sources */,
 				1810AF651E260A5E00918A2C /* XYActiveTopicDetailHeaderView.m in Sources */,

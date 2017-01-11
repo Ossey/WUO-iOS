@@ -14,7 +14,7 @@
 #import "XYRefreshGifHeader.h"
 #import "XYRefreshGifFooter.h"
 #import "WUOHTTPRequest.h"
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 
 /**
  根据topicID type idStamp参数请求帖子数据 当type是1时请求 最新 ，当type是0时请求 榜单
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, XYTopicType) {
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
     /** 将每一种标题类型的数据数组作为value，标题作为key放在这个数组中, 按照当前XYTopicType去_dataList查找对应数据，防止数据错乱 */
-    NSMutableDictionary<NSNumber *,NSMutableArray<XYDynamicViewModel *> *> *_dataList;
+    NSMutableDictionary<NSNumber *,NSMutableArray<XYTopicViewModel *> *> *_dataList;
     NSMutableDictionary<NSNumber *, NSNumber *> *_cnameDict;
     
 }
@@ -116,7 +116,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
                             XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
                             
                             // 帖子模型数
-                            [_dataList[@(self.currentType)] addObject:[XYDynamicViewModel dynamicViewModelWithItem:item info:info]];
+                            [_dataList[@(self.currentType)] addObject:[XYTopicViewModel topicViewModelWithTopic:item info:info]];
                         }
                     }
                 }
@@ -151,7 +151,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
                     flag = NO;
                     break;
                 } else {
-                    XYDynamicViewModel *viewModel = _dataList[@(self.currentType)][i];
+                    XYTopicViewModel *viewModel = _dataList[@(self.currentType)][i];
                     viewModel.item.ranking = [NSString stringWithFormat:@"    NO.%ld", i+1];
                     if (i == 9) {
                         flag = NO;
@@ -209,7 +209,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
         NSArray *datas = _dataList[@(self.currentType)];
         if (indexPath.row < datas.count) {
             
-            XYDynamicViewModel *viewModel = datas[indexPath.row];
+            XYTopicViewModel *viewModel = datas[indexPath.row];
             cellHeight = viewModel.cellHeight;
         }
     }
@@ -296,7 +296,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
     if (_dataList[@(self.currentType)].count == 0 || indexPath.row > _dataList[@(self.currentType)].count - 1) {
         return;
     }
-    XYDynamicViewModel *viewModel = [_dataList[@(self.currentType)] objectAtIndex:indexPath.row];
+    XYTopicViewModel *viewModel = [_dataList[@(self.currentType)] objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;

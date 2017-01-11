@@ -1,14 +1,14 @@
 //
-//  XYDynamicViewModel.m
+//  XYTopicViewModel.m
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 
-@implementation XYDynamicViewModel
+@implementation XYTopicViewModel
 
 - (instancetype)initWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info {
     if (self = [super init]) {
@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (instancetype)dynamicViewModelWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info {
++ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYTopicInfo *)info {
     
     return [[self alloc] initWithItem:item info:info];
 }

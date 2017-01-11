@@ -8,7 +8,7 @@
 
 #import "XYTopicViewCell.h"
 #import <UIButton+WebCache.h>
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 #import "UIImage+XYExtension.h"
 #import "XYPictureCollectionView.h"
 #import "WUOLabel.h"
@@ -289,7 +289,7 @@
 
 
 #pragma mark - set \ get
-- (void)setViewModel:(XYDynamicViewModel *)viewModel {
+- (void)setViewModel:(XYTopicViewModel *)viewModel {
     
     _viewModel = viewModel;
     

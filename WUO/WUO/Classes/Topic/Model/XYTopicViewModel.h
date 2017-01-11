@@ -1,5 +1,5 @@
 //
-//  XYDynamicViewModel.h
+//  XYTopicViewModel.h
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
@@ -11,7 +11,7 @@
 #import "XYTopicItem.h"
 
 
-@interface XYDynamicViewModel : NSObject
+@interface XYTopicViewModel : NSObject
 
 @property (nonatomic, strong) XYTopicInfo *info;
 @property (nonatomic, strong) XYTopicItem *item;
@@ -34,5 +34,5 @@
 
 /** 记录模型所在的tableViewview上次滚动的偏移量 */
 @property (nonatomic, assign) CGPoint previousContentOffset;
-+ (instancetype)dynamicViewModelWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info;
++ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYTopicInfo *)info;
 @end

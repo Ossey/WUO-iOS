@@ -9,7 +9,7 @@
 #import "XYDynamicTableView.h"
 #import "XYRefreshGifFooter.h"
 #import "XYRefreshGifHeader.h"
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 #import "WUOHTTPRequest.h"
 #import "XYTopicViewCell.h"
 
@@ -22,7 +22,7 @@
 
 @implementation XYDynamicTableView {
         
-    NSMutableArray<XYDynamicViewModel *> *_dynamicList;
+    NSMutableArray<XYTopicViewModel *> *_dynamicList;
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
     
@@ -97,7 +97,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
                         XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:_dynamicInfo];
-                        XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:_dynamicInfo];
+                        XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:_dynamicInfo];
                         [_dynamicList addObject:viewModel];
                     }
                 }
@@ -116,7 +116,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 }
 
 - (void)drawCell:(XYTopicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
-    XYDynamicViewModel *viewModel = [_dynamicList objectAtIndex:indexPath.row];
+    XYTopicViewModel *viewModel = [_dynamicList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;
@@ -148,7 +148,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XYDynamicViewModel *viewModel = _dynamicList[indexPath.row];
+    XYTopicViewModel *viewModel = _dynamicList[indexPath.row];
 
     return viewModel.cellHeight;
 

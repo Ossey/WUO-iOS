@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYDynamicViewModel;
+@class XYTopicViewModel;
 
 
 @interface XYTopicViewCell : UITableViewCell
 
-@property (nonatomic, strong) XYDynamicViewModel *viewModel;
+@property (nonatomic, strong) XYTopicViewModel *viewModel;
 
 - (void)clear;
 - (void)releaseMemory;

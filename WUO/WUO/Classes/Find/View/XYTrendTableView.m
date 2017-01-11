@@ -32,7 +32,7 @@
 #import "XYTrendTableView.h"
 #import "XYRefreshGifFooter.h"
 #import "XYRefreshGifHeader.h"
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 #import "WUOHTTPRequest.h"
 #import "XYTopicViewCell.h"
 
@@ -47,7 +47,7 @@
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
     /** 将每一种标题类型的数据数组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据，防止数据错乱 */
-    NSMutableDictionary<NSString *,NSMutableArray<XYDynamicViewModel *> *> *_dataList;
+    NSMutableDictionary<NSString *,NSMutableArray<XYTopicViewModel *> *> *_dataList;
     NSMutableDictionary<NSString *, NSNumber *> *_cnameDict;
 }
 
@@ -148,7 +148,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
                         XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
-                        XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:info];
+                        XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:info];
                         
                         // 将数据添加到对应的容器中，避免被循环利用，数据错乱
                         [_dataList[self.serachLabel] addObject:viewModel];
@@ -173,7 +173,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
         return;
     }
-    XYDynamicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
+    XYTopicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;
@@ -215,7 +215,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         // 现在问题解决了，不需要这里错误判断了
         if (indexPath.row < datas.count) {
             
-            XYDynamicViewModel *viewModel = datas[indexPath.row];
+            XYTopicViewModel *viewModel = datas[indexPath.row];
             cellHeight = viewModel.cellHeight;
         }
     }
@@ -317,7 +317,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         // 当标题栏在顶部固定的时候，才去记录偏移量
         if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
             // 记录停止拖拽时rendTableView的偏移量
-            XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+            XYTopicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
             viewModel.previousContentOffset = scrollView.contentOffset;
             
         }
@@ -333,7 +333,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     // 当标题栏在顶部固定的时候，才去记录偏移量
     if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
         // 记录停止拖拽时rendTableView的偏移量
-        XYDynamicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+        XYTopicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
         viewModel.previousContentOffset = scrollView.contentOffset;
 
     }
@@ -421,7 +421,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 //        // 遍历数据源，判断有没有其中任何一个上次偏移量大于了compareOffsetY，只要有就停止遍历，让所有的都移动到compareOffsetY
 //        dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //            for (NSString *key in _dataList) {
-//                NSArray<XYDynamicViewModel *> *arrValue = _dataList[key];
+//                NSArray<XYTopicViewModel *> *arrValue = _dataList[key];
 //                NSLog(@"%f--compareOffsetY=%f", arrValue.firstObject.previousContentOffset.y, compareOffsetY);
 //                if (arrValue.firstObject.previousContentOffset.y > compareOffsetY) {
 //                    tempOffsetY = compareOffsetY;
@@ -441,7 +441,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 //        
 //    } else if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
 //        // 取出模型，第一个模型保存了偏移量
-//        XYDynamicViewModel *viewModel = _dataList[serachLabel].firstObject;
+//        XYTopicViewModel *viewModel = _dataList[serachLabel].firstObject;
 //        if (viewModel.previousContentOffset.y > compareOffsetY) {
 //
 //            [self setContentOffset:viewModel.previousContentOffset animated:YES];

@@ -7,7 +7,7 @@
 //
 
 #import "XYVideoImgView.h"
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 #import <UIImageView+WebCache.h>
 #import "XYPlayerViewController.h"
 
@@ -49,7 +49,7 @@
     }
 }
 
-- (void)setViewModel:(XYDynamicViewModel *)viewModel {
+- (void)setViewModel:(XYTopicViewModel *)viewModel {
     _viewModel = viewModel;
     
     XYTopicItem * item = viewModel.item;

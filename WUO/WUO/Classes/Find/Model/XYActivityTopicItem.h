@@ -7,7 +7,7 @@
 //  find 页面 活动话题 模型
 
 #import <Foundation/Foundation.h>
-#import "XYDynamicViewModel.h"
+#import "XYTopicViewModel.h"
 
 #define SIZE_MARGIN 10
 #define SIZE_CORNERWH SIZE_HEADERWH+5
@@ -45,7 +45,7 @@
 @property (nonatomic, assign) NSInteger totalAmount;
 @property (nonatomic, assign) NSInteger uid;
 @property (nonatomic, copy) NSString *videoImg;
-@property (nonatomic, strong) NSMutableArray<XYDynamicViewModel *> *trendList;
+@property (nonatomic, strong) NSMutableArray<XYTopicViewModel *> *trendList;
 
 /************ 扩展属性 *************/
 /** 用于处理上面的logo属性 */

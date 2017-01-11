@@ -22,7 +22,7 @@
             for (id obj in dict[@"trendList"]) {
                 if ([obj isKindOfClass:[NSDictionary class]]) {
                     XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
-                    XYDynamicViewModel *viewModel = [XYDynamicViewModel dynamicViewModelWithItem:item info:info];
+                    XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:info];
                     [_trendList addObject:viewModel];
                 }
             }
@@ -39,7 +39,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
 
-//- (NSMutableArray<XYDynamicViewModel *> *)trendList {
+//- (NSMutableArray<XYTopicViewModel *> *)trendList {
 //    if (_trendList == nil) {
 //        _trendList = [NSMutableArray array];
 //    }
@@ -174,7 +174,7 @@
     return CGRectMake(0, 0, kScreenW, self.topicDetailHeaderHeight);
 }
 
-//- (void)setTrendList:(NSMutableArray<XYDynamicViewModel *> *)trendList {
+//- (void)setTrendList:(NSMutableArray<XYTopicViewModel *> *)trendList {
 //    _trendList = trendList;
 //    
 //    // 发布数据改变的通知，外界更新数据
