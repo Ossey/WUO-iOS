@@ -238,7 +238,8 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
-    [self setGlobalBackgroundColor:backgroundColor];
+    self.currentItemBackgroundColor = backgroundColor;
+    self.rightButton.backgroundColor = backgroundColor;
 }
 
 - (UIImage *)separatorImage {
