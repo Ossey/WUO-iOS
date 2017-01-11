@@ -44,23 +44,14 @@
 }
 
 - (instancetype)initWithFrame:(CGRect)frame player:(AVPlayer *)player {
-    if (self = [self initWithFrame:frame]) {
+    if (self = [super initWithFrame:frame]) {
+        
+        [self setupUI];
         _player = player;
-        // 设置plyer音量 范围 0 - 1，默认为 1
-        player.volume = 0.9;
+        player.volume = 0.9; // 设置plyer音量 范围 0 - 1，默认为 1
         _isPlaying = NO;
         [self initObserver];
         [self startDisplayLink];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setupUI];
-        
     }
     return self;
 }
@@ -142,7 +133,6 @@
      TouchDown: 当UISlider被按下时调用.
      TouchUpInside  松开时调用
      */
-    
     [_slider addTarget:self action:@selector(sliderValueChangedEvent:) forControlEvents:UIControlEventValueChanged];
     [_slider addTarget:self action:@selector(sliderTouchDownEvent:) forControlEvents:UIControlEventTouchDown];
     [_slider addTarget:self action:@selector(sliderTouchUpInsideEvent:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,6 +192,7 @@
 
 - (void)play {
 //    if (!_isPlaying) {
+    self.state = XYPlayerStatePlaying;
         // 播放时需要判断是否可以播放，再设置以下数据，比如有时明明网络有问题点击了播放，实际并未播放，以下状态却改变了是不行的
         [_player play];
         // 设置播放速率---默认为 1.0 (normal speed)，设为 0.0 时暂停播放。设置后立即开始播放，可放在开始播放后设置
@@ -246,6 +237,21 @@
     _remainingTimeLabel.text = [self coverTime:remainingTime];
 }
 
+/**
+ *  设置播放的状态
+ *  @param state WMPlayerState
+ */
+- (void)setState:(XYPlayerState)state
+{
+    _state = state;
+    
+    if (self.playerStateChangeBlock) {
+        self.playerStateChangeBlock(state);
+    }
+
+}
+
+
 #pragma mark - 事件监听
 // 定时器监听的事件
 - (void)playerProgress {
@@ -286,11 +292,13 @@
         switch (playerItem.status) {
             case AVPlayerItemStatusReadyToPlay:
                 _isPlaying = YES;
+                self.state = XYPlayerStateReadyToPlay;
                 break;
             case AVPlayerItemStatusUnknown:
                 [self pause];
                 break;
             case AVPlayerItemStatusFailed:
+                self.state = XYPlayerStateFailed;
                 [self pause];
                 break;
                 
@@ -331,6 +339,7 @@
     if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         if (playerItem.playbackBufferEmpty == YES) {
             NSLog(@"缓存不足，强制暂停");
+            self.state = XYPlayerStateBuffering;
             [self pause];
         }
     }
@@ -369,10 +378,9 @@
     [_slider setValue:0.00 animated:YES];
     self.currentPlayerTime = 0;
     self.remainingTime = CMTimeGetSeconds(_player.currentItem.duration);
-    
+    self.state = XYPlayerStateEnd;
     [self stopDisplayLink];
     
-#warning TODO 当视频播放完成后，应显示视频的第一帧
 }
 
 /**

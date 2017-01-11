@@ -8,8 +8,9 @@
 
 #import "XYDynamicViewController.h"
 #import "XYDynamicTableView.h"
+#import "XYUserDetailController.h"
 
-@interface XYDynamicViewController ()
+@interface XYDynamicViewController () <XYDynamicTableViewDelegate>
 
 @property (nonatomic, strong) XYDynamicTableView *tableView;
 
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     
     self.tableView.backgroundColor = kTableViewBgColor;
+    self.tableView.dynamicDelegate = self;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_Home_goldCoin_new"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(goldCoinClick)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Home_Icon"]];
@@ -37,6 +39,13 @@
     }
     
     return _tableView;
+}
+
+#pragma mark - <XYDynamicTableViewDelegate>
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath {
+    
+    XYUserDetailController *vc = [XYUserDetailController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Events 

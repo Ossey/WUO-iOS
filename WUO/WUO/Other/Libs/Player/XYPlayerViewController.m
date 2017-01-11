@@ -7,15 +7,16 @@
 //
 
 #import "XYPlayerViewController.h"
-#import <AVFoundation/AVFoundation.h>
-#import "XYPlayerControl.h"
+#import "XYPlayerView.h"
+//#import "XYPlayerControl.h"
 
 @interface XYPlayerViewController () {
     NSURL *_videoURL;
-    AVPlayer *_player;
-    AVPlayerItem *_playerItem;
-    AVPlayerLayer *_playerLayer;
-    XYPlayerControl *_playerControl;
+//    AVPlayer *_player;
+//    AVPlayerItem *_playerItem;
+//    AVPlayerLayer *_playerLayer;
+//    XYPlayerControl *_playerControl;
+    
 }
 @end
 
@@ -40,37 +41,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
-    _player = [AVPlayer playerWithPlayerItem:_playerItem];
-    _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-    // 设置画面缩放模式
-    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-    _playerLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:_playerLayer];
-    
-    CGFloat progressViewH = 25;
-    CGFloat bottomMargin = 15;
-    _playerControl = [[XYPlayerControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame) - progressViewH - bottomMargin, CGRectGetWidth(self.view.frame), progressViewH) player:_player];
-    [self.view addSubview:_playerControl];
-    
-    
-}
-
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = touches.anyObject;
-    // 获取手指在view上的位置
-    CGPoint point = [touch locationInView:self.view];
-    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件
-    if (point.y < _playerControl.frame.origin.y) {
-        
+    XYPlayerView *playerView = [[XYPlayerView alloc] initWithFrame:self.view.bounds videoURL:_videoURL];
+    [self.view addSubview:playerView];
+    [playerView setCloseCallBack:^{
         [self dismissViewControllerAnimated:YES completion:^{
-            [_playerControl pause];
+            
         }];
-    }
+    }];
+
+    
+    
     
 }
+
+
+
 
 
 - (void)dealloc {

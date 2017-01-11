@@ -97,7 +97,7 @@
 // 处理数据
 - (NSURL *)imgFullURL {
     
-    if (self.imgUrl) {
+    if (self.imgUrl.length) {
         /// 将网址进行 UTF8 转码，避免有些汉字会变乱码
         NSString *urlStr = [self.imgUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         return [NSURL URLWithString:[self.info.basePath stringByAppendingString:urlStr]];

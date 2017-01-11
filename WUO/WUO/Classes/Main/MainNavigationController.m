@@ -14,14 +14,6 @@
 
 @implementation MainNavigationController
 
-+ (void)initialize {
-    
-    if (self == [MainNavigationController class]) {
-        
-//        UINavigationBar *navBar = [UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[self]];
-        
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +25,7 @@
     
     if (self.childViewControllers.count > 0) {
         [viewController setHidesBottomBarWhenPushed:YES];
+        
     }
     
     [super pushViewController:viewController animated:animated];

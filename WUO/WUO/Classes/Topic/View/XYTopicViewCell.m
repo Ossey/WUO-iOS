@@ -25,7 +25,7 @@
 
 @property (strong, nonatomic)  UIImageView *postBGView;
 @property (strong, nonatomic)  UIButton *investBtn;
-@property (strong, nonatomic)  UIButton *headerView;
+@property (strong, nonatomic)  UIButton *avatarView;
 @property (strong, nonatomic)  WUOLabel *title_label;
 @property (strong, nonatomic)  WUOLabel *contentLabel;
 @property (strong, nonatomic)  UIButton *readCountBtn;
@@ -46,6 +46,7 @@
     if (self) {
         //不透明，提升渲染性能
         self.contentView.opaque = YES;
+        
         [self setup];
     }
     return self;
@@ -69,19 +70,22 @@
     [self.contentView insertSubview:self.postBGView atIndex:0];
     
     // 头像
-    self.headerView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.headerView.backgroundColor = kColorGlobalCell;
-    self.headerView.hidden = NO;
-    self.headerView.tag = NSIntegerMax;
-    self.headerView.clipsToBounds = YES;
-    [self.contentView addSubview:self.headerView];
+    self.avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.avatarView.backgroundColor = kColorGlobalCell;
+    self.avatarView.hidden = NO;
+    self.avatarView.tag = NSIntegerMax;
+    self.avatarView.clipsToBounds = YES;
+    [self.contentView addSubview:self.avatarView];
+    [self.avatarView addTarget:self action:@selector(avatarViewClick) forControlEvents:UIControlEventTouchUpInside];
     
     // 镂空的圆形图片盖在头像上面，目的是让头像显示为圆形
     self.cornerImageView = [[UIImageView alloc] init];
-    self.cornerImageView.center = self.headerView.center;
+    self.cornerImageView.center = self.avatarView.center;
     self.cornerImageView.image = [UIImage imageNamed:@"corner_circle"];
     self.cornerImageView.tag = NSIntegerMax;
     [self.contentView addSubview:self.cornerImageView];
+    self.cornerImageView.userInteractionEnabled = YES;
+    [self.cornerImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarViewClick)]];
     
     // 榜单
     self.rankingLabel = [UILabel new];
@@ -134,8 +138,6 @@
 }
 
 
-
-
 - (void)creatLabel {
     
     if (self.title_label) {
@@ -166,13 +168,13 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.headerView.frame = self.viewModel.headerFrame;
+    self.avatarView.frame = self.viewModel.headerFrame;
     self.cornerImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewModel.headerFrame)+5, CGRectGetHeight(self.viewModel.headerFrame)+5);
-    self.cornerImageView.center = self.headerView.center;
+    self.cornerImageView.center = self.avatarView.center;
     
     self.investBtn.xy_height = 26;
     self.investBtn.xy_width = 50;
-    self.investBtn.xy_y = self.headerView.xy_y;
+    self.investBtn.xy_y = self.avatarView.xy_y;
     self.investBtn.xy_x = kScreenW - 50 - 15;
     
     self.readCountBtn.frame = self.viewModel.readCountBtnFrame;
@@ -180,6 +182,15 @@
     self.toolView.frame = self.viewModel.toolViewFrame;
     
     self.rankingLabel.frame = self.viewModel.rankingFrame;
+}
+
+#pragma mark - Events
+- (void)avatarViewClick {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCellDidSelectAvatarView:)]) {
+        
+        [self.delegate topicViewCellDidSelectAvatarView:self];
+    }
 }
 
 
@@ -297,8 +308,8 @@
     self.pictureCollectionView.dynamicItem = item;
     self.pictureCollectionView.hidden = item.imgCount == 0;
     
-    [self.headerView setBackgroundImage:nil forState:UIControlStateNormal];
-    [self.headerView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
+    [self.avatarView setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.avatarView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
     
     self.videoImgView.viewModel = viewModel;
     

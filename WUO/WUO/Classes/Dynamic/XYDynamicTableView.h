@@ -12,6 +12,8 @@
 @protocol XYDynamicTableViewDelegate <UITableViewDelegate>
 
 @optional
+
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath;
 /**
  * @explain scrollView滚动的时候调用
  *
@@ -30,6 +32,7 @@
 
 - (CGFloat)dynamicTableView:(XYDynamicTableView *)dynamicTableView heightForHeaderInSection:(NSInteger)section;
 - (UIView *)dynamicTableView:(XYDynamicTableView *)dynamicTableView viewForHeaderInSection:(NSInteger)section;
+
 @end
 
 @interface XYDynamicTableView : UITableView

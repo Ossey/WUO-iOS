@@ -43,6 +43,7 @@
 		1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC51E26197600918A2C /* XYMineViewController.m */; };
 		1810AFCC1E26200300918A2C /* XYPlayerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC91E26200300918A2C /* XYPlayerControl.m */; };
 		1810AFCD1E26200300918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCB1E26200300918A2C /* XYPlayerViewController.m */; };
+		1810AFD01E26319F00918A2C /* XYPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCF1E26319F00918A2C /* XYPlayerView.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
 		183F93901E18BFA200875416 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F938F1E18BFA200875416 /* main.m */; };
 		183F939B1E18BFA200875416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183F939A1E18BFA200875416 /* Assets.xcassets */; };
@@ -156,6 +157,8 @@
 		1810AFC91E26200300918A2C /* XYPlayerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerControl.m; sourceTree = "<group>"; };
 		1810AFCA1E26200300918A2C /* XYPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerViewController.h; sourceTree = "<group>"; };
 		1810AFCB1E26200300918A2C /* XYPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerViewController.m; sourceTree = "<group>"; };
+		1810AFCE1E26319F00918A2C /* XYPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerView.h; sourceTree = "<group>"; };
+		1810AFCF1E26319F00918A2C /* XYPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerView.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
 		183F938B1E18BFA200875416 /* WUO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WUO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -424,6 +427,8 @@
 			children = (
 				1810AFC81E26200300918A2C /* XYPlayerControl.h */,
 				1810AFC91E26200300918A2C /* XYPlayerControl.m */,
+				1810AFCE1E26319F00918A2C /* XYPlayerView.h */,
+				1810AFCF1E26319F00918A2C /* XYPlayerView.m */,
 				1810AFCA1E26200300918A2C /* XYPlayerViewController.h */,
 				1810AFCB1E26200300918A2C /* XYPlayerViewController.m */,
 			);
@@ -964,6 +969,7 @@
 				18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */,
 				183F94201E195B8500875416 /* XYCustomNavController.m in Sources */,
 				1810AF851E260A7A00918A2C /* XYTrendTableView.m in Sources */,
+				1810AFD01E26319F00918A2C /* XYPlayerView.m in Sources */,
 				183F94021E19182500875416 /* XYConstant.m in Sources */,
 				1810AFAE1E2616D700918A2C /* XYTopicInfo.m in Sources */,
 				1810AFB51E2616D700918A2C /* XYTopicViewCell.m in Sources */,

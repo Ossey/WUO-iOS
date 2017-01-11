@@ -13,8 +13,7 @@
 #import "WUOHTTPRequest.h"
 #import "XYTopicViewCell.h"
 
-
-@interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource>
+@interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource, XYTopicViewCellDelegate>
 
 @property (nonatomic, strong) XYTopicInfo *dynamicInfo;
 
@@ -25,7 +24,6 @@
     NSMutableArray<XYTopicViewModel *> *_dynamicList;
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
-    
 }
 
 static NSString * const cellIdentifier = @"XYTopicViewCell";
@@ -130,7 +128,14 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     [cell draw];
 }
 
-
+#pragma mark - <XYTopicViewCellDelegate>
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell {
+    
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath:)]) {
+        NSIndexPath *indexPath = [self indexPathForCell:cell];
+        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath];
+    }
+}
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -141,22 +146,20 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     XYTopicViewModel *viewModel = _dynamicList[indexPath.row];
-
     return viewModel.cellHeight;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%@", NSStringFromCGRect([tableView dequeueReusableCellWithIdentifier:cellIdentifier].frame));
+    NSLog(@"%@", [tableView dequeueReusableCellWithIdentifier:cellIdentifier]);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -174,6 +177,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }
     return view;
 }
+
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [_needLoadList removeAllObjects];
@@ -280,12 +284,9 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     if ([_serachLabel isEqualToString:serachLabel]) {
         return;
     }
-    
     _serachLabel = serachLabel;
     [self loadDataFromNetwork];
 }
-
-
 
 - (NSInteger)dataType {
     

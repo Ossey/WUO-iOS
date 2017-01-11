@@ -38,7 +38,6 @@
     
     [XYPlayerViewController presenteViewControllerWithVideoURL:self.viewModel.item.videoFullURL];
     
-    
     if (self.playBtnCallBack) {
         self.playBtnCallBack(btn);
         return;

@@ -8,12 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTopicViewModel;
+@class XYTopicViewModel, XYTopicViewCell;
 
+@protocol XYTopicViewCellDelegate <NSObject>
+
+@optional
+/**
+ * @explain 点击cell上面头像时调用
+ */
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell;
+
+@end
 
 @interface XYTopicViewCell : UITableViewCell
 
 @property (nonatomic, strong) XYTopicViewModel *viewModel;
+
+@property (nonatomic, weak) id<XYTopicViewCellDelegate> delegate;
 
 - (void)clear;
 - (void)releaseMemory;
