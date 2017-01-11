@@ -9,10 +9,17 @@
 #import "XYPlayerView.h"
 #import "XYPlayerControl.h"
 
+@interface XYPlayerView ()
+
+@property (nonatomic, strong) UIActivityIndicatorView *loadingView;// 菊花
+
+@end
+
 @implementation XYPlayerView {
     NSURL *_videoURL;
     AVPlayer *_player;
     AVPlayerItem *_playerItem;
+    
 }
 
 + (Class)layerClass {
@@ -51,8 +58,8 @@
     [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
        make.center.equalTo(self);
     }];
-    [self.loadingView startAnimating];
-    [self bringSubviewToFront:self.loadingView];
+    [_loadingView startAnimating];
+    [self bringSubviewToFront:_loadingView];
     
     // 根据播放状态 更新 菊花
     __weak typeof(self) weakSelf = self;
@@ -92,22 +99,14 @@
         [self.playerControl pause];
         if (self.closeCallBack) {
             self.closeCallBack();
+            // 执行完block后，让block释放,不然会有循环引用
+            self.closeCallBack = nil;
         }
     }
 }
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    
-//    UITouch *touch = touches.anyObject;
-//    // 获取手指在view上的位置
-//    CGPoint point = [touch locationInView:self];
-//    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件
-//    if (point.y < _playerControl.frame.origin.y) {
-//        [self.playerControl pause];
-//        if (self.closeCallBack) {
-//            self.closeCallBack();
-//        }
-//    }
-//    
-//}
+
+- (void)dealloc {
+    NSLog(@"%s", __FUNCTION__);
+}
 
 @end

@@ -38,10 +38,9 @@
 
     XYPlayerView *playerView = [[XYPlayerView alloc] initWithFrame:self.view.bounds videoURL:_videoURL];
     [self.view addSubview:playerView];
+//    __weak typeof(self) weakSelf = self;
     [playerView setCloseCallBack:^{
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
 
     

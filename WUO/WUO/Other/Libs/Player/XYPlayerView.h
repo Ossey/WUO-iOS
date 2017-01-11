@@ -14,10 +14,6 @@
 @property (nonatomic, strong, readonly) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) XYPlayerControl *playerControl;
 @property (nonatomic, copy) void (^closeCallBack)();
-/**
- *  菊花（加载框）
- */
-@property (nonatomic,strong) UIActivityIndicatorView *loadingView;
 
 - (instancetype)initWithFrame:(CGRect)frame videoURL:(NSURL *)URL;
 
