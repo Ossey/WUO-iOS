@@ -50,6 +50,7 @@
         _player = player;
         player.volume = 0.9; // 设置plyer音量 范围 0 - 1，默认为 1
         _isPlaying = NO;
+        self.state = XYPlayerStateReadyToPlay;
         [self initObserver];
         [self startDisplayLink];
     }
@@ -192,7 +193,7 @@
 
 - (void)play {
 //    if (!_isPlaying) {
-    self.state = XYPlayerStatePlaying;
+//    self.state = XYPlayerStatePlaying;
         // 播放时需要判断是否可以播放，再设置以下数据，比如有时明明网络有问题点击了播放，实际并未播放，以下状态却改变了是不行的
         [_player play];
         // 设置播放速率---默认为 1.0 (normal speed)，设为 0.0 时暂停播放。设置后立即开始播放，可放在开始播放后设置
@@ -291,7 +292,6 @@
         
         switch (playerItem.status) {
             case AVPlayerItemStatusReadyToPlay:
-                _isPlaying = YES;
                 self.state = XYPlayerStateReadyToPlay;
                 break;
             case AVPlayerItemStatusUnknown:

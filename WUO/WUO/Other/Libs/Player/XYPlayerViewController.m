@@ -8,14 +8,9 @@
 
 #import "XYPlayerViewController.h"
 #import "XYPlayerView.h"
-//#import "XYPlayerControl.h"
 
 @interface XYPlayerViewController () {
     NSURL *_videoURL;
-//    AVPlayer *_player;
-//    AVPlayerItem *_playerItem;
-//    AVPlayerLayer *_playerLayer;
-//    XYPlayerControl *_playerControl;
     
 }
 @end

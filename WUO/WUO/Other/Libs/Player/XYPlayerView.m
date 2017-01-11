@@ -67,6 +67,11 @@
             case XYPlayerStateReadyToPlay:
                 [weakSelf.loadingView stopAnimating];
                 break;
+            case XYPlayerStateFailed:
+                [weakSelf.loadingView startAnimating];
+                [weakSelf xy_showMessage:@"网络请求失败"];
+                break;
+
             default:
                 [weakSelf.loadingView stopAnimating];
                 break;
