@@ -12,11 +12,11 @@
 // 播放器的播放状态
 typedef NS_ENUM(NSInteger, XYPlayerState) {
     XYPlayerStateFailed,        // 播放失败
-    XYPlayerStateBuffering,     // 缓存中
+    XYPlayerStateBuffering,     // 缓存中， 缓存不充足
     XYPlayerStateReadyToPlay,   // 将要播放
     XYPlayerStatePlaying,       // 播放中
-    XYPlayerStatePause,         //暂停播放
-    XYPlayerStateEnd            //播放完毕
+    XYPlayerStatePause,         // 暂停播放
+    XYPlayerStateEnd,           // 播放完毕
 };
 
 

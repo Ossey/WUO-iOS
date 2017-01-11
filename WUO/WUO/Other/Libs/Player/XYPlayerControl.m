@@ -238,10 +238,6 @@
     _remainingTimeLabel.text = [self coverTime:remainingTime];
 }
 
-/**
- *  设置播放的状态
- *  @param state WMPlayerState
- */
 - (void)setState:(XYPlayerState)state
 {
     _state = state;
@@ -332,7 +328,7 @@
             //            _playPauseBtn.selected = YES; // 在这里跳转按钮的选中状态，会有延迟
             _isPlaying = YES;
             
-        }
+        } 
     }
     
     // 监听播放器在缓冲数据的状态
@@ -415,28 +411,33 @@
 
 // 单击整个滑动条时调用
 - (void)actionTapGestureOnSlider:(UITapGestureRecognizer*)tap {
-    // 手指按下时，暂停播放，并调整视频的位置到当前滑竿的位置
-    [self pause];
-    CGPoint touchPoint = [tap locationInView:_slider];
-    // 用当前的手指在滑竿的x值 ➗ 滑竿的宽度 得到比例，计算滑竿滑动时的进度
-    CGFloat value = (_slider.maximumValue - _slider.minimumValue) * (touchPoint.x / _slider.frame.size.width );
-    // 使用滑竿的进度快进或后退视频
-    [_slider setValue:value animated:YES];
-    float currentTime = CMTimeGetSeconds(_player.currentItem.duration) * value;
     
-    [self seekVideoToPos:currentTime];
-    
-    switch (tap.state) {
-            
-        case UIGestureRecognizerStateBegan:
-            // 手指按下时，不调用这里
-            break;
-            // 手指松开时，继续播放，且从滑动当前的位置开始播放
-        case UIGestureRecognizerStateEnded:
-            [self play];
-            break;
-        default:
-            break;
+    // 当缓存充足时才更新
+    if (self.state != XYPlayerStateBuffering) {
+        // 手指按下时，暂停播放，并调整视频的位置到当前滑竿的位置
+        [self pause];
+        CGPoint touchPoint = [tap locationInView:_slider];
+        // 用当前的手指在滑竿的x值 ➗ 滑竿的宽度 得到比例，计算滑竿滑动时的进度
+        CGFloat value = (_slider.maximumValue - _slider.minimumValue) * (touchPoint.x / _slider.frame.size.width );
+        // 使用滑竿的进度快进或后退视频
+        [_slider setValue:value animated:YES];
+        float currentTime = CMTimeGetSeconds(_player.currentItem.duration) * value;
+        
+        [self seekVideoToPos:currentTime];
+        
+        switch (tap.state) {
+                
+            case UIGestureRecognizerStateBegan:
+                // 手指按下时，不调用这里
+                break;
+                // 手指松开时，继续播放，且从滑动当前的位置开始播放
+            case UIGestureRecognizerStateEnded:
+                [self play];
+                break;
+            default:
+                break;
+        }
+
     }
     
 }
