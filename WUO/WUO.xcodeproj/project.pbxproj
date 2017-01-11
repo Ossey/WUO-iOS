@@ -24,7 +24,6 @@
 		1810AF831E260A7A00918A2C /* XYFindTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF761E260A7A00918A2C /* XYFindTopicView.m */; };
 		1810AF841E260A7A00918A2C /* XYTrendLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF781E260A7A00918A2C /* XYTrendLabelView.m */; };
 		1810AF851E260A7A00918A2C /* XYTrendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF7A1E260A7A00918A2C /* XYTrendTableView.m */; };
-		1810AF861E260A7A00918A2C /* XYFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF7D1E260A7A00918A2C /* XYFindViewController.m */; };
 		1810AF891E2614BF00918A2C /* XYUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF881E2614BF00918A2C /* XYUserDetailController.m */; };
 		1810AF8C1E26152100918A2C /* XYTopicDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF8B1E26152100918A2C /* XYTopicDetailController.m */; };
 		1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF8E1E2616C800918A2C /* XYDynamicTableView.m */; };
@@ -40,6 +39,10 @@
 		1810AFB41E2616D700918A2C /* XYPlayerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA81E2616D700918A2C /* XYPlayerControl.m */; };
 		1810AFB51E2616D700918A2C /* XYTopicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFAA1E2616D700918A2C /* XYTopicViewCell.m */; };
 		1810AFB61E2616D700918A2C /* XYVideoImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFAC1E2616D700918A2C /* XYVideoImgView.m */; };
+		1810AFBA1E26190400918A2C /* XYComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFB91E26190400918A2C /* XYComposeViewController.m */; };
+		1810AFBE1E26193400918A2C /* XYFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFBD1E26193400918A2C /* XYFindViewController.m */; };
+		1810AFC21E26195000918A2C /* XYInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC11E26195000918A2C /* XYInvestViewController.m */; };
+		1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC51E26197600918A2C /* XYMineViewController.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
 		183F93901E18BFA200875416 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F938F1E18BFA200875416 /* main.m */; };
 		183F939B1E18BFA200875416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183F939A1E18BFA200875416 /* Assets.xcassets */; };
@@ -47,9 +50,6 @@
 		183F93E41E18F2B500875416 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E11E18F2B500875416 /* Reachability.m */; };
 		183F93E51E18F2B500875416 /* XYNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E31E18F2B500875416 /* XYNetworkRequest.m */; };
 		183F93E81E18F44200875416 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93E71E18F44200875416 /* MainTabBarController.m */; };
-		183F93EB1E18F47E00875416 /* XYComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93EA1E18F47E00875416 /* XYComposeViewController.m */; };
-		183F93F41E18F4D100875416 /* XYInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93F31E18F4D100875416 /* XYInvestViewController.m */; };
-		183F93F71E18F4E500875416 /* XYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93F61E18F4E500875416 /* XYMineViewController.m */; };
 		183F93FB1E18F96800875416 /* UIImage+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93FA1E18F96800875416 /* UIImage+XYExtension.m */; };
 		183F93FF1E19173B00875416 /* MainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93FE1E19173B00875416 /* MainTabBar.m */; };
 		183F94021E19182500875416 /* XYConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F94011E19182500875416 /* XYConstant.m */; };
@@ -118,8 +118,6 @@
 		1810AF781E260A7A00918A2C /* XYTrendLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTrendLabelView.m; sourceTree = "<group>"; };
 		1810AF791E260A7A00918A2C /* XYTrendTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTrendTableView.h; sourceTree = "<group>"; };
 		1810AF7A1E260A7A00918A2C /* XYTrendTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTrendTableView.m; sourceTree = "<group>"; };
-		1810AF7C1E260A7A00918A2C /* XYFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFindViewController.h; sourceTree = "<group>"; };
-		1810AF7D1E260A7A00918A2C /* XYFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFindViewController.m; sourceTree = "<group>"; };
 		1810AF871E2614BF00918A2C /* XYUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserDetailController.h; sourceTree = "<group>"; };
 		1810AF881E2614BF00918A2C /* XYUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserDetailController.m; sourceTree = "<group>"; };
 		1810AF8A1E26152100918A2C /* XYTopicDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicDetailController.h; sourceTree = "<group>"; };
@@ -150,6 +148,14 @@
 		1810AFAA1E2616D700918A2C /* XYTopicViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicViewCell.m; sourceTree = "<group>"; };
 		1810AFAB1E2616D700918A2C /* XYVideoImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYVideoImgView.h; sourceTree = "<group>"; };
 		1810AFAC1E2616D700918A2C /* XYVideoImgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYVideoImgView.m; sourceTree = "<group>"; };
+		1810AFB81E26190400918A2C /* XYComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYComposeViewController.h; sourceTree = "<group>"; };
+		1810AFB91E26190400918A2C /* XYComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYComposeViewController.m; sourceTree = "<group>"; };
+		1810AFBC1E26193400918A2C /* XYFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFindViewController.h; sourceTree = "<group>"; };
+		1810AFBD1E26193400918A2C /* XYFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFindViewController.m; sourceTree = "<group>"; };
+		1810AFC01E26195000918A2C /* XYInvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYInvestViewController.h; sourceTree = "<group>"; };
+		1810AFC11E26195000918A2C /* XYInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInvestViewController.m; sourceTree = "<group>"; };
+		1810AFC41E26197600918A2C /* XYMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMineViewController.h; sourceTree = "<group>"; };
+		1810AFC51E26197600918A2C /* XYMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMineViewController.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
 		183F938B1E18BFA200875416 /* WUO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WUO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,12 +170,6 @@
 		183F93E31E18F2B500875416 /* XYNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYNetworkRequest.m; sourceTree = "<group>"; };
 		183F93E61E18F44200875416 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		183F93E71E18F44200875416 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		183F93E91E18F47E00875416 /* XYComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYComposeViewController.h; sourceTree = "<group>"; };
-		183F93EA1E18F47E00875416 /* XYComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYComposeViewController.m; sourceTree = "<group>"; };
-		183F93F21E18F4D100875416 /* XYInvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYInvestViewController.h; sourceTree = "<group>"; };
-		183F93F31E18F4D100875416 /* XYInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInvestViewController.m; sourceTree = "<group>"; };
-		183F93F51E18F4E500875416 /* XYMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMineViewController.h; sourceTree = "<group>"; };
-		183F93F61E18F4E500875416 /* XYMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMineViewController.m; sourceTree = "<group>"; };
 		183F93F91E18F96800875416 /* UIImage+XYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XYExtension.h"; sourceTree = "<group>"; };
 		183F93FA1E18F96800875416 /* UIImage+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XYExtension.m"; sourceTree = "<group>"; };
 		183F93FC1E18F99E00875416 /* WUO.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WUO.pch; sourceTree = "<group>"; };
@@ -342,15 +342,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1810AF7B1E260A7A00918A2C /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				1810AF7C1E260A7A00918A2C /* XYFindViewController.h */,
-				1810AF7D1E260A7A00918A2C /* XYFindViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		1810AF961E2616D700918A2C /* Topic */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +383,42 @@
 				1810AFAC1E2616D700918A2C /* XYVideoImgView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1810AFB71E26190400918A2C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1810AFB81E26190400918A2C /* XYComposeViewController.h */,
+				1810AFB91E26190400918A2C /* XYComposeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1810AFBB1E26193400918A2C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1810AFBC1E26193400918A2C /* XYFindViewController.h */,
+				1810AFBD1E26193400918A2C /* XYFindViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1810AFBF1E26195000918A2C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1810AFC01E26195000918A2C /* XYInvestViewController.h */,
+				1810AFC11E26195000918A2C /* XYInvestViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1810AFC31E26197600918A2C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1810AFC41E26197600918A2C /* XYMineViewController.h */,
+				1810AFC51E26197600918A2C /* XYMineViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		183F93821E18BFA200875416 = {
@@ -496,9 +523,9 @@
 		183F93C51E18F2A400875416 /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				1810AFB71E26190400918A2C /* Controller */,
 				183F93C61E18F2A400875416 /* Model */,
 				183F93C71E18F2A400875416 /* View */,
-				183F93C81E18F2A400875416 /* ViewController */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -517,15 +544,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		183F93C81E18F2A400875416 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				183F93E91E18F47E00875416 /* XYComposeViewController.h */,
-				183F93EA1E18F47E00875416 /* XYComposeViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		183F93C91E18F2A400875416 /* Dynamic */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,9 +560,9 @@
 		183F93CD1E18F2A400875416 /* Find */ = {
 			isa = PBXGroup;
 			children = (
+				1810AFBB1E26193400918A2C /* Controller */,
 				1810AF691E260A7A00918A2C /* Model */,
 				1810AF701E260A7A00918A2C /* View */,
-				1810AF7B1E260A7A00918A2C /* ViewController */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -552,9 +570,9 @@
 		183F93D11E18F2A400875416 /* Invest */ = {
 			isa = PBXGroup;
 			children = (
+				1810AFBF1E26195000918A2C /* Controller */,
 				183F93D21E18F2A400875416 /* Model */,
 				183F93D31E18F2A400875416 /* View */,
-				183F93D41E18F2A400875416 /* ViewController */,
 			);
 			path = Invest;
 			sourceTree = "<group>";
@@ -571,15 +589,6 @@
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		183F93D41E18F2A400875416 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				183F93F21E18F4D100875416 /* XYInvestViewController.h */,
-				183F93F31E18F4D100875416 /* XYInvestViewController.m */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		183F93D51E18F2A400875416 /* Main */ = {
@@ -600,9 +609,9 @@
 		183F93D81E18F2A400875416 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				1810AFC31E26197600918A2C /* Controller */,
 				183F93D91E18F2A400875416 /* Model */,
 				183F93DA1E18F2A400875416 /* View */,
-				183F93DB1E18F2A400875416 /* ViewController */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -623,15 +632,6 @@
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		183F93DB1E18F2A400875416 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				183F93F51E18F4E500875416 /* XYMineViewController.h */,
-				183F93F61E18F4E500875416 /* XYMineViewController.m */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		183F93DD1E18F2AD00875416 /* Resources */ = {
@@ -967,10 +967,8 @@
 				1810AF801E260A7A00918A2C /* XYTrendLabelItem.m in Sources */,
 				18CA21EB1E1A1693005F1C87 /* XYLoginView.m in Sources */,
 				1810AF891E2614BF00918A2C /* XYUserDetailController.m in Sources */,
-				1810AF861E260A7A00918A2C /* XYFindViewController.m in Sources */,
 				18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */,
 				1810AF951E2616C800918A2C /* XYPlayerViewController.m in Sources */,
-				183F93F41E18F4D100875416 /* XYInvestViewController.m in Sources */,
 				183F93901E18BFA200875416 /* main.m in Sources */,
 				1810AFAD1E2616D700918A2C /* XYTopicViewModel.m in Sources */,
 				1810AF811E260A7A00918A2C /* WUOFindHeaderView.m in Sources */,
@@ -995,10 +993,12 @@
 				183F93E51E18F2B500875416 /* XYNetworkRequest.m in Sources */,
 				18F404FB1E1F26FD00E0837A /* XYCateTitleView.m in Sources */,
 				180214BD1E1E599C006605C2 /* XYImageView.m in Sources */,
+				1810AFBE1E26193400918A2C /* XYFindViewController.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
 				1810AFB41E2616D700918A2C /* XYPlayerControl.m in Sources */,
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
 				1810AFB01E2616D700918A2C /* WUOLabel.m in Sources */,
+				1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */,
 				18E294F61E248EBA006145E3 /* NSString+Date.m in Sources */,
 				1862E69F1E21DB530031D063 /* UITableView+Gzw.m in Sources */,
 				18CA221E1E1A6728005F1C87 /* XYUserInfoItem.m in Sources */,
@@ -1006,11 +1006,11 @@
 				18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */,
 				1810AF821E260A7A00918A2C /* XYAdvertView.m in Sources */,
 				1810AF831E260A7A00918A2C /* XYFindTopicView.m in Sources */,
+				1810AFBA1E26190400918A2C /* XYComposeViewController.m in Sources */,
 				1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */,
 				18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */,
+				1810AFC21E26195000918A2C /* XYInvestViewController.m in Sources */,
 				1810AF8C1E26152100918A2C /* XYTopicDetailController.m in Sources */,
-				183F93EB1E18F47E00875416 /* XYComposeViewController.m in Sources */,
-				183F93F71E18F4E500875416 /* XYMineViewController.m in Sources */,
 				1810AFB61E2616D700918A2C /* XYVideoImgView.m in Sources */,
 				18CA21E81E1A1693005F1C87 /* XYLoginRegisterController.m in Sources */,
 				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
