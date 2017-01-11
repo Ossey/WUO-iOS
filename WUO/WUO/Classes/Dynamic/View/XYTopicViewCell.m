@@ -96,7 +96,7 @@
     // 设置反射。倾斜15度
     CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(15 * (CGFloat)M_PI / 180), 1, 0, 0);
     // 取得系统字符并设置反射
-    UIFontDescriptor *desc = [ UIFontDescriptor fontDescriptorWithName:[UIFont systemFontOfSize :16].fontName matrix:matrix];
+    UIFontDescriptor *desc = [UIFontDescriptor fontDescriptorWithName:[UIFont systemFontOfSize:16 weight:1].fontName matrix:matrix];
     // 获取字体
     UIFont *font = [UIFont fontWithDescriptor:desc size:16];
     self.rankingLabel.font = font;

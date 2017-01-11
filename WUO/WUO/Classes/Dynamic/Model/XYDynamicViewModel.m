@@ -53,9 +53,9 @@
     // 排名
     if (self.item.ranking.length) {
         CGFloat rankingHeight = 30;
-        CGFloat rankingWidth = 90;
+        CGFloat rankingWidth = 80;
         // 有排名
-        self.rankingFrame = CGRectMake(-15, y, rankingWidth, rankingHeight);
+        self.rankingFrame = CGRectMake(-18, y, rankingWidth, rankingHeight);
         y += rankingHeight + SIZE_GAP_TOP;
     } else {
         y = SIZE_GAP_TOP;

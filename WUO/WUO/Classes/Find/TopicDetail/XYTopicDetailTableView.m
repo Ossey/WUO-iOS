@@ -149,7 +149,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
                     break;
                 } else {
                     XYDynamicViewModel *viewModel = _dataList[@(self.currentType)][i];
-                    viewModel.item.ranking = [NSString stringWithFormat:@"NO.%ld", i+1];
+                    viewModel.item.ranking = [NSString stringWithFormat:@"    NO.%ld", i+1];
                     if (i == 9) {
                         flag = NO;
                         break;
