@@ -260,8 +260,10 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
     // 注意：这里默认的的偏移量是-64，越往上滑动scrollView偏移量越大，反之越小
     if (scrollView.contentOffset.y > self.headView.xy_height - kNavigationBarHeight) {
         self.selectView.trendLabelView.separatorBackgroundColor = [UIColor colorWithRed:140 / 255.0 green:140 / 255.0 blue:140 / 255.0 alpha:0.6];
+        
     } else {
         self.selectView.trendLabelView.separatorBackgroundColor = [UIColor clearColor];
+        
     }
 }
 
