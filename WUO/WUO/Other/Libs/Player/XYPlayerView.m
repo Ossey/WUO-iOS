@@ -77,21 +77,37 @@
                 break;
         }
     }];
+    
+    // 添加点按手势
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureOnSelf:)]];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+#pragma mark - Events 
+- (void)tapGestureOnSelf:(UITapGestureRecognizer *)tap {
     
-    UITouch *touch = touches.anyObject;
     // 获取手指在view上的位置
-    CGPoint point = [touch locationInView:self];
-    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件
-    if (point.y < _playerControl.frame.origin.y) {
+    CGPoint point = [tap locationInView:tap.view];
+    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件, 让_playerControl自身及其y值以上50的范围内，不响应手势事件
+    if (point.y < _playerControl.frame.origin.y - 50) {
         [self.playerControl pause];
         if (self.closeCallBack) {
             self.closeCallBack();
         }
     }
-    
 }
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    
+//    UITouch *touch = touches.anyObject;
+//    // 获取手指在view上的位置
+//    CGPoint point = [touch locationInView:self];
+//    // 当手指在播放进度view以上的位置，点击时才可以响应以下事件
+//    if (point.y < _playerControl.frame.origin.y) {
+//        [self.playerControl pause];
+//        if (self.closeCallBack) {
+//            self.closeCallBack();
+//        }
+//    }
+//    
+//}
 
 @end
