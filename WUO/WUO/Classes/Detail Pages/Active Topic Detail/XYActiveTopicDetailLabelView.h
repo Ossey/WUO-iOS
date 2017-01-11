@@ -1,5 +1,5 @@
 //
-//  XYTopicDetailLabelView.h
+//  XYActiveTopicDetailLabelView.h
 //  WUO
 //
 //  Created by mofeini on 17/1/10.
@@ -8,6 +8,6 @@
 
 #import "XYCateTitleView.h"
 
-@interface XYTopicDetailLabelView : XYCateTitleView
+@interface XYActiveTopicDetailLabelView : XYCateTitleView
 
 @end

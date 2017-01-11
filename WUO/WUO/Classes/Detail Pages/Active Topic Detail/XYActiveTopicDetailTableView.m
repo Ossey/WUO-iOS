@@ -1,16 +1,16 @@
 //
-//  XYTopicDetailTableView.m
+//  XYActiveTopicDetailTableView.m
 //  WUO
 //
 //  Created by mofeini on 17/1/10.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicDetailTableView.h"
+#import "XYActiveTopicDetailTableView.h"
 #import "XYActiveTopicDetailHeaderView.h"
 #import "XYTopicViewCell.h"
 #import "XYActivityTopicItem.h"
-#import "XYTopicDetailSelectView.h"
+#import "XYActiveTopicDetailSelectView.h"
 #import "XYRefreshGifHeader.h"
 #import "XYRefreshGifFooter.h"
 #import "WUOHTTPRequest.h"
@@ -26,17 +26,17 @@ typedef NS_ENUM(NSInteger, XYTopicType) {
     XYTopicTypeNewRanklist = 0  // 请求排行榜数据
 };
 
-@interface XYTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource, XYCateTitleViewDelegate>
+@interface XYActiveTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource, XYCateTitleViewDelegate>
 
 @property (nonatomic, strong) XYActiveTopicDetailHeaderView *headView;
-@property (nonatomic, strong) XYTopicDetailSelectView *selectView;
+@property (nonatomic, strong) XYActiveTopicDetailSelectView *selectView;
 @property (nonatomic, assign) XYTopicType currentType;
 
 @end
 // 榜单的排名
 //static NSInteger rangking = 0;
 
-@implementation XYTopicDetailTableView {
+@implementation XYActiveTopicDetailTableView {
     NSInteger _idStamp;
     BOOL _isFirst;
     NSMutableArray *_needLoadList;
@@ -64,7 +64,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
         self.delegate = self;
         self.dataSource = self;
         [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
-        [self registerClass:[XYTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
+        [self registerClass:[XYActiveTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
         
         
         // 下拉刷新时请求帖子时_idStamp必须 为空 才能请求到新数据

@@ -1,5 +1,5 @@
 //
-//  XYTopicDetailTableView.h
+//  XYActiveTopicDetailTableView.h
 //  WUO
 //
 //  Created by mofeini on 17/1/10.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class XYActivityTopicItem, XYTopicItem;
-@interface XYTopicDetailTableView : UITableView
+@interface XYActiveTopicDetailTableView : UITableView
 
 /** 主要用于展示头部信息的模型 */
 @property (nonatomic, strong) XYActivityTopicItem *activityTopicItem;

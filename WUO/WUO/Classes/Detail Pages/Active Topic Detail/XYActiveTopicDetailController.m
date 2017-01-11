@@ -8,13 +8,13 @@
 
 #import "XYActiveTopicDetailController.h"
 #import "UIViewController+XYExtension.h"
-#import "XYTopicDetailTableView.h"
+#import "XYActiveTopicDetailTableView.h"
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
 
 @implementation XYActiveTopicDetailController {
     
-    XYTopicDetailTableView *_tableView;
+    XYActiveTopicDetailTableView *_tableView;
     
 }
 
@@ -47,7 +47,7 @@
     self.xy_topBar.backgroundColor = [UIColor whiteColor];
     [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
     
-    _tableView = [[XYTopicDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView = [[XYActiveTopicDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
 
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {

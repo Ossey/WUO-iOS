@@ -1,20 +1,20 @@
 //
-//  XYTopicDetailSelectView.m
+//  XYActiveTopicDetailSelectView.m
 //  WUO
 //
 //  Created by mofeini on 17/1/10.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicDetailSelectView.h"
+#import "XYActiveTopicDetailSelectView.h"
 
 
 
-@interface XYTopicDetailSelectView ()
+@interface XYActiveTopicDetailSelectView ()
 
 @end
 
-@implementation XYTopicDetailSelectView
+@implementation XYActiveTopicDetailSelectView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
@@ -27,11 +27,11 @@
     return self;
 }
 
-- (XYTopicDetailLabelView *)trendLabelView {
+- (XYActiveTopicDetailLabelView *)trendLabelView {
     
     if (_trendLabelView == nil) {
         
-        _trendLabelView = [[XYTopicDetailLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:self channelCates:nil rightBtnWidth:0];
+        _trendLabelView = [[XYActiveTopicDetailLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:self channelCates:nil rightBtnWidth:0];
         _trendLabelView.itemNameKey = @"labelName";
         [self.contentView addSubview:_trendLabelView];
         [_trendLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
