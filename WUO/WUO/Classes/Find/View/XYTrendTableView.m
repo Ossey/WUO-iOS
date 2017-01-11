@@ -46,7 +46,7 @@
     
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
-    /** 将每一种标题类型的数据组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据 */
+    /** 将每一种标题类型的数据数组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据，防止数据错乱 */
     NSMutableDictionary<NSString *,NSMutableArray<XYDynamicViewModel *> *> *_dataList;
     NSMutableDictionary<NSString *, NSNumber *> *_cnameDict;
 }
@@ -65,7 +65,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         self.showsHorizontalScrollIndicator = NO;
         
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
-        _needLoadList = [[NSMutableArray alloc] init];
+        _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
         [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
         
@@ -78,7 +78,6 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         self.mj_footer = [XYRefreshGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         // 忽略多少底部
         self.mj_footer.ignoredScrollViewContentInsetBottom = -10;
-//        [self.mj_header beginRefreshing];
         self.dataType = type;
         
         __weak typeof(self) weak_self = self;
@@ -109,7 +108,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     
 //    NSLog(@"%@--%ld", self.dynamicInfo, self.dynamicInfo.idstamp);
     
-    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType topicID:0 serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",self.dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         if (error) {
             [self.mj_header endRefreshing];

@@ -42,7 +42,9 @@
 
 @end
 
-@implementation XYCateTitleView
+@implementation XYCateTitleView {
+    bool _isFirst; // 根据此属性，让第一次点击按钮时没有动画产生
+}
 
 @synthesize titleItemFont = _titleItemFont;
 @synthesize itemScale = _itemScale;
@@ -67,7 +69,6 @@
         self.rightBtnWidth = rightBtnWidth;
         self.channelCates = [channelCates mutableCopy];
         self.separatorView.hidden = NO;
-        
     }
     
     return self;
@@ -79,7 +80,8 @@
     
     self.cateTitleView.hidden = NO;
     self.rightButton.hidden = NO;
-
+    _isFirst = true;
+    
     /// 判断上一次的频道分类数组内容与当前数组是否发生改变
 #warning TODO 未实现
 //    [self checkIsChangeInArrayCallBack:^(BOOL isChange, NSArray *changeAarr) {
@@ -232,14 +234,13 @@
     _globalBackgroundColor = globalBackgroundColor;
     self.currentItemBackgroundColor = globalBackgroundColor;
     self.otherItemBackgroundColor = globalBackgroundColor;
-    self.cateTitleView.backgroundColor = globalBackgroundColor;
     self.rightButton.backgroundColor = globalBackgroundColor;
+
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
-    self.currentItemBackgroundColor = backgroundColor;
-    self.rightButton.backgroundColor = backgroundColor;
+    self.cateTitleView.backgroundColor = backgroundColor;
 }
 
 - (UIImage *)separatorImage {
@@ -380,7 +381,6 @@
 }
 
 - (void)updateUnderLineFrameFromBtn:(UIButton *)btn {
-    
     // 计算差值
     CGFloat less = self.underLineWidth - self.btnContentWidth;
     
@@ -444,9 +444,7 @@
 
 - (UIScrollView *)cateTitleView {
     if (_cateTitleView == nil) {
-        
         UIScrollView *scrollView = [[UIScrollView alloc] init];
-        scrollView.backgroundColor = [UIColor whiteColor];
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.showsVerticalScrollIndicator = NO;
         _cateTitleView = scrollView;
@@ -471,7 +469,6 @@
         _separatorView.frame = frame;
         [self addSubview:separatorView];
         [self bringSubviewToFront:_separatorView];
-        
     }
     return _separatorView;
 }
@@ -485,13 +482,15 @@
     }
     UIButton *btn = self.items[index];
     [self titleButtonClick:btn];
+    
+
 }
 
 #pragma mark - 监听标题按钮的点击
 - (void)titleButtonClick:(UIButton *)button {
     
     [self selectedBtn:button];
-
+    
 }
 
 
@@ -528,11 +527,14 @@
     
     button.transform = CGAffineTransformMakeScale(1.0f + self.itemScale, 1.0f + self.itemScale);
     
-
-    
-    [UIView animateWithDuration:0.15 animations:^{
+    if (_isFirst) {
         [self updateUnderLineFrameFromBtn:button];
-    }];
+        _isFirst = false;
+    } else {
+        [UIView animateWithDuration:0.15 animations:^{
+            [self updateUnderLineFrameFromBtn:button];
+        }];
+    }
 
     /// 将当前点击的按钮相关的频道信息写入到本地
     /// 通知代理，并把点击按钮的索引传递出去，让外界切换对应的子控制器的view,内容滚动范围滚动到对应的位置

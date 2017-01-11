@@ -1,30 +1,26 @@
 //
-//  XYTopicDetailController.m
+//  XYActiveTopicDetailController.m
 //  WUO
 //
 //  Created by mofeini on 17/1/9.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicDetailController.h"
+#import "XYActiveTopicDetailController.h"
 #import "UIViewController+XYExtension.h"
+#import "XYTopicDetailTableView.h"
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
-#import "XYTopicDetailHeaderView.h"
-#import "XYTopicDetailTableView.h"
 
-@implementation XYTopicDetailController {
+@implementation XYActiveTopicDetailController {
     
-    // 话题详情页，头部的模型
-    XYActivityTopicItem *_activityTopicItem;
-    NSMutableArray *_trendList;
     XYTopicDetailTableView *_tableView;
-    XYTopicDetailHeaderView *_headerView;
+    
 }
 
 + (void)pushWithItem:(XYActivityTopicItem *)item {
     
-    XYTopicDetailController *vc = [[XYTopicDetailController alloc] init];
+    XYActiveTopicDetailController *vc = [[XYActiveTopicDetailController alloc] init];
     vc.item = item;
     // 获取当前在显示的主控制器
     UIViewController *currentMainVc = [self getCurrentViewController];
@@ -40,53 +36,57 @@
             }
         }
     }
+    
     [currentNav pushViewController:vc animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _trendList = [NSMutableArray arrayWithCapacity:0];
+    self.xy_title = @"话题详情";
+    self.xy_topBar.backgroundColor = [UIColor whiteColor];
+    [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
     
-    _tableView = [[XYTopicDetailTableView alloc] init];
+    _tableView = [[XYTopicDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
+    // 请求话题详情页,只需要进入页面时请求一次
+    [self loadTopicHeaderDetail];
     
-    // 第一次进入此页面时，请求话题详情数据，下次不管是下拉刷新还是上拉加载时，都是请求Trend
-    [self loadTopicDetail];
+    // 请求失败时回调
+    [_tableView gzwLoading:^{
+        [self loadTopicHeaderDetail];
+    }];
 }
 
-- (void)loadTopicDetail {
+
+- (void)loadTopicHeaderDetail {
+    
+    _tableView.loading = YES; // 正在加载中提示
+    [WUOHTTPRequest setActivityIndicator:YES];
     
     [WUOHTTPRequest find_topicDetailByID:self.item.topicId finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
             [self xy_showMessage:@"网络请求失败"];
+            _tableView.loading = NO;
+            [WUOHTTPRequest setActivityIndicator:NO];
             return;
         }
         if ([responseObject[@"code"] integerValue] == 0) {
             XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
             // 请求数据成功
             // 头部数据，内含第一次加载的帖子数组
-            _activityTopicItem = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
-            _tableView.activityTopicItem = _activityTopicItem;
-            if (responseObject[@"data"][@"trendList"] && [responseObject[@"data"][@"trendList"] count] > 0) {
-                // 头像详情中有帖子数组
-                for (id obj in responseObject[@"data"][@"trendList"]) {
-                    if ([obj isKindOfClass:[NSDictionary class]]) {
-                        // 帖子模型数
-                        [_trendList addObject:[XYTopicItem topicItemWithDict:obj info:info]];
-                    }
-                }
-            }
-            
+            _tableView.activityTopicItem = [XYActivityTopicItem activityTopicItemWithDict:responseObject[@"datas"] info:info];
             
         }
-        
+        _tableView.loading = NO;
+        [WUOHTTPRequest setActivityIndicator:NO];
     }];
-
+    
 }
 
 

@@ -1,19 +1,19 @@
 //
-//  XYTopicDetailHeaderView.m
+//  XYActiveTopicDetailHeaderView.m
 //  WUO
 //
 //  Created by mofeini on 17/1/9.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicDetailHeaderView.h"
+#import "XYActiveTopicDetailHeaderView.h"
 #import "XYActivityTopicItem.h"
 #import "NSString+WUO.h"
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import "WUOLabel.h"
 
-@implementation XYTopicDetailHeaderView {
+@implementation XYActiveTopicDetailHeaderView {
     
     UIButton *_avatarView;
     UIImageView *_cornerView;
@@ -29,49 +29,49 @@
 //    WUOLabel *_titleLabel;
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         self.clipsToBounds = YES;
         _postBGView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self.contentView insertSubview:_postBGView atIndex:0];
+        [self insertSubview:_postBGView atIndex:0];
         
         // 头像
         _avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
         _avatarView.frame = CGRectMake(SIZE_MARGIN, SIZE_MARGIN, SIZE_HEADERWH, SIZE_HEADERWH);
-        _avatarView.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+        _avatarView.backgroundColor = kColorGlobalCell;
         _avatarView.hidden = NO;
         _avatarView.tag = NSIntegerMax;
         _avatarView.clipsToBounds = YES;
-        [self.contentView addSubview:_avatarView];
+        [self addSubview:_avatarView];
         
         // 目的是让头像显示为圆形
         _cornerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SIZE_CORNERWH, SIZE_CORNERWH)];
         _cornerView.center = _avatarView.center;
         _cornerView.image = [UIImage imageNamed:@"corner_circle"];
         _cornerView.tag = NSIntegerMax;
-        [self.contentView addSubview:_cornerView];
+        [self addSubview:_cornerView];
         
         // logo视图
         _logoView = [[UIImageView alloc] init];
         _logoView.tag = NSIntegerMax;
-        [self.contentView addSubview:_logoView];
-     
+        [self addSubview:_logoView];
+        
         // 标题
-//        _titleLabel = [[WUOLabel alloc] init];
-//        _titleLabel.textColor = kColorTitleText;
-//        _titleLabel.font = kFontWithSize(SIZE_FONT_TITLE);
-//        _titleLabel.lineSpace = 0;
-//        [self.contentView addSubview:_titleLabel];
-//        
+        //        _titleLabel = [[WUOLabel alloc] init];
+        //        _titleLabel.textColor = kColorTitleText;
+        //        _titleLabel.font = kFontWithSize(SIZE_FONT_TITLE);
+        //        _titleLabel.lineSpace = 0;
+        //        [self addSubview:_titleLabel];
+        //
         // 活动介绍
         _introduceLabel = [[WUOLabel alloc] init];
         _introduceLabel.textColor = kColorContentText;
         _introduceLabel.font = kFontWithSize(SIZE_FONT_CONTENT);
         _introduceLabel.lineSpace = 0;
-        [self.contentView addSubview:_introduceLabel];
+        [self addSubview:_introduceLabel];
     }
-    
     return self;
 }
 
@@ -87,11 +87,12 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        // 开启 一个 跟cell bounds 相同的 图形上下文
+        // 开启 一个 跟当前控件大小 相同的 图形上下文
         CGRect rect = self.item.topicDetailHeaderBounds;
+        // 当不透明度设置为YES时，底部会有1的黑色线条，如果需要线条设置为YES即可
         UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0);
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[self getBackgroundColor] set];
+        [kColorGlobalCell set];
         CGContextFillRect(context, rect);
 
         // name
@@ -142,6 +143,7 @@
     
 }
 
+
 - (void)clear {
     if (!_isDrawing) {
         return;
@@ -178,11 +180,6 @@
     _introduceLabel.text = _item.introduce;
     _introduceLabel.frame = _item.topicDetailIntroduceFrame;
 
-}
-
-- (UIColor *)getBackgroundColor {
-    
-    return [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 }
 
 

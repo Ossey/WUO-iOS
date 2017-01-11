@@ -6,8 +6,8 @@
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //  发现界面的控制器
 
-#import <UIKit/UIKit.h>
+#import "XYProfileBaseController.h"
 
-@interface XYFindViewController : UIViewController
+@interface XYFindViewController : XYProfileBaseController
 
 @end

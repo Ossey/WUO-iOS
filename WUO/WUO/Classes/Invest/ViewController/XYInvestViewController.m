@@ -8,31 +8,56 @@
 
 #import "XYInvestViewController.h"
 
-@interface XYInvestViewController ()
+#define tableHeaderHeight 200
+
+@interface XYInvestViewController () <UITableViewDataSource, UITableViewDelegate> 
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation XYInvestViewController
+@implementation XYInvestViewController {
+    CGRect _firstCellFrame;
+}
 
+static NSString * const cellIdentifier = @"UITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = kColor(238, 238, 238, 1.0);
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    UIView *headerView = [UIView new];
+    headerView.backgroundColor = [UIColor blueColor];
+    headerView.xy_height = tableHeaderHeight;
+    self.tableView.tableHeaderView = headerView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (UITableView *)tableView {
+    if (_tableView == nil) {
+        
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        [self.view addSubview:_tableView];
+    }
+    
+    return _tableView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - <UITableViewDataSource, UITableViewDelegate>
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 20;
 }
-*/
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    if (indexPath.row == 0) {
+        _firstCellFrame = cell.frame;
+    }
+    
+    return cell;
+    
+}
 @end

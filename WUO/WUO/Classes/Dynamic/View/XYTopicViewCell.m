@@ -194,7 +194,8 @@
     NSInteger flag = _drawColorFlag;
     _isDrawing = YES;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        // cell frame
+        // 开启和cell大小相同的图形上下文
+        // 当不透明度设置为YES时，底部会有1的黑色线条，如果需要线条设置为YES即可
         CGRect rect = self.viewModel.cellBounds;
         UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0);
         CGContextRef context = UIGraphicsGetCurrentContext();

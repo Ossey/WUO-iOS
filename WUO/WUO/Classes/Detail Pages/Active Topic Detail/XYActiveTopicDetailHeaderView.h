@@ -1,5 +1,5 @@
 //
-//  XYTopicDetailHeaderView.h
+//  XYActiveTopicDetailHeaderView.h
 //  WUO
 //
 //  Created by mofeini on 17/1/9.
@@ -10,7 +10,7 @@
 
 @class XYActivityTopicItem;
 
-@interface XYTopicDetailHeaderView : UITableViewHeaderFooterView
+@interface XYActiveTopicDetailHeaderView : UIView
 
 @property (nonatomic, strong) XYActivityTopicItem *item;
 

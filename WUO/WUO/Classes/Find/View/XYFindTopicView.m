@@ -9,7 +9,7 @@
 #import "XYFindTopicView.h"
 #import "XYActivityTopicItem.h"
 #import <UIImageView+WebCache.h>
-#import "XYTopicDetailController.h"
+#import "XYActiveTopicDetailController.h"
 
 #define titleBtnHeight 30
 #define leftMargin  8
@@ -121,7 +121,8 @@ static NSString * const cellIdentifier = @"XYFindTopicViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    [XYTopicDetailController pushWithItem:self.topicItemList[indexPath.row]];
+    
+    [XYActiveTopicDetailController pushWithItem:self.topicItemList[indexPath.row]];
 }
 
 @end
