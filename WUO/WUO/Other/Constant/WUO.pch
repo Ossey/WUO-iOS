@@ -29,7 +29,7 @@
 #define SIZE_TOOLVIEWH 40       // 工具条高度
 #define SIZE_GAP_MARGIN 15
 #define SIZE_GAP_TOP 13
-#define SIZE_HEADERWH 40        // 头像尺寸
+#define SIZE_HEADERWH 50        // 头像尺寸
 #define SIZE_GAP_PADDING 10     // 内间距
 #define SIZE_PIC_BOTTOM 20      // 图片底部间距
 #define SIZE_GAP_SMALL 5        // 最小的间距
@@ -71,7 +71,7 @@
 #define kColorReadCountText kColor(180, 180, 180, 1.0)      // 阅读文本数量颜色
 #define kColorLightBlue kColor(106, 140, 181, 1.0)          // 浅蓝色
 #define kColorSeparator kColor(140, 140, 140, 0.6)          // 分隔符的颜色
-#define kColorGlobalCell kColor(255, 255, 255, 1.0)         // cell的全局颜色
+#define kColorGlobalCell kColor(250, 250, 250, 1.0)         // cell的全局颜色
 #define kColorGlobalGreen [UIColor colorWithRed:47/255.0 green:189/255.0 blue:169/255.0 alpha:1.0]
 /*************** 颜色 ***************/
 

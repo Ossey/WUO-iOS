@@ -70,13 +70,13 @@
     
     // 头像
     self.headerView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.headerView.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+    self.headerView.backgroundColor = kColorGlobalCell;
     self.headerView.hidden = NO;
     self.headerView.tag = NSIntegerMax;
     self.headerView.clipsToBounds = YES;
     [self.contentView addSubview:self.headerView];
     
-    // 圆形图片，目的是让头像显示为圆形
+    // 镂空的圆形图片盖在头像上面，目的是让头像显示为圆形
     self.cornerImageView = [[UIImageView alloc] init];
     self.cornerImageView.center = self.headerView.center;
     self.cornerImageView.image = [UIImage imageNamed:@"corner_circle"];

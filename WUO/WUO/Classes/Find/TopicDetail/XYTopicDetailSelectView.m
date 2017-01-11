@@ -34,7 +34,7 @@
         _trendLabelView = [[XYTopicDetailLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:self channelCates:nil rightBtnWidth:0];
         _trendLabelView.itemNameKey = @"labelName";
         [self.contentView addSubview:_trendLabelView];
-        
+        _trendLabelView.globalBackgroundColor = kColorGlobalCell;
         [_trendLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];

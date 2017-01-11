@@ -67,7 +67,7 @@
         self.rightBtnWidth = rightBtnWidth;
         self.channelCates = [channelCates mutableCopy];
         self.separatorView.hidden = NO;
-        NSLog(@"%@", self.separatorView);
+        
     }
     
     return self;
@@ -233,7 +233,12 @@
     self.currentItemBackgroundColor = globalBackgroundColor;
     self.otherItemBackgroundColor = globalBackgroundColor;
     self.cateTitleView.backgroundColor = globalBackgroundColor;
-    
+    self.rightButton.backgroundColor = globalBackgroundColor;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    [self setGlobalBackgroundColor:backgroundColor];
 }
 
 - (UIImage *)separatorImage {
@@ -428,7 +433,6 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:@"addbutton"] forState:UIControlStateNormal];
         _rightButton = btn;
-
         _rightButton.frame = CGRectMake(CGRectGetWidth(self.frame) - self.rightBtnWidth, 0, self.rightBtnWidth, CGRectGetHeight(self.frame));
         [_rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_rightButton];

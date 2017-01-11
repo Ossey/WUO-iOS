@@ -14,7 +14,7 @@
     
     if (self = [super initWithFrame:frame delegate:delegate channelCates:channelCates rightBtnWidth:rightBtnWidth]) {
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = kColorGlobalCell;
         self.titleItemFont = kFontWithSize(11);
         self.itemScale = 0.2;
         self.underLineBackgroundColor = [UIColor blackColor];
