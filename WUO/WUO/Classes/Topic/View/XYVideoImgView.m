@@ -53,7 +53,7 @@
     _viewModel = viewModel;
     
     XYTopicItem * item = viewModel.item;
-    if (item.videoImgFullURL) {
+    if (item.videoUrl.length) {
         self.hidden = NO;
         [self sd_setImageWithURL:item.videoImgFullURL];
     } else {

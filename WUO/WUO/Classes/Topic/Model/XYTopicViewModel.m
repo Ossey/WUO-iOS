@@ -92,7 +92,7 @@
     
     // 视频图片
     CGFloat videoImgH = 0.0;
-    if (self.item.videoImg.length == 0) {
+    if (self.item.videoUrl.length == 0) {
         // 注意：有视频时，就没有图片，反之亦然
         videoImgH = 0.0;
         self.videoImgViewFrame = CGRectZero;

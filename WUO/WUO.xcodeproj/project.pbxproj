@@ -28,7 +28,6 @@
 		1810AF8C1E26152100918A2C /* XYTopicDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF8B1E26152100918A2C /* XYTopicDetailController.m */; };
 		1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF8E1E2616C800918A2C /* XYDynamicTableView.m */; };
 		1810AF941E2616C800918A2C /* XYDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF901E2616C800918A2C /* XYDynamicViewController.m */; };
-		1810AF951E2616C800918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF921E2616C800918A2C /* XYPlayerViewController.m */; };
 		1810AFAD1E2616D700918A2C /* XYTopicViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF991E2616D700918A2C /* XYTopicViewModel.m */; };
 		1810AFAE1E2616D700918A2C /* XYTopicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF9B1E2616D700918A2C /* XYTopicInfo.m */; };
 		1810AFAF1E2616D700918A2C /* XYTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF9D1E2616D700918A2C /* XYTopicItem.m */; };
@@ -36,13 +35,14 @@
 		1810AFB11E2616D700918A2C /* WUOToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA21E2616D700918A2C /* WUOToolView.m */; };
 		1810AFB21E2616D700918A2C /* XYDynamicToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA41E2616D700918A2C /* XYDynamicToolButton.m */; };
 		1810AFB31E2616D700918A2C /* XYPictureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA61E2616D700918A2C /* XYPictureCollectionView.m */; };
-		1810AFB41E2616D700918A2C /* XYPlayerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFA81E2616D700918A2C /* XYPlayerControl.m */; };
 		1810AFB51E2616D700918A2C /* XYTopicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFAA1E2616D700918A2C /* XYTopicViewCell.m */; };
 		1810AFB61E2616D700918A2C /* XYVideoImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFAC1E2616D700918A2C /* XYVideoImgView.m */; };
 		1810AFBA1E26190400918A2C /* XYComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFB91E26190400918A2C /* XYComposeViewController.m */; };
 		1810AFBE1E26193400918A2C /* XYFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFBD1E26193400918A2C /* XYFindViewController.m */; };
 		1810AFC21E26195000918A2C /* XYInvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC11E26195000918A2C /* XYInvestViewController.m */; };
 		1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC51E26197600918A2C /* XYMineViewController.m */; };
+		1810AFCC1E26200300918A2C /* XYPlayerControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFC91E26200300918A2C /* XYPlayerControl.m */; };
+		1810AFCD1E26200300918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCB1E26200300918A2C /* XYPlayerViewController.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
 		183F93901E18BFA200875416 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F938F1E18BFA200875416 /* main.m */; };
 		183F939B1E18BFA200875416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183F939A1E18BFA200875416 /* Assets.xcassets */; };
@@ -126,8 +126,6 @@
 		1810AF8E1E2616C800918A2C /* XYDynamicTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicTableView.m; sourceTree = "<group>"; };
 		1810AF8F1E2616C800918A2C /* XYDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDynamicViewController.h; sourceTree = "<group>"; };
 		1810AF901E2616C800918A2C /* XYDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicViewController.m; sourceTree = "<group>"; };
-		1810AF911E2616C800918A2C /* XYPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerViewController.h; sourceTree = "<group>"; };
-		1810AF921E2616C800918A2C /* XYPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerViewController.m; sourceTree = "<group>"; };
 		1810AF981E2616D700918A2C /* XYTopicViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicViewModel.h; sourceTree = "<group>"; };
 		1810AF991E2616D700918A2C /* XYTopicViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicViewModel.m; sourceTree = "<group>"; };
 		1810AF9A1E2616D700918A2C /* XYTopicInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicInfo.h; sourceTree = "<group>"; };
@@ -142,8 +140,6 @@
 		1810AFA41E2616D700918A2C /* XYDynamicToolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDynamicToolButton.m; sourceTree = "<group>"; };
 		1810AFA51E2616D700918A2C /* XYPictureCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPictureCollectionView.h; sourceTree = "<group>"; };
 		1810AFA61E2616D700918A2C /* XYPictureCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPictureCollectionView.m; sourceTree = "<group>"; };
-		1810AFA71E2616D700918A2C /* XYPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerControl.h; sourceTree = "<group>"; };
-		1810AFA81E2616D700918A2C /* XYPlayerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerControl.m; sourceTree = "<group>"; };
 		1810AFA91E2616D700918A2C /* XYTopicViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTopicViewCell.h; sourceTree = "<group>"; };
 		1810AFAA1E2616D700918A2C /* XYTopicViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTopicViewCell.m; sourceTree = "<group>"; };
 		1810AFAB1E2616D700918A2C /* XYVideoImgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYVideoImgView.h; sourceTree = "<group>"; };
@@ -156,6 +152,10 @@
 		1810AFC11E26195000918A2C /* XYInvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInvestViewController.m; sourceTree = "<group>"; };
 		1810AFC41E26197600918A2C /* XYMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMineViewController.h; sourceTree = "<group>"; };
 		1810AFC51E26197600918A2C /* XYMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMineViewController.m; sourceTree = "<group>"; };
+		1810AFC81E26200300918A2C /* XYPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerControl.h; sourceTree = "<group>"; };
+		1810AFC91E26200300918A2C /* XYPlayerControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerControl.m; sourceTree = "<group>"; };
+		1810AFCA1E26200300918A2C /* XYPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPlayerViewController.h; sourceTree = "<group>"; };
+		1810AFCB1E26200300918A2C /* XYPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerViewController.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
 		183F938B1E18BFA200875416 /* WUO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WUO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -375,8 +375,6 @@
 				1810AFA41E2616D700918A2C /* XYDynamicToolButton.m */,
 				1810AFA51E2616D700918A2C /* XYPictureCollectionView.h */,
 				1810AFA61E2616D700918A2C /* XYPictureCollectionView.m */,
-				1810AFA71E2616D700918A2C /* XYPlayerControl.h */,
-				1810AFA81E2616D700918A2C /* XYPlayerControl.m */,
 				1810AFA91E2616D700918A2C /* XYTopicViewCell.h */,
 				1810AFAA1E2616D700918A2C /* XYTopicViewCell.m */,
 				1810AFAB1E2616D700918A2C /* XYVideoImgView.h */,
@@ -419,6 +417,17 @@
 				1810AFC51E26197600918A2C /* XYMineViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		1810AFC71E26200300918A2C /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				1810AFC81E26200300918A2C /* XYPlayerControl.h */,
+				1810AFC91E26200300918A2C /* XYPlayerControl.m */,
+				1810AFCA1E26200300918A2C /* XYPlayerViewController.h */,
+				1810AFCB1E26200300918A2C /* XYPlayerViewController.m */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		183F93821E18BFA200875416 = {
@@ -495,6 +504,7 @@
 		183F93C31E18F1E900875416 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				1810AFC71E26200300918A2C /* Player */,
 				1862E6941E21DB530031D063 /* GzwTableViewLoading */,
 				180214BF1E1E6B7E006605C2 /* XRCarouselView */,
 				180214B51E1E599C006605C2 /* ImageViewer */,
@@ -551,8 +561,6 @@
 				1810AF8E1E2616C800918A2C /* XYDynamicTableView.m */,
 				1810AF8F1E2616C800918A2C /* XYDynamicViewController.h */,
 				1810AF901E2616C800918A2C /* XYDynamicViewController.m */,
-				1810AF911E2616C800918A2C /* XYPlayerViewController.h */,
-				1810AF921E2616C800918A2C /* XYPlayerViewController.m */,
 			);
 			path = Dynamic;
 			sourceTree = "<group>";
@@ -960,6 +968,7 @@
 				1810AFAE1E2616D700918A2C /* XYTopicInfo.m in Sources */,
 				1810AFB51E2616D700918A2C /* XYTopicViewCell.m in Sources */,
 				180214BE1E1E599C006605C2 /* XYImageViewer.m in Sources */,
+				1810AFCD1E26200300918A2C /* XYPlayerViewController.m in Sources */,
 				18CA21E91E1A1693005F1C87 /* XYLaunchView.m in Sources */,
 				181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */,
 				18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */,
@@ -968,7 +977,6 @@
 				18CA21EB1E1A1693005F1C87 /* XYLoginView.m in Sources */,
 				1810AF891E2614BF00918A2C /* XYUserDetailController.m in Sources */,
 				18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */,
-				1810AF951E2616C800918A2C /* XYPlayerViewController.m in Sources */,
 				183F93901E18BFA200875416 /* main.m in Sources */,
 				1810AFAD1E2616D700918A2C /* XYTopicViewModel.m in Sources */,
 				1810AF811E260A7A00918A2C /* WUOFindHeaderView.m in Sources */,
@@ -995,7 +1003,6 @@
 				180214BD1E1E599C006605C2 /* XYImageView.m in Sources */,
 				1810AFBE1E26193400918A2C /* XYFindViewController.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
-				1810AFB41E2616D700918A2C /* XYPlayerControl.m in Sources */,
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
 				1810AFB01E2616D700918A2C /* WUOLabel.m in Sources */,
 				1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */,
@@ -1007,6 +1014,7 @@
 				1810AF821E260A7A00918A2C /* XYAdvertView.m in Sources */,
 				1810AF831E260A7A00918A2C /* XYFindTopicView.m in Sources */,
 				1810AFBA1E26190400918A2C /* XYComposeViewController.m in Sources */,
+				1810AFCC1E26200300918A2C /* XYPlayerControl.m in Sources */,
 				1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */,
 				18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */,
 				1810AFC21E26195000918A2C /* XYInvestViewController.m in Sources */,
