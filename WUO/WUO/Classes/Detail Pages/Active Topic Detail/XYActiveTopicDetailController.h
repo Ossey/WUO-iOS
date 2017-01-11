@@ -4,7 +4,7 @@
 //
 //  Created by mofeini on 17/1/9.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//  活动话题 详情页
+//  活动话题 详情页 控制器
 
 #import "XYProfileBaseController.h"
 
