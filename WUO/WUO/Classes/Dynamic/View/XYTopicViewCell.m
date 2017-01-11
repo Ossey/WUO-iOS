@@ -35,11 +35,12 @@
 @property (strong, nonatomic)  WUOToolView *toolView;
 @property (strong, nonatomic)  UIImageView *cornerImageView;
 @property (strong, nonatomic)  XYVideoImgView *videoImgView;
-@property (strong, nonatomic)  UIButton *rankingBtn;
+@property (strong, nonatomic)  UILabel *rankingLabel;
 @end
 
 @implementation XYTopicViewCell
 
+#pragma mark - 初始化方法
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
@@ -59,6 +60,8 @@
     
     return self;
 }
+
+#pragma mark - 初始化控件
 
 - (void)setup {
     
@@ -82,14 +85,13 @@
     [self.contentView addSubview:self.cornerImageView];
     
     // 榜单
-    self.rankingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.contentView addSubview:self.rankingBtn];
-    self.rankingBtn.layer.cornerRadius = 16;
-    [self.rankingBtn.layer setMasksToBounds:YES];
-    self.rankingBtn.backgroundColor = kAppGlobalGreenColor;
-    [self.rankingBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
-    [self.rankingBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
+    self.rankingLabel = [UILabel new];
+    [self.contentView addSubview:self.rankingLabel];
+    self.rankingLabel.layer.cornerRadius = 16;
+    [self.rankingLabel.layer setMasksToBounds:YES];
+    self.rankingLabel.backgroundColor = kAppGlobalGreenColor;
+    [self.rankingLabel setTextColor:[UIColor whiteColor]];
+    [self.rankingLabel setTextAlignment:NSTextAlignmentCenter];
     // iOS中不支持中文字体倾斜，只有设置倾斜角度
     // 设置反射。倾斜15度
     CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(15 * (CGFloat)M_PI / 180), 1, 0, 0);
@@ -97,7 +99,7 @@
     UIFontDescriptor *desc = [ UIFontDescriptor fontDescriptorWithName:[UIFont systemFontOfSize :16].fontName matrix:matrix];
     // 获取字体
     UIFont *font = [UIFont fontWithDescriptor:desc size:16];
-    self.rankingBtn.titleLabel.font = font;
+    self.rankingLabel.font = font;
     
     // 投资按钮
     self.investBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -108,7 +110,7 @@
     self.investBtn.layer.cornerRadius = 5;
     [self.investBtn.layer setMasksToBounds:YES];
     
-    [self addLabel];
+    [self creatLabel];
     
     // 图片
     self.pictureCollectionView = [[XYPictureCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[XYPictureCollectionViewLayout new]];
@@ -125,14 +127,6 @@
     self.videoImgView.backgroundColor = [self getBackgroundColor];
     [self.contentView addSubview:self.videoImgView];
     
-    // 阅读数量
-//    self.readCountBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.readCountBtn setTitleColor:kColorCountText forState:UIControlStateNormal];
-//    [self.readCountBtn setImage:[UIImage imageNamed:@"Home_trendsReadCount"] forState:UIControlStateNormal];
-//    [self.readCountBtn setTitle:@"0人预览" forState:UIControlStateNormal];
-//    [self.readCountBtn.titleLabel setFont:kFontWithSize(8)];
-//    [self.contentView addSubview:self.readCountBtn];
-    
     // 底部工具条
     self.toolView = [[WUOToolView alloc] initWithFrame:self.viewModel.toolViewFrame];
     [self.contentView addSubview:_toolView];
@@ -141,61 +135,9 @@
 }
 
 
-- (void)setViewModel:(XYDynamicViewModel *)viewModel {
-    
-    _viewModel = viewModel;
-    
-    XYTopicItem *item = viewModel.item;
-    self.pictureCollectionView.dynamicItem = item;
-    self.pictureCollectionView.hidden = item.imgCount == 0;
-    
-    [self.headerView setBackgroundImage:nil forState:UIControlStateNormal];
-    [self.headerView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
-    
-    self.videoImgView.viewModel = viewModel;
-    
-    self.jobLabel.text = item.job;
 
 
-    self.jobLabel.hidden = !item.job.length;
-    self.title_label.hidden = !item.title.length || item.title == nil || [item.title isEqualToString:@""];
-    self.contentLabel.hidden = !item.content.length || item.content == nil || [item.title isEqualToString:@""];
-    
-    
-    [self.readCountBtn setTitle:[NSString stringWithFormat:@"%ld人预览", item.readCount] forState:UIControlStateNormal];
-    
-    [self.toolView->_shareBtn setTitle:[NSString stringWithFormat:@"%ld", item.shareCount] forState:UIControlStateNormal];
-    [self.toolView->_commentBtn setTitle:[NSString stringWithFormat:@"%ld", item.commentCount] forState:UIControlStateNormal];
-    [self.toolView->_rewardBtn setTitle:[NSString stringWithFormat:@"%ld", item.rewardCount] forState:UIControlStateNormal];
-    [self.toolView->_praiseBtn setTitle:[NSString stringWithFormat:@"%ld", item.praiseCount] forState:UIControlStateNormal];
-    
-    CGSize picViewSize = [self caculatePicViewSize:item.imgList.count];
-    self.pictureCollectionView.frame = CGRectMake(viewModel.picCollectionViewFrame.origin.x, viewModel.picCollectionViewFrame.origin.y, picViewSize.width, picViewSize.height);
-    
-    [self.rankingBtn setTitle:viewModel.item.ranking forState:UIControlStateNormal];
-    
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.headerView.frame = self.viewModel.headerFrame;
-    self.cornerImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewModel.headerFrame)+5, CGRectGetHeight(self.viewModel.headerFrame)+5);
-    self.cornerImageView.center = self.headerView.center;
-    
-    self.investBtn.xy_height = 26;
-    self.investBtn.xy_width = 50;
-    self.investBtn.xy_y = self.headerView.xy_y;
-    self.investBtn.xy_x = kScreenW - 50 - 15;
-    
-    self.readCountBtn.frame = self.viewModel.readCountBtnFrame;
-    
-    self.toolView.frame = self.viewModel.toolViewFrame;
-    
-    self.rankingBtn.frame = self.viewModel.rankingFrame;
-}
-
-- (void)addLabel {
+- (void)creatLabel {
     
     if (self.title_label) {
         [self.title_label removeFromSuperview];
@@ -222,8 +164,27 @@
     [self.contentView addSubview:self.contentLabel];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.headerView.frame = self.viewModel.headerFrame;
+    self.cornerImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewModel.headerFrame)+5, CGRectGetHeight(self.viewModel.headerFrame)+5);
+    self.cornerImageView.center = self.headerView.center;
+    
+    self.investBtn.xy_height = 26;
+    self.investBtn.xy_width = 50;
+    self.investBtn.xy_y = self.headerView.xy_y;
+    self.investBtn.xy_x = kScreenW - 50 - 15;
+    
+    self.readCountBtn.frame = self.viewModel.readCountBtnFrame;
+    
+    self.toolView.frame = self.viewModel.toolViewFrame;
+    
+    self.rankingLabel.frame = self.viewModel.rankingFrame;
+}
 
 
+#pragma mark - 绘制cell及主要控件
 
 - (void)draw {
     
@@ -291,7 +252,7 @@
 //将文本内容绘制到图片上
 - (void)drawText {
     if (self.title_label==nil||self.contentLabel==nil) {
-        [self addLabel];
+        [self creatLabel];
     }
     self.title_label.frame = self.viewModel.title_labelFrame;
     self.title_label.text = self.viewModel.item.title;
@@ -326,6 +287,42 @@
     [super removeFromSuperview];
 }
 
+
+#pragma mark - set \ get
+- (void)setViewModel:(XYDynamicViewModel *)viewModel {
+    
+    _viewModel = viewModel;
+    
+    XYTopicItem *item = viewModel.item;
+    self.pictureCollectionView.dynamicItem = item;
+    self.pictureCollectionView.hidden = item.imgCount == 0;
+    
+    [self.headerView setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.headerView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
+    
+    self.videoImgView.viewModel = viewModel;
+    
+    self.jobLabel.text = item.job;
+    
+    
+    self.jobLabel.hidden = !item.job.length;
+    self.title_label.hidden = !item.title.length || item.title == nil || [item.title isEqualToString:@""];
+    self.contentLabel.hidden = !item.content.length || item.content == nil || [item.title isEqualToString:@""];
+    
+    
+    [self.readCountBtn setTitle:[NSString stringWithFormat:@"%ld人预览", item.readCount] forState:UIControlStateNormal];
+    
+    [self.toolView->_shareBtn setTitle:[NSString stringWithFormat:@"%ld", item.shareCount] forState:UIControlStateNormal];
+    [self.toolView->_commentBtn setTitle:[NSString stringWithFormat:@"%ld", item.commentCount] forState:UIControlStateNormal];
+    [self.toolView->_rewardBtn setTitle:[NSString stringWithFormat:@"%ld", item.rewardCount] forState:UIControlStateNormal];
+    [self.toolView->_praiseBtn setTitle:[NSString stringWithFormat:@"%ld", item.praiseCount] forState:UIControlStateNormal];
+    
+    CGSize picViewSize = [self caculatePicViewSize:item.imgList.count];
+    self.pictureCollectionView.frame = CGRectMake(viewModel.picCollectionViewFrame.origin.x, viewModel.picCollectionViewFrame.origin.y, picViewSize.width, picViewSize.height);
+    
+    [self.rankingLabel setText:viewModel.item.ranking];
+    
+}
 
 
 - (void)setFrame:(CGRect)frame {

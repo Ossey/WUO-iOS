@@ -114,12 +114,6 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
                         if ([obj isKindOfClass:[NSDictionary class]]) {
                             XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
                             
-//                            // 给榜单类型的模型，添加排名属性
-//                            if (self.currentType == XYTopicTypeNewRanklist) {
-//                                item.ranking = rangking+1;
-//                                rangking++;
-//                            }
-                            
                             // 帖子模型数
                             [_dataList[@(self.currentType)] addObject:[XYDynamicViewModel dynamicViewModelWithItem:item info:info]];
                         }
@@ -129,17 +123,20 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
             }
         }
         
-        [self processingModel];
-        [self reloadData];
-        [WUOHTTPRequest setActivityIndicator:NO];
-        [self.mj_footer endRefreshing];
-        [self.mj_header endRefreshing];
+        [self processingModel:^{
+            
+            [self reloadData];
+            [WUOHTTPRequest setActivityIndicator:NO];
+            [self.mj_footer endRefreshing];
+            [self.mj_header endRefreshing];
+        }];
     }];
     
 }
 
-- (void)processingModel {
-    // 对模型进行处理 -- 为榜单前10个模型扩展排名属性
+/// 对模型进行处理 -- 为榜单前10个模型扩展排名属性
+- (void)processingModel:(void(^)())block {
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     
         if (self.currentType == XYTopicTypeNewRanklist) {
@@ -147,7 +144,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
             NSInteger i = 0;
             BOOL flag = YES;
             while (flag) {
-                if (i>_dataList[@(self.currentType)].count-1) {
+                if (i>_dataList[@(self.currentType)].count-1 || _dataList[@(self.currentType)].count == 0) {
                     flag = NO;
                     break;
                 } else {
@@ -160,7 +157,12 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
                     i++;
                 }
             }
-            
+            // 要回到主线程中刷新数据源，不然会引发莫名其妙的更新榜单不显示的问题
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (block) {
+                    block();
+                }
+            });
         }
     });
 }
@@ -374,8 +376,10 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
         _isFirst = NO;
     }
     
-    [self processingModel];
-    [self reloadData];
+    [self processingModel:^{
+        
+        [self reloadData];
+    }];
 }
 
 
