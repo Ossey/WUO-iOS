@@ -20,6 +20,7 @@
         self.underLineBackgroundColor = [UIColor blackColor];
         self.itemWidth = kScreenW * 0.5;
         self.underLineWidth = 50;
+        self.separatorImage = [UIImage new];
     
     }
     

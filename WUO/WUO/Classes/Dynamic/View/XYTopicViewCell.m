@@ -8,7 +8,6 @@
 
 #import "XYTopicViewCell.h"
 #import <UIButton+WebCache.h>
-//#import <UIImageView+WebCache.h>
 #import "XYDynamicViewModel.h"
 #import "UIImage+XYExtension.h"
 #import "XYPictureCollectionView.h"
@@ -89,7 +88,7 @@
     [self.contentView addSubview:self.rankingLabel];
     self.rankingLabel.layer.cornerRadius = 16;
     [self.rankingLabel.layer setMasksToBounds:YES];
-    self.rankingLabel.backgroundColor = kAppGlobalGreenColor;
+    self.rankingLabel.backgroundColor = kColorGlobalGreen;
     [self.rankingLabel setTextColor:[UIColor whiteColor]];
     [self.rankingLabel setTextAlignment:NSTextAlignmentCenter];
     // iOS中不支持中文字体倾斜，只有设置倾斜角度
@@ -116,7 +115,7 @@
     self.pictureCollectionView = [[XYPictureCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[XYPictureCollectionViewLayout new]];
     self.pictureCollectionView.tag = NSIntegerMax;
     self.pictureCollectionView.hidden = YES;
-    self.pictureCollectionView.backgroundColor = [self getBackgroundColor];
+    self.pictureCollectionView.backgroundColor = kColorGlobalCell;
     [self.contentView addSubview:self.pictureCollectionView];
     
     // 视频图片展示
@@ -124,7 +123,7 @@
     self.videoImgView.hidden = YES;
     self.videoImgView.tag = NSIntegerMax;
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.videoImgView.backgroundColor = [self getBackgroundColor];
+    self.videoImgView.backgroundColor = kColorGlobalCell;
     [self.contentView addSubview:self.videoImgView];
     
     // 底部工具条
@@ -199,7 +198,7 @@
         CGRect rect = self.viewModel.cellBounds;
         UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0);
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[self getBackgroundColor] set];
+        [kColorGlobalCell set];
         CGContextFillRect(context, rect);
         
         // name
@@ -376,9 +375,5 @@
 
 
 
-- (UIColor *)getBackgroundColor {
-    
-    return [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-}
 
 @end

@@ -67,7 +67,7 @@
         self.rightBtnWidth = rightBtnWidth;
         self.channelCates = [channelCates mutableCopy];
         self.separatorView.hidden = NO;
-        
+        NSLog(@"%@", self.separatorView);
     }
     
     return self;
@@ -139,7 +139,6 @@
     [self selecteTitleItemWithIndex:self.selectedIndex];
     [self creatUnderLine];
     
-//    self.previousSelectedBtn = nil;
     
 }
 
@@ -460,12 +459,13 @@
         separatorView.backgroundColor = self.separatorBackgroundColor;
         _separatorView = separatorView;
         CGRect frame = _separatorView.frame;
-        frame.origin.y = CGRectGetHeight(self.cateTitleView.frame);
+        frame.origin.y = CGRectGetHeight(self.cateTitleView.frame)-0.5;
         frame.size.height = 0.5;
         frame.size.width = CGRectGetWidth(self.frame);
         frame.origin.x = 0;
         _separatorView.frame = frame;
-        [self insertSubview:_separatorView aboveSubview:self.underLine];
+        [self addSubview:separatorView];
+        [self bringSubviewToFront:_separatorView];
         
     }
     return _separatorView;
@@ -517,7 +517,7 @@
     button.selected = YES;
     [_previousSelectedBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    [button setTitleColor:kAppGlobalGreenColor forState:UIControlStateNormal];
+    [button setTitleColor:kColorGlobalGreen forState:UIControlStateNormal];
     
     [self setupTitleCenter:button];
     

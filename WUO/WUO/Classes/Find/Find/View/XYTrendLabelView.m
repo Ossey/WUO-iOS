@@ -18,6 +18,7 @@
         self.itemScale = 0.1;
         self.underLineImage = [UIImage new];
         self.itemWidth = 60;
+        self.separatorImage = [UIImage new];
     }
     
     return self;

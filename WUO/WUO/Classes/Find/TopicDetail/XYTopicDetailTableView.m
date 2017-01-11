@@ -57,6 +57,7 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
         _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
         _isFirst = YES;
         
+        self.backgroundColor = kTableViewBgColor;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.showsHorizontalScrollIndicator = NO;
         self.tableHeaderView = self.headView;
@@ -252,6 +253,16 @@ static NSString * const selectViewIdentifier = @"XYTopicDetailHeaderView";
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
     _scrollToToping = NO;
     [self loadContent];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    // 注意：这里默认的的偏移量是-64，越往上滑动scrollView偏移量越大，反之越小
+    if (scrollView.contentOffset.y > self.headView.xy_height - kNavigationBarHeight) {
+        self.selectView.trendLabelView.separatorBackgroundColor = [UIColor colorWithRed:140 / 255.0 green:140 / 255.0 blue:140 / 255.0 alpha:0.6];
+    } else {
+        self.selectView.trendLabelView.separatorBackgroundColor = [UIColor clearColor];
+    }
 }
 
 #pragma mark - XYCateTitleViewDelegate

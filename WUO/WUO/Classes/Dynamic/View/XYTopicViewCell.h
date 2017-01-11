@@ -19,5 +19,5 @@
 - (void)releaseMemory;
 - (void)draw;
 
-- (UIColor *)getBackgroundColor;
+
 @end

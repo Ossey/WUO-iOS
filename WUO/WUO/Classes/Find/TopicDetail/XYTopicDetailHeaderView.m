@@ -40,7 +40,7 @@
         // 头像
         _avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
         _avatarView.frame = CGRectMake(SIZE_MARGIN, SIZE_MARGIN, SIZE_HEADERWH, SIZE_HEADERWH);
-        _avatarView.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+        _avatarView.backgroundColor = kColorGlobalCell;
         _avatarView.hidden = NO;
         _avatarView.tag = NSIntegerMax;
         _avatarView.clipsToBounds = YES;
@@ -91,7 +91,7 @@
         CGRect rect = self.item.topicDetailHeaderBounds;
         UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0);
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[self getBackgroundColor] set];
+        [kColorGlobalCell set];
         CGContextFillRect(context, rect);
 
         // name
@@ -178,11 +178,6 @@
     _introduceLabel.text = _item.introduce;
     _introduceLabel.frame = _item.topicDetailIntroduceFrame;
 
-}
-
-- (UIColor *)getBackgroundColor {
-    
-    return [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 }
 
 

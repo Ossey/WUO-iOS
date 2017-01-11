@@ -37,7 +37,6 @@
         }
     }
     
-    
     [currentNav pushViewController:vc animated:YES];
 }
 
