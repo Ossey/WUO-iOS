@@ -97,12 +97,17 @@
     // 当手指在播放进度view以上的位置，点击时才可以响应以下事件, 让_playerControl自身及其y值以上50的范围内，不响应手势事件
     if (point.y < _playerControl.frame.origin.y - 50) {
         [self.playerControl pause];
-        if (self.closeCallBack) {
-            self.closeCallBack();
-            // 执行完block后，让block释放,不然会有循环引用
-            self.closeCallBack = nil;
+        if (self.closeEvent) {
+            self.closeEvent();
+            [self releaseSelf];
         }
     }
+}
+
+- (void)releaseSelf {
+    // 执行完block后，让block释放,不然会有循环引用
+    self.closeEvent = nil;
+    [super removeFromSuperview];
 }
 
 - (void)dealloc {

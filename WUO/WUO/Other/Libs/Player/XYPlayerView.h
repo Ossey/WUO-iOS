@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong, readonly) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) XYPlayerControl *playerControl;
-@property (nonatomic, copy) void (^closeCallBack)();
+@property (nonatomic, copy) void (^closeEvent)();
 
 - (instancetype)initWithFrame:(CGRect)frame videoURL:(NSURL *)URL;
 
