@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTopicViewModel;
+@class XYTopicItem;
 
 @interface XYUserDetailController : UIViewController
 
-/** uid 当前用户的uid 请求数据的时候使用此参数*/
-@property (nonatomic, assign) NSInteger uid;
-
-- (instancetype)initWithTargetUid:(NSInteger)uid;
+/** item中的 uid 当前用户的uid 请求数据的时候使用此参数*/
+@property (nonatomic, strong) XYTopicItem *item;
+- (instancetype)initWithItem:(XYTopicItem *)item;
 @end

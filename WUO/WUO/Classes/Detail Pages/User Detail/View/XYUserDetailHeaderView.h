@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class XYUserInfo;
 @interface XYUserDetailHeaderView : UIView
+
+@property (nonatomic, strong) XYUserInfo *userInfo;
 
 @end

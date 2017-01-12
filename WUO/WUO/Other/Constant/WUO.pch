@@ -72,6 +72,7 @@
 #define kColorLightBlue kColor(106, 140, 181, 1.0)          // 浅蓝色
 #define kColorSeparator kColor(140, 140, 140, 0.6)          // 分隔符的颜色
 #define kColorGlobalCell kColor(250, 250, 250, 1.0)         // cell的全局颜色
+#define kColorLightGray kColor(180, 180, 180, 1.0)          // 灰色
 #define kColorGlobalGreen [UIColor colorWithRed:47/255.0 green:189/255.0 blue:169/255.0 alpha:1.0]
 
 

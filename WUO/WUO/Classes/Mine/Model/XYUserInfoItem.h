@@ -4,7 +4,7 @@
 //
 //  Created by mofeini on 17/1/2.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//
+//  当前登录用户的模型
 
 #import <Foundation/Foundation.h>
 

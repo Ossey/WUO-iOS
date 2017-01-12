@@ -10,13 +10,13 @@
 
 @implementation XYUserInfo
 
-+ (instancetype)userInfoWithDict:(NSDictionary *)dict {
-    return [[self alloc] initWithDict:dict];
++ (instancetype)userInfoWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info {
+    return [[self alloc] initWithDict:dict responseInfo:info];
 }
-- (instancetype)initWithDict:(NSDictionary *)dict {
+- (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info {
     if (self = [super init]) {
         [self setValuesForKeysWithDictionary:dict];
-        
+        self.responseInfo = info;
         if (dict[@"userLabelList"] && [dict[@"userLabelList"] isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempList = [NSMutableArray arrayWithCapacity:0];
             for (id obj in dict[@"userLabelList"]) {
@@ -35,6 +35,26 @@
     if ([key isEqualToString:@"description"]) {
         self.Description = value;
     }
+}
+
+- (NSURL *)headFullURL {
+    NSURL *url = nil;
+    if (self.head.length) {
+        NSString *urlStr = [self.head stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if (![urlStr containsString:@"http://"]) {
+            url = [NSURL URLWithString:[self.responseInfo.basePath stringByAppendingString:urlStr]];
+        } else {
+            url = [NSURL URLWithString:urlStr];
+        }
+    }
+    return url;
+}
+
+- (NSString *)descriptionText {
+    if (self.Description == nil || [self.Description isEqualToString:@""]) {
+        return @"暂无个性签名";
+    }
+    return self.Description;
 }
 
 @end

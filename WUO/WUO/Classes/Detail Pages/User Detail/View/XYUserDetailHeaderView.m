@@ -7,6 +7,8 @@
 //
 
 #import "XYUserDetailHeaderView.h"
+#import <UIButton+WebCache.h>
+#import "XYUserInfo.h"
 
 @implementation XYUserDetailHeaderView {
     UIButton *_avaterView;
@@ -32,17 +34,34 @@
     return self;
 }
 
+
+- (void)setUserInfo:(XYUserInfo *)userInfo {
+    _userInfo = userInfo;
+    
+    [_avaterView sd_setBackgroundImageWithURL:userInfo.headFullURL forState:UIControlStateNormal placeholderImage:nil options:SDWebImageHighPriority];
+    
+    _nameLabel.text = userInfo.name;
+    _descriptionLabel.text = userInfo.descriptionText;
+    _fansCountLabel.text = [NSString stringWithFormat:@"%ld", userInfo.fansCount];
+    _fansCountLabel.text = [NSString stringWithFormat:@"%ld", userInfo.fansCount];
+    _followCountLabel.text = [NSString stringWithFormat:@"%ld", userInfo.followCount];
+    _invesCountLabel.text = [NSString stringWithFormat:@"%ld", userInfo.gmCount];
+    
+    _followRequestBtn.selected = userInfo.isFollow;
+}
+
+#pragma mark - 初始化控件
 - (void)setup {
     
     _avaterView = [UIButton buttonWithType:UIButtonTypeCustom];
     _avaterView.layer.cornerRadius = SIZE_USER_DETAIL_AVATER_WH * 0.5;
     _avaterView.layer.masksToBounds = YES;
     _avaterView.layer.shouldRasterize = YES;
-    _avaterView.backgroundColor = [UIColor redColor];
+//    _avaterView.backgroundColor = [UIColor redColor];
     [self addSubview:_avaterView];
     
     _nameLabel = [[UILabel alloc] init];
-    _nameLabel.text = @"女痞Diana";
+//    _nameLabel.text = @"女痞Diana";
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     _nameLabel.font = kFontWithSize(SIZE_FONT_NAME);
     [self addSubview:_nameLabel];

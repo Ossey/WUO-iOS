@@ -23,4 +23,9 @@
     return self;
 }
 
+- (void)setUserInfo:(XYUserInfo *)userInfo {
+    _userInfo = userInfo;
+    _headerView.userInfo = userInfo;
+}
+
 @end

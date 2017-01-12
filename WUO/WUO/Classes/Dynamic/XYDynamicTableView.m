@@ -129,11 +129,11 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 }
 
 #pragma mark - <XYTopicViewCellDelegate>
-- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell toUid:(NSInteger)uid {
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item {
     
-    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath: targetUid:)]) {
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath: item:)]) {
         NSIndexPath *indexPath = [self indexPathForCell:cell];
-        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath targetUid:uid];
+        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath item:item];
     }
 }
 

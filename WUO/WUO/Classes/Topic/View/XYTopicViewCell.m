@@ -127,7 +127,7 @@
     self.videoImgView.hidden = YES;
     self.videoImgView.tag = NSIntegerMax;
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.videoImgView.backgroundColor = kColorGlobalCell;
+    self.videoImgView.backgroundColor = kColorLightGray;
     [self.contentView addSubview:self.videoImgView];
     
     // 底部工具条
@@ -187,9 +187,9 @@
 #pragma mark - Events
 - (void)avatarViewClick {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCellDidSelectAvatarView: toUid:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCellDidSelectAvatarView: item:)]) {
         
-        [self.delegate topicViewCellDidSelectAvatarView:self toUid:self.viewModel.item.uid];
+        [self.delegate topicViewCellDidSelectAvatarView:self item:self.viewModel.item];
     }
 }
 

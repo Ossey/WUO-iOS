@@ -9,19 +9,21 @@
 #import "XYUserDetailController.h"
 #import "XYUserDetailTableView.h"
 #import "WUOHTTPRequest.h"
-#import "XYUserInfoItem.h"
+#import "XYUserInfo.h"
+#import "XYTopicViewModel.h"
 
 @interface XYUserDetailController ()
-
+@property (nonatomic, strong) XYUserInfo *userInfo;
 @end
 
 @implementation XYUserDetailController {
     XYUserDetailTableView *_tableView;
+    
 }
 
-- (instancetype)initWithTargetUid:(NSInteger)uid {
+- (instancetype)initWithItem:(XYTopicItem *)item {
     if (self = [super init]) {
-        self.uid = uid;
+        self.item = item;
     }
     return self;
 }
@@ -30,9 +32,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    // 获取用户的主页及用户信息的 只需要获取一次即可
-    // userInfo URL	http://me.api.kfit.com.cn/me-api/rest/api/userInfo/getUserInfo
-    // targetUid=2579
+    self.title = self.item.name;
+    
+    [self loadUserInfo];
     
     // 请求用户发布的作品的
     // URL	http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllTrendById
@@ -44,17 +46,36 @@
         make.edges.equalTo(self.view);
     }];
     
-    [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    }
+
+- (void)loadUserInfo {
+    
+    [WUOHTTPRequest setActivityIndicator:YES];
+    
+    [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.item.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
+            [WUOHTTPRequest setActivityIndicator:NO];
             return;
         }
         
-        NSLog(@"%@", responseObject);
+        if ([responseObject[@"code"] integerValue] == 0) {
+            XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
+            if (responseObject[@"userInfo"] && [responseObject[@"userInfo"] isKindOfClass:[NSDictionary class]]) {
+                self.userInfo = [XYUserInfo userInfoWithDict:responseObject[@"userInfo"] responseInfo:info];
+            }
+        }
+        
+        [WUOHTTPRequest setActivityIndicator:NO];
+        
     }];
+
 }
 
-
+- (void)setUserInfo:(XYUserInfo *)userInfo {
+    _userInfo = userInfo;
+    _tableView.userInfo = userInfo;
+}
 
 @end

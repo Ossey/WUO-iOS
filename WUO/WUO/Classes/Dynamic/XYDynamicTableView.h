@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYDynamicTableView, XYTopicViewModel;
+@class XYDynamicTableView, XYTopicViewModel, XYTopicItem;
 @protocol XYDynamicTableViewDelegate <UITableViewDelegate>
 
 @optional
 
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath targetUid:(NSInteger)uid;
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item;
 /**
  * @explain scrollView滚动的时候调用
  *

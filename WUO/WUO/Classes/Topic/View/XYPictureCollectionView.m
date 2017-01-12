@@ -107,6 +107,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
         [self.contentView addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
+        self.backgroundColor = kColorLightGray;
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.contentView);
         }];

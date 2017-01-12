@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTopicViewModel, XYTopicViewCell;
+@class XYTopicViewModel, XYTopicViewCell, XYTopicItem;
 
 @protocol XYTopicViewCellDelegate <NSObject>
 
@@ -17,7 +17,7 @@
  * @explain 点击cell上面头像时调用
  * uid      当前点击用户的uid，用于请求用户数据的参数
  */
-- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell toUid:(NSInteger)uid;
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item;
 
 @end
 
