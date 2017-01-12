@@ -49,12 +49,13 @@
 
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
         self.contentView.backgroundColor = [UIColor whiteColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
     return self;
 }
 

@@ -66,6 +66,7 @@
 		1890CE291E2727690028BDB5 /* XYUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890CE281E2727690028BDB5 /* XYUserInfo.m */; };
 		1890CE2C1E274B740028BDB5 /* XYUserImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890CE2B1E274B740028BDB5 /* XYUserImgItem.m */; };
 		1890CE351E2764700028BDB5 /* XYUserHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890CE341E2764700028BDB5 /* XYUserHomePageView.m */; };
+		1890CE401E2789C60028BDB5 /* XYUserAlbumViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890CE3F1E2789C60028BDB5 /* XYUserAlbumViewCell.m */; };
 		18C90B4F1E1C950000B88D61 /* NSString+WUO.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C90B4E1E1C950000B88D61 /* NSString+WUO.m */; };
 		18CA21CB1E19EFBB005F1C87 /* WUOHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21CA1E19EFBB005F1C87 /* WUOHTTPRequest.m */; };
 		18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA21D51E19FC22005F1C87 /* UIView+XYExtension.m */; };
@@ -207,6 +208,8 @@
 		1890CE2B1E274B740028BDB5 /* XYUserImgItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserImgItem.m; sourceTree = "<group>"; };
 		1890CE331E2764700028BDB5 /* XYUserHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserHomePageView.h; sourceTree = "<group>"; };
 		1890CE341E2764700028BDB5 /* XYUserHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserHomePageView.m; sourceTree = "<group>"; };
+		1890CE3E1E2789C60028BDB5 /* XYUserAlbumViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserAlbumViewCell.h; sourceTree = "<group>"; };
+		1890CE3F1E2789C60028BDB5 /* XYUserAlbumViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserAlbumViewCell.m; sourceTree = "<group>"; };
 		18C90B4D1E1C950000B88D61 /* NSString+WUO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WUO.h"; sourceTree = "<group>"; };
 		18C90B4E1E1C950000B88D61 /* NSString+WUO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WUO.m"; sourceTree = "<group>"; };
 		18CA21C91E19EFBB005F1C87 /* WUOHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUOHTTPRequest.h; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 			children = (
 				1890CE331E2764700028BDB5 /* XYUserHomePageView.h */,
 				1890CE341E2764700028BDB5 /* XYUserHomePageView.m */,
+				1890CE3E1E2789C60028BDB5 /* XYUserAlbumViewCell.h */,
+				1890CE3F1E2789C60028BDB5 /* XYUserAlbumViewCell.m */,
 				1810AFD71E267ED000918A2C /* XYUserDetailHeaderView.h */,
 				1810AFD81E267ED000918A2C /* XYUserDetailHeaderView.m */,
 				1810AFDC1E269D6B00918A2C /* XYUserDetailTableView.h */,
@@ -1062,6 +1067,7 @@
 				180214BD1E1E599C006605C2 /* XYImageView.m in Sources */,
 				1810AFBE1E26193400918A2C /* XYFindViewController.m in Sources */,
 				183F93FF1E19173B00875416 /* MainTabBar.m in Sources */,
+				1890CE401E2789C60028BDB5 /* XYUserAlbumViewCell.m in Sources */,
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
 				1890CE291E2727690028BDB5 /* XYUserInfo.m in Sources */,
 				1810AFB01E2616D700918A2C /* WUOLabel.m in Sources */,

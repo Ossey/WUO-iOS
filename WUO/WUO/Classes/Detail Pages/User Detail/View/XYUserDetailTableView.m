@@ -16,6 +16,7 @@
 #import "XYUserInfo.h"
 #import "XYTopicViewModel.h"
 #import "XYUserHomePageView.h"
+#import "XYUserAlbumViewCell.h"
 
 typedef NS_ENUM(NSInteger, XYUserDetailRequestType) {
     XYUserDetailRequestTypeInfo = 0,  // 请求用户信息
@@ -39,18 +40,19 @@ typedef NS_ENUM(NSInteger, XYUserDetailRequestType) {
     NSInteger _page;
 }
 
-static NSString * const infoCellIdentifier = @"infoCellIdentifier";
-static NSString * const topicCellIdentifier = @"topicCellIdentifier";
-static NSString * const albumCellIdentifier = @"albumCellIdentifier";
+static NSString * const infoCellIdentifier = @"XYUserHomePageView";
+static NSString * const topicCellIdentifier = @"XYTopicViewCell";
+static NSString * const albumCellIdentifier = @"XYUserAlubmViewCell";
 static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
 static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
-    if (self = [super initWithFrame:frame style:style]) {
+    if (self = [super initWithFrame:frame style:UITableViewStylePlain]) {
         
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _photoList = [NSMutableArray arrayWithCapacity:0];
         _page = 1;
+        _requestType = XYUserDetailRequestTypeAlbum;
         
         _headerView = [XYUserDetailHeaderView new];
         _headerView.xy_height = SIZE_USER_DETAIL_HEADERVIEW_H;
@@ -60,12 +62,12 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
         self.dataSource = self;
-        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:infoCellIdentifier];
+        [self registerClass:[XYUserHomePageView class] forCellReuseIdentifier:infoCellIdentifier];
         [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:topicCellIdentifier];
-        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:albumCellIdentifier];
+        [self registerClass:[XYUserAlbumViewCell class] forCellReuseIdentifier:albumCellIdentifier];
         
         [self registerClass:[XYActiveTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
-        [self registerClass:[XYUserHomePageView class] forHeaderFooterViewReuseIdentifier:pageViewIdentifier];
+        
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _idStamp = 0;
@@ -183,7 +185,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _dataList[@(_requestType)].count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,15 +218,22 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     return self.selectView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    XYUserHomePageView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:pageViewIdentifier];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return view;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
-    return 500;
+    CGFloat height = 0;
+    switch (_requestType) {
+        case XYUserDetailRequestTypeInfo:
+            height = 400;
+            break;
+        case XYUserDetailRequestTypeAlbum:
+            // 高度为collectionViewCell的行数 * cell的高度
+            // 行数的计算：每行两个item，根据数据源计算 相片的个数 / 2 ,如果除2为计数，也算一行
+            height = 10 * SIZE_ALBUM_ITEM_H;
+            break;
+        default:
+            break;
+    }
+    return height;
 }
 
 #pragma mark - XYCateTitleViewDelegate

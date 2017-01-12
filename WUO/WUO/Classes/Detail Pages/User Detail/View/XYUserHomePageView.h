@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYUserHomePageView : UITableViewHeaderFooterView
+@interface XYUserHomePageView : UITableViewCell
 
 @end
 
