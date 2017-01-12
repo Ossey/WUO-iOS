@@ -9,6 +9,7 @@
 #import "XYUserDetailController.h"
 #import "XYUserDetailTableView.h"
 #import "WUOHTTPRequest.h"
+#import "XYUserInfoItem.h"
 
 @interface XYUserDetailController ()
 
