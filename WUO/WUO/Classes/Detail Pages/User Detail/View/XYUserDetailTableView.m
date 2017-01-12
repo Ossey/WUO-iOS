@@ -75,6 +75,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     break;
                 case XYUserDetailRequestTypeTopic:
                     _idStamp = 0;
+                    [_dataList[@(XYUserDetailRequestTypeTopic)] removeAllObjects];
                     [self loadUserTopic];
                     break;
                 case XYUserDetailRequestTypeInfo:
@@ -169,18 +170,19 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                             [_albumList addObject:[XYUserImgItem userImgItemWithDict:obj responseInfo:info]];
                         }
                     }
-                    [_dataList[@(XYUserDetailRequestTypeAlbum)] addObject:_albumList];
+                    
                 }
-                
+                [self reloadData];
+                self.mj_footer.hidden = NO;
             } else {
                 [self xy_showMessage:@"没有更多相片了"];
+                self.mj_footer.hidden = YES;
                 _page--;
             }
         }
         
         [self.mj_footer endRefreshing];
         [self.mj_header endRefreshing];
-        [self reloadData];
         [WUOHTTPRequest setActivityIndicator:NO];
     }];
 }
@@ -456,6 +458,10 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             // 不包含就创建一个容器存放数据，然后再将容器添加到大数组dataList中
             NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:0];
             [_dataList setObject:arrM forKey:@(requestType)];
+            
+            if (requestType == XYUserDetailRequestTypeAlbum) {
+                [_dataList[@(XYUserDetailRequestTypeAlbum)] addObject:_albumList];
+            }
         }
     }
     

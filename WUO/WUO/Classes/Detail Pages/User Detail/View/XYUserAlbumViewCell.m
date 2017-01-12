@@ -33,6 +33,7 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
         _collectionView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:_collectionView];
         _collectionView.scrollEnabled = NO;
+        _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
@@ -78,6 +79,7 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _imageView = [UIImageView new];
+        _imageView.backgroundColor = kColorLightGray;
         [self.contentView addSubview:_imageView];
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
