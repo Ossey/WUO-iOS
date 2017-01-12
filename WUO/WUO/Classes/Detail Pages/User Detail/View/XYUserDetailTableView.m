@@ -77,6 +77,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     [self loadUserTopic];
                     break;
                 case XYUserDetailRequestTypeInfo:
+                    [_dataList[@(XYUserDetailRequestTypeInfo)] removeAllObjects];
                     [self loadUserInfo];
                     break;
                 default:
@@ -444,6 +445,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     }
     
     _idStamp = 0;
+    
     [self.mj_header beginRefreshing];
 }
 
