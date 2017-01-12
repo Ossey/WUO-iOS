@@ -53,7 +53,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         _albumList = [NSMutableArray arrayWithCapacity:0];
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
-        _page = 0;
+        _page = 1;
         self.requestType = XYUserDetailRequestTypeTopic;
         
         _headerView = [XYUserDetailHeaderView new];
@@ -73,8 +73,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             switch (self.requestType) {
                 case XYUserDetailRequestTypeAlbum:
-                    [_albumList removeAllObjects];
-                    _page = 1;
+                    
                     [self loadUserAlbum];
                     break;
                 case XYUserDetailRequestTypeTopic:
@@ -186,7 +185,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             } else {
                 [self xy_showMessage:@"没有更多相片了"];
                 self.mj_footer.hidden = YES;
-                _page--;
             }
         }
         
