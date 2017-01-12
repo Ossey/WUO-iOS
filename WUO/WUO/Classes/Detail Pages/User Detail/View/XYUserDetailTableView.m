@@ -52,7 +52,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _photoList = [NSMutableArray arrayWithCapacity:0];
         _page = 1;
-        _requestType = XYUserDetailRequestTypeAlbum;
+        _requestType = XYUserDetailRequestTypeInfo;
         
         _headerView = [XYUserDetailHeaderView new];
         _headerView.xy_height = SIZE_USER_DETAIL_HEADERVIEW_H;
@@ -247,7 +247,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         // 当有数据时才去设置selectView
         NSDictionary *dict1 = @{@"labelName": @"主页"};
         NSDictionary *dict2 = @{@"labelName": @"作品"};
-        NSDictionary *dict3 = @{@"labelName": @"展示"};
+        NSDictionary *dict3 = @{@"labelName": @"相册"};
         NSArray<NSDictionary *> *labelArr = @[dict1, dict2, dict3];
         self.selectView.trendLabelView.channelCates = [labelArr mutableCopy];
         self.selectView.trendLabelView.backgroundColor = [UIColor whiteColor];
