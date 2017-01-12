@@ -19,7 +19,7 @@
         self.titleItemFont = kFontWithSize(11);
         self.itemScale = 0.2;
         self.underLineBackgroundColor = [UIColor blackColor];
-        self.itemWidth = kScreenW * 0.5;
+
         self.underLineWidth = 50;
         self.separatorImage = [UIImage new];
     
