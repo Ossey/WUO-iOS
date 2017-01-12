@@ -57,6 +57,24 @@
     return self.Description;
 }
 
+- (NSString *)genderText {
+    NSString *genderText;
+    switch (self.gender) {
+        case 0:
+            genderText = @"女";
+            break;
+        case 1:
+            genderText = @"男";
+            break;
+        case 2:
+            genderText = @"保密";
+            break;
+        default:
+            break;
+    }
+    return genderText;
+}
+
 @end
 
 @implementation XYUserLabelItem

@@ -36,7 +36,7 @@
 @property (nonatomic, assign) NSInteger fansCount;
 /** 粉丝数量 */
 @property (nonatomic, assign) NSInteger followCount;
-/** 性别 0 女 1是男 */
+/** 性别 0是女 1是男 2是保密 */
 @property (nonatomic, assign) NSInteger gender;
 /** 投资数量 */
 @property (nonatomic, assign) NSInteger gmCount;
@@ -66,6 +66,8 @@
 @property (nonatomic, strong) NSURL *headFullURL;
 /** 对Description进行处理，当Description为空时，显示暂无个性签名 */
 @property (nonatomic, copy) NSString *descriptionText;
+/** 对性别的处理 */
+@property (nonatomic, copy) NSString *genderText;
 
 + (instancetype)userInfoWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info;
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info;

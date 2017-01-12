@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, XYUserDetailRequestType) {
     NSMutableDictionary<NSNumber *,NSMutableArray<NSObject *> *> *_dataList;
     NSInteger _page;
     NSMutableArray<XYUserImgItem *> *_albumList;
+    /** 是不是第一次进入请求userInfo数据 */
+    bool _isFristRequestUserInfo;
 }
 
 static NSString * const infoCellIdentifier = @"XYUserHomePageView";
@@ -51,7 +53,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         _albumList = [NSMutableArray arrayWithCapacity:0];
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
-        _page = 1;
+        _page = 0;
         self.requestType = XYUserDetailRequestTypeTopic;
         
         _headerView = [XYUserDetailHeaderView new];
@@ -71,6 +73,8 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             switch (self.requestType) {
                 case XYUserDetailRequestTypeAlbum:
+                    [_albumList removeAllObjects];
+                    _page = 1;
                     [self loadUserAlbum];
                     break;
                 case XYUserDetailRequestTypeTopic:
@@ -113,8 +117,13 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)setUserInfo:(XYUserInfo *)userInfo {
     _userInfo = userInfo;
     _headerView.userInfo = userInfo;
+    _isFristRequestUserInfo = YES;
     
-    [self loadUserTopic];
+    if (_isFristRequestUserInfo == YES) {
+        
+        [self loadUserTopic];
+        _isFristRequestUserInfo = NO;
+    }
 }
 
 #pragma mark - 数据请求
@@ -245,6 +254,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             
         case XYUserDetailRequestTypeInfo:
             cell = [tableView dequeueReusableCellWithIdentifier:infoCellIdentifier forIndexPath:indexPath];
+            ((XYUserHomePageView *)cell).userInfo = (XYUserInfo *)_dataList[@(self.requestType)].firstObject;
             break;
             
         case XYUserDetailRequestTypeAlbum:

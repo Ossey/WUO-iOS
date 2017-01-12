@@ -7,8 +7,7 @@
 //
 
 #import "XYUserHomePageView.h"
-
-
+#import "XYUserInfo.h"
 
 @implementation XYUserHomePageView {
     
@@ -59,6 +58,22 @@
     return self;
 }
 
+
+#pragma mark - 属性设置
+
+- (void)setUserInfo:(XYUserInfo *)userInfo {
+    _userInfo = userInfo;
+    
+    _uidContentLabel.text = [NSString stringWithFormat:@"%ld", userInfo.uid];
+    _nameContentLabel.text = userInfo.name;
+    _genderContentLabel.text = userInfo.genderText;
+    _ageContentLabel.text = [NSString stringWithFormat:@"%ld", userInfo.age];
+    _jobContentLabel.text = userInfo.job;
+    _descriptionContentLabel.text = userInfo.descriptionText;
+}
+
+#pragma mark - 控件初始化及界面布局
+
 - (void)setupUI {
     [self addSubview];
     
@@ -107,8 +122,7 @@
     [_containerView addSubview:_labelContentView];
     _descriptionContentLabel = [XYUserHomePageViewContentLabel new];
     [_containerView addSubview:_descriptionContentLabel];
-    
-    
+    _descriptionContentLabel.textAlignment = NSTextAlignmentLeft;
     
 }
 
@@ -248,7 +262,9 @@
 @end
 
 
-@implementation XYUserHomePageViewContentLabel
+@implementation XYUserHomePageViewContentLabel {
+    UIEdgeInsets _insets;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -256,11 +272,24 @@
     if (self) {
         
         self.textColor = kColorNameTextBlack;
-        self.font = kFontWithSize(12);
+        self.font = kFontWithSize(15);
         self.textAlignment = NSTextAlignmentRight;
         self.backgroundColor = [UIColor whiteColor];
+        // 让文本向左偏移15的距离
+        _insets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 15.0f);
+
     }
     return self;
 }
+
+- (void)drawTextInRect:(CGRect)rect {
+    [super drawTextInRect:UIEdgeInsetsInsetRect(rect, _insets)];
+}
+
+//- (void)setText:(NSString *)text {
+//    
+//    text = [text stringByAppendingString:@"   1"];
+//    [super setText:text];
+//}
 
 @end

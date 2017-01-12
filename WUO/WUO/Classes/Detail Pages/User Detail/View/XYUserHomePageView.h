@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class XYUserInfo;
 @interface XYUserHomePageView : UITableViewCell
+
+@property (nonatomic, strong) XYUserInfo *userInfo;
 
 @end
 
