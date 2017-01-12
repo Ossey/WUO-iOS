@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, XYUserDetailRequestType) {
     BOOL _scrollToToping;
     NSMutableDictionary<NSNumber *,NSMutableArray<NSObject *> *> *_dataList;
     NSInteger _page;
+    NSMutableArray<XYUserImgItem *> *_albumList;
 }
 
 static NSString * const infoCellIdentifier = @"XYUserHomePageView";
@@ -47,6 +48,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:UITableViewStylePlain]) {
         
+        _albumList = [NSMutableArray arrayWithCapacity:0];
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _page = 1;
@@ -66,7 +68,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         
         [self registerClass:[XYActiveTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
         
-        
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             switch (self.requestType) {
                 case XYUserDetailRequestTypeAlbum:
@@ -85,9 +86,12 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             }
         }];
         
+        __block XYTopicViewModel *viewModel;
         self.mj_footer = [XYRefreshGifFooter footerWithRefreshingBlock:^{
             switch (self.requestType) {
                 case XYUserDetailRequestTypeTopic:
+                     viewModel = (XYTopicViewModel *)_dataList[@(XYUserDetailRequestTypeTopic)].lastObject;
+                    _idStamp = viewModel.info.idstamp;
                     [self loadUserTopic];
                     break;
                 case XYUserDetailRequestTypeAlbum:
@@ -162,9 +166,10 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     for (id obj in responseObject[@"datas"]) {
                         if ([obj isKindOfClass:[NSDictionary class]]) {
                             
-                            [_dataList[@(self.requestType)] addObject:[XYUserImgItem userImgItemWithDict:obj responseInfo:info]];
+                            [_albumList addObject:[XYUserImgItem userImgItemWithDict:obj responseInfo:info]];
                         }
                     }
+                    [_dataList[@(XYUserDetailRequestTypeAlbum)] addObject:_albumList];
                 }
                 
             } else {
@@ -196,22 +201,30 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         
         if ([responseObject[@"code"] integerValue] == 0 && [responseObject isKindOfClass:[NSDictionary class]]) {
             XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
-            if (responseObject[@"datas"] && [responseObject[@"datas"] isKindOfClass:[NSArray class]]) {
-                for (id obj in responseObject[@"datas"]) {
-                    if ([obj isKindOfClass:[NSDictionary class]]) {
-                       XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:[XYTopicItem topicItemWithDict:obj info:info] info:info];
-                        [_dataList[[NSNumber numberWithInteger:XYUserDetailRequestTypeTopic]] addObject:viewModel];
+            if (responseObject[@"datas"] && [responseObject[@"datas"] count]) {
+                if ([responseObject[@"datas"] isKindOfClass:[NSArray class]]) {
+                    for (id obj in responseObject[@"datas"]) {
+                        if ([obj isKindOfClass:[NSDictionary class]]) {
+                            XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:[XYTopicItem topicItemWithDict:obj info:info] info:info];
+                            [_dataList[[NSNumber numberWithInteger:XYUserDetailRequestTypeTopic]] addObject:viewModel];
+                        }
                     }
+                    [self reloadData];
+                    self.mj_footer.hidden = NO;
                 }
+            } else {
+                [self xy_showMessage:@"没有更多数据了"];
+                self.mj_footer.hidden = YES;
             }
         }
         
         [self.mj_footer endRefreshing];
         [self.mj_header endRefreshing];
-        [self reloadData];
         [WUOHTTPRequest setActivityIndicator:NO];
     }];
 }
+
+
 
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -234,6 +247,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             
         case XYUserDetailRequestTypeAlbum:
             cell = [tableView dequeueReusableCellWithIdentifier:albumCellIdentifier forIndexPath:indexPath];
+            ((XYUserAlbumViewCell *)cell).albumList = (NSMutableArray *)_dataList[@(XYUserDetailRequestTypeAlbum)].firstObject;
             break;
             
         default:
@@ -255,17 +269,18 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    NSInteger albumRow;
     CGFloat height = 0;
     switch (_requestType) {
         case XYUserDetailRequestTypeInfo:
-            height = 400;
+            height = SIZE_USER_DETAIL_HOMEPAGE_H;
             break;
             
         case XYUserDetailRequestTypeAlbum:
             // 高度为collectionViewCell的行数 * cell的高度
             // 行数的计算：每行两个item，根据数据源计算 相片的个数 / 2 ,如果除2为计数，也算一行
-            height = 10 * SIZE_ALBUM_ITEM_H;
+            albumRow = [(NSMutableArray *)[_dataList[@(XYUserDetailRequestTypeAlbum)] firstObject] count] * 0.5;
+            height = albumRow * SIZE_ALBUM_ITEM_H;
             break;
             
         case XYUserDetailRequestTypeTopic:
@@ -447,6 +462,12 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     _idStamp = 0;
     
     [self.mj_header beginRefreshing];
+    
+    if (requestType == XYUserDetailRequestTypeInfo) {
+        self.mj_footer.hidden = YES;
+    } else {
+        self.mj_footer.hidden = NO;
+    }
 }
 
 

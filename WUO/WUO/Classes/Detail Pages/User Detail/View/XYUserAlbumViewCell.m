@@ -7,12 +7,19 @@
 //
 
 #import "XYUserAlbumViewCell.h"
+#import <UIImageView+WebCache.h>
+#import "XYUserImgItem.h"
+
+@interface XYUserAlbumViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@end
 
 @implementation XYUserAlbumViewCell {
     
-    XYUserAlbumCollectionView *_collectionView;
+    UICollectionView *_collectionView;
 }
 
+static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
@@ -21,7 +28,7 @@
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _collectionView = [[XYUserAlbumCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:_collectionView];
@@ -29,37 +36,24 @@
         [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
+        
+        [_collectionView registerClass:[XYUserAlbumCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
     }
     return self;
 }
 
-@end
-
-@interface XYUserAlbumCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource>
-
-@end
-
-@implementation XYUserAlbumCollectionView
-
-static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
-    if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
-        [self setup];
-    }
-    return self;
-}
-
-- (void)setup {
-    
-    [self registerClass:[XYUserAlbumCollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
-    self.delegate = self;
-    self.dataSource = self;
+- (void)setAlbumList:(NSArray *)albumList {
+    _albumList = albumList;
+    NSLog(@"%@", albumList);
+    [_collectionView reloadData];
 }
 
 #pragma mark - <UICollectionViewDelegate, UICollectionViewDataSource>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 20;
+    return _albumList.count;
 }
 
 
@@ -67,11 +61,12 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
     
     XYUserAlbumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.backgroundColor = kRandomColor;
+//    cell.backgroundColor = kRandomColor;
+    
+    cell.imgItem = _albumList[indexPath.row];
     
     return cell;
 }
-
 
 
 @end
@@ -90,6 +85,12 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
     }
     
     return self;
+}
+
+- (void)setImgItem:(XYUserImgItem *)imgItem {
+    _imgItem = imgItem;
+    
+    [_imageView sd_setImageWithURL:imgItem.imgFullURL];
 }
 
 @end

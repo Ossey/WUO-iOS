@@ -85,8 +85,9 @@
 #define kColorDescriptionGray kColor(166, 166, 166, 1.0)    
 #define SIZE_FONT_USER_DETAIL_DESCRIPTION 12
 #define SIZE_FONT_USER_DETAIL_COUNT 10
-#define SIZE_ALBUM_ITEM_H 120                               // 相册collectionViewcell的高度
+#define SIZE_ALBUM_ITEM_H SIZE_ALBUM_ITEM_W                 // 相册collectionViewcell的高度
 #define SIZE_ALBUM_ITEM_W kScreenW * 0.5                    // 相册collectionViewcell的宽度
+#define SIZE_USER_DETAIL_HOMEPAGE_H 400         
 
 
 #define kLoginInfoPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"loginInfo.plist"]
