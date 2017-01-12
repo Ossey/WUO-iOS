@@ -17,6 +17,8 @@
 @property (nonatomic, assign) NSInteger currentPlayerTime;
 /** 剩余播放的时间 */
 @property (nonatomic, assign) NSInteger remainingTime;
+/** 记录上一次的播放状态，当app进入前台时，判断上次是在播放还是暂停，根据情况是否播放 */
+@property (nonatomic, assign) XYPlayerState previousState;
 @end
 
 @implementation XYPlayerControl {
@@ -149,6 +151,11 @@
     // 监听播放到结尾的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlayToEndTime:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
+    // 监听app即将进入后台和前台的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
     /// KVO监听playerItem
     // 监听准备播放状态属性
     [_player.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
@@ -192,29 +199,22 @@
 #pragma mark - AVPlayer相关设置
 
 - (void)play {
-//    if (!_isPlaying) {
-//    self.state = XYPlayerStatePlaying;
-        // 播放时需要判断是否可以播放，再设置以下数据，比如有时明明网络有问题点击了播放，实际并未播放，以下状态却改变了是不行的
-        [_player play];
-        // 设置播放速率---默认为 1.0 (normal speed)，设为 0.0 时暂停播放。设置后立即开始播放，可放在开始播放后设置
-        _player.rate = 1.0;
-        //    if (_player.status == AVPlayerItemStatusReadyToPlay) {
-        _playPauseBtn.selected = YES;
-        _isPlaying = YES;
-        [self startDisplayLink];
-        //    }
-        
-//    }
+    // 播放时需要判断是否可以播放，再设置以下数据，比如有时明明网络有问题点击了播放，实际并未播放，以下状态却改变了是不行的
+    [_player play];
+    // 设置播放速率---默认为 1.0 (normal speed)，设为 0.0 时暂停播放。设置后立即开始播放，可放在开始播放后设置
+    _player.rate = 1.0;
+    _playPauseBtn.selected = YES;
+    _isPlaying = YES;
+    [self startDisplayLink];
     
 }
 
 - (void)pause {
-//    if (_isPlaying) {
-        [_player pause];
-        _playPauseBtn.selected = NO;
-        [self stopDisplayLink];
-        _isPlaying = NO;
-//    }
+    
+    [_player pause];
+    _playPauseBtn.selected = NO;
+    [self stopDisplayLink];
+    _isPlaying = NO;
     
 }
 
@@ -240,6 +240,8 @@
 
 - (void)setState:(XYPlayerState)state
 {
+    // 状态发送改变时，保存上次的播放状态和当前播放状态
+    self.previousState = _state;
     _state = state;
     
     if (self.playerStateChangeBlock) {
@@ -250,6 +252,22 @@
 
 
 #pragma mark - 事件监听
+
+- (void)applicationDidEnterBackground {
+    [self pause];
+    self.state = XYPlayerStatePause;
+}
+
+- (void)applicationWillEnterForeground {
+    
+    //    NSLog(@"%ld--%ld", self.previousState, self.state);
+    if (self.previousState == XYPlayerStatePlaying) {
+        [self play];
+    } else {
+        [self pause];
+    }
+}
+
 // 定时器监听的事件
 - (void)playerProgress {
     
@@ -292,6 +310,7 @@
                 break;
             case AVPlayerItemStatusUnknown:
                 [self pause];
+                self.state = XYPlayerStatePause;
                 break;
             case AVPlayerItemStatusFailed:
                 self.state = XYPlayerStateFailed;
@@ -325,8 +344,9 @@
         NSLog(@"视频开始播放时的时间:%f--总时长：%f -- 缓冲进度%f", startSecods, durationSeconds, progress);
         if (progress > 0.00) {
             // 大于0，说明已经开始缓冲了，视频可以播放了
-            //            _playPauseBtn.selected = YES; // 在这里跳转按钮的选中状态，会有延迟
             _isPlaying = YES;
+            self.state = XYPlayerStatePlaying;
+            [self play];
             
         } 
     }
@@ -345,7 +365,13 @@
             
             // 缓存可达到播放的进度了。
             //由于 AVPlayer 缓存不足就会自动暂停，所以缓存充足了需要手动播放，才能继续播放
-            [self player];
+            if (self.previousState == XYPlayerStatePlaying) {
+                [self play];
+                self.state = XYPlayerStatePlaying;
+            } else {
+                [self pause];
+                self.state = XYPlayerStatePause;
+            }
         }
     }
 }
@@ -441,8 +467,6 @@
     }
     
 }
-
-
 
 
 #pragma mark - 定时器
