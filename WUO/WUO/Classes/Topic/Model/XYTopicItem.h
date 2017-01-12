@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class XYTopicInfo;
+@class XYHTTPResponseInfo;
 @interface XYTopicItem : NSObject
 
 @property (nonatomic, copy) NSString *content;        // 文本内容
@@ -53,15 +53,15 @@
 
 // 扩展属性
 @property (nonatomic, strong) NSURL *headerImageURL;
-@property (nonatomic, strong)XYTopicInfo *info;
+@property (nonatomic, strong)XYHTTPResponseInfo *info;
 @property (nonatomic, strong) NSArray<NSString *> *imageUrls;
 @property (nonatomic, strong) NSURL *videoFullURL;     // 用户发布动态的视频url，当有视频时没有图片，反之亦然
 @property (nonatomic, strong) NSURL *videoImgFullURL;   // 视频的封面图片
 /** 排名，此属性是为话题详情页榜单数据扩展的属性，前10个模型时，cell左上角显示 NO.1样式，其他不显示 */
 @property (nonatomic, copy) NSString *ranking;
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
-+ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info;
++ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info;
 
 @end
 
@@ -74,7 +74,7 @@
 @property (nonatomic, assign) NSInteger uid;
 
 // 扩展属性
-@property (nonatomic, strong)XYTopicInfo *info;
+@property (nonatomic, strong)XYHTTPResponseInfo *info;
 @property (nonatomic, strong) NSURL *imgFullURL;
 @property (nonatomic, assign) CGSize imgSize;            // 图片的原始尺寸
 

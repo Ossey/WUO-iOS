@@ -187,9 +187,9 @@
 #pragma mark - Events
 - (void)avatarViewClick {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCellDidSelectAvatarView:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCellDidSelectAvatarView: toUid:)]) {
         
-        [self.delegate topicViewCellDidSelectAvatarView:self];
+        [self.delegate topicViewCellDidSelectAvatarView:self toUid:self.viewModel.item.uid];
     }
 }
 

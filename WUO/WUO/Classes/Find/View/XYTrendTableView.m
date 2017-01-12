@@ -38,7 +38,7 @@
 
 @interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) XYTopicInfo *dynamicInfo;
+@property (nonatomic, strong) XYHTTPResponseInfo *dynamicInfo;
 
 @end
 
@@ -143,7 +143,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
                 
             } else {
                 
-                XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
+                XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
@@ -452,7 +452,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     
 }
 
-- (XYTopicInfo *)dynamicInfo {
+- (XYHTTPResponseInfo *)dynamicInfo {
     // 防止数据错乱，每次请求时，去对应子标题的数据源中取info
     if (_dataList[self.serachLabel].count) {
         // 每次取最后一个info，保证是服务器最新返回的info

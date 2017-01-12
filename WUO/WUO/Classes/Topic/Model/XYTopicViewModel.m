@@ -10,7 +10,7 @@
 
 @implementation XYTopicViewModel
 
-- (instancetype)initWithItem:(XYTopicItem *)item info:(XYTopicInfo *)info {
+- (instancetype)initWithItem:(XYTopicItem *)item info:(XYHTTPResponseInfo *)info {
     if (self = [super init]) {
         self.item = item;
         self.info = info;
@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYTopicInfo *)info {
++ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYHTTPResponseInfo *)info {
     
     return [[self alloc] initWithItem:item info:info];
 }

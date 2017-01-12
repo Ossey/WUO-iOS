@@ -153,7 +153,7 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
             if ([responseObject[@"datas"] count] != 0) {
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
-                        XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
+                        XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
                         XYActivityTopicItem *item = [XYActivityTopicItem activityTopicItemWithDict:obj info:info];
                         [_topicList addObject:item];
                     }

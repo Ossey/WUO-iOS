@@ -42,9 +42,9 @@
 }
 
 #pragma mark - <XYDynamicTableViewDelegate>
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath {
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath targetUid:(NSInteger)uid {
     
-    XYUserDetailController *vc = [XYUserDetailController new];
+    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithTargetUid:uid];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

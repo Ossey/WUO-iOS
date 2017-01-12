@@ -27,7 +27,7 @@
 /** 参与活动的人数 */
 @property (nonatomic, assign) NSInteger joinCount;
 @property (nonatomic, assign) NSInteger type;
-@property (nonatomic, strong) XYTopicInfo *info;
+@property (nonatomic, strong) XYHTTPResponseInfo *info;
 
 /** 分配状态 */
 @property (nonatomic, assign) NSInteger distributionState;
@@ -84,7 +84,7 @@
 
 
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
-+ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info;
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info;
++ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info;
 
 @end

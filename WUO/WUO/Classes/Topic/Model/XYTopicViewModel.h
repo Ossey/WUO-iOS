@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XYTopicInfo.h"
+#import "XYHTTPResponseInfo.h"
 #import "XYTopicItem.h"
 
 
 @interface XYTopicViewModel : NSObject
 
-@property (nonatomic, strong) XYTopicInfo *info;
+@property (nonatomic, strong) XYHTTPResponseInfo *info;
 @property (nonatomic, strong) XYTopicItem *item;
 
 @property (nonatomic, assign) CGRect cellBounds;
@@ -34,5 +34,5 @@
 
 /** 记录模型所在的tableViewview上次滚动的偏移量 */
 @property (nonatomic, assign) CGPoint previousContentOffset;
-+ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYTopicInfo *)info;
++ (instancetype)topicViewModelWithTopic:(XYTopicItem *)item info:(XYHTTPResponseInfo *)info;
 @end

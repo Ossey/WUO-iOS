@@ -138,6 +138,19 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
+// 用户详情页--获取用户的主页及用户信息的 只需要获取一次即可
++ (void)userDetail_getUserInfoWithtargetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/userInfo/getUserInfo";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:1];
+    [parameters setValue:@(targetUid) forKey:@"targetUid"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfoItem *)userLoginInfoItem {
     

@@ -8,6 +8,7 @@
 
 #import "XYUserDetailController.h"
 #import "XYUserDetailTableView.h"
+#import "WUOHTTPRequest.h"
 
 @interface XYUserDetailController ()
 
@@ -15,6 +16,13 @@
 
 @implementation XYUserDetailController {
     XYUserDetailTableView *_tableView;
+}
+
+- (instancetype)initWithTargetUid:(NSInteger)uid {
+    if (self = [super init]) {
+        self.uid = uid;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -33,6 +41,16 @@
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+    }];
+    
+    [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+            [self xy_showMessage:@"网络请求失败"];
+            return;
+        }
+        
+        NSLog(@"%@", responseObject);
     }];
 }
 

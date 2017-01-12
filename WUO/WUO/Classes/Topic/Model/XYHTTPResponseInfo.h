@@ -1,14 +1,14 @@
 //
-//  XYTopicInfo.h
+//  XYHTTPResponseInfo.h
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//
+//  所有请求服务器时，返回的info信息模型
 
 #import <Foundation/Foundation.h>
 
-@interface XYTopicInfo : NSObject
+@interface XYHTTPResponseInfo : NSObject
 
 @property (nonatomic, copy) NSString *basePath;
 @property (nonatomic, assign) NSInteger code;
@@ -17,6 +17,6 @@
 @property (nonatomic, assign) NSInteger idstamp;
 
 
-+ (instancetype)topicInfoWithDict:(NSDictionary *)dict;
++ (instancetype)responseInfoWithDict:(NSDictionary *)dict;
 
 @end

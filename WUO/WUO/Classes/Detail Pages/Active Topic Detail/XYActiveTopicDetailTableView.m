@@ -105,7 +105,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
                 [self xy_showMessage:@"没有更多数据了"];
                 
             } else {
-                XYTopicInfo *info = [XYTopicInfo topicInfoWithDict:responseObject];
+                XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
                 _activityTopicItem.info = info;
                 // 请求数据成功
                 if (responseObject[@"datas"] && [responseObject[@"datas"] count] > 0) {
@@ -406,7 +406,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
 }
 
 
-- (XYTopicInfo *)dynamicInfo {
+- (XYHTTPResponseInfo *)dynamicInfo {
     // 防止数据错乱，每次请求时，去对应子标题的数据源中取info
     if (_dataList[@(self.currentType)].count) {
         // 每次取最后一个info，保证是服务器最新返回的info

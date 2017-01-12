@@ -47,4 +47,7 @@
 
 // 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
 + (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSString *)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+// 用户详情页--获取用户的主页及用户信息的 每次进入页面时，只需要获取一次即可
++ (void)userDetail_getUserInfoWithtargetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

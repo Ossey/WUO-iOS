@@ -1,14 +1,14 @@
 //
-//  XYTopicInfo.m
+//  XYHTTPResponseInfo.m
 //  WUO
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#import "XYTopicInfo.h"
+#import "XYHTTPResponseInfo.h"
 
-@implementation XYTopicInfo
+@implementation XYHTTPResponseInfo
 
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
@@ -24,7 +24,7 @@
     
     return self;
 }
-+ (instancetype)topicInfoWithDict:(NSDictionary *)dict {
++ (instancetype)responseInfoWithDict:(NSDictionary *)dict {
     
     return [[self alloc] initWithDict:dict];
 }

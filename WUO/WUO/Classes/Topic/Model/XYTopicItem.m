@@ -7,11 +7,11 @@
 //
 
 #import "XYTopicItem.h"
-#import "XYTopicInfo.h"
+#import "XYHTTPResponseInfo.h"
 
 @implementation XYTopicItem
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
     if (self = [super init]) {
 
         [self setValuesForKeysWithDictionary:dict];
@@ -32,7 +32,7 @@
     return self;
 }
 
-+ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
++ (instancetype)topicItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
     
     return [[self alloc] initWithDict:dict info:info];
 }

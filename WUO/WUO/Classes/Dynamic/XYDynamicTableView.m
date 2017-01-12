@@ -15,7 +15,7 @@
 
 @interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource, XYTopicViewCellDelegate>
 
-@property (nonatomic, strong) XYTopicInfo *dynamicInfo;
+@property (nonatomic, strong) XYHTTPResponseInfo *dynamicInfo;
 
 @end
 
@@ -90,7 +90,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
             } else {
                 
                 // 当有数据时，才更新dynamic，避免无数据时idstamp为空，就导致下次请求数据时，又重新开始请求了
-                _dynamicInfo = [XYTopicInfo topicInfoWithDict:responseObject];
+                _dynamicInfo = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
@@ -129,11 +129,11 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 }
 
 #pragma mark - <XYTopicViewCellDelegate>
-- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell {
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell toUid:(NSInteger)uid {
     
-    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath:)]) {
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath: targetUid:)]) {
         NSIndexPath *indexPath = [self indexPathForCell:cell];
-        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath];
+        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath targetUid:uid];
     }
 }
 

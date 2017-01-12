@@ -12,7 +12,7 @@
 
 @implementation XYActivityTopicItem
 
-- (instancetype)initWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
+- (instancetype)initWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
     if (self = [super init]) {
         [self setValuesForKeysWithDictionary:dict];
         self.info = info;
@@ -32,7 +32,7 @@
     return self;
 }
 
-+ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYTopicInfo *)info {
++ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
     
     return [[self alloc] initWithDict:dict info:info];
 }
