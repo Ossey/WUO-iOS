@@ -20,8 +20,7 @@
             NSMutableArray *temArrM = [NSMutableArray arrayWithCapacity:1];
             for (id obj in dict[@"imgList"]) {
                 if ([obj isKindOfClass:[NSDictionary class]]) {
-                    XYDynamicImgItem *imgItm = [XYDynamicImgItem dynamicImgItemWithDict:obj];
-                    imgItm.info = info;
+                    XYTopImgItem *imgItm = [XYTopImgItem userImgItemWithDict:obj responseInfo:info];
                     [temArrM addObject:imgItm];
                 }
             }
@@ -52,7 +51,7 @@
 - (NSArray<NSString *> *)imageUrls {
     
     NSMutableArray<NSString *> *tempArrM = [NSMutableArray arrayWithCapacity:1];
-    for (XYDynamicImgItem *imgItem in self.imgList) {
+    for (XYTopImgItem *imgItem in self.imgList) {
         [tempArrM addObject:imgItem.imgFullURL.absoluteString];
     }
     return [tempArrM mutableCopy];
@@ -78,42 +77,8 @@
 
 @end
 
-@implementation XYDynamicImgItem
-
-- (instancetype)initWithDict:(NSDictionary *)dict {
-    if (self = [super init]) {
-        [self setValuesForKeysWithDictionary:dict];
-    }
-    return self;
-}
-+ (instancetype)dynamicImgItemWithDict:(NSDictionary *)dict {
-    
-    return [[self alloc] initWithDict:dict];
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
+@implementation XYTopImgItem
 
 
-// 处理数据
-- (NSURL *)imgFullURL {
-    
-    if (self.imgUrl.length) {
-        /// 将网址进行 UTF8 转码，避免有些汉字会变乱码
-        NSString *urlStr = [self.imgUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        return [NSURL URLWithString:[self.info.basePath stringByAppendingString:urlStr]];
-    }
-    
-    return nil;
-}
-
-- (CGSize)imgSize {
-    
-    NSString *subStr = [self.imgUrl componentsSeparatedByString:@"jpg?"].lastObject;
-    NSArray *sizeStrs = [subStr componentsSeparatedByString:@"&"];
-    CGFloat width = [[sizeStrs[0] substringFromIndex:2] doubleValue];
-    CGFloat height = [[sizeStrs[1] substringFromIndex:2] doubleValue];
-    
-    return CGSizeMake(width, height);
-}
 
 @end

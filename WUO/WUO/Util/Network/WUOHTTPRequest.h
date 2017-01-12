@@ -30,24 +30,58 @@
  */
 + (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack;
 
-// 获取登录用户信息模型
+/**
+ * @explain 获取登录用户信息模型
+ *
+ */
 + (XYLoginInfoItem *)userLoginInfoItem;
 
-// 广告接口
+/**
+ * @explain 广告接口
+ *
+ */
 + (void)find_advertWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 
-// 发现界面 分类标题接口 getHotTrendLabel
+/**
+ * @explain 发现界面 分类标题接口 getHotTrendLabel
+ *
+ */
 + (void)find_hotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 
-// 发现界面 话题详情 接口 第一次进入话题详情界面时，请求这个数据，以后每次都请求下面的话题数据接口
+/**
+ * @explain 发现界面 话题详情 接口 第一次进入话题详情界面时，请求这个数据，以后每次都请求下面的话题数据接口
+ *
+ */
 + (void)find_allTopicWithFinishedCallBack:(FinishedCallBack)finishedCallBack;
 
-// 发现界面 -- 话题详情 接口
+/**
+ * @explain 发现界面 -- 话题详情 接口
+ *
+ */
 + (void)find_topicDetailByID:(NSInteger)topicID finishedCallBack:(FinishedCallBack)finishedCallBack;
 
-// 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
+/**
+ * @explain 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
+ *
+ */
 + (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSString *)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack;
 
-// 用户详情页--获取用户的主页及用户信息的 每次进入页面时，只需要获取一次即可
+/**
+ * @explain 用户详情页--获取用户的主页及用户信息的 每次进入页面时，只需要获取一次即可
+ *
+ */
 + (void)userDetail_getUserInfoWithtargetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 用户详情界面 请求用户发布的作品的
+ *
+ */
++ (void)userDetail_getUserTopicByUid:(NSInteger)uid idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain // 用户相册
+ *
+ * @param   page  是指请求的页数
+ */
++ (void)userDetail_getUserAlbumWithPage:(NSInteger)page targetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

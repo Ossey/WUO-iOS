@@ -36,9 +36,6 @@
     
     [self loadUserInfo];
     
-    // 请求用户发布的作品的
-    // URL	http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllTrendById
-    // idstamp=&pageNum=15&toUid=2579
   
     _tableView = [[XYUserDetailTableView alloc] init];
     [self.view addSubview:_tableView];
@@ -48,8 +45,10 @@
     
     }
 
+// 请求用户信息
 - (void)loadUserInfo {
     
+    _tableView.loading = YES;
     [WUOHTTPRequest setActivityIndicator:YES];
     
     [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.item.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
@@ -57,6 +56,7 @@
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
             [WUOHTTPRequest setActivityIndicator:NO];
+            _tableView.loading = NO;
             return;
         }
         
@@ -68,7 +68,7 @@
         }
         
         [WUOHTTPRequest setActivityIndicator:NO];
-        
+        _tableView.loading = NO;
     }];
 
 }

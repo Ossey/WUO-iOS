@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, XYTopicType) {
 }
 
 static NSString * const cellIdentifier = @"XYTopicViewCell";
-static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
+static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     if (self = [super initWithFrame:frame style:style]) {
         
@@ -396,6 +396,8 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailController";
         self.selectView.trendLabelView.channelCates = [labelArr mutableCopy];
         self.selectView.trendLabelView.selectedIndex = 1; // 默认选中第一个按钮
         self.selectView.trendLabelView.delegate = self;
+        self.selectView.trendLabelView.backgroundColor = kTableViewBgColor;
+        self.selectView.trendLabelView.globalBackgroundColor = kColorGlobalCell;
         _isFirst = NO;
     }
     

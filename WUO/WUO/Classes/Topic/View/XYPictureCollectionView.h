@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTopicItem, XYDynamicImgItem;
+@class XYTopicItem, XYTopImgItem;
 @interface XYPictureCollectionView : UICollectionView
 
 @property (nonatomic, strong) XYTopicItem *dynamicItem;
@@ -18,7 +18,7 @@
 
 @interface XYPictureCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) XYDynamicImgItem *imgItem;
+@property (nonatomic, strong) XYTopImgItem *imgItem;
 
 
 @end

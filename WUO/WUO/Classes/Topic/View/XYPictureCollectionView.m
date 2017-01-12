@@ -116,7 +116,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     return self;
 }
 
-- (void)setImgItem:(XYDynamicImgItem *)imgItem {
+- (void)setImgItem:(XYTopImgItem *)imgItem {
     
     _imgItem = imgItem;
     

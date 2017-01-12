@@ -151,6 +151,43 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
+// 用户详情界面
+// 请求用户发布的作品的
+// URL	http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllTrendById
+// idstamp=&pageNum=15&toUid=2579
++ (void)userDetail_getUserTopicByUid:(NSInteger)uid idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllTrendById";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+    [parameters setValue:@(uid) forKey:@"toUid"];
+    [parameters setValue:idstamp forKey:@"idstamp"];
+    [parameters setValue:@15 forKey:@"pageNum"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
+// 用户相册
+// URL	http://me.api.kfit.com.cn/me-api/rest/api/me/myAlbum
+// page=2&pageNum=15&targetUid=2579
+// page 是指请求的页数
++ (void)userDetail_getUserAlbumWithPage:(NSInteger)page targetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/me/myAlbum";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+    [parameters setValue:@(page) forKey:@"page"];
+    [parameters setValue:@(targetUid) forKey:@"targetUid"];
+    [parameters  setValue:@15 forKey:@"pageNum"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+
+}
+
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfoItem *)userLoginInfoItem {
     

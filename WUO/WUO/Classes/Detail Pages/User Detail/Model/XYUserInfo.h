@@ -28,13 +28,15 @@
 @property (nonatomic, assign) CGFloat cash;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, assign) NSInteger constellation;
-@property (nonatomic, copy) NSString *Description;  // 原字段description
+/** 个性签名  原字段description */
+@property (nonatomic, copy) NSString *Description;
 @property (nonatomic, assign) CGFloat earningsCash;
 @property (nonatomic, assign) CGFloat earningsGoldCoin;
 @property (nonatomic, copy) NSString *email;
 @property (nonatomic, assign) NSInteger fansCount;
 /** 粉丝数量 */
 @property (nonatomic, assign) NSInteger followCount;
+/** 性别 0 女 1是男 */
 @property (nonatomic, assign) NSInteger gender;
 /** 投资数量 */
 @property (nonatomic, assign) NSInteger gmCount;
@@ -49,12 +51,14 @@
 @property (nonatomic, assign) BOOL isFollow;
 /** 当前登录的用户是否投资查看的用户 */
 @property (nonatomic, assign) BOOL isInvest;
+/** 兴趣/职业 */
 @property (nonatomic, copy) NSString *job;
 @property (nonatomic, copy) NSString *location;
 @property (nonatomic, copy) NSString *name;
 /** 分享数量 */
 @property (nonatomic, assign) NSInteger shareCount;
 @property (nonatomic, assign) NSInteger uid;
+/** 用户个性前面 */
 @property (nonatomic, strong) NSArray *userLabelList;
 
 
@@ -67,6 +71,7 @@
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info;
 @end
 
+/** 个人标签的类， 每个label就是一种标签 */
 @interface XYUserLabelItem : NSObject
 
 @property (nonatomic, copy) NSString *label;
