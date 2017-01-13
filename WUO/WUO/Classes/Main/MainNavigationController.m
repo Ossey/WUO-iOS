@@ -33,6 +33,7 @@
         // 自定义导航条左侧返回按钮
         UIButton *backBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [backBarButton setImage:[UIImage imageNamed:@"Login_backSel"].xy_originalMode forState:UIControlStateNormal];
+        [backBarButton addTarget:self action:@selector(backBarButton) forControlEvents:UIControlEventTouchUpInside];
         backBarButton.contentEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
         [backBarButton sizeToFit];
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBarButton];
@@ -54,7 +55,7 @@
         [self dismissViewControllerAnimated:YES completion:^{
         }];
     }else {
-        [[self navigationController] popViewControllerAnimated:YES];
+        [self popViewControllerAnimated:YES];
     }
     
 }
