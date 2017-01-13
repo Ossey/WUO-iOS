@@ -53,7 +53,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         _albumList = [NSMutableArray arrayWithCapacity:0];
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
-        _page = 1;
+        _page = 0;
         self.requestType = XYUserDetailRequestTypeTopic;
         
         _headerView = [XYUserDetailHeaderView new];
@@ -71,23 +71,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         [self registerClass:[XYActiveTopicDetailSelectView class] forHeaderFooterViewReuseIdentifier:selectViewIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
-            switch (self.requestType) {
-                case XYUserDetailRequestTypeAlbum:
-                    
-                    [self loadUserAlbum];
-                    break;
-                case XYUserDetailRequestTypeTopic:
-                    _idStamp = 0;
-                    [_dataList[@(XYUserDetailRequestTypeTopic)] removeAllObjects];
-                    [self loadUserTopic];
-                    break;
-                case XYUserDetailRequestTypeInfo:
-                    [_dataList[@(XYUserDetailRequestTypeInfo)] removeAllObjects];
-                    [self loadUserInfo];
-                    break;
-                default:
-                    break;
-            }
+            [self loadNewData];
         }];
         
         __block XYTopicViewModel *viewModel;
@@ -111,6 +95,28 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         
     }
     return self;
+}
+
+- (void)loadNewData {
+    switch (self.requestType) {
+        case XYUserDetailRequestTypeAlbum:
+            _page = 1;
+            [_albumList removeAllObjects];
+            [self loadUserAlbum];
+            break;
+        case XYUserDetailRequestTypeTopic:
+            _idStamp = 0;
+            [_dataList[@(XYUserDetailRequestTypeTopic)] removeAllObjects];
+            [self loadUserTopic];
+            break;
+        case XYUserDetailRequestTypeInfo:
+            [_dataList[@(XYUserDetailRequestTypeInfo)] removeAllObjects];
+            [self loadUserInfo];
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)setUserInfo:(XYUserInfo *)userInfo {
@@ -182,9 +188,11 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                 }
                 [self reloadData];
                 self.mj_footer.hidden = NO;
+                
             } else {
                 [self xy_showMessage:@"没有更多相片了"];
                 self.mj_footer.hidden = YES;
+                
             }
         }
         
@@ -475,8 +483,8 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     
     _idStamp = 0;
     
-    [self.mj_header beginRefreshing];
     
+    [self loadNewData];
     if (requestType == XYUserDetailRequestTypeInfo) {
         self.mj_footer.hidden = YES;
     } else {
