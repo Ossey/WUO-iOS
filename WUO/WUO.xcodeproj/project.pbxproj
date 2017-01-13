@@ -576,6 +576,7 @@
 		183F93C41E18F2A400875416 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				184560611E28E6F10065D991 /* Message */,
 				1810AF961E2616D700918A2C /* Topic */,
 				1810AF561E260A5E00918A2C /* Detail Pages */,
 				183F94071E191F9F00875416 /* LoginRegister */,
@@ -760,6 +761,13 @@
 				183F941E1E195B8500875416 /* XYCustomNavController.m */,
 			);
 			path = CustomNav;
+			sourceTree = "<group>";
+		};
+		184560611E28E6F10065D991 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		1862E6941E21DB530031D063 /* GzwTableViewLoading */ = {

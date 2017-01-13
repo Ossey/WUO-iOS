@@ -195,7 +195,7 @@ static id obj;
     return _xy_rightButton;
 }
 
-- (void)setXy_xy_rightButton:(UIButton *)xy_rightButton {
+- (void)setXy_rightButton:(UIButton *)xy_rightButton {
     
     _xy_rightButton = xy_rightButton;
     [xy_rightButton removeFromSuperview];

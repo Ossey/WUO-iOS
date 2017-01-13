@@ -36,13 +36,20 @@
     _tableView.backgroundColor = kTableViewBgColor;
     
     self.xy_topBar.backgroundColor = [UIColor whiteColor];
-    
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightBtn setImage:[UIImage imageNamed:@"Nav_message"] forState:UIControlStateNormal];
+    [rightBtn sizeToFit];
+
     // 根据当前控制器所在当行控制器是不是XYCustomNavController判断，导航标题该显示在哪
     if ([self.navigationController isKindOfClass:NSClassFromString(@"XYCustomNavController")]) {
         self.xy_title = self.item.name;
         [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
+        self.xy_rightButton = rightBtn;
+        
     } else {
         self.title = self.item.name;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(meaasgeClick)];
     }
     
     [self loadUserInfo];
@@ -62,11 +69,11 @@
     
     _tableView.loading = YES;
     [WUOHTTPRequest setActivityIndicator:YES];
-    
+    __weak typeof(self) weakSelf = self;
     [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.item.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"%@", error.localizedDescription);
-            [self xy_showMessage:@"网络请求失败"];
+            [weakSelf xy_showMessage:@"网络请求失败"];
             [WUOHTTPRequest setActivityIndicator:NO];
             _tableView.loading = NO;
             return;
@@ -75,7 +82,7 @@
         if ([responseObject[@"code"] integerValue] == 0) {
             XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
             if (responseObject[@"userInfo"] && [responseObject[@"userInfo"] isKindOfClass:[NSDictionary class]]) {
-                self.userInfo = [XYUserInfo userInfoWithDict:responseObject[@"userInfo"] responseInfo:info];
+                weakSelf.userInfo = [XYUserInfo userInfoWithDict:responseObject[@"userInfo"] responseInfo:info];
             }
         }
         
@@ -90,13 +97,22 @@
     _tableView.userInfo = userInfo;
 }
 
+#pragma mark - Eevent 
+- (void)chatEvent {
+    
+}
 
 
 - (void)dealloc {
-//    NSLog(@"%@", _tableView);
+
+    _tableView.delegate = nil;
+    _tableView.userInfo = nil;
     [_tableView removeFromSuperview];
     _tableView = nil;
-//    NSLog(@"%@", _tableView);
+    self.item = nil;
+    _userInfo = nil;
+    
+    
     NSLog(@"%s", __func__);
 }
 

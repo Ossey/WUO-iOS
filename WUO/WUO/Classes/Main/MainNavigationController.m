@@ -23,6 +23,8 @@
         self.interactivePopGestureRecognizer.delegate = weakSelf;
         self.delegate = weakSelf;
     }
+    
+    [self.navigationBar setBackgroundImage:[UIImage xy_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsCompact];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
