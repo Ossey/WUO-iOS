@@ -31,19 +31,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.title = self.item.name;
+    _tableView.backgroundColor = kTableViewBgColor;
+    
+    self.xy_topBar.backgroundColor = [UIColor whiteColor];
+    
+    // 根据当前控制器所在当行控制器是不是XYCustomNavController判断，导航标题该显示在哪
+    if ([self.navigationController isKindOfClass:NSClassFromString(@"XYCustomNavController")]) {
+        self.xy_title = self.item.name;
+        [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
+    } else {
+        self.title = self.item.name;
+    }
     
     [self loadUserInfo];
     
-  
+    
     _tableView = [[XYUserDetailTableView alloc] init];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
-    }
+}
+
 
 // 请求用户信息
 - (void)loadUserInfo {
@@ -76,6 +86,15 @@
 - (void)setUserInfo:(XYUserInfo *)userInfo {
     _userInfo = userInfo;
     _tableView.userInfo = userInfo;
+}
+
+
+- (void)dealloc {
+    
+    [_tableView removeFromSuperview];
+    _tableView = nil;
+    
+    NSLog(@"%s", __func__);
 }
 
 @end

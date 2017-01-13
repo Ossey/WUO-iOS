@@ -183,7 +183,7 @@ static id _instance;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
     [parameters setValue:@(page) forKey:@"page"];
     [parameters setValue:@(targetUid) forKey:@"targetUid"];
-    [parameters  setValue:@15 forKey:@"pageNum"];
+    [parameters  setValue:@14 forKey:@"pageNum"];
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 
 }

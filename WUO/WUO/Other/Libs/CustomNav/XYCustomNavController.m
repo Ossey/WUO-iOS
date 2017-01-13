@@ -57,6 +57,7 @@
     [super pushViewController:viewController animated:animated];
 }
 
+#pragma mark - <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
 
     return self.viewControllers.count > 1;

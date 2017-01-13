@@ -9,6 +9,7 @@
 #import "XYUserAlbumViewCell.h"
 #import <UIImageView+WebCache.h>
 #import "XYUserImgItem.h"
+#import "XYImageViewer.h"
 
 @interface XYUserAlbumViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -17,11 +18,15 @@
 @implementation XYUserAlbumViewCell {
     
     UICollectionView *_collectionView;
+    /** 将数据源中的所有模型，转换为图片的URL字符串保存数组中 */
+    NSMutableArray<NSString *> *_imageURLStrList;
 }
 
 static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        _imageURLStrList = [NSMutableArray arrayWithCapacity:0];
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake(SIZE_ALBUM_ITEM_W, SIZE_ALBUM_ITEM_H);
@@ -47,8 +52,17 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
 
 - (void)setAlbumList:(NSArray *)albumList {
     _albumList = albumList;
-    NSLog(@"%@", albumList);
     [_collectionView reloadData];
+    
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        NSMutableArray *tempArrM = [NSMutableArray arrayWithCapacity:0];
+        for (XYUserImgItem *imgItem in self.albumList) {
+            [tempArrM addObject:imgItem.imgFullURL.absoluteString];
+        }
+        _imageURLStrList = [tempArrM mutableCopy];
+        tempArrM = nil;
+        NSLog(@"%@", [NSThread currentThread]);
+    }];
 }
 
 #pragma mark - <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -62,12 +76,20 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
     
     XYUserAlbumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-//    cell.backgroundColor = kRandomColor;
-    
     cell.imgItem = _albumList[indexPath.row];
     
     return cell;
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    XYUserAlbumCollectionViewCell *cell = (XYUserAlbumCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    [[XYImageViewer shareInstance] prepareImageURLStrList:_imageURLStrList endView:^UIView *(NSIndexPath *indexPath) {
+        return [collectionView cellForItemAtIndexPath:indexPath];
+    }];
+    
+    [[XYImageViewer shareInstance] show:cell currentImgIndex:indexPath.row];}
 
 
 @end
@@ -81,6 +103,8 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
         _imageView = [UIImageView new];
         _imageView.backgroundColor = kColorLightGray;
         [self.contentView addSubview:_imageView];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];

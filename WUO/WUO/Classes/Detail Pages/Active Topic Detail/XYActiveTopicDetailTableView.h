@@ -8,10 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYActivityTopicItem, XYTopicItem;
+@class XYActivityTopicItem, XYTopicItem, XYActiveTopicDetailTableView;
+
+@protocol XYActiveTopicTableViewDelegate <UITableViewDelegate>
+
+@optional
+/**
+ * @explain 点击cell上面头像时调用
+ *
+ * @param   item  头像对应用户当前的topic模型数据
+ */
+- (void)activeTopicDetailTableView:(XYActiveTopicDetailTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item;
+
+@end
+
 @interface XYActiveTopicDetailTableView : UITableView
 
 /** 主要用于展示头部信息的模型 */
 @property (nonatomic, strong) XYActivityTopicItem *activityTopicItem;
+
+@property (nonatomic, weak) id<XYActiveTopicTableViewDelegate> activeTopicTableViewdelegate;
 
 @end

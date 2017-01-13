@@ -230,7 +230,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     self.mj_footer.hidden = NO;
                 }
             } else {
-                [self xy_showMessage:@"没有更多数据了"];
                 self.mj_footer.hidden = YES;
             }
         }
@@ -296,8 +295,12 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             
         case XYUserDetailRequestTypeAlbum:
             // 高度为collectionViewCell的行数 * cell的高度
-            // 行数的计算：每行两个item，根据数据源计算 相片的个数 / 2 ,如果除2为计数，也算一行
+            // 行数的计算：每行两个item，根据数据源计算 相片的个数 / 2 ,如果除2为基数，也算一行
+            // 不过，可以通过修改一次请求的数据解决
             albumRow = [(NSMutableArray *)[_dataList[@(XYUserDetailRequestTypeAlbum)] firstObject] count] * 0.5;
+//            if (albumRow % 2 == 1) {
+//                albumRow += 1;
+//            }
             height = albumRow * SIZE_ALBUM_ITEM_H;
             break;
             
@@ -490,6 +493,10 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     } else {
         self.mj_footer.hidden = NO;
     }
+}
+
+- (void)dealloc {
+    NSLog(@"%s", __func__);
 }
 
 

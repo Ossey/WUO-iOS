@@ -10,10 +10,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTrendTableView;
+@class XYTrendTableView, XYTopicItem, XYTopicViewCell;
 @protocol XYTrendTableViewDelegate <UITableViewDelegate>
 
 @optional
+
+/**
+ * @explain 点击cell上面头像时调用
+ *
+ * @param   item  头像对应用户当前的topic模型数据
+ */
+- (void)dynamicTableView:(XYTrendTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item;
+
 /**
  * @explain scrollView滚动的时候调用
  *

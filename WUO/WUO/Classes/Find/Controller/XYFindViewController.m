@@ -15,6 +15,7 @@
 #import "XYTopicViewCell.h"
 #import "WUOFindHeaderView.h"
 #import "XYActivityTopicItem.h"
+#import "XYUserDetailController.h"
 
 @interface XYFindViewController () <XYTrendTableViewDelegate, UIScrollViewDelegate, XYCateTitleViewDelegate>
 @property (nonatomic, strong) XYTrendTableView *tableView;
@@ -212,6 +213,13 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
     self.xy_titleColor = [UIColor colorWithWhite:0 alpha:alpha];
     self.xy_topBar.backgroundColor = [UIColor colorWithWhite:1 alpha:alpha];
     
+}
+
+
+- (void)dynamicTableView:(XYTrendTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
+    
+    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithItem:item];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //// 触摸dynamicTableView并拖拽画面，再松开时，触发该函数

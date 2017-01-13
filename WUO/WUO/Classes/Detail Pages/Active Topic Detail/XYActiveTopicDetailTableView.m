@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, XYTopicType) {
     XYTopicTypeNewRanklist = 0  // 请求排行榜数据
 };
 
-@interface XYActiveTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource, XYCateTitleViewDelegate>
+@interface XYActiveTopicDetailTableView () <UITableViewDelegate, UITableViewDataSource, XYCateTitleViewDelegate, XYTopicViewCellDelegate>
 
 @property (nonatomic, strong) XYActiveTopicDetailHeaderView *headView;
 @property (nonatomic, strong) XYActiveTopicDetailSelectView *selectView;
@@ -178,7 +178,14 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
     });
 }
 
-
+#pragma mark - XYTopicViewCellDelegate 
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item {
+    if (self.activeTopicTableViewdelegate && [self.activeTopicTableViewdelegate respondsToSelector:@selector(activeTopicDetailTableView:didSelectAvatarViewAtIndexPath:item:)]) {
+        
+        NSIndexPath *indexPath = [self indexPathForCell:cell];
+        [self.activeTopicTableViewdelegate activeTopicDetailTableView:self didSelectAvatarViewAtIndexPath:indexPath item:item];
+    }
+}
 
 #pragma mark - <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -189,6 +196,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
 }

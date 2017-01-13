@@ -36,7 +36,7 @@
 #import "WUOHTTPRequest.h"
 #import "XYTopicViewCell.h"
 
-@interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource>
+@interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource, XYTopicViewCellDelegate>
 
 @property (nonatomic, strong) XYHTTPResponseInfo *dynamicInfo;
 
@@ -188,7 +188,13 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     [cell draw];
 }
 
-
+#pragma mark - XYTopicViewCellDelegate
+- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item {
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath:item:)]) {
+        NSIndexPath *indexPath = [self indexPathForCell:cell];
+        [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath item:item];
+    }
+}
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -199,6 +205,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
     

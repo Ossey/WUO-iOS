@@ -11,6 +11,11 @@
 #import "XYActiveTopicDetailTableView.h"
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
+#import "XYUserDetailController.h"
+
+@interface XYActiveTopicDetailController () <XYActiveTopicTableViewDelegate>
+
+@end
 
 @implementation XYActiveTopicDetailController {
     
@@ -48,7 +53,7 @@
     [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
     
     _tableView = [[XYActiveTopicDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-
+    _tableView.activeTopicTableViewdelegate = self;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -87,6 +92,14 @@
         [WUOHTTPRequest setActivityIndicator:NO];
     }];
     
+}
+
+#pragma mark - XYActiveTopicTableViewDelegate
+- (void)activeTopicDetailTableView:(XYActiveTopicDetailTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
+    
+    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithItem:item];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 
