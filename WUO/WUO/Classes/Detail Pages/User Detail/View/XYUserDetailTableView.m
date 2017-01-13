@@ -494,10 +494,16 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         self.mj_footer.hidden = NO;
     }
 }
-
 - (void)dealloc {
+    
+    [super removeFromSuperview];
+    [_dataList removeAllObjects];
+    [_needLoadList removeAllObjects];
+    _needLoadList = nil;
+    _dataList = nil;
     NSLog(@"%s", __func__);
 }
+
 
 
 @end

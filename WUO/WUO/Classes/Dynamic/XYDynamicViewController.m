@@ -61,7 +61,10 @@
 
 
 - (void)dealloc {
-    
+    _tableView.dynamicDelegate = nil;
+    [_tableView removeFromSuperview];
+    _tableView = nil;
+    NSLog(@"%s", __func__);
     
 }
 @end

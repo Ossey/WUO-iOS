@@ -6,6 +6,8 @@
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
+#warning TODO 目前待解决的问题：循环引用了😢
+
 #import "XYUserDetailController.h"
 #import "XYUserDetailTableView.h"
 #import "WUOHTTPRequest.h"
@@ -89,11 +91,12 @@
 }
 
 
+
 - (void)dealloc {
-    
+//    NSLog(@"%@", _tableView);
     [_tableView removeFromSuperview];
     _tableView = nil;
-    
+//    NSLog(@"%@", _tableView);
     NSLog(@"%s", __func__);
 }
 

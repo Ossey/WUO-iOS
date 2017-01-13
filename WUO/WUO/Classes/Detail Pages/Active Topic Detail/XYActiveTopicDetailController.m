@@ -102,5 +102,13 @@
 
 }
 
+- (void)dealloc {
+    _tableView.activeTopicTableViewdelegate = nil;
+    [_tableView removeFromSuperview];
+    _tableView = nil;
+    NSLog(@"%s", __func__);
+    
+}
+
 
 @end
