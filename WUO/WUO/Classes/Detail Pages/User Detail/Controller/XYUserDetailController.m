@@ -118,7 +118,7 @@
 - (void)jumpToChat {
     
     // 进入聊天室，与当前用户聊天
-    ChatViewController *vc = [[ChatViewController alloc] initWithConversationChatter:[NSString stringWithFormat:@"%ld", self.uid] conversationType:EMConversationTypeChat];
+    ChatViewController *vc = [[ChatViewController alloc] initWithConversationChatter:[NSString stringWithFormat:@"%ld", (long)self.uid] conversationType:EMConversationTypeChat];
     vc.user = self.userInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
