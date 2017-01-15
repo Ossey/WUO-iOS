@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 
 @interface MainTabBarController : UITabBarController
+{
+    EMConnectionState _connectionState;
+}
+//- (void)setupUntreatedApplyCount;
+
+//- (void)setupUnreadMessageCount;
+//
+//- (void)networkChanged:(EMConnectionState)connectionState;
 
 @end

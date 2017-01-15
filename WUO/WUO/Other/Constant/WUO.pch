@@ -7,8 +7,7 @@
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#ifndef WUO_pch
-#define WUO_pch
+#ifdef __OBJC__
 
 #import "UIImage+XYExtension.h"
 #import "XYConstant.h"
@@ -17,6 +16,7 @@
 #import "NSString+MD5.h"
 #import "NSObject+XYHUD.h"
 #import "GzwTableViewLoading.h"
+
 
 #define kScreenW CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kScreenH CGRectGetHeight([UIScreen mainScreen].bounds)
@@ -92,5 +92,21 @@
 
 #define kLoginInfoPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"loginInfo.plist"]
 
-#endif /* WUO_pch */
 
+// 环信相关
+
+#import <Foundation/Foundation.h>
+#import <Hyphenate/Hyphenate.h>
+#import "EaseUI.h"
+
+//#define NSEaseLocalizedString(key, comment) [[NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"EaseUIResource" withExtension:@"bundle"]] localizedStringForKey:(key) value:@"" table:nil]
+
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
+
+#define CHATVIEWBACKGROUNDCOLOR [UIColor colorWithRed:0.936 green:0.932 blue:0.907 alpha:1]
+
+#endif

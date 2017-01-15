@@ -8,6 +8,7 @@
 
 #import "WUOHTTPRequest.h"
 #import "XYLoginInfoItem.h"
+#import "AppDelegate.h"
 
 //#import <AFNetworkActivityIndicatorManager.h>
 
@@ -183,7 +184,7 @@ static id _instance;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
     [parameters setValue:@(page) forKey:@"page"];
     [parameters setValue:@(targetUid) forKey:@"targetUid"];
-    [parameters  setValue:@14 forKey:@"pageNum"];
+    [parameters  setValue:@15 forKey:@"pageNum"];
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 
 }
@@ -194,5 +195,31 @@ static id _instance;
     NSDictionary *loginInfoDict = [NSDictionary dictionaryWithContentsOfFile:kLoginInfoPath];
     
     return [XYLoginInfoItem loginInfoItemWithDict:loginInfoDict];
+}
+
+// 每次请求网络时，检测登录状态，如果发现已经在其他地方登录，当前账户就要强制退出，并提醒用户
++ (void)checkLoginStatusFromResponseCode:(NSInteger)code {
+
+    if (code == -2) {
+        
+        [self showInfo:[NSString stringWithFormat:@"您的账号已于%@在其他设备上登录，如果不是您的操作，您的密码可能已经泄露，请立刻重新登录后修改密码", @"(刚刚)"]];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 用户没有登录
+            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            delegate.isLogin = NO;
+            
+            // 主动退出登录：调用 SDK 的退出接口；
+            EMError *error = [[EMClient sharedClient] logout:YES];
+            if (!error) {
+                NSLog(@"您的账号退出成功");
+            }
+            
+        });
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@(code) forKey:XYUserLoginStatuKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
 }
 @end

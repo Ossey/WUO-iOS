@@ -29,6 +29,9 @@
             [button setFrame:CGRectMake(x, y, w, h)];
             [button setImage:[UIImage imageNamed:[self imageNames][i]] forState:UIControlStateNormal];
             [button setTitle:[NSString stringWithFormat:@"%d", 0] forState:UIControlStateNormal];
+            if (i == 3) {
+                [button setImage:[UIImage imageNamed:@"Home_detailPraiseSel"] forState:UIControlStateSelected];
+            }
             
             switch (i) {
                 case WUOToolViewEventTypeShare:

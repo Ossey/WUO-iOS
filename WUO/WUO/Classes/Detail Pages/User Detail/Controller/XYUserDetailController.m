@@ -13,6 +13,7 @@
 #import "WUOHTTPRequest.h"
 #import "XYUserInfo.h"
 #import "XYTopicViewModel.h"
+#import "ChatViewController.h"
 
 @interface XYUserDetailController ()
 @property (nonatomic, strong) XYUserInfo *userInfo;
@@ -23,9 +24,17 @@
     
 }
 
-- (instancetype)initWithItem:(XYTopicItem *)item {
+//- (instancetype)initWithItem:(XYTopicItem *)item {
+//    if (self = [super init]) {
+//        self.item = item;
+//    }
+//    return self;
+//}
+
+- (instancetype)initWithUid:(NSInteger)uid username:(NSString *)name {
     if (self = [super init]) {
-        self.item = item;
+        self.uid = uid;
+        self.username = name;
     }
     return self;
 }
@@ -33,33 +42,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView.backgroundColor = kTableViewBgColor;
-    
-    self.xy_topBar.backgroundColor = [UIColor whiteColor];
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightBtn setImage:[UIImage imageNamed:@"Nav_message"] forState:UIControlStateNormal];
-    [rightBtn sizeToFit];
-
-    // 根据当前控制器所在当行控制器是不是XYCustomNavController判断，导航标题该显示在哪
-    if ([self.navigationController isKindOfClass:NSClassFromString(@"XYCustomNavController")]) {
-        self.xy_title = self.item.name;
-        [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
-        self.xy_rightButton = rightBtn;
-        
-    } else {
-        self.title = self.item.name;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(meaasgeClick)];
-    }
-    
-    [self loadUserInfo];
-    
     
     _tableView = [[XYUserDetailTableView alloc] init];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+//    _tableView.backgroundColor = kTableViewBgColor;
+    
+    self.xy_topBar.backgroundColor = [UIColor whiteColor];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightBtn setImage:[UIImage imageNamed:@"Mine_SiXinImage"] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(jumpToChat) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn sizeToFit];
+
+    // 根据当前控制器所在当行控制器是不是XYCustomNavController判断，导航标题该显示在哪
+    if ([self.navigationController isKindOfClass:NSClassFromString(@"XYCustomNavController")]) {
+        self.xy_title = self.username;
+        [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
+        self.xy_rightButton = rightBtn;
+        // tableView设置偏移量
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+        
+        [self.navigationController.navigationBar setHidden:YES];
+    } else {
+        self.title = self.username;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+        
+
+    }
+    
+    [self loadUserInfo];
+    
+    
+    
     
 }
 
@@ -70,7 +87,7 @@
     _tableView.loading = YES;
     [WUOHTTPRequest setActivityIndicator:YES];
     __weak typeof(self) weakSelf = self;
-    [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.item.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+    [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             [weakSelf xy_showMessage:@"网络请求失败"];
@@ -98,8 +115,12 @@
 }
 
 #pragma mark - Eevent 
-- (void)chatEvent {
+- (void)jumpToChat {
     
+    // 进入聊天室，与当前用户聊天
+    ChatViewController *vc = [[ChatViewController alloc] initWithConversationChatter:[NSString stringWithFormat:@"%ld", self.uid] conversationType:EMConversationTypeChat];
+    vc.user = self.userInfo;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -109,7 +130,6 @@
     _tableView.userInfo = nil;
     [_tableView removeFromSuperview];
     _tableView = nil;
-    self.item = nil;
     _userInfo = nil;
     
     

@@ -21,7 +21,9 @@
 
 
 @interface MainTabBarController ()
+{
 
+}
 @end
 
 @implementation MainTabBarController
@@ -117,8 +119,6 @@
     [imageView.layer addSublayer:layer];
     return imageView;
 }
-
-
 
 
 

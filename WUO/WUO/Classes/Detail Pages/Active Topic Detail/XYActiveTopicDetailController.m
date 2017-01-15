@@ -75,6 +75,9 @@
     [WUOHTTPRequest setActivityIndicator:YES];
     
     [WUOHTTPRequest find_topicDetailByID:self.item.topicId finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        // 检测登录及在线状态, -2 为登录失败
+        [WUOHTTPRequest  checkLoginStatusFromResponseCode:[responseObject[@"code"] integerValue]];
+        
         if (error) {
             [self xy_showMessage:@"网络请求失败"];
             _tableView.loading = NO;
@@ -97,7 +100,7 @@
 #pragma mark - XYActiveTopicTableViewDelegate
 - (void)activeTopicDetailTableView:(XYActiveTopicDetailTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
     
-    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithItem:item];
+    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];
 
 }

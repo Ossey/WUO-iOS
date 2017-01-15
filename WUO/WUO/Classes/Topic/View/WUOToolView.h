@@ -19,9 +19,13 @@ typedef NS_ENUM(NSInteger, WUOToolViewEventType) {
 @interface WUOToolView : UIView {
     
 @public
+    /** 分享按钮 */
     UIButton *_shareBtn;
+    /** 评论按钮 */
     UIButton *_commentBtn;
+    /** 奖赏按钮 */
     UIButton *_rewardBtn;
+    /** 点赞按钮 */
     UIButton *_praiseBtn;
 }
 

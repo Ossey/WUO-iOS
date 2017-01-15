@@ -222,14 +222,6 @@
         [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:self.viewModel.jobLabelFrame.size.height andWidth:self.viewModel.jobLabelFrame.size.width];
         
         
-//        // 播放按钮，当有视频时才需要绘制, 这样产生的问题: 绘制的图片被videoImgView遮住了
-//        if (self.videoImgView.hidden == NO) {
-//            CGSize size = CGSizeMake(40, 40);
-//            CGPoint point = CGPointMake((CGRectGetWidth(self.viewModel.videoImgViewFrame) - size.width) * 0.5, (CGRectGetHeight(self.viewModel.videoImgViewFrame) - size.height) * 0.5);
-//            
-//            [[UIImage imageNamed:@"dynamic_listPlayerVideo"] drawInRect:CGRectMake(point.x, point.y, size.width, size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-//        }
-        
         // read
         float readCounX = kScreenW - self.investBtn.frame.size.width - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;
         
@@ -332,6 +324,10 @@
     self.pictureCollectionView.frame = CGRectMake(viewModel.picCollectionViewFrame.origin.x, viewModel.picCollectionViewFrame.origin.y, picViewSize.width, picViewSize.height);
     
     [self.rankingLabel setText:viewModel.item.ranking];
+    
+    
+    // 根据模型数据，显示点赞状态
+    self.toolView->_praiseBtn.selected = viewModel.item.isPraise;
     
 }
 

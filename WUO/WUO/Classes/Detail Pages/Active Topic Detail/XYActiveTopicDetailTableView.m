@@ -92,6 +92,10 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
     NSLog(@"%ld--%ld--%ld", _activityTopicItem.topicId , _idStamp, self.currentType);
     
     [WUOHTTPRequest find_getTrendByTopicId:_activityTopicItem.topicId idstamp:[NSString stringWithFormat:@"%ld", _idStamp] type:self.currentType finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        
+        // 检测登录及在线状态, -2 为登录失败
+        [WUOHTTPRequest  checkLoginStatusFromResponseCode:[responseObject[@"code"] integerValue]];
+        
         if (error) {
             [self xy_showMessage:@"网络请求失败"];
             [self.mj_header endRefreshing];
@@ -123,9 +127,6 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
                 
             }
         }
-        
-        
-
         
         [self processingModel:^{
             [self reloadData];

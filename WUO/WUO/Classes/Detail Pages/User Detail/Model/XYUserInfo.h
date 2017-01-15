@@ -68,6 +68,7 @@
 @property (nonatomic, copy) NSString *descriptionText;
 /** 对性别的处理 */
 @property (nonatomic, copy) NSString *genderText;
+@property (nonatomic, strong) NSString *headFullPath;
 
 + (instancetype)userInfoWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info;
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo*)info;

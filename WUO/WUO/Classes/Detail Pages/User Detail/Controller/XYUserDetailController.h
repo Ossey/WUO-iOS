@@ -13,6 +13,8 @@
 @interface XYUserDetailController : XYProfileBaseController
 
 /** item中的 uid 当前用户的uid 请求数据的时候使用此参数*/
-@property (nonatomic, strong) XYTopicItem *item;
-- (instancetype)initWithItem:(XYTopicItem *)item;
+//@property (nonatomic, strong) XYTopicItem *item;
+@property (nonatomic, assign) NSInteger uid;
+@property (nonatomic, copy) NSString *username;
+- (instancetype)initWithUid:(NSInteger)uid username:(NSString *)name;
 @end

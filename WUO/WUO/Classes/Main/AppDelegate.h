@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYLoginInfoItem.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> 
 
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic) BOOL isLogin;
+@property (strong, nonatomic) XYLoginInfoItem *currentloginInfo;
 
 @end
 

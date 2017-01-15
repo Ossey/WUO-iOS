@@ -17,8 +17,18 @@
 // 开启菊花
 + (void)setActivityIndicator:(BOOL)enabled;
 
-// 登录接口
+/**
+ * @explain 登录接口
+ *
+ */
 + (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd finished:(FinishedCallBack)finishedCallBack;
+
+
+/**
+ * @explain 每次请求网络时，检测登录状态，如果发现已经在其他地方登录，当前账户就要强制退出，并提醒用户
+ * @param   code 用户请求服务端，返回在response中的响应码，根据此字段确定是否登录成功，如为-2，登录失败
+ */
++ (void)checkLoginStatusFromResponseCode:(NSInteger)code;
 
 /**
  * @explain 动态接口

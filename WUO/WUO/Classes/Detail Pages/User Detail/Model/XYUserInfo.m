@@ -37,12 +37,24 @@
     }
 }
 
+- (NSString *)headFullPath {
+    
+    if (self.head.length) {
+        if (![self.head containsString:@"http://"]) {
+            return [self.responseInfo.basePath stringByAppendingString:self.head];
+        }
+    }
+    
+    return nil;
+}
+
 - (NSURL *)headFullURL {
     NSURL *url = nil;
     if (self.head.length) {
         NSString *urlStr = [self.head stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         if (![urlStr containsString:@"http://"]) {
             url = [NSURL URLWithString:[self.responseInfo.basePath stringByAppendingString:urlStr]];
+            NSLog(@"%@", url);
         } else {
             url = [NSURL URLWithString:urlStr];
         }

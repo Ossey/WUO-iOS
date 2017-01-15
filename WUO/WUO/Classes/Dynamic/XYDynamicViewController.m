@@ -9,6 +9,7 @@
 #import "XYDynamicViewController.h"
 #import "XYDynamicTableView.h"
 #import "XYUserDetailController.h"
+#import "XYTopicItem.h"
 
 @interface XYDynamicViewController () <XYDynamicTableViewDelegate>
 
@@ -27,7 +28,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_Home_goldCoin_new"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(goldCoinClick)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Home_Icon"]];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(meaasgeClick)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(jumpToConversationList)];
     
 }
 
@@ -44,7 +45,7 @@
 #pragma mark - <XYDynamicTableViewDelegate>
 - (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
     
-    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithItem:item];
+    XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -54,7 +55,8 @@
     
 }
 
-- (void)meaasgeClick {
+// 跳转到会话列表控制器
+- (void)jumpToConversationList {
     
     
 }

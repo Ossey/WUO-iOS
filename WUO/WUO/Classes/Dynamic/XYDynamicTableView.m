@@ -75,6 +75,9 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     NSLog(@"%ld", (long)_dynamicInfo.idstamp);
     [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
+        // 检测登录及在线状态, -2 为登录失败
+        [WUOHTTPRequest  checkLoginStatusFromResponseCode:[responseObject[@"code"] integerValue]];
+        
         if (error) {
             [self.mj_header endRefreshing];
             [self.mj_footer endRefreshing];
