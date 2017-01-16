@@ -15,6 +15,7 @@
 #import "NSString+WUO.h"
 #import "WUOToolView.h"
 #import "XYVideoImgView.h"
+
 @class XYPictureCollectionViewLayout;
 @interface XYTopicViewCell () {
     // 是否正在绘制中
@@ -133,9 +134,32 @@
     // 底部工具条
     self.toolView = [[WUOToolView alloc] initWithFrame:self.viewModel.toolViewFrame];
     [self.contentView addSubview:_toolView];
+    __weak typeof(self) weakSelf = self;
+    [self.toolView setToolViewEventBlock:^(UIButton *btn, WUOToolViewEventType type) {
+        switch (type) {
+            case WUOToolViewEventTypeShare:
+                
+                break;
+            case WUOToolViewEventTypePraise:
+                if (self.delegate && [self.delegate respondsToSelector:@selector(topicViewCell:didSelectPraiseBtn:item:)]) {
+                    [weakSelf.delegate topicViewCell:weakSelf didSelectPraiseBtn:btn item:weakSelf.viewModel.item];
+                }
+                break;
+            case WUOToolViewEventTypeReward:
+                
+                break;
+            case WUOToolViewEventTypeComment:
+                
+                break;
+                
+            default:
+                break;
+        }
+    }];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
+
 
 
 - (void)creatLabel {
@@ -191,6 +215,7 @@
         
         [self.delegate topicViewCellDidSelectAvatarView:self item:self.viewModel.item];
     }
+    
 }
 
 
@@ -319,6 +344,7 @@
     [self.toolView->_commentBtn setTitle:[NSString stringWithFormat:@"%ld", item.commentCount] forState:UIControlStateNormal];
     [self.toolView->_rewardBtn setTitle:[NSString stringWithFormat:@"%ld", item.rewardCount] forState:UIControlStateNormal];
     [self.toolView->_praiseBtn setTitle:[NSString stringWithFormat:@"%ld", item.praiseCount] forState:UIControlStateNormal];
+    self.toolView.item = item;
     
     CGSize picViewSize = [self caculatePicViewSize:item.imgList.count];
     self.pictureCollectionView.frame = CGRectMake(viewModel.picCollectionViewFrame.origin.x, viewModel.picCollectionViewFrame.origin.y, picViewSize.width, picViewSize.height);
@@ -328,7 +354,8 @@
     
     // 根据模型数据，显示点赞状态
     self.toolView->_praiseBtn.selected = viewModel.item.isPraise;
-    
+    // 当用户已经点赞了，那此按钮将不能再接受事件
+    self.toolView.userInteractionEnabled = !viewModel.item.isPraise;
 }
 
 

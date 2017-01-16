@@ -8,6 +8,7 @@
 
 #import "WUOToolView.h"
 #import "XYDynamicToolButton.h"
+#import "WUOHTTPRequest.h"
 
 @implementation WUOToolView
 
@@ -60,6 +61,8 @@
     if (self.toolViewEventBlock) {
         self.toolViewEventBlock(btn, btn.tag);
     }
+    
+    
 }
 
 - (NSArray *)imageNames {

@@ -28,8 +28,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_Home_goldCoin_new"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(goldCoinClick)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Home_Icon"]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_message"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(jumpToConversationList)];
-    
 }
+
 
 
 - (XYDynamicTableView *)tableView {
@@ -40,6 +40,17 @@
     
     return _tableView;
 }
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    _tableView.dynamicDelegate = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _tableView.dynamicDelegate = self;
+}
+
 
 #pragma mark - <XYDynamicTableViewDelegate>
 - (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
@@ -60,15 +71,6 @@
     
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    _tableView.dynamicDelegate = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    _tableView.dynamicDelegate = self;
-}
 
 - (void)dealloc {
     

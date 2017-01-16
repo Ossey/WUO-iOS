@@ -14,7 +14,10 @@
 
 + (instancetype)shareInstance;
 
-// 开启菊花
+/**
+ * @explain 菊花是否开启
+ *
+ */
 + (void)setActivityIndicator:(BOOL)enabled;
 
 /**
@@ -91,9 +94,15 @@
 + (void)userDetail_getUserTopicByUid:(NSInteger)uid idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
 
 /**
- * @explain // 用户相册
+ * @explain 用户相册
  *
  * @param   page  是指请求的页数
  */
 + (void)userDetail_getUserAlbumWithPage:(NSInteger)page targetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 点赞接口
+ *
+ */
++ (void)updateTrendPraiseToUid:(NSInteger)toUid tid:(NSInteger)tid finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

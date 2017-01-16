@@ -141,6 +141,26 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }
 }
 
+- (void)topicViewCell:(XYTopicViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTopicItem *)item {
+    // 点赞时，发送网络请求，并更新按钮的状态为选中状态，且按钮不再接受点击事件
+    [WUOHTTPRequest updateTrendPraiseToUid:item.uid tid:item.tid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        if (error) {
+            [self xy_showMessage:@"点赞失败哦"];
+            return;
+        }
+//        NSLog(@"%ld--%ld--%@",item.tid, item.uid, responseObject);
+        
+        if ([responseObject[@"code"] integerValue] == 0) {
+            // 点赞成功，修改按钮的状态状态为select
+            item.isPraise = YES;
+            item.praiseCount+=1;
+            [self reloadData];
+        }
+    }];
+    
+
+}
+
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -150,7 +170,9 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
+    if (cell.delegate == nil) {
+        cell.delegate = self;
+    }
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
     

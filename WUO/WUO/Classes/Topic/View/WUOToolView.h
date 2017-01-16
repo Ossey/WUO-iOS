@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, WUOToolViewEventType) {
     WUOToolViewEventTypePraise     // 点赞
 };
 
+@class XYTopicItem;
 @interface WUOToolView : UIView {
     
 @public
@@ -30,5 +31,5 @@ typedef NS_ENUM(NSInteger, WUOToolViewEventType) {
 }
 
 @property (nonatomic, copy) void (^toolViewEventBlock)(UIButton *btn, WUOToolViewEventType type);
-
+@property (nonatomic, strong) XYTopicItem *item;
 @end
