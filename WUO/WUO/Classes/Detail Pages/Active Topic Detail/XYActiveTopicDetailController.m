@@ -66,6 +66,9 @@
     [_tableView gzwLoading:^{
         [self loadTopicHeaderDetail];
     }];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 }
 
 

@@ -195,7 +195,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
             [self xy_showMessage:@"点赞失败哦"];
             return;
         }
-        //        NSLog(@"%ld--%ld--%@",item.tid, item.uid, responseObject);
+
         
         if ([responseObject[@"code"] integerValue] == 0) {
             // 点赞成功，修改按钮的状态状态为select
