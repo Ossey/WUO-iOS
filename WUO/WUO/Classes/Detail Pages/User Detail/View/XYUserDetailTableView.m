@@ -186,16 +186,14 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     }
                     
                 }
-                [self reloadData];
                 self.mj_footer.hidden = NO;
                 
             } else {
                 [self xy_showMessage:@"没有更多相片了"];
                 self.mj_footer.hidden = YES;
-                
             }
         }
-        
+        [self reloadData];
         [self.mj_footer endRefreshing];
         [self.mj_header endRefreshing];
         [WUOHTTPRequest setActivityIndicator:NO];
@@ -226,7 +224,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                             [_dataList[[NSNumber numberWithInteger:XYUserDetailRequestTypeTopic]] addObject:viewModel];
                         }
                     }
-                    [self reloadData];
                     self.mj_footer.hidden = NO;
                 }
             } else {
@@ -237,6 +234,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         [self.mj_footer endRefreshing];
         [self.mj_header endRefreshing];
         [WUOHTTPRequest setActivityIndicator:NO];
+        [self reloadData];
     }];
 }
 

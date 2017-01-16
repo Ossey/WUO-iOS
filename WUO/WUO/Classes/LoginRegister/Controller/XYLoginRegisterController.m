@@ -261,7 +261,6 @@
 
 // 微信 授权并获取用户信息(获取uid、access token及用户名等)
 // 注意这里的uid为unionID
-
 - (void)getAuthWithUserInfoFromWechat
 {
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
