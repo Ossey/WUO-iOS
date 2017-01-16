@@ -12,7 +12,9 @@
 #import "XYCustomNavController.h"
 #import "WUOHTTPRequest.h"
 #import "Reachability.h"
+#import <UMSocialCore/UMSocialCore.h>
 
+#define USHARE_DEMO_APPKEY @"6941FCB2FEAA582F17BD450FF3B6F693"
 
 
 @interface AppDelegate () <EMClientDelegate>
@@ -94,43 +96,78 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    /* 打开日志 */
+    [[UMSocialManager defaultManager] openLog:YES];
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_DEMO_APPKEY];
+    // 配置友盟
+    [self configUSharePlatforms];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [self getRootVc];
     [self.window makeKeyAndVisible];
     [self checkNetworkState];
     [[EMClient sharedClient] addDelegate:self delegateQueue:nil];
     
+    // 检测im状态
     [self checkImStatus];
-    
+
     return YES;
 }
 
-
-// 检测用户IM登录状态，如果未登录，就登录
-- (void)checkImStatus {
-
-    BOOL isLogin =  [[EMClient sharedClient] isLoggedIn];
-    if (isLogin) {
-        NSLog(@"用户IM已经登录成功");
-    } else {
-        NSLog(@"用户IM未登录");
-        [self loginImUserAccount];
+//#define __IPHONE_10_0    100000
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > 100000
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
     }
+    return result;
 }
 
-// app进入后台时调用
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+#endif
 
-    // 程序进入后台时，需要调用此方法断开连接
-    [[EMClient sharedClient] applicationDidEnterBackground:application];
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
 }
 
-// app将要从后台返回时
-- (void)applicationWillEnterForeground:(UIApplication *)application {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
+
+- (void)configUSharePlatforms
+{
+    /* 设置微信的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx3887d04d13990e7f" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:@"http://mobile.umeng.com/social"];
+    /*
+     * 移除相应平台的分享，如微信收藏
+     */
+    //[[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
     
-    // 程序进入前台时，需要调用此方法进行重连
-    [[EMClient sharedClient] applicationWillEnterForeground:application];
+    /* 设置分享到QQ互联的appID
+     * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105284118"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    
+    /* 设置新浪的appKey和appSecret */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2075031274"  appSecret:@"04b48b094faeb16683c32669824ebdad" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+
+    
 }
+
+
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -202,20 +239,46 @@
     }
 }
 
-- (XYLoginInfoItem *)currentloginInfo {
+- (XYLoginInfo *)currentloginInfo {
     if (_currentloginInfo == nil) {
         // 读取用户登录后存储的登录信息
         NSDictionary *loginInfo  = [NSDictionary dictionaryWithContentsOfFile:kLoginInfoPath];
-        _currentloginInfo = [XYLoginInfoItem loginInfoItemWithDict:loginInfo];
+        _currentloginInfo = [XYLoginInfo loginInfoItemWithDict:loginInfo];
 
     }
     return _currentloginInfo;
 }
 
 #pragma mark - IM 相关
+
+// 检测用户IM登录状态，如果未登录，就登录
+- (void)checkImStatus {
+    
+    BOOL isLogin =  [[EMClient sharedClient] isLoggedIn];
+    if (isLogin) {
+        NSLog(@"用户IM已经登录成功");
+    } else {
+        NSLog(@"用户IM未登录");
+        [self loginImUserAccount];
+    }
+}
+
+// app进入后台时调用
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    // 程序进入后台时，需要调用此方法断开连接
+    [[EMClient sharedClient] applicationDidEnterBackground:application];
+}
+
+// app将要从后台返回时
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    // 程序进入前台时，需要调用此方法进行重连
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
+}
+
+
 - (void)loginImUserAccount {
-    
-    
     
     // EMOptions设置配置信息 AppKey:注册的AppKey。
     EMOptions *options = [EMOptions optionsWithAppkey:@"wuwo#ziwo"];
@@ -226,6 +289,8 @@
     if (!error) {
         NSLog(@"初始化成功");
     }
+    
+//    NSLog(@"%@--%@", self.currentloginInfo.imUser.username, self.currentloginInfo.imUser.password);
     
     // 登录前判断是否自动登录
     BOOL isAutoLogin = [EMClient sharedClient].options.isAutoLogin;

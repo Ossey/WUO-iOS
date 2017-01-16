@@ -90,6 +90,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         if ([responseObject[@"code"] integerValue] == 0) {
             if ([responseObject[@"datas"] count] == 0) {
                 [self xy_showMessage:@"没有更多数据了"];
+                self.loading = NO;
             } else {
                 
                 // 当有数据时，才更新dynamic，避免无数据时idstamp为空，就导致下次请求数据时，又重新开始请求了
@@ -154,6 +155,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     return cell;
     
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     XYTopicViewModel *viewModel = _dynamicList[indexPath.row];

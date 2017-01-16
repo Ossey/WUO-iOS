@@ -7,7 +7,7 @@
 //
 
 #import "WUOHTTPRequest.h"
-#import "XYLoginInfoItem.h"
+#import "XYLoginInfo.h"
 #import "AppDelegate.h"
 
 //#import <AFNetworkActivityIndicatorManager.h>
@@ -32,7 +32,7 @@ static id _instance;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = enabled;
 }
 
-// 登录接口
+// 登录接口: 此接口为用户通过app自身账号和密码登录
 + (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd finished:(FinishedCallBack)finishedCallBack {
     
     // 登录接口
@@ -52,10 +52,37 @@ static id _instance;
     
 }
 
+// 第三方平台登录接口: 此接口为用户授权第三方信息成功后，会再给服务器发送一个请求，返回登录的信息
++ (void)loginByOpenPlatformDeviceToken:(NSString *)deviceToken head:(NSString *)head name:(NSString *)name openPlatform:(NSString *)openPlatform openPlatformId:(NSString *)openPlatformId osVersion:(NSString *)osVersion phoneModel:(NSString *)phoneModel finished:(FinishedCallBack)finishedCallBack {
+//URL	http://me.api.kfit.com.cn/me-api/rest/api/userInfo/loginByOpenPlatform
+    // deviceToken=1d5fab615224efa398414edaf08ce4a143fc37fb16e9d63eb2c889d28a430da7&
+    // head=http%3A//q.qlogo.cn/qqapp/1105284118/94262324467C0AFD63A71AD292C5C470/100&
+    // name=sey.00&
+    // openPlatform=QQ&
+    // openPlatformId=94262324467C0AFD63A71AD292C5C470&
+    // os=iOS&
+    // osVersion=4.2.2&
+    // phoneModel=iPhone&
+    // versionCode=1.7.7
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/userInfo/loginByOpenPlatform";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:0];
+    [parameters setObject:deviceToken forKey:@"deviceToken"];
+    [parameters setObject:head forKey:@"head"];
+    [parameters setObject:name forKey:@"name"];
+    [parameters setObject:openPlatform forKey:@"openPlatform"];
+    [parameters setObject:openPlatformId forKey:@"openPlatformId"];
+    [parameters setObject:phoneModel forKey:@"phoneModel"];
+    [parameters setObject:osVersion forKey:@"osVersion"];
+    [parameters setObject:@"1.7.7" forKey:@"versionCode"];
+    [parameters setObject:@"iOS" forKey:@"os"];
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
 // 获取帖子 接口
 + (void)topicWithIdstamp:(NSString *)idstamp type:(NSInteger)type serachLabel:(NSString *)serachLabel finished:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     // 设置请求头部
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", loginInfoItem.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:loginInfoItem.userInfo.token forHTTPHeaderField:@"token"];
@@ -84,7 +111,7 @@ static id _instance;
 // 发现界面 分类标题接口
 + (void)find_hotTrendLabelWithFinishedCallBack:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *loginInfoItem = [WUOHTTPRequest userLoginInfoItem];
     NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/label/getHotTrendLabel";
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", loginInfoItem.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:loginInfoItem.userInfo.token forHTTPHeaderField:@"token"];
@@ -95,7 +122,7 @@ static id _instance;
 // 发现界面 -- 活动话题接口
 + (void)find_allTopicWithFinishedCallBack:(FinishedCallBack)finishedCallBack  {
     
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
 
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
@@ -112,7 +139,7 @@ static id _instance;
 // 话题详情 接口 第一次进入话题详情界面时，请求这个数据，以后每次都请求下面的话题数据接口
 + (void)find_topicDetailByID:(NSInteger)topicID finishedCallBack:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
     
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
@@ -126,7 +153,7 @@ static id _instance;
 
 // 发现界面 -- 话题详情topic 接口  type为1时请求最新数据，type为0时请求排行榜数据
 + (void)find_getTrendByTopicId:(NSInteger)topicID idstamp:(NSString *)idstamp type:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack {
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
     
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
@@ -142,7 +169,7 @@ static id _instance;
 // 用户详情页--获取用户的主页及用户信息的 只需要获取一次即可
 + (void)userDetail_getUserInfoWithtargetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
     
@@ -158,7 +185,7 @@ static id _instance;
 // idstamp=&pageNum=15&toUid=2579
 + (void)userDetail_getUserTopicByUid:(NSInteger)uid idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
     
@@ -176,7 +203,7 @@ static id _instance;
 // page 是指请求的页数
 + (void)userDetail_getUserAlbumWithPage:(NSInteger)page targetUid:(NSInteger)targetUid finishedCallBack:(FinishedCallBack)finishedCallBack {
     
-    XYLoginInfoItem *info = [WUOHTTPRequest userLoginInfoItem];
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
     [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
     
@@ -190,11 +217,11 @@ static id _instance;
 }
 
 // 获取用户登录的信息，并转换为模型
-+ (XYLoginInfoItem *)userLoginInfoItem {
++ (XYLoginInfo *)userLoginInfoItem {
     
     NSDictionary *loginInfoDict = [NSDictionary dictionaryWithContentsOfFile:kLoginInfoPath];
     
-    return [XYLoginInfoItem loginInfoItemWithDict:loginInfoDict];
+    return [XYLoginInfo loginInfoItemWithDict:loginInfoDict];
 }
 
 // 每次请求网络时，检测登录状态，如果发现已经在其他地方登录，当前账户就要强制退出，并提醒用户

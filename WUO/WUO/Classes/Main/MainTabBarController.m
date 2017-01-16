@@ -44,8 +44,7 @@
     [super viewDidLoad];
     
     [self setupChildViewController:[XYDynamicViewController new]];
-    [self addChildViewController:[[XYCustomNavController alloc] initWithRootViewController:[XYFindViewController new]]];
-//    [self setupChildViewController:[XYFindViewController new]];
+    [self setupChildViewController:[XYFindViewController new]];
 //    [self setupChildViewController:[XYComposeViewController new]];
     [self setupChildViewController:[XYInvestViewController new]];
     [self setupChildViewController:[XYMineViewController new]];
@@ -83,7 +82,13 @@
 
 - (void)setupChildViewController:(UIViewController *)vc  {
 
-    MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *nav = nil;
+    if ([vc isKindOfClass:[XYProfileBaseController class]]) {
+        nav = [[XYCustomNavController alloc] initWithRootViewController:vc];
+    } else {
+        nav = [[MainNavigationController alloc] initWithRootViewController:vc];
+    }
+    
     [self addChildViewController:nav];
     
 }
@@ -120,6 +125,8 @@
     return imageView;
 }
 
-
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
 
 @end

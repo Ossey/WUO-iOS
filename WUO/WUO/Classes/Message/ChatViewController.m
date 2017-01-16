@@ -200,9 +200,7 @@
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:uid username:username];
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    UserProfileViewController *userprofile = [[UserProfileViewController alloc] initWithUsername:messageModel.message.from];
-//    [self.navigationController pushViewController:userprofile animated:YES];
+
 }
 
 - (void)messageViewController:(EaseMessageViewController *)viewController
@@ -302,7 +300,12 @@
         // 设置消息消息发送方的头像和昵称
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate ;
         
-        model.avatarURLPath = [appDelegate.currentloginInfo.basePath stringByAppendingString:appDelegate.currentloginInfo.userInfo.head]; //头像网络地址
+        if (![appDelegate.currentloginInfo.userInfo.head containsString:@"http://"]) {
+            
+            model.avatarURLPath = [appDelegate.currentloginInfo.basePath stringByAppendingString:appDelegate.currentloginInfo.userInfo.head]; //头像网络地址
+        } else {
+            model.avatarURLPath = appDelegate.currentloginInfo.userInfo.head;
+        }
         model.nickname = appDelegate.currentloginInfo.userInfo.name;//用户昵称
         
     } else {

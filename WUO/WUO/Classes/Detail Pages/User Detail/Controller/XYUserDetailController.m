@@ -24,12 +24,6 @@
     
 }
 
-//- (instancetype)initWithItem:(XYTopicItem *)item {
-//    if (self = [super init]) {
-//        self.item = item;
-//    }
-//    return self;
-//}
 
 - (instancetype)initWithUid:(NSInteger)uid username:(NSString *)name {
     if (self = [super init]) {
@@ -48,7 +42,6 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-//    _tableView.backgroundColor = kTableViewBgColor;
     
     self.xy_topBar.backgroundColor = [UIColor whiteColor];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -74,10 +67,6 @@
     }
     
     [self loadUserInfo];
-    
-    
-    
-    
 }
 
 
@@ -124,14 +113,17 @@
 }
 
 
-- (void)dealloc {
 
+
+- (void)dealloc {
     _tableView.delegate = nil;
     _tableView.userInfo = nil;
     [_tableView removeFromSuperview];
     _tableView = nil;
     _userInfo = nil;
     
+    [self.view removeFromSuperview];
+    self.view = nil;
     
     NSLog(@"%s", __func__);
 }

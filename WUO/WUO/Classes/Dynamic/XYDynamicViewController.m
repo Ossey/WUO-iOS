@@ -24,7 +24,6 @@
     [super viewDidLoad];
     
     self.tableView.backgroundColor = kTableViewBgColor;
-    self.tableView.dynamicDelegate = self;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Nav_Home_goldCoin_new"].xy_originalMode style:UIBarButtonItemStylePlain target:self action:@selector(goldCoinClick)];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Home_Icon"]];
@@ -61,9 +60,18 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    _tableView.dynamicDelegate = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _tableView.dynamicDelegate = self;
+}
 
 - (void)dealloc {
-    _tableView.dynamicDelegate = nil;
+    
     [_tableView removeFromSuperview];
     _tableView = nil;
     NSLog(@"%s", __func__);

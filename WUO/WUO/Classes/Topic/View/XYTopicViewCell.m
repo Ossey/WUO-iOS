@@ -381,7 +381,9 @@
     return CGSizeMake(picViewW, picViewH);
 }
 
-
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
 
 
 @end

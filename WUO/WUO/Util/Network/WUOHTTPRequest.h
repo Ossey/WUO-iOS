@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XYNetworkRequest.h"
 
-@class XYNetworkRequest, XYLoginInfoItem;
+@class XYNetworkRequest, XYLoginInfo;
 @interface WUOHTTPRequest : NSObject
 
 + (instancetype)shareInstance;
@@ -23,6 +23,8 @@
  */
 + (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd finished:(FinishedCallBack)finishedCallBack;
 
+// 第三方平台登录接口: 此接口为用户授权第三方信息成功后，会再给服务器发送一个请求，返回登录的信息
++ (void)loginByOpenPlatformDeviceToken:(NSString *)deviceToken head:(NSString *)head name:(NSString *)name openPlatform:(NSString *)openPlatform openPlatformId:(NSString *)openPlatformId osVersion:(NSString *)osVersion phoneModel:(NSString *)phoneModel finished:(FinishedCallBack)finishedCallBack;
 
 /**
  * @explain 每次请求网络时，检测登录状态，如果发现已经在其他地方登录，当前账户就要强制退出，并提醒用户
@@ -44,7 +46,7 @@
  * @explain 获取登录用户信息模型
  *
  */
-+ (XYLoginInfoItem *)userLoginInfoItem;
++ (XYLoginInfo *)userLoginInfoItem;
 
 /**
  * @explain 广告接口

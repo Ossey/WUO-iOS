@@ -7,6 +7,8 @@
 //
 
 #import "XYSettingViewController.h"
+#import "XYLaunchPlayerController.h"
+#import "AppDelegate.h"
 
 @interface XYSettingViewController ()
 
@@ -16,22 +18,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view);
+        make.height.equalTo(@35);
+        make.left.right.equalTo(self.view);
+    }];
+    btn.backgroundColor = [UIColor blueColor];
+    [btn addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+/// 退出登录
+- (void)loginOut {
+    
+    
+    // 用户没有登录
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.isLogin = NO;
+    
+    // 主动退出登录：调用 SDK 的退出接口；
+    EMError *error = [[EMClient sharedClient] logout:YES];
+    if (!error) {
+        NSLog(@"您的账号退出成功");
+    }
+
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@-2 forKey:XYUserLoginStatuKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
