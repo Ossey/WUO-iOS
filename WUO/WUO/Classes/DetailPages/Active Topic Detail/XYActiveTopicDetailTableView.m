@@ -246,6 +246,14 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
     return cellHeight;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.activeTopicTableViewdelegate && [self.activeTopicTableViewdelegate respondsToSelector:@selector(activeTopicDetailTableView:didSelectRowAtIndexPath:item:)]) {
+        
+        XYTrendViewModel *viewModel = [_dataList[@(self.currentType)] objectAtIndex:indexPath.row];
+        [self.activeTopicTableViewdelegate activeTopicDetailTableView:self didSelectRowAtIndexPath:indexPath item:viewModel.item];
+    }
+}
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{

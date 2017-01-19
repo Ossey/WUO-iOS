@@ -12,6 +12,7 @@
 #import "WUOHTTPRequest.h"
 #import "XYActivityTopicItem.h"
 #import "XYUserDetailController.h"
+#import "WUO-Swift.h"
 
 @interface XYActiveTopicDetailController () <XYActiveTopicTableViewDelegate>
 
@@ -106,6 +107,12 @@
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];
 
+}
+
+- (void)activeTopicDetailTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
+    
+    XYTrendDetailController *vc = [[XYTrendDetailController alloc] initWithTrendItem:item];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)dealloc {

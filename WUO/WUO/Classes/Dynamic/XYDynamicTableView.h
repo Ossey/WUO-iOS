@@ -17,7 +17,7 @@
  * @explain 点击cell时调用
  *
  */
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item;
 
 /**
  * @explain 点击cell上面头像时调用

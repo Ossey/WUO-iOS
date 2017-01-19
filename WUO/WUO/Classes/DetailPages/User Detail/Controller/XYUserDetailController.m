@@ -43,7 +43,7 @@
         make.edges.equalTo(self.view);
     }];
     
-    self.xy_topBar.backgroundColor = [UIColor whiteColor];
+   
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightBtn setImage:[UIImage imageNamed:@"Mine_SiXinImage"] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(jumpToChat) forControlEvents:UIControlEventTouchUpInside];
@@ -51,6 +51,7 @@
 
     // 根据当前控制器所在当行控制器是不是XYCustomNavController判断，导航标题该显示在哪
     if ([self.navigationController isKindOfClass:NSClassFromString(@"XYCustomNavController")]) {
+        self.xy_topBar.backgroundColor = [UIColor whiteColor];
         self.xy_title = self.username;
         [self xy_setBackBarTitle:nil titleColor:nil image:[UIImage imageNamed:@"Login_backSel"] forState:UIControlStateNormal];
         self.xy_rightButton = rightBtn;
@@ -62,8 +63,6 @@
     } else {
         self.title = self.username;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-        
-
     }
     
     [self loadUserInfo];

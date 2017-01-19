@@ -36,7 +36,7 @@
 
 - (void)playEvent:(UIButton *)btn {
     
-    [XYPlayerViewController presenteViewControllerWithVideoURL:self.viewModel.item.videoFullURL];
+    [XYPlayerViewController presenteViewControllerWithVideoURL:self.item.videoFullURL];
     
     if (self.playBtnCallBack) {
         self.playBtnCallBack(btn);
@@ -48,17 +48,28 @@
     }
 }
 
-- (void)setViewModel:(XYTrendViewModel *)viewModel {
-    _viewModel = viewModel;
+- (void)setItem:(XYTrendItem *)item {
+    _item = item;
     
-    XYTrendItem * item = viewModel.item;
     if (item.videoUrl.length) {
         self.hidden = NO;
         [self sd_setImageWithURL:item.videoImgFullURL];
     } else {
         self.hidden = YES;
     }
-    self.frame = viewModel.videoImgViewFrame;
 }
+
+//- (void)setViewModel:(XYTrendViewModel *)viewModel {
+//    _viewModel = viewModel;
+//    
+//    XYTrendItem * item = viewModel.item;
+//    if (item.videoUrl.length) {
+//        self.hidden = NO;
+//        [self sd_setImageWithURL:item.videoImgFullURL];
+//    } else {
+//        self.hidden = YES;
+//    }
+//    self.frame = viewModel.videoImgViewFrame;
+//}
 
 @end

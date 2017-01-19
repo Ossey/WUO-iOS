@@ -9,6 +9,8 @@
 #import "XYUserImgItem.h"
 #import "XYHTTPResponseInfo.h"
 
+#define kContentW  kScreenW - kSIZE_GAP_MARGIN * 2
+
 @implementation XYUserImgItem
 
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info {
@@ -43,9 +45,18 @@
     NSString *subStr = [self.imgUrl componentsSeparatedByString:@"jpg?"].lastObject;
     NSArray *sizeStrs = [subStr componentsSeparatedByString:@"&"];
     CGFloat width = [[sizeStrs[0] substringFromIndex:2] doubleValue];
+    if (width == 0) {
+        width = kContentW;
+    }
     CGFloat height = [[sizeStrs[1] substringFromIndex:2] doubleValue];
     
     return CGSizeMake(width, height);
+}
+
+- (CGSize)imgScaleSize {
+    
+
+    return CGSizeMake(kContentW, kContentW / self.imgSize.width * self.imgSize.height);
 }
 
 @end

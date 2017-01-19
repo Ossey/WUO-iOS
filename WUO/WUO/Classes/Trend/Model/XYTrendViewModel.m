@@ -115,7 +115,9 @@
         y += titleSize.height + kSIZE_GAP_PADDING;
     }
     
-   
+    // 投资按钮
+    self.investBtnFrame = CGRectMake(kScreenW - 50 - 15, self.headerFrame.origin.y, 50, 26);
+    
     // 内容
     CGSize contentSize = CGSizeZero;
     if (self.item.content.length == 0) {
@@ -130,7 +132,7 @@
     // 浏览人数
     CGFloat readCountW = 80;
     CGFloat readCountH = 10;
-    CGFloat readCountX = self.contentWidth - kSIZE_GAP_MARGIN - 0;
+    float readCountX = kScreenW - self.investBtnFrame.size.width - kSIZE_GAP_MARGIN - kSIZE_GAP_MARGIN;
     self.readCountBtnFrame = CGRectMake(readCountX, y, readCountW, readCountH);
     y += readCountH + kSIZE_PIC_BOTTOM;
     

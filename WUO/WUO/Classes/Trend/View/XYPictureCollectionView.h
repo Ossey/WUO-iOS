@@ -8,10 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+typedef CGSize(^SizeForItemAtIndexPath)(NSIndexPath *indexPath, UICollectionViewFlowLayout *layout, UICollectionView *collectionView);
+
 @class XYTrendItem, XYTrendImgItem;
+
+@protocol XYPictureCollectionViewDataSource <UICollectionViewDataSource>
+
+- (CGSize)pictureCollectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
 @interface XYPictureCollectionView : UICollectionView
 
-@property (nonatomic, strong) XYTrendItem *dynamicItem;
+@property (nonatomic, strong) XYTrendItem *item;
+@property (nonatomic, weak) id<XYPictureCollectionViewDataSource> picDataSource;
+
+@property (nonatomic, copy) SizeForItemAtIndexPath sizeForItemAtIndexPath;
 
 @end
 

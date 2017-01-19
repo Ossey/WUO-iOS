@@ -194,16 +194,15 @@
     self.cornerImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.viewModel.headerFrame)+5, CGRectGetHeight(self.viewModel.headerFrame)+5);
     self.cornerImageView.center = self.avatarView.center;
     
-    self.investBtn.xy_height = 26;
-    self.investBtn.xy_width = 50;
-    self.investBtn.xy_y = self.avatarView.xy_y;
-    self.investBtn.xy_x = kScreenW - 50 - 15;
+    self.investBtn.frame = self.viewModel.investBtnFrame;
     
     self.readCountBtn.frame = self.viewModel.readCountBtnFrame;
     
     self.toolView.frame = self.viewModel.toolViewFrame;
     
     self.rankingLabel.frame = self.viewModel.rankingFrame;
+    
+    self.videoImgView.frame = self.viewModel.videoImgViewFrame;
 }
 
 #pragma mark - Events
@@ -323,13 +322,13 @@
     _viewModel = viewModel;
     
     XYTrendItem *item = viewModel.item;
-    self.pictureCollectionView.dynamicItem = item;
+    self.pictureCollectionView.item = item;
     self.pictureCollectionView.hidden = item.imgCount == 0;
     
     [self.avatarView setBackgroundImage:nil forState:UIControlStateNormal];
     [self.avatarView sd_setBackgroundImageWithURL:item.headerImageURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"mine_HeadImage"] options:SDWebImageLowPriority];
     
-    self.videoImgView.viewModel = viewModel;
+    self.videoImgView.item = item;
     
     self.jobLabel.text = item.job;
     
@@ -378,12 +377,16 @@
         return CGSizeZero;
     }
     
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.pictureCollectionView.collectionViewLayout;
+//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.pictureCollectionView.collectionViewLayout;
     
     
     if (count == 1) {
         itemWH = 150;
-        layout.itemSize = CGSizeMake(itemWH, itemWH);
+//        layout.itemSize = CGSizeMake(itemWH, itemWH);
+
+        [self.pictureCollectionView setSizeForItemAtIndexPath:^CGSize(NSIndexPath *indexPath, UICollectionViewFlowLayout *layout, UICollectionView *collectionView) {
+            return CGSizeMake(itemWH, itemWH);
+        }];
         return CGSizeMake(itemWH, itemWH);
     }
     
@@ -396,12 +399,17 @@
     itemWH = (contentWidth - 2 * itemMargin) / 3;
     
     if (count == 4) {
-        layout.itemSize = CGSizeMake(itemWH, itemWH);
+//        layout.itemSize = CGSizeMake(itemWH, itemWH);
+        [self.pictureCollectionView setSizeForItemAtIndexPath:^CGSize(NSIndexPath *indexPath, UICollectionViewFlowLayout *layout, UICollectionView *collectionView) {
+            return CGSizeMake(itemWH, itemWH);
+        }];
         return CGSizeMake(itemWH * 2 + itemMargin, itemWH * 2 + itemMargin);
     }
 
-    layout.itemSize = CGSizeMake(itemWH, itemWH);
-    
+//    layout.itemSize = CGSizeMake(itemWH, itemWH);
+    [self.pictureCollectionView setSizeForItemAtIndexPath:^CGSize(NSIndexPath *indexPath, UICollectionViewFlowLayout *layout, UICollectionView *collectionView) {
+        return CGSizeMake(itemWH, itemWH);
+    }];
     CGFloat picViewW = contentWidth;
     CGFloat picViewH = rows * itemWH + (rows - 1) * itemMargin;
     

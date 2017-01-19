@@ -8,7 +8,7 @@
 
 #import <YYImage/YYImage.h>
 
-@class XYVideoImgView, XYTrendViewModel;
+@class XYVideoImgView, XYTrendViewModel, XYTrendItem;
 @protocol XYVideoImgViewDelegate <NSObject>
 
 @optional
@@ -22,7 +22,8 @@
 
 @interface XYVideoImgView : YYAnimatedImageView
 
-@property (nonatomic, strong) XYTrendViewModel *viewModel;
+//@property (nonatomic, strong) XYTrendViewModel *viewModel;
+@property (nonatomic, strong) XYTrendItem *item;
 
 @property (nonatomic, weak) id<XYVideoImgViewDelegate> delegate;
 @property (nonatomic, copy) void(^playBtnCallBack)(UIButton *);

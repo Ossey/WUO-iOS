@@ -17,6 +17,7 @@
 @property (nonatomic, strong)XYHTTPResponseInfo *info;
 @property (nonatomic, strong) NSURL *imgFullURL;
 @property (nonatomic, assign) CGSize imgSize;            // 图片的原始尺寸
+@property (nonatomic, assign) CGSize imgScaleSize;       // 图片等比例缩放尺寸
 
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info;
 + (instancetype)imgItemWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info;

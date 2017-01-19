@@ -20,6 +20,8 @@
  */
 - (void)activeTopicDetailTableView:(XYActiveTopicDetailTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item;
 
+- (void)activeTopicDetailTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item;
+
 @end
 
 @interface XYActiveTopicDetailTableView : UITableView

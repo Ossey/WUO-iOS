@@ -6,8 +6,8 @@
 #import "XYVideoImgView.h"
 #import "XYTrendViewModel.h"
 #import "XYConstant.h"
-
-
-
-
-
+#import <UIButton+WebCache.h>
+#import "WUOLabel.h"
+#import "XYPictureCollectionView.h"
+#import "XYProfileBaseController.h"
+#import "XYCustomNavController.h"

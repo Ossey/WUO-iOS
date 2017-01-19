@@ -256,7 +256,12 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%@", NSStringFromCGRect([tableView dequeueReusableCellWithIdentifier:cellIdentifier].frame));
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectRowAtIndexPath:item:)]) {
+        
+        XYTrendViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
+        
+        [self.dynamicDelegate dynamicTableView:self didSelectRowAtIndexPath:indexPath item:viewModel.item];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

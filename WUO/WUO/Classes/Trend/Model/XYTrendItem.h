@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XYUserImgItem.h"
 
-@class XYHTTPResponseInfo;
+@class XYHTTPResponseInfo, XYTrendImgItem;
 @interface XYTrendItem : NSObject
 
 /** 文本内容 */
@@ -23,7 +23,7 @@
 /** 发布的图片数量 */
 @property (nonatomic, assign) NSInteger imgCount;
 /** 发布的图片数组 */
-@property (nonatomic, strong) NSArray *imgList;
+@property (nonatomic, strong) NSArray<XYTrendImgItem *> *imgList;
 /** 是否被当前登录的用户投资 */
 @property (nonatomic, assign) NSInteger isInvest;
 /** 是否被当前登录用户赞 */

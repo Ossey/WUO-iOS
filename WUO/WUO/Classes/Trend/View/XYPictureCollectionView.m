@@ -23,12 +23,12 @@
 static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 
 - (instancetype)init {
-    return [self initWithFrame:CGRectZero collectionViewLayout:nil];
+    return [self initWithFrame:CGRectZero collectionViewLayout:[XYPictureCollectionViewLayout new]];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     
-    if (self = [super initWithFrame:frame collectionViewLayout:[XYPictureCollectionViewLayout new]]) {
+    if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
         [self setup];
     }
     return self;
@@ -53,9 +53,9 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     return self;
 }
 
-- (void)setDynamicItem:(XYTrendItem *)dynamicItem {
+- (void)setItem:(XYTrendItem *)item {
     
-    _dynamicItem = dynamicItem;
+    _item = item;
     
     [self reloadData];
 
@@ -66,23 +66,38 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.dynamicItem.imgList.count;
+    return self.item.imgList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     XYPictureCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    cell.imgItem = self.dynamicItem.imgList[indexPath.row];
+
+    cell.imgItem = self.item.imgList[indexPath.row];
     
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize size = CGSizeZero;
+    
+    if (self.picDataSource && [self.picDataSource respondsToSelector:@selector(pictureCollectionView:layout:sizeForItemAtIndexPath:)]) {
+        size = [self.picDataSource pictureCollectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
+    }
+    
+    if (self.sizeForItemAtIndexPath) {
+        size = self.sizeForItemAtIndexPath(indexPath, collectionViewLayout, collectionView);
+    }
+    
+    return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    [[XYImageViewer shareInstance] prepareImageURLStrList:self.dynamicItem.imageUrls endView:^UIView *(NSIndexPath *indexPath) {
+    [[XYImageViewer shareInstance] prepareImageURLStrList:self.item.imageUrls endView:^UIView *(NSIndexPath *indexPath) {
         return [collectionView cellForItemAtIndexPath:indexPath];
     }];
     

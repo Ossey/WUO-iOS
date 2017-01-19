@@ -91,8 +91,10 @@ let SIZE_PICWH : CGFloat = 80.0                           // 单张图片宽度
 let SIZE_FONT : CGFloat = 17.0                            // 字体大小
 let SIZE_FONT_NAME = SIZE_FONT - 1                       // 昵称字体大小
 let SIZE_FONT_SUBTITLE = SIZE_FONT-8                     // job及创建日期字体大小
-let SIZE_FONT_TITLE : CGFloat = 15.0                                // 标题字体大小
+let SIZE_FONT_TITLE : CGFloat = 15.0                     // 标题字体大小
 let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)              // 内容文本字体大小
+let COLOR_COUNT_TEXT = COLOR(r: 205, g: 205, b: 205, a: 1.0) // 工具条的各种数量文本颜色
+let COLOR_READCOUNT_TEXT = COLOR(r: 180, g: 180, b: 180, a: 1.0) // 阅读文本数量颜色
 
 /** 全局字体 */
 func FontWithSize(s: CGFloat) -> UIFont {

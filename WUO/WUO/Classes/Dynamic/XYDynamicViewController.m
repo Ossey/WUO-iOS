@@ -60,9 +60,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
     // 跳转到 trend 详情页
-    XYTrendDetailController *vc = [[XYTrendDetailController alloc] init];
+    XYTrendDetailController *vc = [[XYTrendDetailController alloc] initWithTrendItem:item];
     [self.navigationController pushViewController:vc animated:YES];
 
 }

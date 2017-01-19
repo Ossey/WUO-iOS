@@ -16,6 +16,7 @@
 #import "WUOFindHeaderView.h"
 #import "XYActivityTopicItem.h"
 #import "XYUserDetailController.h"
+#import "WUO-Swift.h"
 
 @interface XYFindViewController () <XYTrendTableViewDelegate, UIScrollViewDelegate, XYCateTitleViewDelegate>
 @property (nonatomic, strong) XYTrendTableView *tableView;
@@ -222,6 +223,12 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
 - (void)dynamicTableView:(XYTrendTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
     
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)dynamicTableView:(XYTrendTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
+    // 跳转到 trend 详情页
+    XYTrendDetailController *vc = [[XYTrendDetailController alloc] initWithTrendItem:item];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
