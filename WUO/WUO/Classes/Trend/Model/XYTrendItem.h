@@ -86,7 +86,7 @@
 
 @end
 
-@interface XYTopImgItem : XYUserImgItem
+@interface XYTrendImgItem : XYUserImgItem
 
 @property (nonatomic, copy) NSString *createTime;
 @property (nonatomic, assign) NSInteger tid;

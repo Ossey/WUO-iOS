@@ -242,7 +242,10 @@
                                       andHeight:self.viewModel.nameLabelFrame.size.height];
         
         // job
-        [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(kSIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:self.viewModel.jobLabelFrame.size.height andWidth:self.viewModel.jobLabelFrame.size.width];
+        [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(kSIZE_FONT_SUBTITLE)
+                                  andTextColor:kColorJobText
+                                     andHeight:self.viewModel.jobLabelFrame.size.height
+                                      andWidth:self.viewModel.jobLabelFrame.size.width];
         
         
         // read

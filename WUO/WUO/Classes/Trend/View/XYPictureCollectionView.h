@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYTrendItem, XYTopImgItem;
+@class XYTrendItem, XYTrendImgItem;
 @interface XYPictureCollectionView : UICollectionView
 
 @property (nonatomic, strong) XYTrendItem *dynamicItem;
@@ -18,7 +18,7 @@
 
 @interface XYPictureCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) XYTopImgItem *imgItem;
+@property (nonatomic, strong) XYTrendImgItem *imgItem;
 
 
 @end

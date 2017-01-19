@@ -18,7 +18,7 @@
     }
     return self;
 }
-+ (instancetype)userImgItemWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info {
++ (instancetype)imgItemWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info {
     
     return [[self alloc] initWithDict:dict responseInfo:info];
 }

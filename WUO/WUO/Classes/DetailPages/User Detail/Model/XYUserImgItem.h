@@ -19,6 +19,6 @@
 @property (nonatomic, assign) CGSize imgSize;            // 图片的原始尺寸
 
 - (instancetype)initWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info;
-+ (instancetype)userImgItemWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info;
++ (instancetype)imgItemWithDict:(NSDictionary *)dict responseInfo:(XYHTTPResponseInfo *)info;
 
 @end

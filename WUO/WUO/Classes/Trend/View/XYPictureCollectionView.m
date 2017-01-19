@@ -120,7 +120,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     return self;
 }
 
-- (void)setImgItem:(XYTopImgItem *)imgItem {
+- (void)setImgItem:(XYTrendImgItem *)imgItem {
     
     _imgItem = imgItem;
     

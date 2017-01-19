@@ -20,7 +20,7 @@
             NSMutableArray *temArrM = [NSMutableArray arrayWithCapacity:1];
             for (id obj in dict[@"imgList"]) {
                 if ([obj isKindOfClass:[NSDictionary class]]) {
-                    XYTopImgItem *imgItm = [XYTopImgItem userImgItemWithDict:obj responseInfo:info];
+                    XYTrendImgItem *imgItm = [XYTrendImgItem imgItemWithDict:obj responseInfo:info];
                     [temArrM addObject:imgItm];
                 }
             }
@@ -51,7 +51,7 @@
 - (NSArray<NSString *> *)imageUrls {
     
     NSMutableArray<NSString *> *tempArrM = [NSMutableArray arrayWithCapacity:1];
-    for (XYTopImgItem *imgItem in self.imgList) {
+    for (XYTrendImgItem *imgItem in self.imgList) {
         [tempArrM addObject:imgItem.imgFullURL.absoluteString];
     }
     return [tempArrM mutableCopy];
@@ -77,7 +77,7 @@
 
 @end
 
-@implementation XYTopImgItem
+@implementation XYTrendImgItem
 
 
 

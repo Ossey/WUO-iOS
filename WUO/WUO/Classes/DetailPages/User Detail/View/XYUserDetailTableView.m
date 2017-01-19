@@ -181,7 +181,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                     for (id obj in responseObject[@"datas"]) {
                         if ([obj isKindOfClass:[NSDictionary class]]) {
                             
-                            [_albumList addObject:[XYUserImgItem userImgItemWithDict:obj responseInfo:info]];
+                            [_albumList addObject:[XYUserImgItem imgItemWithDict:obj responseInfo:info]];
                         }
                     }
                     

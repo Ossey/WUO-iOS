@@ -89,10 +89,10 @@ let SIZE_GAP_SMALL : CGFloat = 5.0                        // 最小的间距
 let SIZE_PICMARGIN : CGFloat = 5.0                        // 每张图片之间的间距
 let SIZE_PICWH : CGFloat = 80.0                           // 单张图片宽度
 let SIZE_FONT : CGFloat = 17.0                            // 字体大小
-let SIZE_FONT_NAME = SIZE_FONT - 1             // 昵称字体大小
-let SIZE_FONT_SUBTITLE = SIZE_FONT-8        // job及创建日期字体大小
-let SIZE_FONT_TITLE = 15                      // 标题字体大小
-let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)   // 内容文本字体大小
+let SIZE_FONT_NAME = SIZE_FONT - 1                       // 昵称字体大小
+let SIZE_FONT_SUBTITLE = SIZE_FONT-8                     // job及创建日期字体大小
+let SIZE_FONT_TITLE : CGFloat = 15.0                                // 标题字体大小
+let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)              // 内容文本字体大小
 
 /** 全局字体 */
 func FontWithSize(s: CGFloat) -> UIFont {
