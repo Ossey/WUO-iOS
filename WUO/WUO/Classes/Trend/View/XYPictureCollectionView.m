@@ -22,9 +22,13 @@
 
 static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 
+- (instancetype)init {
+    return [self initWithFrame:CGRectZero collectionViewLayout:nil];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     
-    if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
+    if (self = [super initWithFrame:frame collectionViewLayout:[XYPictureCollectionViewLayout new]]) {
         [self setup];
     }
     return self;

@@ -186,7 +186,9 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%@", [tableView dequeueReusableCellWithIdentifier:cellIdentifier]);
+    if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectRowAtIndexPath:)]) {
+        [self.dynamicDelegate dynamicTableView:self didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

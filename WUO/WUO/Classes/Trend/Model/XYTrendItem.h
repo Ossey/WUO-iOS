@@ -4,7 +4,7 @@
 //
 //  Created by mofeini on 17/1/3.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//  
+//  用户的每一条 趋势 模型
 
 #import <Foundation/Foundation.h>
 #import "XYUserImgItem.h"
@@ -60,12 +60,12 @@
 @property (nonatomic, assign) BOOL isFollow;
 @property (nonatomic, assign) BOOL isOpenActivity;
 @property (nonatomic, assign) BOOL isRecommend;
-@property (nonatomic, assign) NSInteger lat;
-@property (nonatomic, assign) NSInteger lot;
+@property (nonatomic, assign) CGFloat lat;
+@property (nonatomic, assign) CGFloat lot;
 /** 报道数量 */
 @property (nonatomic, assign) NSInteger reportCount;
-@property (nonatomic, assign) NSInteger rewardGoldCoin;
-@property (nonatomic, assign) NSInteger rewardMoney;
+@property (nonatomic, assign) CGFloat rewardGoldCoin;
+@property (nonatomic, assign) CGFloat rewardMoney;
 @property (nonatomic, assign) NSInteger state;
 @property (nonatomic, copy) NSString *url;
 

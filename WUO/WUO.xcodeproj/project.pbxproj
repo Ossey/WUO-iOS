@@ -101,7 +101,6 @@
 		182F158E1E305D2900FA12C9 /* XYActiveTopicDetailLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15721E305D2900FA12C9 /* XYActiveTopicDetailLabelView.m */; };
 		182F158F1E305D2900FA12C9 /* XYActiveTopicDetailSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15741E305D2900FA12C9 /* XYActiveTopicDetailSelectView.m */; };
 		182F15901E305D2900FA12C9 /* XYActiveTopicDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15761E305D2900FA12C9 /* XYActiveTopicDetailTableView.m */; };
-		182F15911E305D2900FA12C9 /* XYTrendDetailControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15781E305D2900FA12C9 /* XYTrendDetailControlle.m */; };
 		182F15921E305D2900FA12C9 /* XYUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F157D1E305D2900FA12C9 /* XYUserDetailController.m */; };
 		182F15931E305D2900FA12C9 /* XYUserImgItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15801E305D2900FA12C9 /* XYUserImgItem.m */; };
 		182F15941E305D2900FA12C9 /* XYUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15821E305D2900FA12C9 /* XYUserInfo.m */; };
@@ -109,6 +108,10 @@
 		182F15961E305D2900FA12C9 /* XYUserDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15871E305D2900FA12C9 /* XYUserDetailHeaderView.m */; };
 		182F15971E305D2900FA12C9 /* XYUserDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15891E305D2900FA12C9 /* XYUserDetailTableView.m */; };
 		182F15981E305D2900FA12C9 /* XYUserHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F158B1E305D2900FA12C9 /* XYUserHomePageView.m */; };
+		182F159B1E3061FC00FA12C9 /* XYTrendDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F159A1E3061FC00FA12C9 /* XYTrendDetailController.swift */; };
+		182F159D1E3064E400FA12C9 /* XYTrendDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F159C1E3064E400FA12C9 /* XYTrendDetailTableView.swift */; };
+		182F159F1E30692000FA12C9 /* XYTrendDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F159E1E30692000FA12C9 /* XYTrendDetailHeaderView.swift */; };
+		182F15A11E3078C600FA12C9 /* XYConstant-Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182F15A01E3078C600FA12C9 /* XYConstant-Swift.swift */; };
 		183F93901E18BFA200875416 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F938F1E18BFA200875416 /* main.m */; };
 		183F939B1E18BFA200875416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183F939A1E18BFA200875416 /* Assets.xcassets */; };
 		183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F93D71E18F2A400875416 /* AppDelegate.m */; };
@@ -512,8 +515,6 @@
 		182F15741E305D2900FA12C9 /* XYActiveTopicDetailSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYActiveTopicDetailSelectView.m; sourceTree = "<group>"; };
 		182F15751E305D2900FA12C9 /* XYActiveTopicDetailTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYActiveTopicDetailTableView.h; sourceTree = "<group>"; };
 		182F15761E305D2900FA12C9 /* XYActiveTopicDetailTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYActiveTopicDetailTableView.m; sourceTree = "<group>"; };
-		182F15781E305D2900FA12C9 /* XYTrendDetailControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYTrendDetailControlle.m; sourceTree = "<group>"; };
-		182F15791E305D2900FA12C9 /* XYTrendDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTrendDetailController.h; sourceTree = "<group>"; };
 		182F157C1E305D2900FA12C9 /* XYUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserDetailController.h; sourceTree = "<group>"; };
 		182F157D1E305D2900FA12C9 /* XYUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserDetailController.m; sourceTree = "<group>"; };
 		182F157F1E305D2900FA12C9 /* XYUserImgItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserImgItem.h; sourceTree = "<group>"; };
@@ -528,6 +529,11 @@
 		182F15891E305D2900FA12C9 /* XYUserDetailTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserDetailTableView.m; sourceTree = "<group>"; };
 		182F158A1E305D2900FA12C9 /* XYUserHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserHomePageView.h; sourceTree = "<group>"; };
 		182F158B1E305D2900FA12C9 /* XYUserHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserHomePageView.m; sourceTree = "<group>"; };
+		182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WUO-Bridging-Header.h"; sourceTree = "<group>"; };
+		182F159A1E3061FC00FA12C9 /* XYTrendDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailController.swift; sourceTree = "<group>"; };
+		182F159C1E3064E400FA12C9 /* XYTrendDetailTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailTableView.swift; sourceTree = "<group>"; };
+		182F159E1E30692000FA12C9 /* XYTrendDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailHeaderView.swift; sourceTree = "<group>"; };
+		182F15A01E3078C600FA12C9 /* XYConstant-Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "XYConstant-Swift.swift"; path = "../../Classes/Trend/View/XYConstant-Swift.swift"; sourceTree = "<group>"; };
 		183F938B1E18BFA200875416 /* WUO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WUO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		183F938F1E18BFA200875416 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		183F939A1E18BFA200875416 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -1510,8 +1516,10 @@
 		182F15771E305D2900FA12C9 /* TrendDetail */ = {
 			isa = PBXGroup;
 			children = (
-				182F15781E305D2900FA12C9 /* XYTrendDetailControlle.m */,
-				182F15791E305D2900FA12C9 /* XYTrendDetailController.h */,
+				182F159A1E3061FC00FA12C9 /* XYTrendDetailController.swift */,
+				182F159C1E3064E400FA12C9 /* XYTrendDetailTableView.swift */,
+				182F159E1E30692000FA12C9 /* XYTrendDetailHeaderView.swift */,
+				182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */,
 			);
 			path = TrendDetail;
 			sourceTree = "<group>";
@@ -1625,6 +1633,7 @@
 		183F93C21E18F1E900875416 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
+				182F15A01E3078C600FA12C9 /* XYConstant-Swift.swift */,
 				183F93FC1E18F99E00875416 /* WUO.pch */,
 				183F94001E19182500875416 /* XYConstant.h */,
 				183F94011E19182500875416 /* XYConstant.m */,
@@ -2521,6 +2530,7 @@
 					183F938A1E18BFA200875416 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = NKW67GFDHM;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -2664,6 +2674,7 @@
 				18B0B9191E29CF3A004CD3C8 /* EMAudioRecorderUtil.m in Sources */,
 				18CA21E91E1A1693005F1C87 /* XYLaunchView.m in Sources */,
 				18B0B91E1E29CF3A004CD3C8 /* EMCDDeviceManagerBase.m in Sources */,
+				182F159F1E30692000FA12C9 /* XYTrendDetailHeaderView.swift in Sources */,
 				181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */,
 				18CA21D61E19FC22005F1C87 /* UIView+XYExtension.m in Sources */,
 				18B0B9431E29CF3A004CD3C8 /* EMSDWebImageCompat.m in Sources */,
@@ -2735,6 +2746,7 @@
 				18B0B95A1E29CF3A004CD3C8 /* PSTCollectionViewUpdateItem.m in Sources */,
 				18B0B9691E29CF3A004CD3C8 /* EaseChineseToPinyin.m in Sources */,
 				1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */,
+				182F159D1E3064E400FA12C9 /* XYTrendDetailTableView.swift in Sources */,
 				18B0B93A1E29CF3A004CD3C8 /* MWGridCell.m in Sources */,
 				18B0B9181E29CF3A004CD3C8 /* EMAudioPlayerUtil.m in Sources */,
 				18E294F61E248EBA006145E3 /* NSString+Date.m in Sources */,
@@ -2750,7 +2762,6 @@
 				182F15661E305A3D00FA12C9 /* XYVideoImgView.m in Sources */,
 				18B0B9441E29CF3A004CD3C8 /* EMSDWebImageDecoder.m in Sources */,
 				18B0B91A1E29CF3A004CD3C8 /* EMCDDeviceManager+Media.m in Sources */,
-				182F15911E305D2900FA12C9 /* XYTrendDetailControlle.m in Sources */,
 				1810AF821E260A7A00918A2C /* XYAdvertView.m in Sources */,
 				18B0B9541E29CF3A004CD3C8 /* PSTCollectionViewCell.m in Sources */,
 				18B0B9491E29CF3A004CD3C8 /* MKAnnotationView+EMWebCache.m in Sources */,
@@ -2782,6 +2793,7 @@
 				18B0B96B1E29CF3A004CD3C8 /* EaseMessageReadManager.m in Sources */,
 				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
 				180439701E2CA8A00064B5EE /* XYSettingViewController.m in Sources */,
+				182F15A11E3078C600FA12C9 /* XYConstant-Swift.swift in Sources */,
 				18B0B9561E29CF3A004CD3C8 /* PSTCollectionViewData.m in Sources */,
 				18B0B9501E29CF3A004CD3C8 /* UIImageView+EMWebCache.m in Sources */,
 				182F158C1E305D2900FA12C9 /* XYActiveTopicDetailController.m in Sources */,
@@ -2789,6 +2801,7 @@
 				18CA21E71E1A1693005F1C87 /* XYLaunchPlayerController.m in Sources */,
 				1845607F1E29C0970065D991 /* XYLoginInfo.m in Sources */,
 				18B0B98C1E29CF3A004CD3C8 /* EaseConversationCell.m in Sources */,
+				182F159B1E3061FC00FA12C9 /* XYTrendDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2889,6 +2902,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKW67GFDHM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2945,6 +2960,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sey.WUO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WUO/Classes/DetailPages/TrendDetail/WUO-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2954,6 +2972,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NKW67GFDHM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3010,6 +3030,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sey.WUO1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WUO/Classes/DetailPages/TrendDetail/WUO-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

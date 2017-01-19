@@ -95,24 +95,24 @@
     CGFloat y = SIZE_MARGIN;
     
     // 头像
-    self.topicDetailAvatarFrame = CGRectMake(x, y, SIZE_HEADERWH, SIZE_HEADERWH);
+    self.topicDetailAvatarFrame = CGRectMake(x, y, kSIZE_HEADERWH, kSIZE_HEADERWH);
     
     {
         // 昵称
-        CGSize nameSize = [self.name boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
-        self.topicDetailNameFrame = CGRectMake(SIZE_MARGIN+SIZE_HEADERWH+SIZE_MARGIN, SIZE_GAP_TOP, nameSize.width, nameSize.height);
+        CGSize nameSize = [self.name boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_NAME)} context:nil].size;
+        self.topicDetailNameFrame = CGRectMake(SIZE_MARGIN+kSIZE_HEADERWH+SIZE_MARGIN, kSIZE_GAP_TOP, nameSize.width, nameSize.height);
         // 发布时间
-        CGSize startTimeName = [self.statTimeFormat boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_SUBTITLE)} context:nil].size;
-        self.topicDetailStartTimeFrame = CGRectMake(self.topicDetailNameFrame.origin.x, CGRectGetMaxY(self.topicDetailNameFrame) + SIZE_GAP_SMALL, startTimeName.width, startTimeName.height);
+        CGSize startTimeName = [self.statTimeFormat boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_SUBTITLE)} context:nil].size;
+        self.topicDetailStartTimeFrame = CGRectMake(self.topicDetailNameFrame.origin.x, CGRectGetMaxY(self.topicDetailNameFrame) + kSIZE_GAP_SMALL, startTimeName.width, startTimeName.height);
         
         // 加入人数
-        CGSize joinCounStrSize = [self.joinCounStr boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_JOINCOUNT)} context:nil].size;
-        CGFloat joinCounStrX = kScreenW - SIZE_GAP_SMALL*2 - joinCounStrSize.width - SIZE_MARGIN;
-        CGFloat joinCounStrY = (SIZE_HEADERWH - joinCounStrSize.height) * 0.5 + SIZE_GAP_MARGIN;
+        CGSize joinCounStrSize = [self.joinCounStr boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_JOINCOUNT)} context:nil].size;
+        CGFloat joinCounStrX = kScreenW - kSIZE_GAP_SMALL*2 - joinCounStrSize.width - SIZE_MARGIN;
+        CGFloat joinCounStrY = (kSIZE_HEADERWH - joinCounStrSize.height) * 0.5 + kSIZE_GAP_MARGIN;
         self.topicDetailJoinCountFrame = CGRectMake(joinCounStrX, joinCounStrY, joinCounStrSize.width, joinCounStrSize.height);
     }
     
-    y += SIZE_HEADERWH + SIZE_MARGIN;
+    y += kSIZE_HEADERWH + SIZE_MARGIN;
     // logo
     CGFloat logoW = 0.0;
     CGFloat logoH = 0.0;
@@ -128,16 +128,16 @@
     // title
     y += logoH + SIZE_MARGIN;
     
-    CGSize titleStrSize = [self.Title boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_TITLE)} context:nil].size;
+    CGSize titleStrSize = [self.Title boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_TITLE)} context:nil].size;
     // 居中显示
     CGFloat titleStrX = (kScreenW - titleStrSize.width) * 0.5;
     self.topicDetailTitleFrame = CGRectMake(titleStrX, y, titleStrSize.width, titleStrSize.height);
     
     // 正文
     if (self.introduce.length) {
-        y += titleStrSize.height + SIZE_GAP_MARGIN;
-        CGSize introduceSize = [self.introduce boundingRectWithSize:CGSizeMake(kScreenW-2*SIZE_MARGIN, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_CONTENT)} context:nil].size;
-        //        CGSize introduceSize = [self.introduce sizeWithFont:kFontWithSize(SIZE_FONT_CONTENT) constrainedToSize:CGSizeMake((kScreenW-2*x), MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+        y += titleStrSize.height + kSIZE_GAP_MARGIN;
+        CGSize introduceSize = [self.introduce boundingRectWithSize:CGSizeMake(kScreenW-2*SIZE_MARGIN, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_CONTENT)} context:nil].size;
+        //        CGSize introduceSize = [self.introduce sizeWithFont:kFontWithSize(kSIZE_FONT_CONTENT) constrainedToSize:CGSizeMake((kScreenW-2*x), MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
         self.topicDetailIntroduceFrame = CGRectMake(x, y, introduceSize.width, introduceSize.height);
     } else {
         self.topicDetailIntroduceFrame = CGRectZero;
@@ -147,7 +147,7 @@
     y += self.topicDetailIntroduceFrame.size.height + 30;
     CGFloat joinTopicW = 80;
     CGFloat joinTopicH = 35;
-    CGFloat joinTopicX = kScreenW - joinTopicW - SIZE_GAP_MARGIN;
+    CGFloat joinTopicX = kScreenW - joinTopicW - kSIZE_GAP_MARGIN;
     self.topicDetailJoinTopicFrame = CGRectMake(joinTopicX, y, joinTopicW, joinTopicH);
     
     // 距离底部的距离

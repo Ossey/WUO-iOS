@@ -18,8 +18,8 @@
         NSInteger count = 4;
         CGFloat x = 0;
         CGFloat y = 0;
-        CGFloat h = SIZE_TOOLVIEWH;
-        CGFloat w = (kScreenW - SIZE_GAP_MARGIN * 2 - SIZE_HEADERWH - SIZE_GAP_PADDING) / count;
+        CGFloat h = kSIZE_TOOLVIEWH;
+        CGFloat w = (kScreenW - kSIZE_GAP_MARGIN * 2 - kSIZE_HEADERWH - kSIZE_GAP_PADDING) / count;
         
         for (NSInteger i = 0; i < count; ++i) {
             x = i * w;

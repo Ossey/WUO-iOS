@@ -24,6 +24,7 @@
  * @param   btn  点赞所在的按钮，当点赞后应该修改对应的模型数据 数据修改后刷新表格，就会让按钮应该变为选中状态，且更新点赞数，按钮不可以相应事件
  */
 - (void)topicViewCell:(XYTrendViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTrendItem *)item;
+
 @end
 
 @interface XYTrendViewCell : UITableViewCell

@@ -47,8 +47,8 @@
         return _cellHeight;
     }
     
-    CGFloat x = SIZE_GAP_MARGIN;
-    CGFloat y = SIZE_GAP_TOP;
+    CGFloat x = kSIZE_GAP_MARGIN;
+    CGFloat y = kSIZE_GAP_TOP;
     
     // 排名
     if (self.item.ranking.length) {
@@ -56,28 +56,28 @@
         CGFloat rankingWidth = 80;
         // 有排名
         self.rankingFrame = CGRectMake(-18, y, rankingWidth, rankingHeight);
-        y += rankingHeight + SIZE_GAP_TOP;
+        y += rankingHeight + kSIZE_GAP_TOP;
     } else {
-        y = SIZE_GAP_TOP;
+        y = kSIZE_GAP_TOP;
         self.rankingFrame = CGRectZero;
     }
     
     // 头部
-    CGFloat headerHeight = SIZE_HEADERWH;
+    CGFloat headerHeight = kSIZE_HEADERWH;
     
     self.headerFrame = CGRectMake(x, y, headerHeight, headerHeight);
     
-    y += headerHeight + SIZE_GAP_SMALL;
-    x += SIZE_HEADERWH + SIZE_GAP_PADDING;
+    y += headerHeight + kSIZE_GAP_SMALL;
+    x += kSIZE_HEADERWH + kSIZE_GAP_PADDING;
     
     // 昵称
-    CGSize nameSize = [self.item.name boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_NAME)} context:nil].size;
+    CGSize nameSize = [self.item.name boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_NAME)} context:nil].size;
     self.nameLabelFrame = CGRectMake(x, self.headerFrame.origin.y, nameSize.width, nameSize.height);
-    CGRectMake(x, SIZE_GAP_MARGIN, 0, 0);
+    CGRectMake(x, kSIZE_GAP_MARGIN, 0, 0);
     
     // job
-    CGSize jobSize = [self.item.job boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_SUBTITLE)} context:nil].size;
-    self.jobLabelFrame = CGRectMake(x, CGRectGetMaxY(self.nameLabelFrame) + SIZE_GAP_SMALL, jobSize.width, jobSize.height);
+    CGSize jobSize = [self.item.job boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_SUBTITLE)} context:nil].size;
+    self.jobLabelFrame = CGRectMake(x, CGRectGetMaxY(self.nameLabelFrame) + kSIZE_GAP_SMALL, jobSize.width, jobSize.height);
     
     // 图片
     if (self.item.imgCount == 0) {
@@ -86,7 +86,7 @@
     } else {
         CGSize picSize = [self caculatePicViewSize:self.item.imgCount];
         self.picCollectionViewFrame = CGRectMake(x, y, picSize.width, picSize.height);
-        y += picSize.height + SIZE_PIC_BOTTOM;
+        y += picSize.height + kSIZE_PIC_BOTTOM;
 
     }
     
@@ -100,7 +100,7 @@
     } else {
         videoImgH = 160.0;
         self.videoImgViewFrame = CGRectMake(x, y, self.contentWidth, videoImgH);
-        y += videoImgH + SIZE_PIC_BOTTOM;
+        y += videoImgH + kSIZE_PIC_BOTTOM;
     }
     
     
@@ -110,9 +110,9 @@
         self.title_labelFrame = CGRectZero;
         y += titleSize.height;
     } else {
-        titleSize = [self.item.title boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(SIZE_FONT_TITLE)} context:nil].size;
+        titleSize = [self.item.title boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(kSIZE_FONT_TITLE)} context:nil].size;
         self.title_labelFrame = CGRectMake(x, y, titleSize.width, titleSize.height);
-        y += titleSize.height + SIZE_GAP_PADDING;
+        y += titleSize.height + kSIZE_GAP_PADDING;
     }
     
    
@@ -122,21 +122,21 @@
         self.contentLableFrame = CGRectZero;
         y += contentSize.height;
     } else {
-        contentSize = [self.item.content boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(SIZE_FONT_CONTENT)} context:nil].size;
+        contentSize = [self.item.content boundingRectWithSize:CGSizeMake(self.contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : kFontWithSize(kSIZE_FONT_CONTENT)} context:nil].size;
         self.contentLableFrame = CGRectMake(x, y, contentSize.width, contentSize.height);
-        y += contentSize.height + SIZE_PIC_BOTTOM;
+        y += contentSize.height + kSIZE_PIC_BOTTOM;
     }
     
     // 浏览人数
     CGFloat readCountW = 80;
     CGFloat readCountH = 10;
-    CGFloat readCountX = self.contentWidth - SIZE_GAP_MARGIN - 0;
+    CGFloat readCountX = self.contentWidth - kSIZE_GAP_MARGIN - 0;
     self.readCountBtnFrame = CGRectMake(readCountX, y, readCountW, readCountH);
-    y += readCountH + SIZE_PIC_BOTTOM;
+    y += readCountH + kSIZE_PIC_BOTTOM;
     
     // 工具条
-    self.toolViewFrame = CGRectMake(x, y, self.contentWidth, SIZE_TOOLVIEWH);
-    y += SIZE_TOOLVIEWH + SIZE_SEPARATORH;
+    self.toolViewFrame = CGRectMake(x, y, self.contentWidth, kSIZE_TOOLVIEWH);
+    y += kSIZE_TOOLVIEWH + kSIZE_SEPARATORH;
     
     return y;
 }
@@ -161,12 +161,12 @@
     NSInteger rows = (count - 1) / 3 + 1;
     
     if (count == 4) {
-        return CGSizeMake(self.picItemWH * 2 + SIZE_PICMARGIN, self.picItemWH * 2 + SIZE_PICMARGIN);
+        return CGSizeMake(self.picItemWH * 2 + kSIZE_PICMARGIN, self.picItemWH * 2 + kSIZE_PICMARGIN);
     }
     
     
     CGFloat picViewW = self.contentWidth;
-    CGFloat picViewH = rows * self.picItemWH + (rows - 1) * SIZE_PICMARGIN;
+    CGFloat picViewH = rows * self.picItemWH + (rows - 1) * kSIZE_PICMARGIN;
     
     
     return CGSizeMake(picViewW, picViewH);
@@ -174,7 +174,7 @@
 
 - (CGFloat)contentWidth {
     
-    return kScreenW - SIZE_GAP_MARGIN * 2 - SIZE_HEADERWH - SIZE_GAP_PADDING;
+    return kScreenW - kSIZE_GAP_MARGIN * 2 - kSIZE_HEADERWH - kSIZE_GAP_PADDING;
 }
 
 - (CGFloat)picItemWH {
@@ -185,7 +185,7 @@
         return 150;
     }
     
-    return (self.contentWidth - 2 * SIZE_PICMARGIN) / 3;
+    return (self.contentWidth - 2 * kSIZE_PICMARGIN) / 3;
 }
 
 

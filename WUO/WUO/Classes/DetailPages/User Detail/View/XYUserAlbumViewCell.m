@@ -29,7 +29,7 @@ static NSString * const cellIdentifier = @"XYUserAlbumViewCell";
         _imageURLStrList = [NSMutableArray arrayWithCapacity:0];
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake(SIZE_ALBUM_ITEM_W, SIZE_ALBUM_ITEM_H);
+        layout.itemSize = CGSizeMake(kSIZE_ALBUM_ITEM_W, kSIZE_ALBUM_ITEM_H);
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;

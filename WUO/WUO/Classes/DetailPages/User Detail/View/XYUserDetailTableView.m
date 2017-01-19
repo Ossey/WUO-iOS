@@ -57,7 +57,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         self.requestType = XYUserDetailRequestTypeTopic;
         
         _headerView = [XYUserDetailHeaderView new];
-        _headerView.xy_height = SIZE_USER_DETAIL_HEADERVIEW_H;
+        _headerView.xy_height = kSIZE_USER_DETAIL_HEADERVIEW_H;
         self.tableHeaderView = _headerView;
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -309,7 +309,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     CGFloat height = 0;
     switch (_requestType) {
         case XYUserDetailRequestTypeInfo:
-            height = SIZE_USER_DETAIL_HOMEPAGE_H;
+            height = kSIZE_USER_DETAIL_HOMEPAGE_H;
             break;
             
         case XYUserDetailRequestTypeAlbum:
@@ -322,7 +322,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                 albumRow = (_albumList.count+1) * 0.5;
             }
 
-            height = albumRow * SIZE_ALBUM_ITEM_H;
+            height = albumRow * kSIZE_ALBUM_ITEM_H;
             break;
             
         case XYUserDetailRequestTypeTopic:

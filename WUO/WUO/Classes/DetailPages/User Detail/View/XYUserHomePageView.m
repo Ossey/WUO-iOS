@@ -134,7 +134,7 @@
 - (void)makeConstraints {
     
     [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).mas_offset(SIZE_GAP_MARGIN);
+        make.left.equalTo(self.contentView).mas_offset(kSIZE_GAP_MARGIN);
         make.right.top.bottom.equalTo(self.contentView);
     }];
     

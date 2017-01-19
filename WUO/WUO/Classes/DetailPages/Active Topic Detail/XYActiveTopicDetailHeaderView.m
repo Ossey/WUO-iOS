@@ -39,7 +39,7 @@
         
         // 头像
         _avatarView = [UIButton buttonWithType:UIButtonTypeCustom];
-        _avatarView.frame = CGRectMake(SIZE_MARGIN, SIZE_MARGIN, SIZE_HEADERWH, SIZE_HEADERWH);
+        _avatarView.frame = CGRectMake(SIZE_MARGIN, SIZE_MARGIN, kSIZE_HEADERWH, kSIZE_HEADERWH);
         _avatarView.backgroundColor = kColorGlobalCell;
         _avatarView.hidden = NO;
         _avatarView.tag = NSIntegerMax;
@@ -61,14 +61,14 @@
         // 标题
         //        _titleLabel = [[WUOLabel alloc] init];
         //        _titleLabel.textColor = kColorTitleText;
-        //        _titleLabel.font = kFontWithSize(SIZE_FONT_TITLE);
+        //        _titleLabel.font = kFontWithSize(kSIZE_FONT_TITLE);
         //        _titleLabel.lineSpace = 0;
         //        [self addSubview:_titleLabel];
         //
         // 活动介绍
         _introduceLabel = [[WUOLabel alloc] init];
         _introduceLabel.textColor = kColorContentText;
-        _introduceLabel.font = kFontWithSize(SIZE_FONT_CONTENT);
+        _introduceLabel.font = kFontWithSize(kSIZE_FONT_CONTENT);
         _introduceLabel.lineSpace = 0;
         [self addSubview:_introduceLabel];
     }
@@ -96,33 +96,33 @@
         CGContextFillRect(context, rect);
 
         // name
-        [self.item.name drawInContext:context withPosition:self.item.topicDetailNameFrame.origin andFont:kFontWithSize(SIZE_FONT_NAME)
+        [self.item.name drawInContext:context withPosition:self.item.topicDetailNameFrame.origin andFont:kFontWithSize(kSIZE_FONT_NAME)
                                    andTextColor:kColorNameText
                                       andHeight:self.item.topicDetailNameFrame.size.height];
         
         // 创建时间
-        [self.item.statTimeFormat drawInContext:context withPosition:self.item.topicDetailStartTimeFrame.origin andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorContentText andHeight:self.item.topicDetailNameFrame.size.height];
+        [self.item.statTimeFormat drawInContext:context withPosition:self.item.topicDetailStartTimeFrame.origin andFont:kFontWithSize(kSIZE_FONT_SUBTITLE) andTextColor:kColorContentText andHeight:self.item.topicDetailNameFrame.size.height];
         
         // 参加人数 背景
         [[UIImage imageNamed:@"mine_payButtonIcon"] drawInRect:CGRectMake(self.item.topicDetailJoinCountFrame.origin.x-5, self.item.topicDetailJoinCountFrame.origin.y-3, self.item.topicDetailJoinCountFrame.size.width+10,  self.item.topicDetailJoinCountFrame.size.height+6+3) blendMode:kCGBlendModeNormal alpha:0.8];
         
         // 参加人数
-        [self.item.joinCounStr drawInContext:context withPosition:self.item.topicDetailJoinCountFrame.origin andFont:kFontWithSize(SIZE_FONT_JOINCOUNT) andTextColor:kColorContentText andHeight:self.item.topicDetailJoinCountFrame.size.height];
+        [self.item.joinCounStr drawInContext:context withPosition:self.item.topicDetailJoinCountFrame.origin andFont:kFontWithSize(kSIZE_FONT_JOINCOUNT) andTextColor:kColorContentText andHeight:self.item.topicDetailJoinCountFrame.size.height];
          
         // 标题
-        [self.item.Title drawInContext:context withPosition:self.item.topicDetailTitleFrame.origin andFont:kFontWithSize(SIZE_FONT_TITLE) andTextColor:kColorTitleText andHeight:self.item.topicDetailTitleFrame.size.height];
+        [self.item.Title drawInContext:context withPosition:self.item.topicDetailTitleFrame.origin andFont:kFontWithSize(kSIZE_FONT_TITLE) andTextColor:kColorTitleText andHeight:self.item.topicDetailTitleFrame.size.height];
         
 //        // 正文
-//        [self.item.introduce drawInContext:context withPosition:self.item.topicDetailIntroduceFrame.origin andFont:kFontWithSize(SIZE_FONT_CONTENT) andTextColor:kColorContentText andHeight:self.item.topicDetailIntroduceFrame.size.height andWidth:kScreenW];
+//        [self.item.introduce drawInContext:context withPosition:self.item.topicDetailIntroduceFrame.origin andFont:kFontWithSize(kSIZE_FONT_CONTENT) andTextColor:kColorContentText andHeight:self.item.topicDetailIntroduceFrame.size.height andWidth:kScreenW];
         
         // 参加话题背景
         [[UIImage imageNamed:@"mine_payButtonIcon"] drawInRect:self.item.topicDetailJoinTopicFrame blendMode:kCGBlendModeNormal alpha:1.0];
         // 参加话题
-//        CGSize joinCounStrSize = [@"参加话题" sizeWithConstrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT) fromFont:kFontWithSize(SIZE_FONT_TITLE) lineSpace:1];
-       CGSize joinCounStrSize = [@"参加话题" boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(SIZE_FONT_TITLE)} context:nil].size;
+//        CGSize joinCounStrSize = [@"参加话题" sizeWithConstrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT) fromFont:kFontWithSize(kSIZE_FONT_TITLE) lineSpace:1];
+       CGSize joinCounStrSize = [@"参加话题" boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kFontWithSize(kSIZE_FONT_TITLE)} context:nil].size;
         CGFloat joinCounStrX = (self.item.topicDetailJoinTopicFrame.size.width - joinCounStrSize.width) * 0.5 + self.item.topicDetailJoinTopicFrame.origin.x;
         CGFloat joinCountStrY = (self.item.topicDetailJoinTopicFrame.size.height - joinCounStrSize.height) * 0.5 + self.item.topicDetailJoinTopicFrame.origin.y - 2;
-        [@"参加话题" drawInContext:context withPosition:CGPointMake(joinCounStrX, joinCountStrY) andFont:kFontWithSize(SIZE_FONT_TITLE) andTextColor:kColorTitleText andHeight:self.item.topicDetailJoinTopicFrame.size.height];
+        [@"参加话题" drawInContext:context withPosition:CGPointMake(joinCounStrX, joinCountStrY) andFont:kFontWithSize(kSIZE_FONT_TITLE) andTextColor:kColorTitleText andHeight:self.item.topicDetailJoinTopicFrame.size.height];
         
         // 获取当前图形上下文
         UIImage *temImage = UIGraphicsGetImageFromCurrentImageContext();

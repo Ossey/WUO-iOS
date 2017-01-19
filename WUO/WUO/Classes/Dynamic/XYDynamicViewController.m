@@ -10,6 +10,7 @@
 #import "XYDynamicTableView.h"
 #import "XYUserDetailController.h"
 #import "XYTrendItem.h"
+#import "WUO-Swift.h"
 
 @interface XYDynamicViewController () <XYDynamicTableViewDelegate>
 
@@ -58,6 +59,15 @@
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 跳转到 trend 详情页
+    XYTrendDetailController *vc = [[XYTrendDetailController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+
 
 #pragma mark - Events 
 - (void)goldCoinClick {

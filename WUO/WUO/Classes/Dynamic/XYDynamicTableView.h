@@ -14,6 +14,12 @@
 @optional
 
 /**
+ * @explain 点击cell时调用
+ *
+ */
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
  * @explain 点击cell上面头像时调用
  *
  * @param   item  头像对应用户当前的topic模型数据
@@ -37,6 +43,7 @@
 
 - (CGFloat)dynamicTableView:(XYDynamicTableView *)dynamicTableView heightForHeaderInSection:(NSInteger)section;
 - (UIView *)dynamicTableView:(XYDynamicTableView *)dynamicTableView viewForHeaderInSection:(NSInteger)section;
+
 
 @end
 

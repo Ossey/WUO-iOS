@@ -7,8 +7,8 @@
 //  Copyright © 2017年 com.test.demo. All rights reserved.
 //
 
-#ifdef __OBJC__
 
+#ifdef __OBJC__
 #import "UIImage+XYExtension.h"
 #import "XYConstant.h"
 #import <Masonry.h>
@@ -24,22 +24,22 @@
 #define kTabBarH 49
 
 /*************** 动态界面 ***************/
-#define SIZE_CONTENT_W kScreenW - SIZE_GAP_MARGIN * 2 - SIZE_HEADERWH - SIZE_GAP_PADDING
-#define SIZE_SEPARATORH 5                       // 分割线高度
-#define SIZE_TOOLVIEWH 40                       // 工具条高度
-#define SIZE_GAP_MARGIN 15                      // 全局外间距
-#define SIZE_GAP_TOP 13                         // 全局顶部间距
-#define SIZE_HEADERWH 50                        // 头像尺寸
-#define SIZE_GAP_PADDING 10                     // 内间距
-#define SIZE_PIC_BOTTOM 20                      // 图片底部间距
-#define SIZE_GAP_SMALL 5                        // 最小的间距
-#define SIZE_PICMARGIN 5                        // 每张图片之间的间距
-#define SIZE_PICWH 80                           // 单张图片宽度
-#define SIZE_FONT 17                            // 字体大小
-#define SIZE_FONT_NAME (SIZE_FONT-1)            // 昵称字体大小
-#define SIZE_FONT_SUBTITLE (SIZE_FONT-8)        // job及创建日期字体大小
-#define SIZE_FONT_TITLE 15                      // 标题字体大小
-#define SIZE_FONT_CONTENT (SIZE_FONT_TITLE-3)   // 内容文本字体大小
+#define kSIZE_CONTENT_W kScreenW - kSIZE_GAP_MARGIN * 2 - kSIZE_HEADERWH - kSIZE_GAP_PADDING
+#define kSIZE_SEPARATORH 5                       // 分割线高度
+#define kSIZE_TOOLVIEWH 40                       // 工具条高度
+#define kSIZE_GAP_MARGIN 15                      // 全局外间距
+#define kSIZE_GAP_TOP 13                         // 全局顶部间距
+#define kSIZE_HEADERWH 50                        // 头像尺寸
+#define kSIZE_GAP_PADDING 10                     // 内间距
+#define kSIZE_PIC_BOTTOM 20                      // 图片底部间距
+#define kSIZE_GAP_SMALL 5                        // 最小的间距
+#define kSIZE_PICMARGIN 5                        // 每张图片之间的间距
+#define kSIZE_PICWH 80                           // 单张图片宽度
+#define kSIZE_FONT 17                            // 字体大小
+#define kSIZE_FONT_NAME (kSIZE_FONT-1)            // 昵称字体大小
+#define kSIZE_FONT_SUBTITLE (kSIZE_FONT-8)        // job及创建日期字体大小
+#define kSIZE_FONT_TITLE 15                      // 标题字体大小
+#define kSIZE_FONT_CONTENT (kSIZE_FONT_TITLE-3)   // 内容文本字体大小
 #define kFontWithSize(s) [UIFont fontWithName:@"HelveticaNeue-Light" size:s] // 全局字体
 
 
@@ -53,7 +53,7 @@
 
 
 /**************** 话题详情 *****************/
-#define SIZE_FONT_JOINCOUNT (SIZE_FONT-6)
+#define kSIZE_FONT_JOINCOUNT (kSIZE_FONT-6)
 
 
 /*************** 颜色 ***************/
@@ -77,17 +77,17 @@
 
 
 /*************** 用户详情页 ***************/
-#define SIZE_USER_DETAIL_AVATER_WH 70                       // 头像尺寸
-#define SIZE_USER_DETAIL_TOP 13                             // 顶部距离
-#define SIZE_USER_DETAIL_PADDING 10                         // 间距
-#define SIZE_USER_DETAIL_HEADERVIEW_H 260                   // tableHeaderView高度
-#define SIZE_USER_DETAIL_leftCentXMargin kScreenW * 0.5 * 0.5
+#define kSIZE_USER_DETAIL_AVATER_WH 70                       // 头像尺寸
+#define kSIZE_USER_DETAIL_TOP 13                             // 顶部距离
+#define kSIZE_USER_DETAIL_PADDING 10                         // 间距
+#define kSIZE_USER_DETAIL_HEADERVIEW_H 260                   // tableHeaderView高度
+#define kSIZE_USER_DETAIL_leftCentXMargin kScreenW * 0.5 * 0.5
 #define kColorDescriptionGray kColor(166, 166, 166, 1.0)    
-#define SIZE_FONT_USER_DETAIL_DESCRIPTION 12
-#define SIZE_FONT_USER_DETAIL_COUNT 10
-#define SIZE_ALBUM_ITEM_H SIZE_ALBUM_ITEM_W                 // 相册collectionViewcell的高度
-#define SIZE_ALBUM_ITEM_W kScreenW * 0.5                    // 相册collectionViewcell的宽度
-#define SIZE_USER_DETAIL_HOMEPAGE_H 400         
+#define kkSIZE_FONT_USER_DETAIL_DESCRIPTION 12
+#define kkSIZE_FONT_USER_DETAIL_COUNT 10
+#define kSIZE_ALBUM_ITEM_H kSIZE_ALBUM_ITEM_W                 // 相册collectionViewcell的高度
+#define kSIZE_ALBUM_ITEM_W kScreenW * 0.5                    // 相册collectionViewcell的宽度
+#define kSIZE_USER_DETAIL_HOMEPAGE_H 400         
 
 
 #define kLoginInfoPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"loginInfo.plist"]

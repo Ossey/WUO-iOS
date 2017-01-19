@@ -10,7 +10,7 @@
 #import "XYTrendViewModel.h"
 
 #define SIZE_MARGIN 10
-#define SIZE_CORNERWH SIZE_HEADERWH+5
+#define SIZE_CORNERWH kSIZE_HEADERWH+5
 #define SIZE_LOGOH 200
 
 @interface XYActivityTopicItem : NSObject

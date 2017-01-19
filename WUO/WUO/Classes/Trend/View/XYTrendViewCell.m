@@ -16,7 +16,6 @@
 #import "WUOToolView.h"
 #import "XYVideoImgView.h"
 
-@class XYPictureCollectionViewLayout;
 @interface XYTrendViewCell () {
     // 是否正在绘制中
     BOOL _isDrawing;
@@ -117,7 +116,7 @@
     [self creatLabel];
     
     // 图片
-    self.pictureCollectionView = [[XYPictureCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[XYPictureCollectionViewLayout new]];
+    self.pictureCollectionView = [[XYPictureCollectionView alloc] init];
     self.pictureCollectionView.tag = NSIntegerMax;
     self.pictureCollectionView.hidden = YES;
     self.pictureCollectionView.backgroundColor = kColorGlobalCell;
@@ -127,7 +126,6 @@
     self.videoImgView = [[XYVideoImgView alloc] init];
     self.videoImgView.hidden = YES;
     self.videoImgView.tag = NSIntegerMax;
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.videoImgView.backgroundColor = kColorLightGray;
     [self.contentView addSubview:self.videoImgView];
     
@@ -174,7 +172,7 @@
     self.title_label = [[WUOLabel alloc] initWithFrame:self.viewModel.title_labelFrame];
     self.title_label.textColor = kColorTitleText;
     self.title_label.text = @"标题";
-    self.title_label.font = kFontWithSize(SIZE_FONT_TITLE);
+    self.title_label.font = kFontWithSize(kSIZE_FONT_TITLE);
     [self.contentView addSubview:self.title_label];
     
     if (self.contentLabel) {
@@ -184,7 +182,7 @@
     // 正文
     self.contentLabel = [[WUOLabel alloc] initWithFrame:self.viewModel.title_labelFrame];
     self.contentLabel.text = @"内容";
-    self.contentLabel.font = kFontWithSize(SIZE_FONT_CONTENT);
+    self.contentLabel.font = kFontWithSize(kSIZE_FONT_CONTENT);
     self.contentLabel.textColor = kColorContentText;
     [self.contentView addSubview:self.contentLabel];
 }
@@ -239,16 +237,16 @@
         CGContextFillRect(context, rect);
         
         // name
-        [self.viewModel.item.name drawInContext:context withPosition:self.viewModel.nameLabelFrame.origin andFont:kFontWithSize(SIZE_FONT_NAME)
+        [self.viewModel.item.name drawInContext:context withPosition:self.viewModel.nameLabelFrame.origin andFont:kFontWithSize(kSIZE_FONT_NAME)
                                    andTextColor:kColorNameText
                                       andHeight:self.viewModel.nameLabelFrame.size.height];
         
         // job
-        [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(SIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:self.viewModel.jobLabelFrame.size.height andWidth:self.viewModel.jobLabelFrame.size.width];
+        [self.viewModel.item.job drawInContext:context withPosition:self.viewModel.jobLabelFrame.origin andFont:kFontWithSize(kSIZE_FONT_SUBTITLE) andTextColor:kColorJobText andHeight:self.viewModel.jobLabelFrame.size.height andWidth:self.viewModel.jobLabelFrame.size.width];
         
         
         // read
-        float readCounX = kScreenW - self.investBtn.frame.size.width - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;
+        float readCounX = kScreenW - self.investBtn.frame.size.width - kSIZE_GAP_MARGIN - kSIZE_GAP_MARGIN;
         
         NSString *readCountStr = [NSString stringWithFormat:@"%ld人预览", self.viewModel.item.readCount];
         CGSize readCounSize = [readCountStr sizeWithConstrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) fromFont:kFontWithSize(8) lineSpace:5];
@@ -361,7 +359,7 @@
 
 - (void)setFrame:(CGRect)frame {
     
-    frame.size.height -= SIZE_SEPARATORH;
+    frame.size.height -= kSIZE_SEPARATORH;
     [super setFrame:frame];
 }
 
@@ -390,7 +388,7 @@
     // 计算行数
     NSInteger rows = (count - 1) / 3 + 1;
 
-    CGFloat contentWidth = SIZE_CONTENT_W;
+    CGFloat contentWidth = kSIZE_CONTENT_W;
     
     itemWH = (contentWidth - 2 * itemMargin) / 3;
     
