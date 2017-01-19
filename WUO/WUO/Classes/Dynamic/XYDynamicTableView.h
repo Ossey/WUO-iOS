@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class XYDynamicTableView, XYTopicViewModel, XYTopicItem;
+@class XYDynamicTableView, XYTrendViewModel, XYTrendItem;
 @protocol XYDynamicTableViewDelegate <UITableViewDelegate>
 
 @optional
@@ -18,7 +18,7 @@
  *
  * @param   item  头像对应用户当前的topic模型数据
  */
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item;
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item;
 /**
  * @explain scrollView滚动的时候调用
  *

@@ -12,7 +12,7 @@
 UIKIT_EXTERN NSNotificationName const XYTabBarButtonDidRepeatClickNotification;
 // 用户登录状态
 UIKIT_EXTERN NSNotificationName const XYUserLoginStatuKey;
-UIKIT_EXTERN NSNotificationName const XYTopicViewCellHeightDidChangeNote;
+UIKIT_EXTERN NSNotificationName const XYTrendViewCellHeightDidChangeNote;
 UIKIT_EXTERN NSNotificationName const WUODynamicDidSelectImgNote;
 UIKIT_EXTERN NSString * const WUODynamicImgItemsKey;
 UIKIT_EXTERN NSString * const WUODynamicSelectImgIndexPathKey;

@@ -9,11 +9,11 @@
 #import "XYDynamicTableView.h"
 #import "XYRefreshGifFooter.h"
 #import "XYRefreshGifHeader.h"
-#import "XYTopicViewModel.h"
+#import "XYTrendViewModel.h"
 #import "WUOHTTPRequest.h"
-#import "XYTopicViewCell.h"
+#import "XYTrendViewCell.h"
 
-@interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource, XYTopicViewCellDelegate>
+@interface XYDynamicTableView () <UITableViewDelegate, UITableViewDataSource, XYTrendViewCellDelegate>
 
 @property (nonatomic, strong) XYHTTPResponseInfo *dynamicInfo;
 
@@ -21,12 +21,12 @@
 
 @implementation XYDynamicTableView {
         
-    NSMutableArray<XYTopicViewModel *> *_dynamicList;
+    NSMutableArray<XYTrendViewModel *> *_dynamicList;
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
 }
 
-static NSString * const cellIdentifier = @"XYTopicViewCell";
+static NSString * const cellIdentifier = @"XYTrendViewCell";
 @synthesize serachLabel = _serachLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
@@ -40,7 +40,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         _dynamicList = [NSMutableArray arrayWithCapacity:0];
         _needLoadList = [[NSMutableArray alloc] init];
         
-        [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self registerClass:[XYTrendViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             _dynamicInfo.idstamp = 0;
@@ -98,8 +98,8 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
-                        XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:_dynamicInfo];
-                        XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:_dynamicInfo];
+                        XYTrendItem *item = [XYTrendItem trendItemWithDict:obj info:_dynamicInfo];
+                        XYTrendViewModel *viewModel = [XYTrendViewModel trendViewModelWithTrend:item info:_dynamicInfo];
                         [_dynamicList addObject:viewModel];
                     }
                 }
@@ -117,8 +117,8 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }];
 }
 
-- (void)drawCell:(XYTopicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
-    XYTopicViewModel *viewModel = [_dynamicList objectAtIndex:indexPath.row];
+- (void)drawCell:(XYTrendViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+    XYTrendViewModel *viewModel = [_dynamicList objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;
@@ -132,8 +132,8 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     [cell draw];
 }
 
-#pragma mark - <XYTopicViewCellDelegate>
-- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item {
+#pragma mark - <XYTrendViewCellDelegate>
+- (void)topicViewCellDidSelectAvatarView:(XYTrendViewCell *)cell item:(XYTrendItem *)item {
     
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath: item:)]) {
         NSIndexPath *indexPath = [self indexPathForCell:cell];
@@ -141,7 +141,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }
 }
 
-- (void)topicViewCell:(XYTopicViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTopicItem *)item {
+- (void)topicViewCell:(XYTrendViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTrendItem *)item {
     // 点赞时，发送网络请求，并更新按钮的状态为选中状态，且按钮不再接受点击事件
     [WUOHTTPRequest updateTrendPraiseToUid:item.uid tid:item.tid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
@@ -169,7 +169,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    XYTrendViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if (cell.delegate == nil) {
         cell.delegate = self;
     }
@@ -180,7 +180,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    XYTopicViewModel *viewModel = _dynamicList[indexPath.row];
+    XYTrendViewModel *viewModel = _dynamicList[indexPath.row];
     return viewModel.cellHeight;
 }
 
@@ -288,7 +288,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }
     if (self.visibleCells && self.visibleCells.count > 0 ) {
         for (id temp in [self.visibleCells copy]) {
-            XYTopicViewCell *cell = (XYTopicViewCell *)temp;
+            XYTrendViewCell *cell = (XYTrendViewCell *)temp;
             [cell draw];
         }
     }

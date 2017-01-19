@@ -32,11 +32,11 @@
 #import "XYTrendTableView.h"
 #import "XYRefreshGifFooter.h"
 #import "XYRefreshGifHeader.h"
-#import "XYTopicViewModel.h"
+#import "XYTrendViewModel.h"
 #import "WUOHTTPRequest.h"
-#import "XYTopicViewCell.h"
+#import "XYTrendViewCell.h"
 
-@interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource, XYTopicViewCellDelegate>
+@interface XYTrendTableView () <UITableViewDelegate, UITableViewDataSource, XYTrendViewCellDelegate>
 
 @property (nonatomic, strong) XYHTTPResponseInfo *dynamicInfo;
 
@@ -47,12 +47,12 @@
     NSMutableArray *_needLoadList;
     BOOL _scrollToToping;
     /** 将每一种标题类型的数据数组作为value，标题作为key放在这个数组中, 按照当前点击的serachLabel去_dataList查找对应数据，防止数据错乱 */
-    NSMutableDictionary<NSString *,NSMutableArray<XYTopicViewModel *> *> *_dataList;
+    NSMutableDictionary<NSString *,NSMutableArray<XYTrendViewModel *> *> *_dataList;
     NSMutableDictionary<NSString *, NSNumber *> *_cnameDict;
 }
 
 
-static NSString * const cellIdentifier = @"XYTopicViewCell";
+static NSString * const cellIdentifier = @"XYTrendViewCell";
 @synthesize serachLabel = _serachLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame dataType:(NSInteger)type
@@ -67,7 +67,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         _dataList = [NSMutableDictionary dictionaryWithCapacity:0];
         _needLoadList = [NSMutableArray arrayWithCapacity:3];
         _cnameDict = [NSMutableDictionary dictionaryWithCapacity:1];
-        [self registerClass:[XYTopicViewCell class] forCellReuseIdentifier:cellIdentifier];
+        [self registerClass:[XYTrendViewCell class] forCellReuseIdentifier:cellIdentifier];
         
         self.mj_header = [XYRefreshGifHeader headerWithRefreshingBlock:^{
             [_dataList[self.serachLabel] removeAllObjects];
@@ -150,8 +150,8 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         
-                        XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
-                        XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:info];
+                        XYTrendItem *item = [XYTrendItem trendItemWithDict:obj info:info];
+                        XYTrendViewModel *viewModel = [XYTrendViewModel trendViewModelWithTrend:item info:info];
                         
                         // 将数据添加到对应的容器中，避免被循环利用，数据错乱
                         [_dataList[self.serachLabel] addObject:viewModel];
@@ -169,14 +169,14 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }];
 }
 
-- (void)drawCell:(XYTopicViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+- (void)drawCell:(XYTrendViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
     //    NSLog(@"%@", indexPath);
     // 防止数据错乱时，引发数组越界问题崩溃  , 数据重复请求并添加，导致数据越界问题已经解决，所以不需要在这判断了
     if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
         return;
     }
-    XYTopicViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
+    XYTrendViewModel *viewModel = [_dataList[self.serachLabel] objectAtIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clear];
     cell.viewModel = viewModel;
@@ -191,15 +191,15 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     [cell draw];
 }
 
-#pragma mark - XYTopicViewCellDelegate
-- (void)topicViewCellDidSelectAvatarView:(XYTopicViewCell *)cell item:(XYTopicItem *)item {
+#pragma mark - XYTrendViewCellDelegate
+- (void)topicViewCellDidSelectAvatarView:(XYTrendViewCell *)cell item:(XYTrendItem *)item {
     if (self.dynamicDelegate && [self.dynamicDelegate respondsToSelector:@selector(dynamicTableView:didSelectAvatarViewAtIndexPath:item:)]) {
         NSIndexPath *indexPath = [self indexPathForCell:cell];
         [self.dynamicDelegate dynamicTableView:self didSelectAvatarViewAtIndexPath:indexPath item:item];
     }
 }
 
-- (void)topicViewCell:(XYTopicViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTopicItem *)item {
+- (void)topicViewCell:(XYTrendViewCell *)celll didSelectPraiseBtn:(UIButton *)btn item:(XYTrendItem *)item {
     // 点赞时，发送网络请求，并更新按钮的状态为选中状态，且按钮不再接受点击事件
     [WUOHTTPRequest updateTrendPraiseToUid:item.uid tid:item.tid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         if (error) {
@@ -227,7 +227,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XYTopicViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    XYTrendViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     [self drawCell:cell withIndexPath:indexPath];
     return cell;
@@ -245,7 +245,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         // 现在问题解决了，不需要这里错误判断了
         if (indexPath.row < datas.count) {
             
-            XYTopicViewModel *viewModel = datas[indexPath.row];
+            XYTrendViewModel *viewModel = datas[indexPath.row];
             cellHeight = viewModel.cellHeight;
         }
     }
@@ -347,7 +347,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
         // 当标题栏在顶部固定的时候，才去记录偏移量
         if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
             // 记录停止拖拽时rendTableView的偏移量
-            XYTopicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+            XYTrendViewModel *viewModel = _dataList[self.serachLabel].firstObject;
             viewModel.previousContentOffset = scrollView.contentOffset;
             
         }
@@ -363,7 +363,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     // 当标题栏在顶部固定的时候，才去记录偏移量
     if (self.contentOffset.y > kTopicViewHeight + kAdvertViewHeight + kHeaderFooterViewInsetMargin - kNavigationBarHeight) {
         // 记录停止拖拽时rendTableView的偏移量
-        XYTopicViewModel *viewModel = _dataList[self.serachLabel].firstObject;
+        XYTrendViewModel *viewModel = _dataList[self.serachLabel].firstObject;
         viewModel.previousContentOffset = scrollView.contentOffset;
 
     }
@@ -388,7 +388,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
     }
     if (self.visibleCells && self.visibleCells.count > 0 ) {
         for (id temp in [self.visibleCells copy]) {
-            XYTopicViewCell *cell = (XYTopicViewCell *)temp;
+            XYTrendViewCell *cell = (XYTrendViewCell *)temp;
             [cell draw];
         }
     }
@@ -451,7 +451,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 //        // 遍历数据源，判断有没有其中任何一个上次偏移量大于了compareOffsetY，只要有就停止遍历，让所有的都移动到compareOffsetY
 //        dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //            for (NSString *key in _dataList) {
-//                NSArray<XYTopicViewModel *> *arrValue = _dataList[key];
+//                NSArray<XYTrendViewModel *> *arrValue = _dataList[key];
 //                NSLog(@"%f--compareOffsetY=%f", arrValue.firstObject.previousContentOffset.y, compareOffsetY);
 //                if (arrValue.firstObject.previousContentOffset.y > compareOffsetY) {
 //                    tempOffsetY = compareOffsetY;
@@ -471,7 +471,7 @@ static NSString * const cellIdentifier = @"XYTopicViewCell";
 //        
 //    } else if ([[_cnameDict objectForKey:serachLabel] integerValue] == 2) {
 //        // 取出模型，第一个模型保存了偏移量
-//        XYTopicViewModel *viewModel = _dataList[serachLabel].firstObject;
+//        XYTrendViewModel *viewModel = _dataList[serachLabel].firstObject;
 //        if (viewModel.previousContentOffset.y > compareOffsetY) {
 //
 //            [self setContentOffset:viewModel.previousContentOffset animated:YES];

@@ -12,7 +12,7 @@
 #import "XYAdvertView.h"
 #import "XYTrendLabelItem.h"
 #import "XYTrendTableView.h"
-#import "XYTopicViewCell.h"
+#import "XYTrendViewCell.h"
 #import "WUOFindHeaderView.h"
 #import "XYActivityTopicItem.h"
 #import "XYUserDetailController.h"
@@ -158,7 +158,7 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
                 for (id obj in responseObject[@"datas"]) {
                     if ([obj isKindOfClass:[NSDictionary class]]) {
                         XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
-                        XYActivityTopicItem *item = [XYActivityTopicItem activityTopicItemWithDict:obj info:info];
+                        XYActivityTopicItem *item = [XYActivityTopicItem activitytrendItemWithDict:obj info:info];
                         [_topicList addObject:item];
                     }
                 }
@@ -219,7 +219,7 @@ static NSString *const headerFooterViewIdentifier = @"WUOFindHeaderView";
 }
 
 
-- (void)dynamicTableView:(XYTrendTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
+- (void)dynamicTableView:(XYTrendTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
     
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];

@@ -9,7 +9,7 @@
 #import "XYDynamicViewController.h"
 #import "XYDynamicTableView.h"
 #import "XYUserDetailController.h"
-#import "XYTopicItem.h"
+#import "XYTrendItem.h"
 
 @interface XYDynamicViewController () <XYDynamicTableViewDelegate>
 
@@ -53,7 +53,7 @@
 
 
 #pragma mark - <XYDynamicTableViewDelegate>
-- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTopicItem *)item {
+- (void)dynamicTableView:(XYDynamicTableView *)tableView didSelectAvatarViewAtIndexPath:(NSIndexPath *)indexPath item:(XYTrendItem *)item {
     
     XYUserDetailController *vc = [[XYUserDetailController alloc] initWithUid:item.uid username:item.name];
     [self.navigationController pushViewController:vc animated:YES];

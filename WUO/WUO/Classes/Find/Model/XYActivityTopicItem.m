@@ -21,8 +21,8 @@
             // 里面都是帖子
             for (id obj in dict[@"trendList"]) {
                 if ([obj isKindOfClass:[NSDictionary class]]) {
-                    XYTopicItem *item = [XYTopicItem topicItemWithDict:obj info:info];
-                    XYTopicViewModel *viewModel = [XYTopicViewModel topicViewModelWithTopic:item info:info];
+                    XYTrendItem *item = [XYTrendItem trendItemWithDict:obj info:info];
+                    XYTrendViewModel *viewModel = [XYTrendViewModel trendViewModelWithTrend:item info:info];
                     [_trendList addObject:viewModel];
                 }
             }
@@ -32,14 +32,14 @@
     return self;
 }
 
-+ (instancetype)activityTopicItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
++ (instancetype)activitytrendItemWithDict:(NSDictionary *)dict info:(XYHTTPResponseInfo *)info {
     
     return [[self alloc] initWithDict:dict info:info];
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
 
-//- (NSMutableArray<XYTopicViewModel *> *)trendList {
+//- (NSMutableArray<XYTrendViewModel *> *)trendList {
 //    if (_trendList == nil) {
 //        _trendList = [NSMutableArray array];
 //    }
@@ -174,7 +174,7 @@
     return CGRectMake(0, 0, kScreenW, self.topicDetailHeaderHeight);
 }
 
-//- (void)setTrendList:(NSMutableArray<XYTopicViewModel *> *)trendList {
+//- (void)setTrendList:(NSMutableArray<XYTrendViewModel *> *)trendList {
 //    _trendList = trendList;
 //    
 //    // 发布数据改变的通知，外界更新数据

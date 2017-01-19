@@ -10,7 +10,7 @@
 
 NSNotificationName const XYTabBarButtonDidRepeatClickNotification = @"XYTabBarButtonDidRepeatClickNotification";
 NSNotificationName const XYUserLoginStatuKey = @"XYUserLoginStatuKey";
-NSNotificationName const XYTopicViewCellHeightDidChangeNote = @"XYTopicViewCellHeightDidChangeNote";
+NSNotificationName const XYTrendViewCellHeightDidChangeNote = @"XYTrendViewCellHeightDidChangeNote";
 NSNotificationName const WUODynamicDidSelectImgNote = @"WUODynamicDidSelectImgNote";
 NSString * const WUODynamicImgItemsKey = @"WUODynamicImgItemsKey";
 NSString * const WUODynamicSelectImgIndexPathKey = @"WUODynamicSelectImgIndexPathKey";

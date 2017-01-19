@@ -8,7 +8,7 @@
 
 #import "ChatViewController.h"
 #import "XYUserDetailController.h"
-#import "XYTopicItem.h"
+#import "XYTrendItem.h"
 #import "XYUserInfo.h"
 #import "AppDelegate.h"
 
@@ -182,7 +182,7 @@
 {
 //    NSLog(@"%@", messageModel.nickname);
 //    
-//    XYTopicItem *topicItem = [[XYTopicItem alloc] init];
+//    XYTrendItem *topicItem = [[XYTrendItem alloc] init];
 //    topicItem.uid = [messageModel.nickname integerValue];
     
     NSInteger uid = 0;
