@@ -72,8 +72,34 @@ func COLOR_GLOBAL_GREEN() -> UIColor {
     return COLOR(r: 47, g: 189, b: 169, a: 1.0)
 }
 
+func SCREENT_W() -> CGFloat {
+    return UIScreen.main.bounds.size.width
+}
 
 /*************** 动态界面 ***************/
+let SIZE_CONTENT_W = SCREENT_W() - SIZE_GAP_MARGIN * 2 - SIZE_HEADERWH - SIZE_GAP_PADDING
+let SIZE_SEPARATORH : CGFloat = 5.0                       // 分割线高度
+let SIZE_TOOLVIEWH : CGFloat = 40.0                       // 工具条高度
+let SIZE_GAP_MARGIN : CGFloat = 15.0                      // 全局外间距
+let SIZE_GAP_TOP : CGFloat = 13.0                         // 全局顶部间距
+let SIZE_HEADERWH  : CGFloat = 50.0                        // 头像尺寸
+let SIZE_GAP_PADDING  : CGFloat = 10.0                     // 内间距
+let SIZE_PIC_BOTTOM : CGFloat = 20.0                      // 图片底部间距
+let SIZE_GAP_SMALL : CGFloat = 5.0                        // 最小的间距
+let SIZE_PICMARGIN : CGFloat = 5.0                        // 每张图片之间的间距
+let SIZE_PICWH : CGFloat = 80.0                           // 单张图片宽度
+let SIZE_FONT : CGFloat = 17.0                            // 字体大小
+let SIZE_FONT_NAME = SIZE_FONT - 1             // 昵称字体大小
+let SIZE_FONT_SUBTITLE = SIZE_FONT-8        // job及创建日期字体大小
+let SIZE_FONT_TITLE = 15                      // 标题字体大小
+let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)   // 内容文本字体大小
+
+/** 全局字体 */
+func FontWithSize(s: CGFloat) -> UIFont {
+    return UIFont.init(name: "HelveticaNeue-Light", size: s)!
+}
+
+
 
 
 
