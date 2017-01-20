@@ -105,4 +105,10 @@
  *
  */
 + (void)updateTrendPraiseToUid:(NSInteger)toUid tid:(NSInteger)tid finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 获取投资界面的数据
+ *
+ */
++ (void)invset_getAllFoundUserFromSerachLabel:(NSString *)serachLabel idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

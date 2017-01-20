@@ -8,13 +8,13 @@
 
 #import "MainTabBarController.h"
 #import "XYFindViewController.h"
-#import "XYInvestViewController.h"
 #import "XYMineViewController.h"
 #import "XYComposeViewController.h"
 #import "XYDynamicViewController.h"
 #import "MainNavigationController.h"
 #import "MainTabBar.h"
 #import "XYCustomNavController.h"
+#import "WUO-Swift.h"
 
 #define tabBarHeight CGRectGetHeight(self.tabBar.bounds)
 #define standOutHeight 12.0f // 中间突出部分的高度

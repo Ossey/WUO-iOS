@@ -231,6 +231,21 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
 
+// 获取投资界面的数据URL	http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllFoundUser
++ (void)invset_getAllFoundUserFromSerachLabel:(NSString *)serachLabel idstamp:(NSString *)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack {
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllFoundUser";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:serachLabel forKey:@"serachLabel"];
+    [parameters setObject:idstamp forKey:@"idstamp"];
+    [parameters setObject:@15 forKey:@"pageNum"];
+    
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfo *)userLoginInfoItem {
     

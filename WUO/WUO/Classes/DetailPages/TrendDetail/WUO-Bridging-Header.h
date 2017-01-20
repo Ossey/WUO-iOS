@@ -13,3 +13,4 @@
 #import "XYCustomNavController.h"
 #import <Masonry.h>
 #import "XYCateTitleView.h"
+#import "WUOHTTPRequest.h"
