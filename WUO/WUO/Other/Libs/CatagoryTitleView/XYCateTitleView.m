@@ -104,13 +104,16 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         x = i * self.itemWidth;
         button.frame = CGRectMake(x, 0, self.itemWidth, CGRectGetHeight(self.cateTitleView.frame));
-//        button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-//        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+        button.titleEdgeInsets = self.titleEdgeInsets;
+        button.imageEdgeInsets = self.imageEdgeInsets;
         NSDictionary *dict = self.channelCates[i];
         button.ename = dict[self.itemImageNameKey];
         button.cname = dict[self.itemNameKey];
         [button setTitle:dict[self.itemNameKey] forState:UIControlStateNormal];
         [button setImage:dict[self.itemImageNameKey] forState:UIControlStateNormal];
+        if ((!button.ename || !button.ename.length) && (!button.cname || !button.cname.length)) {
+            button.userInteractionEnabled = NO;
+        }
 //        UIImage *image = [UIImage imageNamed:imageName];
 //        if (!image) {
 //            image = [UIImage imageNamed:@"boardgames"];
@@ -229,18 +232,14 @@
     }
 }
 
-- (void)setGlobalBackgroundColor:(UIColor *)globalBackgroundColor {
-    
-    _globalBackgroundColor = globalBackgroundColor;
-    self.currentItemBackgroundColor = globalBackgroundColor;
-    self.otherItemBackgroundColor = globalBackgroundColor;
-    self.rightButton.backgroundColor = globalBackgroundColor;
-
-}
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
+
     self.cateTitleView.backgroundColor = backgroundColor;
+    self.currentItemBackgroundColor = backgroundColor;
+    self.otherItemBackgroundColor = backgroundColor;
+    self.rightButton.backgroundColor = backgroundColor;
 }
 
 - (UIImage *)separatorImage {
@@ -301,7 +300,7 @@
     _currentItemBackgroundColor = currentItemBackgroundColor;
     
     if (self.currentSelectBtn != self.previousSelectedBtn) {
-        
+    
         self.currentSelectBtn.backgroundColor = currentItemBackgroundColor;
     }
 }

@@ -18,7 +18,7 @@ class XYTrendDetailLabelView: XYCateTitleView {
         itemScale = 0.0
         underLineBackgroundColor = COLOR_GLOBAL_GREEN()
         separatorImage = UIImage()
-
+        backgroundColor = COLOR_GLOBAL_CELL()
     }
 
 }

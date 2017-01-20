@@ -307,10 +307,11 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
     // 注意：这里默认的的偏移量是-64，越往上滑动scrollView偏移量越大，反之越小
     if (scrollView.contentOffset.y > self.headView.xy_height - kNavigationBarHeight) {
         self.selectView.trendLabelView.separatorBackgroundColor = [UIColor colorWithRed:140 / 255.0 green:140 / 255.0 blue:140 / 255.0 alpha:0.6];
+        self.selectView.trendLabelView.backgroundColor = [UIColor whiteColor];
         
     } else {
         self.selectView.trendLabelView.separatorBackgroundColor = [UIColor clearColor];
-        
+        self.selectView.trendLabelView.backgroundColor = kColorGlobalCell;
     }
 }
 
@@ -433,8 +434,6 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
         self.selectView.trendLabelView.channelCates = [labelArr mutableCopy];
         self.selectView.trendLabelView.selectedIndex = 1; // 默认选中第一个按钮
         self.selectView.trendLabelView.delegate = self;
-        self.selectView.trendLabelView.backgroundColor = kTableViewBgColor;
-        self.selectView.trendLabelView.globalBackgroundColor = kColorGlobalCell;
         _isFirst = NO;
     }
     

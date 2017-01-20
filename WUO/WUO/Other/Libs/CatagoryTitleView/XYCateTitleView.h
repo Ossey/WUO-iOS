@@ -83,8 +83,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImage *underLineImage;
 @property (nonatomic, strong) UIImage *separatorImage;
 @property (nonatomic, strong) UIColor *separatorBackgroundColor;
-@property (nonatomic, strong) UIColor *globalBackgroundColor;
 @property (nonatomic, assign) CGFloat itemWidth;
+@property (nonatomic, assign) UIEdgeInsets titleEdgeInsets;
+@property (nonatomic, assign) UIEdgeInsets imageEdgeInsets;
 @property (nonatomic, weak, readonly) UIButton *rightButton;
 @property (nonatomic, weak) id<XYCateTitleViewDelegate> delegate;
 @property (nonatomic, copy) void (^selectedItemCallBack)(NSString *ename, NSInteger index);
