@@ -25,6 +25,8 @@ class XYTrendDetailViewModel: NSObject {
     var topicNameLabelFrame : CGRect?
     var readCountBtnFrame : CGRect?
     var investBtnFrame : CGRect?
+    var locationBtnFrame: CGRect?
+    
     /** 用户发布的图片父视图的总高度 */
     var pictureSize : CGSize? {
         get {
@@ -118,7 +120,6 @@ class XYTrendDetailViewModel: NSObject {
                 contentLableFrame = CGRect.init(x: x, y: y, width: contentSize.width, height: contentSize.height)
                 y += contentSize.height + SIZE_GAP_PADDING
             }
-//             print(y)
             // 图片
             let picViewSize = pictureSize!
             picCollectionViewFrame = CGRect.init(x: x, y: y, width: picViewSize.width, height: picViewSize.height)
@@ -145,7 +146,19 @@ class XYTrendDetailViewModel: NSObject {
             let readCountH : CGFloat = 10.0
             let readCountX = SCREENT_W() - (investBtnFrame?.size.width)! - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;
             readCountBtnFrame = CGRect.init(x: readCountX, y: y, width: readCountW, height: readCountH)
-            y += readCountH + SIZE_PIC_BOTTOM;
+            
+            // 位置
+            if item?.location.characters.count == 0 {
+                y += readCountH + SIZE_PIC_BOTTOM;
+                locationBtnFrame = CGRect.zero
+            } else {
+                y += readCountH
+                let attributes = [NSFontAttributeName: FontWithSize(s: SIZE_FONT_LOCATION)]
+                let size = item?.location.boundingRect(with: CGSize.init(width: contentViewWidth, height: CGFloat(MAXFLOAT)), options: option, attributes: attributes, context: nil).size
+                locationBtnFrame = CGRect(x: x, y: y, width: (size?.width)! + 30, height: (size?.height)! + 5)
+            }
+            
+            y += (locationBtnFrame?.size.height)! + SIZE_GAP_MARGIN
             
             return y;
         }
@@ -171,41 +184,6 @@ class XYTrendDetailViewModel: NSObject {
             return URL(string: fullPath!)
         }
     }
-    
-    // 计算collectionView的尺寸
-//    func caculatePicViewSize(imgList: [XYTrendImgItem]) -> CGSize {
-//        
-//        // 以内容的宽度为准，等比例计算高度
-//        if imgList.count == 0 {
-//            return CGSize.zero
-//        }
-//        
-//        if imgList.count == 1 {
-//            if let width = imgList.first?.imgSize.width, let height = imgList.first?.imgSize.height {
-//                let oneImageHeight = contentViewWidth / width * height
-//               return CGSize.init(width: contentViewWidth, height: oneImageHeight)
-//            }
-//        }
-//        
-//        let picViewW = contentViewWidth
-//        var picViewH : CGFloat = 0.0;
-//        var imgWidth : CGFloat = 0.0
-//        for item in imgList {
-//            imgWidth = item.imgSize.width
-//            // 计算每一个图片的等比例高度
-//            // 注意： 此处需要判断服务器返回的width是否为0 ，如果为0，就让其为内容视图的宽度，不然为0 时 使用除法会保存
-//                if imgWidth == 0 {
-//                    imgWidth = contentViewWidth
-//                }
-//                let oneImageHeight = contentViewWidth / imgWidth * item.imgSize.height
-//                picViewH += oneImageHeight
-//            
-//        }
-//        picViewH += CGFloat(imgList.count - 1) * SIZE_PICMARGIN
-//        print(picViewH, CGFloat(imgList.count - 1))
-//        return CGSize.init(width: picViewW, height: picViewH)
-//    }
-    
 
     
     

@@ -11,3 +11,4 @@
 #import "XYPictureCollectionView.h"
 #import "XYProfileBaseController.h"
 #import "XYCustomNavController.h"
+#import <Masonry.h>

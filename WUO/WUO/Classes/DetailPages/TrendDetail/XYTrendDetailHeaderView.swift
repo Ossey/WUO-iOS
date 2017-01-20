@@ -48,7 +48,9 @@ class XYTrendDetailHeaderView: UIView {
         return UILabel()
     }()
     
-    
+    lazy var locationBtn: UIButton = {
+        return UIButton()
+    }()
     
     // MARK: - 模型属性
     var trendDetailViewModel : XYTrendDetailViewModel? {
@@ -69,7 +71,9 @@ class XYTrendDetailHeaderView: UIView {
                 videoImgView.isHidden = item.videoImgFullURL == nil
                 
                 readCountBtn.setTitle("\(item.readCount)" + "人预览", for: .normal)
- 
+                locationBtn.isHidden = item.location.characters.count == 0
+                locationBtn.setImage(UIImage.init(named: "Home_sendTrendsLocIcon"), for: .normal)
+                locationBtn.setTitle(item.location, for: .normal)
             }
         }
     }
@@ -104,6 +108,7 @@ class XYTrendDetailHeaderView: UIView {
         videoImgView.frame = trendDetailViewModel.videoImgViewFrame!
         
         readCountBtn.frame = trendDetailViewModel.readCountBtnFrame!
+        locationBtn.frame = trendDetailViewModel.locationBtnFrame!
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -173,6 +178,7 @@ extension XYTrendDetailHeaderView {
         readCountBtn.setTitleColor(COLOR_READCOUNT_TEXT, for: .normal)
         readCountBtn.setImage(UIImage.init(named: "Home_trendsReadCount"), for: .normal)
         readCountBtn.titleLabel?.font = FontWithSize(s: 8)
+        readCountBtn.imageView?.contentMode = .scaleAspectFill
         addSubview(readCountBtn)
         
         // title
@@ -193,7 +199,11 @@ extension XYTrendDetailHeaderView {
         topicNameLabel.textColor = COLOR_CONTENT_TEXT()
         addSubview(topicNameLabel)
 
-
+        // 位置
+        locationBtn.titleLabel?.font = FontWithSize(s: SIZE_FONT_LOCATION)
+        locationBtn.setTitleColor(COLOR_CONTENT_TEXT(), for: .normal)
+        locationBtn.imageView?.contentMode = .scaleAspectFill
+        addSubview(locationBtn)
     }
     
 }
@@ -207,12 +217,4 @@ extension XYTrendDetailHeaderView {
 
 }
 
-//extension  XYPictureCollectionViewDataSource {
-//    
-//    @available(iOS 6.0, *)
-//    public func pictureCollectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAt indexPath: IndexPath!) -> CGSize {
-//        
-//    }
-//
-//    
-//}
+
