@@ -31,7 +31,7 @@
     
     if (_trendLabelView == nil) {
         
-        _trendLabelView = [[XYActiveTopicDetailLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:self channelCates:nil rightBtnWidth:0];
+        _trendLabelView = [[XYActiveTopicDetailLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:nil channelCates:nil rightBtnWidth:0];
         _trendLabelView.itemNameKey = @"labelName";
         [self.contentView addSubview:_trendLabelView];
         [_trendLabelView mas_makeConstraints:^(MASConstraintMaker *make) {

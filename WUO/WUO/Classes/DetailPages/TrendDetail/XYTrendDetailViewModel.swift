@@ -143,7 +143,7 @@ class XYTrendDetailViewModel: NSObject {
             
             // 浏览人数
             let readCountW : CGFloat = 80.0
-            let readCountH : CGFloat = 10.0
+            let readCountH : CGFloat = 10.0 + 5.0
             let readCountX = SCREENT_W() - (investBtnFrame?.size.width)! - SIZE_GAP_MARGIN - SIZE_GAP_MARGIN;
             readCountBtnFrame = CGRect.init(x: readCountX, y: y, width: readCountW, height: readCountH)
             
@@ -156,9 +156,8 @@ class XYTrendDetailViewModel: NSObject {
                 let attributes = [NSFontAttributeName: FontWithSize(s: SIZE_FONT_LOCATION)]
                 let size = item?.location.boundingRect(with: CGSize.init(width: contentViewWidth, height: CGFloat(MAXFLOAT)), options: option, attributes: attributes, context: nil).size
                 locationBtnFrame = CGRect(x: x, y: y, width: (size?.width)! + 30, height: (size?.height)! + 5)
+                y += (locationBtnFrame?.size.height)! + SIZE_GAP_MARGIN
             }
-            
-            y += (locationBtnFrame?.size.height)! + SIZE_GAP_MARGIN
             
             return y;
         }

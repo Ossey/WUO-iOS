@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return  初始化对象
  */
 - (instancetype)initWithFrame:(CGRect)frame
-                     delegate:(id)delegate
+                     delegate:(id _Nullable)delegate
                  channelCates:(NSArray<NSDictionary *> * _Nullable )channelCates
                 rightBtnWidth:(CGFloat)rightBtnWidth NS_DESIGNATED_INITIALIZER;
 

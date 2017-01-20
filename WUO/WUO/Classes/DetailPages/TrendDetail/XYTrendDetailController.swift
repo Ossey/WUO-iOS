@@ -37,7 +37,6 @@ class XYTrendDetailController: XYProfileBaseController {
         super.viewDidLoad();
         view.addSubview(tableView)
         tableView.frame = self.view.bounds
-        tableView.delegate = self
         setupUI()
     }
     
@@ -84,9 +83,4 @@ extension XYTrendDetailController {
     }
 }
 
-extension XYTrendDetailController: UITableViewDelegate {
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
-    }
-}

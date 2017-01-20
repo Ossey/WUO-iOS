@@ -125,6 +125,8 @@
 		183F94051E191CBA00875416 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F94041E191CBA00875416 /* MainNavigationController.m */; };
 		183F940F1E194B7400875416 /* launch.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 183F940E1E194B6500875416 /* launch.mp4 */; };
 		183F94201E195B8500875416 /* XYCustomNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183F941E1E195B8500875416 /* XYCustomNavController.m */; };
+		1840A36D1E31AC5B0021691F /* XYTrendDetailLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840A36C1E31AC5B0021691F /* XYTrendDetailLabelView.swift */; };
+		1840A36F1E31AD7E0021691F /* XYTrendDetaileSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840A36E1E31AD7E0021691F /* XYTrendDetaileSelectView.swift */; };
 		184560661E2936100065D991 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184560651E2936100065D991 /* CoreMedia.framework */; };
 		184560681E29361A0065D991 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184560671E29361A0065D991 /* AudioToolbox.framework */; };
 		1845606A1E2936290065D991 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184560691E2936290065D991 /* AVFoundation.framework */; };
@@ -560,6 +562,8 @@
 		183F940E1E194B6500875416 /* launch.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = launch.mp4; sourceTree = "<group>"; };
 		183F941D1E195B8500875416 /* XYCustomNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCustomNavController.h; sourceTree = "<group>"; };
 		183F941E1E195B8500875416 /* XYCustomNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCustomNavController.m; sourceTree = "<group>"; };
+		1840A36C1E31AC5B0021691F /* XYTrendDetailLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailLabelView.swift; sourceTree = "<group>"; };
+		1840A36E1E31AD7E0021691F /* XYTrendDetaileSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetaileSelectView.swift; sourceTree = "<group>"; };
 		184560631E29356C0065D991 /* Hyphenate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hyphenate.framework; path = "/Users/mofeini/Documents/GitHub Code Repository/WUO-iOS/WUO/WUO/Other/Libs/HyphenateFullSDK/Hyphenate.framework"; sourceTree = "<absolute>"; };
 		184560651E2936100065D991 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		184560671E29361A0065D991 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1520,8 +1524,10 @@
 			children = (
 				182F15AD1E30B85500FA12C9 /* XYTrendDetailController.swift */,
 				182F15AE1E30B85500FA12C9 /* XYTrendDetailHeaderView.swift */,
+				1840A36E1E31AD7E0021691F /* XYTrendDetaileSelectView.swift */,
 				182F15AF1E30B85500FA12C9 /* XYTrendDetailTableView.swift */,
 				182F15B01E30B85500FA12C9 /* XYTrendDetailViewModel.swift */,
+				1840A36C1E31AC5B0021691F /* XYTrendDetailLabelView.swift */,
 				182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */,
 			);
 			path = TrendDetail;
@@ -2747,12 +2753,14 @@
 				180214BC1E1E599C006605C2 /* XYImageBrowerView.m in Sources */,
 				182F15951E305D2900FA12C9 /* XYUserAlbumViewCell.m in Sources */,
 				182F155F1E305A3D00FA12C9 /* XYTrendItem.m in Sources */,
+				1840A36D1E31AC5B0021691F /* XYTrendDetailLabelView.swift in Sources */,
 				182F15B11E30B85500FA12C9 /* XYTrendDetailController.swift in Sources */,
 				18B0B95A1E29CF3A004CD3C8 /* PSTCollectionViewUpdateItem.m in Sources */,
 				18B0B9691E29CF3A004CD3C8 /* EaseChineseToPinyin.m in Sources */,
 				1810AFC61E26197600918A2C /* XYMineViewController.m in Sources */,
 				18B0B93A1E29CF3A004CD3C8 /* MWGridCell.m in Sources */,
 				18B0B9181E29CF3A004CD3C8 /* EMAudioPlayerUtil.m in Sources */,
+				1840A36F1E31AD7E0021691F /* XYTrendDetaileSelectView.swift in Sources */,
 				18E294F61E248EBA006145E3 /* NSString+Date.m in Sources */,
 				1862E69F1E21DB530031D063 /* UITableView+Gzw.m in Sources */,
 				183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */,

@@ -188,8 +188,8 @@
     
     // 将之前的保存在这个数组中
     self.previousChannelCates = [_channelCates mutableCopy];
-    
     _channelCates = channelCates;
+
     // 当数据发送改变时，重新布局button
     if (_channelCates.count) {
         

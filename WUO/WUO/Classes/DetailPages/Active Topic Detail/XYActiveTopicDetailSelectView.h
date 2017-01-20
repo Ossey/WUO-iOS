@@ -10,5 +10,7 @@
 #import "XYActiveTopicDetailLabelView.h"
 
 @interface XYActiveTopicDetailSelectView : UITableViewHeaderFooterView
+
 @property (nonatomic, strong) XYActiveTopicDetailLabelView *trendLabelView;
+
 @end

@@ -96,13 +96,13 @@ let SIZE_FONT_LOCATION : CGFloat = SIZE_FONT - 5          // 标题字体大小
 let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)              // 内容文本字体大小
 let COLOR_COUNT_TEXT = COLOR(r: 205, g: 205, b: 205, a: 1.0) // 工具条的各种数量文本颜色
 let COLOR_READCOUNT_TEXT = COLOR(r: 180, g: 180, b: 180, a: 1.0) // 阅读文本数量颜色
-
+let SIZE_TREND_DETAIL_SELECTVIEW_H : CGFloat = 35.0
 /** 全局字体 */
 func FontWithSize(s: CGFloat) -> UIFont {
     return UIFont.init(name: "HelveticaNeue-Light", size: s)!
 }
 
-
+let TableViewBgColor = COLOR(r: 238, g: 238, b: 238, a: 1.0)        // 所有tableView的背景颜色
 
 
 
