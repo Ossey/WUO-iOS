@@ -26,6 +26,10 @@ class XYFoundUser: NSObject {
     var name : String?
     var uid : Int?
     
+    // MARK: - 扩展属性
+    var cellHeight : CGFloat?
+    
+    
     // MARK: - 对模型属性的处理
     var headImageURL : URL? {
         get {
@@ -58,8 +62,16 @@ class XYFoundUser: NSObject {
     
     convenience init(dict: [String: Any], info: XYHTTPResponseInfo) {
         self.init()
+        
         setValuesForKeys(dict)
         responseInfo = info
+        // 使用setValuesForKeys转换模型，Int CGFloat数据类型尽然转换失败，郁闷，手动再转换下
+        beGmCount = dict["beGmCount"] as? Int
+        earningsGoldCoin = dict["earningsGoldCoin"] as? CGFloat
+        fansCount = dict["fansCount"] as? Int
+        uid = dict["uid"] as? Int
+        isFollow = dict["isFollow"] as? Bool
+        isInvest = dict["isInvest"] as? Bool
         
         if let imgList = dict["imgList"] as? [[String: Any]] {
             var tempArr = [XYTrendImgItem]()
@@ -72,4 +84,6 @@ class XYFoundUser: NSObject {
     override func setValue(_ value: Any?, forUndefinedKey key: String) {
         
     }
+    
+
 }

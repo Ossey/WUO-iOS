@@ -51,6 +51,8 @@ extension XYTrendDetailController {
 
     func setupUI() -> Void {
         
+        
+        
         let rightBtn = UIButton(type: .custom)
         rightBtn .setImage(UIImage.init(named: "Nav_more"), for: .normal)
         rightBtn.addTarget(self, action: #selector(moreEvent), for: .touchUpInside)

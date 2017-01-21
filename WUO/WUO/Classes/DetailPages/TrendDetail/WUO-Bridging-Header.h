@@ -17,3 +17,6 @@
 #import "XYHTTPResponseInfo.h"
 #import "WUO.pch"
 #import "XYImageViewer.h"
+#import "XYUserDetailController.h"
+#import "XYRefreshGifHeader.h"
+#import "XYRefreshGifFooter.h"

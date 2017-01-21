@@ -17,18 +17,68 @@ class XYInvestViewController: UIViewController {
         return UITableView()
     }()
     
+    var idstamp : Int? {
+        set {
+        
+        }
+        get {
+            if dataList.count == 0 {
+                return 0
+            }
+            
+            return dataList.last?.responseInfo?.idstamp
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         
-        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "投资榜", idstamp: "0", finishedCallBack: { (task, responseObj, error) in
+        tableView.mj_header = XYRefreshGifHeader {
+            self.getAllFoundUser(idstamp: 0)
+        }
+        
+        tableView.mj_footer = XYRefreshGifFooter {
+            if let idsramp = self.idstamp {
+                
+                self.getAllFoundUser(idstamp: idsramp)
+            }
+        }
+        
+        tableView.mj_header.beginRefreshing()
+        
+        tableView.gzwLoading { 
+            self.getAllFoundUser(idstamp: 0)
+        }
+    }
+
+
+}
+
+// MARK: - 网络请求
+extension XYInvestViewController {
+
+    func getAllFoundUser(idstamp: Int) -> Void {
+        
+        WUOHTTPRequest.setActivityIndicator(true)
+        tableView.loading = true
+        
+        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "投资榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
+            
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            WUOHTTPRequest.setActivityIndicator(false)
+            self.tableView.loading = false
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
                 return
             }
+            
+
+            
             guard let responseObj = responseObj as? [String: Any] else {
                 print("找不到responseObj")
                 return
@@ -48,7 +98,7 @@ class XYInvestViewController: UIViewController {
                     return
                 }
                 for obj in datas {
-                   self.dataList.append(XYFoundUser(dict: obj, info: info!))
+                    self.dataList.append(XYFoundUser(dict: obj, info: info!))
                 }
             }
             
@@ -56,11 +106,7 @@ class XYInvestViewController: UIViewController {
             
         })
     }
-
-
 }
-
-
 
 
 // MARK: - 设置UI
@@ -89,7 +135,6 @@ extension XYInvestViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 144
         tableView.register(UINib.init(nibName: "XYInvestViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
 }
@@ -106,6 +151,7 @@ extension XYInvestViewController {
     }
 }
 
+// MARK: - TableView的代理和数据源方法
 extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,6 +164,28 @@ extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? XYInvestViewCell
         cell?.foundUser = dataList[indexPath.row]
         return cell!
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let item = dataList[indexPath.row]
+        guard let cellHeight = item.cellHeight else {
+            return 0
+        }
+        return cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let item = dataList[indexPath.row]
+        
+        if let uid = item.uid {
+            // 跳转到用户详情页
+            let vc = XYUserDetailController(uid: uid, username: item.name)
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
         
     }
 }
