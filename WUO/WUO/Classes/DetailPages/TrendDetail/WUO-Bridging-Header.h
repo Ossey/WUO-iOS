@@ -16,3 +16,4 @@
 #import "WUOHTTPRequest.h"
 #import "XYHTTPResponseInfo.h"
 #import "WUO.pch"
+#import "XYImageViewer.h"

@@ -60,7 +60,7 @@ class XYInvestViewController: UIViewController {
 
 }
 
-let cellIdentifier = "XYInvestViewCell"
+
 
 
 // MARK: - 设置UI

@@ -18,7 +18,7 @@ class XYInvestViewCell: UITableViewCell {
     @IBOutlet weak var earningsGoldCoin_label: UILabel!
     @IBOutlet weak var fansCount_label: UILabel!
     @IBOutlet weak var investBtn: UIButton!
-    @IBOutlet weak var picCollectionView: XYPictureCollectionView!
+    @IBOutlet weak var picCollectionView: XYInvestPicView!
     lazy var cornerImageView : UIImageView = {
         return UIImageView();
     }()
@@ -65,10 +65,13 @@ extension XYInvestViewCell {
     func setupUI() -> Void {
         
         selectionStyle = .none
-        let layout = picCollectionView.collectionViewLayout as! XYPictureCollectionViewLayout
-        let wh = (self.frame.size.width - 5.0 * 5.0) / 4.0;
+        
+        let layout = picCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        // 由于第一次进入显示此界面时，获取到的picCollectionView的父控件的frame是不准确的，打印为320，当然滑动屏幕后打印宽度就准确了，所以使用屏幕宽度来计算
+        let wh = (SCREENT_W() - 5 * 5) / 4
         layout.itemSize = CGSize(width: wh, height: picCollectionView.frame.height)
-        picCollectionView.backgroundColor = UIColor.red
+        layout.minimumInteritemSpacing = 5
+        layout.minimumInteritemSpacing = 5
         
         // 镂空的圆形图片盖在头像上面，目的是让头像显示为圆形
         cornerImageView.image = UIImage(named: "corner_circle")

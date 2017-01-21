@@ -69,6 +69,7 @@
 		18043A691E2CBC330064B5EE /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18043A321E2CBC330064B5EE /* UShareUI.framework */; };
 		18043A6B1E2CBCC00064B5EE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18043A6A1E2CBCC00064B5EE /* SystemConfiguration.framework */; };
 		18043A6D1E2CBCC80064B5EE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18043A6C1E2CBCC80064B5EE /* CoreTelephony.framework */; };
+		18046FEF1E33BC8A00C8370E /* XYInvestPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18046FEE1E33BC8A00C8370E /* XYInvestPicView.swift */; };
 		1810AF7E1E260A7A00918A2C /* XYActivityTopicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF6B1E260A7A00918A2C /* XYActivityTopicItem.m */; };
 		1810AF7F1E260A7A00918A2C /* XYAdvertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF6D1E260A7A00918A2C /* XYAdvertItem.m */; };
 		1810AF801E260A7A00918A2C /* XYTrendLabelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AF6F1E260A7A00918A2C /* XYTrendLabelItem.m */; };
@@ -457,6 +458,7 @@
 		18043A321E2CBC330064B5EE /* UShareUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UShareUI.framework; sourceTree = "<group>"; };
 		18043A6A1E2CBCC00064B5EE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		18043A6C1E2CBCC80064B5EE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		18046FEE1E33BC8A00C8370E /* XYInvestPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYInvestPicView.swift; sourceTree = "<group>"; };
 		1810AF6A1E260A7A00918A2C /* XYActivityTopicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYActivityTopicItem.h; sourceTree = "<group>"; };
 		1810AF6B1E260A7A00918A2C /* XYActivityTopicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYActivityTopicItem.m; sourceTree = "<group>"; };
 		1810AF6C1E260A7A00918A2C /* XYAdvertItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAdvertItem.h; sourceTree = "<group>"; };
@@ -1431,6 +1433,7 @@
 				189301DA1E3267CB005C6233 /* XYInvestViewController.swift */,
 				189301DC1E327A48005C6233 /* XYInvestViewCell.swift */,
 				189301DD1E327A48005C6233 /* XYInvestViewCell.xib */,
+				18046FEE1E33BC8A00C8370E /* XYInvestPicView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2671,6 +2674,7 @@
 				18B0B96A1E29CF3A004CD3C8 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				18B0B98A1E29CF3A004CD3C8 /* EaseChatBarMoreView.m in Sources */,
 				183F94021E19182500875416 /* XYConstant.m in Sources */,
+				18046FEF1E33BC8A00C8370E /* XYInvestPicView.swift in Sources */,
 				18B0B9591E29CF3A004CD3C8 /* PSTCollectionViewLayout.m in Sources */,
 				18B0B9811E29CF3A004CD3C8 /* EaseBubbleView+Video.m in Sources */,
 				18B0B97C1E29CF3A004CD3C8 /* EaseBubbleView+File.m in Sources */,

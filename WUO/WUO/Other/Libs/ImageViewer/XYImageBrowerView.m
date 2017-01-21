@@ -350,7 +350,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"图片视频已销毁");
+    NSLog(@"%s", __func__);
 }
 
 @end
