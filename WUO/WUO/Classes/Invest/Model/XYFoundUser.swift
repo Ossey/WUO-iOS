@@ -27,7 +27,7 @@ class XYFoundUser: NSObject {
     var uid : Int?
     
     // MARK: - 扩展属性
-    var cellHeight : CGFloat?
+    var cellHeight : CGFloat = 0
     
     
     // MARK: - 对模型属性的处理

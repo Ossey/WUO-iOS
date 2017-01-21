@@ -49,21 +49,24 @@ class XYInvestViewCell: UITableViewCell {
             }
             
             guard let imgList = foundUser.imgList else {
-                foundUser.cellHeight = 180 - picCollectionView.frame.height
+//                foundUser.cellHeight = 180 - picCollectionView.frame.height
+                foundUser.cellHeight = avatarView.frame.maxY + 15
                 picCollectionView.isHidden = true
                 return
             }
             
             // 问题：当第一次加载xib时，不管怎么设置都是按照xib的高度算，只要滑动后才会按照我的计算
             // 暂时的解决办法：让xib中cell的高度与我们手动设置的高度相同
+            // 问题2：cell的高度循环利用导致cell高度不对
+            // 解决方法：由于picCollectionView的高度在xib中并未设置约束导致的，只是设置的顶部和底部的约束，高度属动态改变，现在我直接使用头像的maxY值去取cell应该的高度就解决了，因为头像设置了高度约束
             picCollectionView.isHidden = imgList.count == 0
             if imgList.count > 0 {
                 picCollectionView.imgList = imgList;
                 picCollectionView.isHidden = false
                 foundUser.cellHeight = 180
             } else {
-                
-                foundUser.cellHeight = 180 - picCollectionView.frame.height
+                print(picCollectionView.frame.height)
+                foundUser.cellHeight = avatarView.frame.maxY + 15
                 picCollectionView.isHidden = true
             }
         

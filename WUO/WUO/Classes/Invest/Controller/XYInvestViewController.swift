@@ -65,7 +65,7 @@ extension XYInvestViewController {
         WUOHTTPRequest.setActivityIndicator(true)
         tableView.loading = true
         
-        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "投资榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
+        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "新人榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
@@ -170,10 +170,7 @@ extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let item = dataList[indexPath.row]
-        guard let cellHeight = item.cellHeight else {
-            return 0
-        }
-        return cellHeight
+        return item.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
