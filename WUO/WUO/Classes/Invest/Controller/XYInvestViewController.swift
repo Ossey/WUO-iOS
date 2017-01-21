@@ -53,7 +53,7 @@ class XYInvestViewController: UIViewController {
             }
             
             self.tableView.reloadData()
-            print(self.dataList)
+            
         })
     }
 

@@ -13,14 +13,12 @@
 
 @interface XYPictureCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong, nullable)UIView *currentView;
-@property (nonatomic, strong, nullable)NSArray *currentArray;
-
 @end
 
 @implementation XYPictureCollectionView
 
 static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
+
 
 - (instancetype)init {
     return [self initWithFrame:CGRectZero collectionViewLayout:[XYPictureCollectionViewLayout new]];
@@ -29,6 +27,14 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     
     if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
+        [self setup];
+    }
+    return self;
+}
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        
         [self setup];
     }
     return self;
@@ -44,36 +50,32 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     self.scrollEnabled = NO;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self setup];
-        
-    }
-    return self;
-}
+- (void)setImgList:(NSArray *)imgList {
+    _imgList = imgList;
 
-- (void)setItem:(XYTrendItem *)item {
-    
-    _item = item;
-    
     [self reloadData];
-
 }
-
+- (NSArray<NSString *> *)imageUrls {
+    
+    NSMutableArray<NSString *> *tempArrM = [NSMutableArray arrayWithCapacity:1];
+    for (XYTrendImgItem *imgItem in self.imgList) {
+        [tempArrM addObject:imgItem.imgFullURL.absoluteString];
+    }
+    return [tempArrM mutableCopy];
+}
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.item.imgList.count;
+    return self.imgList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     XYPictureCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
 
-    cell.imgItem = self.item.imgList[indexPath.row];
+    cell.imgItem = self.imgList[indexPath.row];
     
     return cell;
 }
@@ -87,7 +89,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     }
     
     if (self.sizeForItemAtIndexPath) {
-        size = self.sizeForItemAtIndexPath(indexPath, collectionViewLayout, collectionView);
+        size = self.sizeForItemAtIndexPath(indexPath, (XYPictureCollectionViewLayout *)collectionViewLayout, collectionView);
     }
     
     return size;
@@ -97,7 +99,7 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
     
     XYPictureCollectionViewCell *cell = (XYPictureCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    [[XYImageViewer shareInstance] prepareImageURLStrList:self.item.imageUrls endView:^UIView *(NSIndexPath *indexPath) {
+    [[XYImageViewer shareInstance] prepareImageURLStrList:self.imageUrls endView:^UIView *(NSIndexPath *indexPath) {
         return [collectionView cellForItemAtIndexPath:indexPath];
     }];
     
@@ -120,8 +122,8 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 @implementation XYPictureCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    
     if (self = [super initWithFrame:frame]) {
+        
         _imageView = [[UIImageView alloc] init];
         [self.contentView addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -131,14 +133,12 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
             make.edges.mas_equalTo(self.contentView);
         }];
     }
-    
     return self;
 }
 
 - (void)setImgItem:(XYTrendImgItem *)imgItem {
     
     _imgItem = imgItem;
-    
     [_imageView sd_setImageWithURL:self.imgItem.imgFullURL];
 }
 
@@ -147,7 +147,6 @@ static NSString * const cellIdentifier = @"XYPictureCollectionViewCell";
 @implementation XYPictureCollectionViewLayout
 
 - (void)prepareLayout {
-    
     [super prepareLayout];
 
     self.minimumInteritemSpacing = 0;

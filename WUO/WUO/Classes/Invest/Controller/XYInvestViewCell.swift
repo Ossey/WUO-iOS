@@ -27,11 +27,13 @@ class XYInvestViewCell: UITableViewCell {
         didSet {
             avatarView.sd_setBackgroundImage(with: foundUser?.headImageURL, for: .normal, placeholderImage: UIImage.init(named: "mine_HeadImage"), options: .lowPriority)
             nameLabel.text = foundUser?.name
-            jobLabel.text = foundUser?.job
+            jobLabel.text = foundUser?.jobStr
             beGmCount_label.text = "\(foundUser?.beGmCount)" + "投资人"
             earningsGoldCoin_label.text = "赚取" + "\(foundUser?.earningsGoldCoin)" + "金币"
             fansCount_label.text = "\(foundUser?.fansCount)" + "粉丝"
             
+            picCollectionView.imgList = foundUser?.imgList;
+            picCollectionView.isHidden = foundUser?.imgList?.count == 0
         }
     }
     
@@ -63,13 +65,20 @@ extension XYInvestViewCell {
     func setupUI() -> Void {
         
         selectionStyle = .none
-    
+        let layout = picCollectionView.collectionViewLayout as! XYPictureCollectionViewLayout
+        let wh = (self.frame.size.width - 5.0 * 5.0) / 4.0;
+        layout.itemSize = CGSize(width: wh, height: picCollectionView.frame.height)
+        picCollectionView.backgroundColor = UIColor.red
+        
         // 镂空的圆形图片盖在头像上面，目的是让头像显示为圆形
         cornerImageView.image = UIImage(named: "corner_circle")
         cornerImageView.tag = NSIntegerMax;
         addSubview(cornerImageView)
         cornerImageView.isUserInteractionEnabled = true;
         cornerImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(XYTrendDetailHeaderView.avatarViewClick)))
+        
+        investBtn.layer.cornerRadius = 5
+        investBtn.layer.masksToBounds = true
     }
     
     override func layoutSubviews() {

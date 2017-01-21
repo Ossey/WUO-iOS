@@ -322,7 +322,8 @@
     _viewModel = viewModel;
     
     XYTrendItem *item = viewModel.item;
-    self.pictureCollectionView.item = item;
+//    self.pictureCollectionView.item = item;
+    self.pictureCollectionView.imgList = item.imgList;
     self.pictureCollectionView.hidden = item.imgCount == 0;
     
     [self.avatarView setBackgroundImage:nil forState:UIControlStateNormal];

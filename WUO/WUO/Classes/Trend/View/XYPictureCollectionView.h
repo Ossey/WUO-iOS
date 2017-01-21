@@ -10,7 +10,7 @@
 
 typedef CGSize(^SizeForItemAtIndexPath)(NSIndexPath *indexPath, UICollectionViewFlowLayout *layout, UICollectionView *collectionView);
 
-@class XYTrendItem, XYTrendImgItem;
+@class XYTrendImgItem;
 
 @protocol XYPictureCollectionViewDataSource <UICollectionViewDataSource>
 
@@ -21,7 +21,8 @@ typedef CGSize(^SizeForItemAtIndexPath)(NSIndexPath *indexPath, UICollectionView
 
 @interface XYPictureCollectionView : UICollectionView
 
-@property (nonatomic, strong) XYTrendItem *item;
+@property (nonatomic, strong) NSArray<XYTrendImgItem *> *imgList;
+
 @property (nonatomic, weak) id<XYPictureCollectionViewDataSource> picDataSource;
 
 @property (nonatomic, copy) SizeForItemAtIndexPath sizeForItemAtIndexPath;

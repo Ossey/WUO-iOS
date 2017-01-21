@@ -45,17 +45,28 @@ class XYFoundUser: NSObject {
         }
     }
     
+    var jobStr : String? {
+        get {
+            if let job = job {
+                if job.characters.count == 0 {
+                    return "TA很懒还没有设置"
+                }
+            }
+            return job
+        }
+    }
     
     convenience init(dict: [String: Any], info: XYHTTPResponseInfo) {
         self.init()
         setValuesForKeys(dict)
         responseInfo = info
         
-        if let imgList = dict["list"] as? [[String: Any]] {
-            
+        if let imgList = dict["imgList"] as? [[String: Any]] {
+            var tempArr = [XYTrendImgItem]()
             for obj in imgList {
-               self.imgList?.append(XYTrendImgItem(dict: obj, responseInfo: info))
+               tempArr.append(XYTrendImgItem(dict: obj, responseInfo: info))
             }
+            self.imgList = tempArr
         }
     }
     override func setValue(_ value: Any?, forUndefinedKey key: String) {

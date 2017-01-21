@@ -64,8 +64,8 @@ class XYTrendDetailHeaderView: UIView {
                 title_label.text = item.title
                 contentLabel.text = item.content
                 topicNameLabel.text = item.topicName
-                
-                pictureCollectionView.item = item
+        
+                pictureCollectionView.imgList = item.imgList;
                 pictureCollectionView.isHidden = item.imgCount == 0
                 videoImgView.item = item
                 videoImgView.isHidden = item.videoImgFullURL == nil
