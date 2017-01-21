@@ -14,3 +14,5 @@
 #import <Masonry.h>
 #import "XYCateTitleView.h"
 #import "WUOHTTPRequest.h"
+#import "XYHTTPResponseInfo.h"
+#import "WUO.pch"

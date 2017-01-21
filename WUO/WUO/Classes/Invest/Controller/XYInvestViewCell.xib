@@ -68,7 +68,7 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-fK-JGc">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-fK-JGc" customClass="XYPictureCollectionView">
                         <rect key="frame" x="5" y="75" width="310" height="68.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w8Q-5S-wjz">
@@ -100,6 +100,16 @@
                     <constraint firstAttribute="bottom" secondItem="lTQ-fK-JGc" secondAttribute="bottom" id="yWz-zh-YCw"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarView" destination="euT-Bu-Ihn" id="xqR-PU-WtE"/>
+                <outlet property="beGmCount_label" destination="5rC-XL-brp" id="Jau-1g-mQc"/>
+                <outlet property="earningsGoldCoin_label" destination="lsh-gv-A6a" id="yaH-1o-SqF"/>
+                <outlet property="fansCount_label" destination="II8-pw-lUo" id="XYJ-gf-Kf3"/>
+                <outlet property="investBtn" destination="2jy-Cn-XCz" id="uIy-js-ARD"/>
+                <outlet property="jobLabel" destination="2KK-Ii-Tvt" id="Nzg-KC-SeB"/>
+                <outlet property="nameLabel" destination="xWO-6M-k1r" id="n6R-XA-fti"/>
+                <outlet property="picCollectionView" destination="lTQ-fK-JGc" id="UyS-3J-9tl"/>
+            </connections>
             <point key="canvasLocation" x="105" y="-22"/>
         </tableViewCell>
     </objects>

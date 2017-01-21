@@ -86,6 +86,7 @@
 		1810AFCD1E26200300918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCB1E26200300918A2C /* XYPlayerViewController.m */; };
 		1810AFD01E26319F00918A2C /* XYPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCF1E26319F00918A2C /* XYPlayerView.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
+		18261A321E33117C004BE95D /* XYFoundUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18261A311E33117C004BE95D /* XYFoundUser.swift */; };
 		182F155E1E305A3D00FA12C9 /* XYHTTPResponseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F154C1E305A3D00FA12C9 /* XYHTTPResponseInfo.m */; };
 		182F155F1E305A3D00FA12C9 /* XYTrendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F154E1E305A3D00FA12C9 /* XYTrendItem.m */; };
 		182F15601E305A3D00FA12C9 /* XYTrendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F15501E305A3D00FA12C9 /* XYTrendViewModel.m */; };
@@ -490,6 +491,7 @@
 		1810AFCF1E26319F00918A2C /* XYPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerView.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
+		18261A311E33117C004BE95D /* XYFoundUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYFoundUser.swift; sourceTree = "<group>"; };
 		182F154B1E305A3D00FA12C9 /* XYHTTPResponseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYHTTPResponseInfo.h; sourceTree = "<group>"; };
 		182F154C1E305A3D00FA12C9 /* XYHTTPResponseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYHTTPResponseInfo.m; sourceTree = "<group>"; };
 		182F154D1E305A3D00FA12C9 /* XYTrendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYTrendItem.h; sourceTree = "<group>"; };
@@ -532,7 +534,7 @@
 		182F15891E305D2900FA12C9 /* XYUserDetailTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserDetailTableView.m; sourceTree = "<group>"; };
 		182F158A1E305D2900FA12C9 /* XYUserHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserHomePageView.h; sourceTree = "<group>"; };
 		182F158B1E305D2900FA12C9 /* XYUserHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserHomePageView.m; sourceTree = "<group>"; };
-		182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WUO-Bridging-Header.h"; sourceTree = "<group>"; };
+		182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "WUO-Bridging-Header.h"; path = "../Classes/DetailPages/TrendDetail/WUO-Bridging-Header.h"; sourceTree = "<group>"; };
 		182F15A01E3078C600FA12C9 /* XYConstant-Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "XYConstant-Swift.swift"; path = "../../Classes/Trend/View/XYConstant-Swift.swift"; sourceTree = "<group>"; };
 		182F15AD1E30B85500FA12C9 /* XYTrendDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailController.swift; sourceTree = "<group>"; };
 		182F15AE1E30B85500FA12C9 /* XYTrendDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYTrendDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -1532,7 +1534,6 @@
 				182F15AF1E30B85500FA12C9 /* XYTrendDetailTableView.swift */,
 				182F15B01E30B85500FA12C9 /* XYTrendDetailViewModel.swift */,
 				1840A36C1E31AC5B0021691F /* XYTrendDetailLabelView.swift */,
-				182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */,
 			);
 			path = TrendDetail;
 			sourceTree = "<group>";
@@ -1623,6 +1624,7 @@
 		183F93A71E18CD3F00875416 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				182F15991E3061FC00FA12C9 /* WUO-Bridging-Header.h */,
 				183F93C11E18F1E900875416 /* Category */,
 				183F93C21E18F1E900875416 /* Constant */,
 				183F93C31E18F1E900875416 /* Libs */,
@@ -1745,6 +1747,7 @@
 		183F93D21E18F2A400875416 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18261A311E33117C004BE95D /* XYFoundUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2769,6 +2772,7 @@
 				1840A36F1E31AD7E0021691F /* XYTrendDetaileSelectView.swift in Sources */,
 				189301DE1E327A48005C6233 /* XYInvestViewCell.swift in Sources */,
 				18E294F61E248EBA006145E3 /* NSString+Date.m in Sources */,
+				18261A321E33117C004BE95D /* XYFoundUser.swift in Sources */,
 				1862E69F1E21DB530031D063 /* UITableView+Gzw.m in Sources */,
 				183F93DC1E18F2A400875416 /* AppDelegate.m in Sources */,
 				18B0B9891E29CF3A004CD3C8 /* EaseFacialView.m in Sources */,

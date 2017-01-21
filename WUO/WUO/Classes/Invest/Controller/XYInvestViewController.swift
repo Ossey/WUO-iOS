@@ -10,6 +10,14 @@ import UIKit
 
 class XYInvestViewController: UIViewController {
 
+    // MARK: - 数据源
+    var dataList : [XYFoundUser] = [XYFoundUser]()
+    
+    lazy var tableView : UITableView = {
+        return UITableView()
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +25,35 @@ class XYInvestViewController: UIViewController {
         
         WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "投资榜", idstamp: "0", finishedCallBack: { (task, responseObj, error) in
             
+            if error != nil {
+                self.xy_showMessage("网络请求失败")
+                return
+            }
+            guard let responseObj = responseObj as? [String: Any] else {
+                print("找不到responseObj")
+                return
+            }
+            guard let code = responseObj["code"] as? Int else {
+                print("找不到code")
+                return
+            }
+            if code == 0 {
+                let info = XYHTTPResponseInfo(dict: responseObj)
+                guard let datas = responseObj["datas"] as? [[String: Any]] else {
+                    print("找不到datas")
+                    return
+                }
+                if datas.count == 0 {
+                    self.xy_showMessage("暂时没有数据")
+                    return
+                }
+                for obj in datas {
+                   self.dataList.append(XYFoundUser(dict: obj, info: info!))
+                }
+            }
+            
+            self.tableView.reloadData()
+            print(self.dataList)
         })
     }
 
@@ -30,6 +67,8 @@ let cellIdentifier = "XYInvestViewCell"
 extension XYInvestViewController {
     
     func setupUI() -> Void {
+        
+        
         let searchBtn = UIButton(type: .custom)
         searchBtn.frame.size = CGSize(width: SCREENT_W(), height: 30)
         searchBtn.setTitle("请输入昵称", for: .normal)
@@ -45,8 +84,8 @@ extension XYInvestViewController {
         messageBtn.sizeToFit()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: messageBtn)
         
-        let tableView = UITableView()
         view.addSubview(tableView)
+        tableView.separatorStyle = .none
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
@@ -71,13 +110,13 @@ extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 20
+        return self.dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? XYInvestViewCell
-        
+        cell?.foundUser = dataList[indexPath.row]
         return cell!
         
     }
