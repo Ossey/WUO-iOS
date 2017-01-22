@@ -16,7 +16,30 @@ class XYInvestViewController: UIViewController {
     
     var searchLabel : String? {
         didSet {
-           
+            
+            guard let searchLabel = searchLabel else {
+                return
+            }
+            
+            // 创建数据源容器：根据用户选中的标题信息，创建对应的容器
+            if dataList.count == 0 {
+                let datas : [XYFoundUser] = [XYFoundUser]()
+                 dataList[searchLabel] = datas
+            } else {
+                if !dataList.keys.contains(searchLabel) {
+                    let datas : [XYFoundUser] = [XYFoundUser]()
+                    dataList[searchLabel] = datas
+                }
+            }
+            
+            // 当数据源中没有数据时再去服务器请求数据，不然就只刷新数据源即可
+            if dataList[searchLabel]?.count == 0 {
+                
+                getAllFoundUser(idstamp: 0)
+            } else {
+                tableView.reloadData()
+            }
+            
         }
     }
     
@@ -32,6 +55,7 @@ class XYInvestViewController: UIViewController {
     lazy var selectView : XYActiveTopicDetailSelectView? = {
         
         let selectView  = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: headerFooterIdentifier) as? XYActiveTopicDetailSelectView
+        selectView?.trendLabelView.delegate = self
         selectView?.backgroundColor = UIColor.white
         selectView?.trendLabelView.backgroundColor = UIColor.white
         selectView?.trendLabelView.itemScale = 0.0
@@ -77,6 +101,9 @@ class XYInvestViewController: UIViewController {
         setupUI()
         
         tableView.mj_header = XYRefreshGifHeader {
+            if let searchLabel = self.searchLabel {
+                self.dataList[searchLabel]?.removeAll()
+            }
             self.getAllFoundUser(idstamp: 0)
         }
         
@@ -144,10 +171,15 @@ extension XYInvestViewController {
     
     func getAllFoundUser(idstamp: Int) -> Void {
         
+        guard let searchLabel = searchLabel else {
+            return
+        }
+        
         WUOHTTPRequest.setActivityIndicator(true)
         tableView.loading = true
         
-        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "红人榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
+        
+        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: searchLabel, idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
@@ -158,9 +190,7 @@ extension XYInvestViewController {
                 self.xy_showMessage("网络请求失败")
                 return
             }
-            
-
-            
+        
             guard let responseObj = responseObj as? [String: Any] else {
                 print("找不到responseObj")
                 return
@@ -180,11 +210,8 @@ extension XYInvestViewController {
                     return
                 }
                 for obj in datas {
-                    
-                    if let searchLabel = self.searchLabel {
-                        self.dataList[searchLabel]?.append(XYFoundUser(dict: obj, info: info!))
-                    }
-                    
+                
+                    self.dataList[searchLabel]?.append(XYFoundUser(dict: obj, info: info!))
                 }
             }
             

@@ -401,9 +401,14 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
         // 从key取出的是空的，说明是第一次被点击serachLabel对应的按钮，记录第一次被点击了，1是第一次被点击，2是被点击多次了
         [_cnameDict setObject:@1 forKey:@(currentType)];
     }
-    _idStamp = 0;
-    [self loadTopic];
     
+    // 当当前数据源中没有数据时，再去服务器请求数据，不然就只刷新数据源即可
+    if (_dataList[@(currentType)].count == 0) {
+        _idStamp = 0;
+        [self loadTopic];
+    } else {
+        [self reloadData];
+    }
 
 }
 

@@ -474,7 +474,8 @@
 }
 
 
-#pragma mark - 切换到index索引对应的子控制
+#pragma mark - Events
+/// 切换到index索引对应的子控制
 - (void)selecteTitleItemWithIndex:(NSInteger)index {
     
     if (index > self.items.count - 1 || index < 0) {
@@ -487,7 +488,7 @@
 
 }
 
-#pragma mark - 监听标题按钮的点击
+/// 监听标题按钮的点击
 - (void)titleButtonClick:(UIButton *)button {
     
     [self selectedBtn:button];

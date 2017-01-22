@@ -434,7 +434,15 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
     // 每次点击标题按钮时等于刷新数据，需要重置idstamp，不然某些界面因参数问题，是无法获取到完整数据
     //    _dynamicInfo.idstamp = 0;
     //    self.dynamicInfo.idstamp = 0;
-    [self loadDataFromNetwork];
+    
+    // 当当前数据源中没有数据时，再去服务器请求数据，不然就只刷新数据源即可
+    if (_dataList[serachLabel].count == 0) {
+        
+        [self loadDataFromNetwork];
+    } else {
+        [self reloadData];
+    }
+    
     
     
     /**
