@@ -86,10 +86,9 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
         };
         
         // 当点击再次刷新时调用
-        self.loadingClick = ^{
-             [weak_self loadData];
-        };
-
+        [self gzwLoading:^{
+            [weak_self loadData];
+        }];
         
     }
     return self;
