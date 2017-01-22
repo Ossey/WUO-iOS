@@ -86,9 +86,10 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
         };
         
         // 当点击再次刷新时调用
-        [self gzwLoading:^{
-            [self loadData];
-        }];
+        self.loadingClick = ^{
+             [weak_self loadData];
+        };
+
         
     }
     return self;
@@ -112,12 +113,13 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
         
         // 检测登录及在线状态, -2 为登录失败
         [WUOHTTPRequest  checkLoginStatusFromResponseCode:[responseObject[@"code"] integerValue]];
+        [self.mj_header endRefreshing];
+        [self.mj_footer endRefreshing];
+        [WUOHTTPRequest setActivityIndicator:NO];
         
         if (error) {
-            [self.mj_header endRefreshing];
-            [self.mj_footer endRefreshing];
-            [WUOHTTPRequest setActivityIndicator:NO];
             [self xy_showMessage:@"网络请求失败"];
+            [self reloadData];
             self.loading = NO;
             return;
         }
@@ -158,20 +160,14 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
                     }
                 }
             }
-            [self reloadData];
-            self.loading = NO;
+            
         }
-        
-        [WUOHTTPRequest setActivityIndicator:NO];
-        [self.mj_header endRefreshing];
-        [self.mj_footer endRefreshing];
-        
+        [self reloadData];
     }];
 }
 
 - (void)drawCell:(XYTrendViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
     
-    //    NSLog(@"%@", indexPath);
     // 防止数据错乱时，引发数组越界问题崩溃  , 数据重复请求并添加，导致数据越界问题已经解决，所以不需要在这判断了
     if (_dataList[self.serachLabel].count == 0 || indexPath.row > _dataList[self.serachLabel].count - 1) {
         return;

@@ -78,6 +78,14 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
             _idStamp = _dataList[@(self.currentType)].lastObject.info.idstamp;
             [self loadTopic];
         }];
+        
+        __weak typeof(_dataList) dataList = _dataList;
+        __weak typeof(self) weakSelf = self;
+        self.loadingClick = ^{
+            _idStamp = 0;
+            [dataList[@(weakSelf.currentType)] removeAllObjects];
+            [weakSelf loadTopic];
+        };
     }
     return self;
 }
@@ -88,8 +96,8 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
 - (void)loadTopic {
     
     [WUOHTTPRequest setActivityIndicator:YES];
-    
-    NSLog(@"%ld--%ld--%ld", _activityTopicItem.topicId , _idStamp, self.currentType);
+    self.loading = true;
+//    NSLog(@"%ld--%ld--%ld", _activityTopicItem.topicId , _idStamp, self.currentType);
     
     [WUOHTTPRequest find_getTrendByTopicId:_activityTopicItem.topicId idstamp:[NSString stringWithFormat:@"%ld", _idStamp] type:self.currentType finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
@@ -101,6 +109,8 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
             [self.mj_header endRefreshing];
             [self.mj_footer endRefreshing];
             [WUOHTTPRequest setActivityIndicator:NO];
+            [self reloadData];
+            self.loading = false;
             return;
         }
         
