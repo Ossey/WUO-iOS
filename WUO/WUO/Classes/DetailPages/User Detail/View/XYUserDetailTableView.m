@@ -93,6 +93,11 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             
         }];
         
+        __weak typeof(self) weakSelf = self;
+        self.loadingClick = ^{
+            [weakSelf loadNewData];
+        };
+        
     }
     return self;
 }
@@ -136,12 +141,17 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserInfo {
     
     [WUOHTTPRequest setActivityIndicator:YES];
-    
+    self.loading = true;
     [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.userInfo.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        
+        [WUOHTTPRequest setActivityIndicator:NO];
+        [self.mj_header endRefreshing];
+        
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
-            [WUOHTTPRequest setActivityIndicator:NO];
+            [self reloadData];
+            self.loading = false;
             return;
         }
         
@@ -152,8 +162,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             }
         }
         
-        [WUOHTTPRequest setActivityIndicator:NO];
-        [self.mj_header endRefreshing];
         [self reloadData];
     }];
     
@@ -163,14 +171,21 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserAlbum {
     
     [WUOHTTPRequest setActivityIndicator:YES];
+    self.loading = true;
     [WUOHTTPRequest userDetail_getUserAlbumWithPage:_page targetUid:self.userInfo.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        
+        [WUOHTTPRequest setActivityIndicator:NO];
+        [self.mj_footer endRefreshing];
+        [self.mj_header endRefreshing];
+        
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
-            [WUOHTTPRequest setActivityIndicator:NO];
-            [self.mj_footer endRefreshing];
-            [self.mj_header endRefreshing];
-            _page--;
+            [self reloadData];
+            self.loading = false;
+            if (_page > 0) {
+                _page--;
+            }
             return;
         }
         
@@ -194,9 +209,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             }
         }
         [self reloadData];
-        [self.mj_footer endRefreshing];
-        [self.mj_header endRefreshing];
-        [WUOHTTPRequest setActivityIndicator:NO];
     }];
 }
 
@@ -204,13 +216,19 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserTopic {
     
     [WUOHTTPRequest setActivityIndicator:YES];
+    self.loading = true;
+    
     [WUOHTTPRequest userDetail_getUserTopicByUid:self.userInfo.uid idstamp:[NSString stringWithFormat:@"%ld", (long)_idStamp] finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        
+        [self.mj_footer endRefreshing];
+        [self.mj_header endRefreshing];
+        [WUOHTTPRequest setActivityIndicator:NO];
+        
         if (error) {
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
-            [WUOHTTPRequest setActivityIndicator:NO];
-            [self.mj_footer endRefreshing];
-            [self.mj_header endRefreshing];
+            [self reloadData];
+            self.loading = false;
             return;
         }
         
@@ -231,9 +249,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             }
         }
         
-        [self.mj_footer endRefreshing];
-        [self.mj_header endRefreshing];
-        [WUOHTTPRequest setActivityIndicator:NO];
         [self reloadData];
     }];
 }
@@ -505,15 +520,21 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         }
     }
     
-    _idStamp = 0;
+    // 当点击TrendLabel时，判断当前对应的数据没有数据时才去请求服务器，如果有，就刷新数据源即可，避免频繁的删除数据，影响用户体验及性能
+    if (_dataList[@(requestType)].count == 0) {
+        _idStamp = 0;
+        [self loadNewData];
+    } else {
+        [self reloadData];
+    }
     
-    
-    [self loadNewData];
     if (requestType == XYUserDetailRequestTypeInfo) {
         self.mj_footer.hidden = YES;
     } else {
         self.mj_footer.hidden = NO;
     }
+    
+    
 }
 - (void)dealloc {
     

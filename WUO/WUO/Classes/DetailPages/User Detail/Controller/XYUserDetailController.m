@@ -76,10 +76,14 @@
     [WUOHTTPRequest setActivityIndicator:YES];
     __weak typeof(self) weakSelf = self;
     [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        
+        [WUOHTTPRequest setActivityIndicator:NO];
+        
         if (error) {
+            
             NSLog(@"%@", error.localizedDescription);
             [weakSelf xy_showMessage:@"网络请求失败"];
-            [WUOHTTPRequest setActivityIndicator:NO];
+    
             _tableView.loading = NO;
             return;
         }
@@ -89,10 +93,8 @@
             if (responseObject[@"userInfo"] && [responseObject[@"userInfo"] isKindOfClass:[NSDictionary class]]) {
                 weakSelf.userInfo = [XYUserInfo userInfoWithDict:responseObject[@"userInfo"] responseInfo:info];
             }
-        }
-        
-        [WUOHTTPRequest setActivityIndicator:NO];
-        _tableView.loading = NO;
+        } 
+       
     }];
 
 }

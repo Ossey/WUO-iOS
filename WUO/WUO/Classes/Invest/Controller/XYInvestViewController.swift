@@ -171,10 +171,11 @@ extension XYInvestViewController {
             if self.tableView.mj_footer.isRefreshing() {
                 self.tableView.mj_footer.endRefreshing()
             }
-            self.tableView.loading = false
+            
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
+                self.tableView.loading = false
                 return
             }
             guard let responseObj = responseObj as? [String: Any] else {
@@ -208,7 +209,7 @@ extension XYInvestViewController {
         }
         
         WUOHTTPRequest.setActivityIndicator(true)
-
+        tableView.loading = true
         WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: searchLabel, idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
             
             self.tableView.mj_header.endRefreshing()
@@ -218,6 +219,7 @@ extension XYInvestViewController {
             if error != nil {
                 self.xy_showMessage("网络请求失败")
                 self.tableView.reloadData()
+                self.tableView.loading = false
                 return
             }
         
