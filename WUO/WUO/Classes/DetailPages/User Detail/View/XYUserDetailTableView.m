@@ -520,13 +520,30 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
         }
     }
     
+    
     // 当点击TrendLabel时，判断当前对应的数据没有数据时才去请求服务器，如果有，就刷新数据源即可，避免频繁的删除数据，影响用户体验及性能
-    if (_dataList[@(requestType)].count == 0) {
-        _idStamp = 0;
-        [self loadNewData];
+    // 当requestType为请求相册时，由于相册本身也是个数组，所以这里是否请求服务器相册数据，以相册的数组长度是否为0为准
+    if (requestType == XYUserDetailRequestTypeAlbum) {
+        NSArray *datas = _dataList[@(requestType)];
+        if (datas.count != 0 && [datas.firstObject isKindOfClass:[NSArray class]]) {
+            if ([datas.firstObject count] == 0) {
+                [self loadNewData];
+            } else {
+                [self reloadData];
+            }
+        } else {
+            [self reloadData];
+        }
+        
     } else {
-        [self reloadData];
+        if (_dataList[@(requestType)].count == 0) {
+            _idStamp = 0;
+            [self loadNewData];
+        } else {
+            [self reloadData];
+        }
     }
+    
     
     if (requestType == XYUserDetailRequestTypeInfo) {
         self.mj_footer.hidden = YES;
