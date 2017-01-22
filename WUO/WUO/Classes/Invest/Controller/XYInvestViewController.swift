@@ -17,7 +17,6 @@ import UIKit
 class XYInvestViewController: UIViewController {
 
     // MARK: - 数据源
-//    lazy var dataList : [XYFoundUser] = [XYFoundUser]()
     lazy var dataList = [String: [XYFoundUser]]()
     
     var searchLabel : String? {
@@ -115,25 +114,7 @@ class XYInvestViewController: UIViewController {
         }
         
         tableView.mj_header = XYRefreshGifHeader {
-            
-            // 避免没有网络时，未获取到searchLaebl时，就去请求user数据，会导致确实searchLabel参数，请求失败
-            let group = DispatchGroup()
-            group.enter()
-
-            if self.labelNameList == nil {
-                self.getFoundUserLabel {
-                    weakSelf?.selectView?.trendLabelView.channelCates = NSMutableArray(array: (weakSelf?.labelNameList)!)
-                }
-            }
-            if let searchLabel = self.searchLabel {
-                self.dataList[searchLabel]?.removeAll()
-            }
-            
-            group.leave()
-            group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.assignCurrentContext, block: { 
-                
-                self.getAllFoundUser(idstamp: 0)
-            }))
+            weakSelf?.prepareForLoadDataFromNetwork()
         }
         
         
@@ -147,7 +128,7 @@ class XYInvestViewController: UIViewController {
         }
         
         tableView.gzwLoading { 
-            self.getAllFoundUser(idstamp: 0)
+            weakSelf?.prepareForLoadDataFromNetwork()
         }
     }
 
@@ -157,9 +138,31 @@ class XYInvestViewController: UIViewController {
 // MARK: - 网络请求
 extension XYInvestViewController {
 
+    func prepareForLoadDataFromNetwork() -> Void {
+        // 避免没有网络时，未获取到searchLaebl时，就去请求user数据，会导致确实searchLabel参数，请求失败
+        let group = DispatchGroup()
+        group.enter()
+        
+        if self.labelNameList == nil {
+            self.getFoundUserLabel {
+                self.selectView?.trendLabelView.channelCates = NSMutableArray(array: (self.labelNameList)!)
+            }
+        }
+        if let searchLabel = self.searchLabel {
+            self.dataList[searchLabel]?.removeAll()
+        }
+        
+        group.leave()
+        group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.assignCurrentContext, block: {
+            
+            self.getAllFoundUser(idstamp: 0)
+        }))
+    }
+    
     func getFoundUserLabel(completeCallBack: @escaping () -> ()) -> Void {
         
         WUOHTTPRequest.setActivityIndicator(true)
+        self.tableView.loading = true
         WUOHTTPRequest.invest_getFoundUserLabelFinishedCallBack { (task, responseObj, error) in
             
             if self.tableView.mj_header.isRefreshing() {
@@ -168,6 +171,7 @@ extension XYInvestViewController {
             if self.tableView.mj_footer.isRefreshing() {
                 self.tableView.mj_footer.endRefreshing()
             }
+            self.tableView.loading = false
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
@@ -204,15 +208,12 @@ extension XYInvestViewController {
         }
         
         WUOHTTPRequest.setActivityIndicator(true)
-        tableView.loading = true
-        
-        
+
         WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: searchLabel, idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             WUOHTTPRequest.setActivityIndicator(false)
-            self.tableView.loading = false
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
