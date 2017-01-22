@@ -8,6 +8,12 @@
 
 import UIKit
 
+/**
+ * 问题1：当没有网络时，点击TrendLabel时，会出现奔溃
+ * 原因：经分析，这是因为在数据加载失败时(包含没有网络)，未对数据源进行刷新导致了不同的TrendLabel对应的数据源，未更新数据，导致数组越界
+ * 解决方法：即使网络加载失败时，也要刷新数据源
+ */
+
 class XYInvestViewController: UIViewController {
 
     // MARK: - 数据源
@@ -100,24 +106,38 @@ class XYInvestViewController: UIViewController {
 
         setupUI()
         
-        tableView.mj_header = XYRefreshGifHeader {
-            if let searchLabel = self.searchLabel {
-                self.dataList[searchLabel]?.removeAll()
-            }
-            self.getAllFoundUser(idstamp: 0)
-        }
-        
-        // 进入投资界面后先加载LabelName，获取完成后再用对应的值去请求数据
-        
         weak var weakSelf = self
+        // 进入投资界面后先加载LabelName，获取完成后再用对应的值去请求数据
         getFoundUserLabel() {
             
             weakSelf?.selectView?.trendLabelView.channelCates = NSMutableArray(array: (weakSelf?.labelNameList)!)
-            weakSelf?.selectView?.trendLabelView.delegate = self
             
-            weakSelf?.tableView.mj_header.beginRefreshing()
-  
         }
+        
+        tableView.mj_header = XYRefreshGifHeader {
+            
+            // 避免没有网络时，未获取到searchLaebl时，就去请求user数据，会导致确实searchLabel参数，请求失败
+            let group = DispatchGroup()
+            group.enter()
+
+            if self.labelNameList == nil {
+                self.getFoundUserLabel {
+                    weakSelf?.selectView?.trendLabelView.channelCates = NSMutableArray(array: (weakSelf?.labelNameList)!)
+                }
+            }
+            if let searchLabel = self.searchLabel {
+                self.dataList[searchLabel]?.removeAll()
+            }
+            
+            group.leave()
+            group.notify(queue: DispatchQueue.main, work: DispatchWorkItem.init(qos: DispatchQoS.default, flags: DispatchWorkItemFlags.assignCurrentContext, block: { 
+                
+                self.getAllFoundUser(idstamp: 0)
+            }))
+        }
+        
+        
+    
         
         tableView.mj_footer = XYRefreshGifFooter {
             if let idsramp = self.idstamp {
@@ -141,6 +161,14 @@ extension XYInvestViewController {
         
         WUOHTTPRequest.setActivityIndicator(true)
         WUOHTTPRequest.invest_getFoundUserLabelFinishedCallBack { (task, responseObj, error) in
+            
+            if self.tableView.mj_header.isRefreshing() {
+                self.tableView.mj_header.endRefreshing()
+            }
+            if self.tableView.mj_footer.isRefreshing() {
+                self.tableView.mj_footer.endRefreshing()
+            }
+            
             if error != nil {
                 self.xy_showMessage("网络请求失败")
                 return
@@ -188,6 +216,7 @@ extension XYInvestViewController {
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
+                self.tableView.reloadData()
                 return
             }
         
