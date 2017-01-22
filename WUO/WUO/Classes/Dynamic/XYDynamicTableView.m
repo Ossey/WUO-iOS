@@ -68,21 +68,23 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
 
 - (void)loadDataFromNetwork {
     
+    [WUOHTTPRequest setActivityIndicator:YES];
     self.loading = YES;
     
-    [WUOHTTPRequest setActivityIndicator:YES];
-    
-    NSLog(@"%ld", (long)_dynamicInfo.idstamp);
+//    NSLog(@"%ld", (long)_dynamicInfo.idstamp);
     [WUOHTTPRequest topicWithIdstamp:[NSString stringWithFormat:@"%ld",(long)_dynamicInfo.idstamp] type:self.dataType serachLabel:self.serachLabel finished:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         // 检测登录及在线状态, -2 为登录失败
         [WUOHTTPRequest  checkLoginStatusFromResponseCode:[responseObject[@"code"] integerValue]];
         
+        [WUOHTTPRequest setActivityIndicator:NO];
+        [self.mj_header endRefreshing];
+        [self.mj_footer endRefreshing];
+
+        
         if (error) {
-            [self.mj_header endRefreshing];
-            [self.mj_footer endRefreshing];
-            [WUOHTTPRequest setActivityIndicator:NO];
             [self xy_showMessage:@"网络请求失败"];
+            [self reloadData];
             self.loading = NO;
             return;
         }
@@ -103,17 +105,9 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
                         [_dynamicList addObject:viewModel];
                     }
                 }
-                
-                [self reloadData];
-                self.loading = NO;
             }
         }
-        
-        [WUOHTTPRequest setActivityIndicator:NO];
-        [self.mj_header endRefreshing];
-        [self.mj_footer endRefreshing];
-
-        
+        [self reloadData];
     }];
 }
 

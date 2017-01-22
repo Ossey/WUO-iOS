@@ -78,14 +78,13 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
             _idStamp = _dataList[@(self.currentType)].lastObject.info.idstamp;
             [self loadTopic];
         }];
-        
-        __weak typeof(_dataList) dataList = _dataList;
-        __weak typeof(self) weakSelf = self;
-        self.loadingClick = ^{
+
+        [self gzwLoading:^{
             _idStamp = 0;
-            [dataList[@(weakSelf.currentType)] removeAllObjects];
-            [weakSelf loadTopic];
-        };
+            [_dataList[@(self.currentType)] removeAllObjects];
+            [self loadTopic];
+        }];
+      
     }
     return self;
 }
