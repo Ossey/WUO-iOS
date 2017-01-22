@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)cateTitleViewDidScroll:(UIScrollView *)scrollView;
 
-@required
 /**
  * @explain 点击标题按钮时调用，并把点击标题按钮的索引传递出去
  *

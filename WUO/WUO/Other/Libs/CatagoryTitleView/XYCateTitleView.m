@@ -161,7 +161,7 @@
 
 - (CGFloat)itemWidth {
     
-    return _itemWidth ?: self.channelCates.count < 4 ? CGRectGetWidth(self.cateTitleView.frame) / self.channelCates.count : 110;
+    return _itemWidth ?: self.channelCates.count < 5 ? CGRectGetWidth(self.cateTitleView.frame) / self.channelCates.count : 110;
 }
 
 
@@ -415,6 +415,7 @@
         NSLog(@"选中的按钮索引已超出按钮的数量");
         return;
     }
+
     [self selecteTitleItemWithIndex:selectedIndex];
 }
 
@@ -479,6 +480,7 @@
     if (index > self.items.count - 1 || index < 0) {
         return;
     }
+    
     UIButton *btn = self.items[index];
     [self titleButtonClick:btn];
     

@@ -11,7 +11,33 @@ import UIKit
 class XYInvestViewController: UIViewController {
 
     // MARK: - 数据源
-    var dataList : [XYFoundUser] = [XYFoundUser]()
+//    lazy var dataList : [XYFoundUser] = [XYFoundUser]()
+    lazy var dataList = [String: [XYFoundUser]]()
+    
+    var searchLabel : String? {
+        didSet {
+           
+        }
+    }
+    
+    var labelNameList : NSArray? {
+        didSet {
+            
+            if let count = self.labelNameList?.count  {
+                self.selectView?.trendLabelView.itemWidth = (self.selectView?.trendLabelView.frame.width)! / CGFloat(count)
+            }
+        }
+    }
+    
+    lazy var selectView : XYActiveTopicDetailSelectView? = {
+        
+        let selectView  = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: headerFooterIdentifier) as? XYActiveTopicDetailSelectView
+        selectView?.backgroundColor = UIColor.white
+        selectView?.trendLabelView.backgroundColor = UIColor.white
+        selectView?.trendLabelView.itemScale = 0.0
+        selectView?.trendLabelView.underLineImage = UIImage()
+        return selectView
+    }()
     
     lazy var tableView : UITableView = {
         return UITableView()
@@ -26,7 +52,21 @@ class XYInvestViewController: UIViewController {
                 return 0
             }
             
-            return dataList.last?.responseInfo?.idstamp
+            return dynamicInfo?.idstamp
+        }
+    }
+    
+    var dynamicInfo : XYHTTPResponseInfo? {
+        get {
+            guard let searchLabel = searchLabel  else {
+                return nil
+            }
+            if let foundUsers = dataList[searchLabel] {
+                if foundUsers.count > 0 {
+                    return foundUsers.last?.responseInfo
+                }
+            }
+            return nil
         }
     }
     
@@ -40,14 +80,24 @@ class XYInvestViewController: UIViewController {
             self.getAllFoundUser(idstamp: 0)
         }
         
+        // 进入投资界面后先加载LabelName，获取完成后再用对应的值去请求数据
+        
+        weak var weakSelf = self
+        getFoundUserLabel() {
+            
+            weakSelf?.selectView?.trendLabelView.channelCates = NSMutableArray(array: (weakSelf?.labelNameList)!)
+            weakSelf?.selectView?.trendLabelView.delegate = self
+            
+            weakSelf?.tableView.mj_header.beginRefreshing()
+  
+        }
+        
         tableView.mj_footer = XYRefreshGifFooter {
             if let idsramp = self.idstamp {
                 
                 self.getAllFoundUser(idstamp: idsramp)
             }
         }
-        
-        tableView.mj_header.beginRefreshing()
         
         tableView.gzwLoading { 
             self.getAllFoundUser(idstamp: 0)
@@ -60,12 +110,44 @@ class XYInvestViewController: UIViewController {
 // MARK: - 网络请求
 extension XYInvestViewController {
 
+    func getFoundUserLabel(completeCallBack: @escaping () -> ()) -> Void {
+        
+        WUOHTTPRequest.setActivityIndicator(true)
+        WUOHTTPRequest.invest_getFoundUserLabelFinishedCallBack { (task, responseObj, error) in
+            if error != nil {
+                self.xy_showMessage("网络请求失败")
+                return
+            }
+            guard let responseObj = responseObj as? [String: Any] else {
+                print("找不到responseObj")
+                return
+            }
+            guard let code = responseObj["code"] as? Int else {
+                print("找不到code")
+                return
+            }
+            if code == 0 {
+                if let datas = responseObj["datas"] as? [[String: Any]] {
+                    if datas.count == 0 {
+                        self.xy_showMessage("暂时没有数据")
+                        return
+                    }
+                    self.labelNameList = NSArray(array: datas)
+                    if let callBack: () -> () = completeCallBack {
+                        callBack()
+                    }
+                }
+               
+            }
+        }
+    }
+    
     func getAllFoundUser(idstamp: Int) -> Void {
         
         WUOHTTPRequest.setActivityIndicator(true)
         tableView.loading = true
         
-        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "新人榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
+        WUOHTTPRequest.invset_getAllFoundUser(fromSerachLabel: "红人榜", idstamp: idstamp, finishedCallBack: { (task, responseObj, error) in
             
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
@@ -98,7 +180,11 @@ extension XYInvestViewController {
                     return
                 }
                 for obj in datas {
-                    self.dataList.append(XYFoundUser(dict: obj, info: info!))
+                    
+                    if let searchLabel = self.searchLabel {
+                        self.dataList[searchLabel]?.append(XYFoundUser(dict: obj, info: info!))
+                    }
+                    
                 }
             }
             
@@ -107,7 +193,8 @@ extension XYInvestViewController {
         })
     }
 }
-
+private let headerFooterIdentifier = "XYActiveTopicDetailSelectView"
+private let cellIdentifier = "XYInvestViewCell"
 
 // MARK: - 设置UI
 extension XYInvestViewController {
@@ -136,6 +223,7 @@ extension XYInvestViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib.init(nibName: "XYInvestViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.register(XYActiveTopicDetailSelectView.classForCoder(), forHeaderFooterViewReuseIdentifier: headerFooterIdentifier)
     }
 }
 
@@ -156,27 +244,58 @@ extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.dataList.count
+        guard let searchLabel = searchLabel else {
+            return 0
+        }
+        
+        guard let list = self.dataList[searchLabel] else {
+            return 0
+        }
+        
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? XYInvestViewCell
-        cell?.foundUser = dataList[indexPath.row]
+
+        if let searchLabel = searchLabel {
+            if let list = self.dataList[searchLabel]  {
+                
+                cell?.foundUser = list[indexPath.row]
+            }
+        }
+
         return cell!
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let item = dataList[indexPath.row]
+        guard let searchLabel = searchLabel else {
+            return 0
+        }
+        
+        guard let list = self.dataList[searchLabel] else {
+            return 0
+        }
+        
+        let item = list[indexPath.row]
+        
         return item.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let item = dataList[indexPath.row]
+
+        guard let searchLabel = searchLabel else {
+            return
+        }
         
+        guard let list = self.dataList[searchLabel] else {
+            return
+        }
+        let item = list[indexPath.row]
         if let uid = item.uid {
             // 跳转到用户详情页
             let vc = XYUserDetailController(uid: uid, username: item.name)
@@ -184,5 +303,27 @@ extension XYInvestViewController: UITableViewDataSource, UITableViewDelegate {
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        return selectView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 44
+    }
+}
+
+extension XYInvestViewController: XYCateTitleViewDelegate {
+    
+    func cateTitleView(_ view: XYCateTitleView, didSelectedItem btn: UIButton, cname: String) {
+        
+        searchLabel = cname
+    }
+    
+    func cateTitleView(_ view: XYCateTitleView, cateTitleItemDidCreated itemCount: Int) {
+        print(itemCount)
     }
 }

@@ -20,3 +20,4 @@
 #import "XYUserDetailController.h"
 #import "XYRefreshGifHeader.h"
 #import "XYRefreshGifFooter.h"
+#import "XYActiveTopicDetailSelectView.h"

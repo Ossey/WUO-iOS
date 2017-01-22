@@ -45,7 +45,8 @@ class XYInvestPicView: UICollectionView {
 
 }
 
-let cellIdentifier = "XYPictureCollectionViewCell"
+private let cellIdentifier = "XYPictureCollectionViewCell"
+
 
 
 // MARK: - 设置UI界面

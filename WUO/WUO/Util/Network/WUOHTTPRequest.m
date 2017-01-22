@@ -245,6 +245,16 @@ static id _instance;
     
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
 }
+// 获取投资界面的labelName
++ (void)invest_getFoundUserLabelFinishedCallBack:(FinishedCallBack)finishedCallBack {
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/label/getFoundUserLabel";
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:nil progress:nil finished:finishedCallBack];
+}
+
 
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfo *)userLoginInfoItem {

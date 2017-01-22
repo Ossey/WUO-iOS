@@ -49,7 +49,6 @@ class XYInvestViewCell: UITableViewCell {
             }
             
             guard let imgList = foundUser.imgList else {
-//                foundUser.cellHeight = 180 - picCollectionView.frame.height
                 foundUser.cellHeight = avatarView.frame.maxY + 15
                 picCollectionView.isHidden = true
                 return

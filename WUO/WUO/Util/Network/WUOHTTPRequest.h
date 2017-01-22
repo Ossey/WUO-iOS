@@ -111,4 +111,10 @@
  *
  */
 + (void)invset_getAllFoundUserFromSerachLabel:(NSString *)serachLabel idstamp:(NSInteger)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 获取投资界面的labelName 投资界面根据labelName去加载对应的数据
+ *
+ */
++ (void)invest_getFoundUserLabelFinishedCallBack:(FinishedCallBack)finishedCallBack;
 @end
