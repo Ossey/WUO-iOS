@@ -97,7 +97,11 @@ let SIZE_FONT_CONTENT = (SIZE_FONT_TITLE-3)              // 内容文本字体�
 let COLOR_COUNT_TEXT = COLOR(r: 205, g: 205, b: 205, a: 1.0) // 工具条的各种数量文本颜色
 let COLOR_READCOUNT_TEXT = COLOR(r: 180, g: 180, b: 180, a: 1.0) // 阅读文本数量颜色
 let SIZE_TREND_DETAIL_SELECTVIEW_H : CGFloat = 35.0
+
+
 let COLOR_INVEST_SEARCH_BG = COLOR(r: 211, g: 211, b: 211, a: 1.0)
+let COLOR_TABLEVIEW_BG = COLOR(r: 238, g: 238, b: 238, a: 238)        // 所有tableView的背景颜色
+let SIZE_INVESET_HEADERVIEW_H : CGFloat = 260.0
 
 /** 全局字体 */
 func FontWithSize(s: CGFloat) -> UIFont {

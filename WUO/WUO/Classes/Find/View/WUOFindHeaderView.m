@@ -43,7 +43,7 @@
         _trendLabelView = [[XYTrendLabelView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTrendLabelViewHeight) delegate:self channelCates:_trendLabelList rightBtnWidth:50];
         _trendLabelView.itemNameKey = @"labelName";
         [_trendLabelView.rightButton setImage:[UIImage imageNamed:@"Find_addTagBtn"] forState:UIControlStateNormal];
-        //        _trendLabelView.delegate = self;
+        
         [_trendLabelView.rightButton sizeToFit];
         [self.contentView addSubview:_trendLabelView];
         

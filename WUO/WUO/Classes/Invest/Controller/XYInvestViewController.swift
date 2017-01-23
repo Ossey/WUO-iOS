@@ -81,7 +81,8 @@ class XYInvestViewController: UIViewController {
     
     lazy var headerView : XYInvestHeaderView? = {
         let headerView = XYInvestHeaderView()
-        headerView.frame.size.height = 200
+        headerView.frame.size.height = SIZE_INVESET_HEADERVIEW_H
+        headerView.backgroundColor = COLOR_TABLEVIEW_BG
         return headerView
     }()
     
@@ -101,9 +102,6 @@ class XYInvestViewController: UIViewController {
     }()
     
     var idstamp : Int? {
-        set {
-        
-        }
         get {
             if dataList.count == 0 {
                 return 0
