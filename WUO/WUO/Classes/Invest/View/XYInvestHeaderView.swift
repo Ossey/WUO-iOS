@@ -62,7 +62,7 @@ extension XYInvestHeaderView {
         headerLine.mas_makeConstraints { (make) in
             make?.left.right().equalTo()(self)?.setOffset(0)
             make?.bottom.equalTo()(self)?.setOffset(-margin)
-            make?.height.equalTo()(44)
+            make?.height.equalTo()(50)
         }
         figureSpecialView.mas_makeConstraints { (make) in
             make?.top.left().right().equalTo()(self)?.setOffset(0)
