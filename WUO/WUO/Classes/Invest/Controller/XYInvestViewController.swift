@@ -15,10 +15,36 @@ import UIKit
  */
 
 class XYInvestViewController: UIViewController {
-
-    // MARK: - 数据源
-    lazy var dataList = [String: [XYFoundUser]]()
     
+    // MARK: - 数据源
+    /// 用户数据
+    lazy var dataList = [String: [XYFoundUser]]()
+    /// 人物专刊
+    var figureSpecialList = [XYFigureSpecial]() {
+        didSet {
+            
+            /// 当加载到人物专刊数据时，设置tableView的头部视图
+            
+            if figureSpecialList.count > 0 && self.tableView.tableHeaderView == nil {
+                self.tableView.tableHeaderView = headerView
+            }
+            
+        }
+    }
+    /// 头条
+    lazy var headerLineList = [[String: Any]]()
+    /// TrendLabel数据源
+    var labelNameList : NSArray? {
+        didSet {
+            
+            if let count = self.labelNameList?.count  {
+                self.selectView?.trendLabelView.itemWidth = (self.selectView?.trendLabelView.frame.width)! / CGFloat(count)
+            }
+        }
+    }
+    
+    // MARK: - 属性
+    /// 点击TrendLabel时对应的标题类型，用于向服务器请求对应的数据的字段
     var searchLabel : String? {
         didSet {
             
@@ -48,14 +74,11 @@ class XYInvestViewController: UIViewController {
         }
     }
     
-    var labelNameList : NSArray? {
-        didSet {
-            
-            if let count = self.labelNameList?.count  {
-                self.selectView?.trendLabelView.itemWidth = (self.selectView?.trendLabelView.frame.width)! / CGFloat(count)
-            }
-        }
-    }
+    lazy var headerView : XYInvestHeaderView? = {
+        let headerView = XYInvestHeaderView()
+        headerView.frame.size.height = 200
+        return headerView
+    }()
     
     lazy var selectView : XYActiveTopicDetailSelectView? = {
         
@@ -100,6 +123,7 @@ class XYInvestViewController: UIViewController {
     }
     
     
+    // MARK: - 控制器view的生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -118,7 +142,6 @@ class XYInvestViewController: UIViewController {
         }
         
         
-    
         
         tableView.mj_footer = XYRefreshGifFooter {
             if let idsramp = self.idstamp {
@@ -127,17 +150,107 @@ class XYInvestViewController: UIViewController {
             }
         }
         
-        tableView.gzwLoading { 
+        tableView.gzwLoading {
+            if weakSelf?.figureSpecialList.count == 0 {
+                weakSelf?.getFigureSpecialFromNetwork()
+            }
+            if weakSelf?.headerLineList.count == 0 {
+                weakSelf?.getHeaderLineFromNetwork()
+            }
             weakSelf?.prepareForLoadDataFromNetwork()
         }
+        
+        // 获取头部的数据
+        getFigureSpecialFromNetwork()
+        getHeaderLineFromNetwork()
+        
     }
-
 
 }
 
 // MARK: - 网络请求
 extension XYInvestViewController {
 
+    /// 获取人物专刊数据
+    func getFigureSpecialFromNetwork() -> Void {
+        
+        WUOHTTPRequest.setActivityIndicator(true)
+        WUOHTTPRequest.invest_getAllNew(fromIdstamp: 0) { (task, responseObj, error) in
+            WUOHTTPRequest.setActivityIndicator(false)
+            
+            if error != nil {
+                self.xy_showMessage("网络请求失败")
+                return
+            }
+            
+            guard let responseObj = responseObj as? [String: Any] else {
+                print("找不到responseObj")
+                return
+            }
+            
+            guard let code = responseObj["code"] as? Int else {
+                print("找不到code")
+                return
+            }
+            let info = XYHTTPResponseInfo(dict: responseObj)
+            if code == 0 {
+                if let datas = responseObj["datas"] as? [[String: Any]] {
+                    
+                    if datas.count == 0 {
+                        self.xy_showMessage("暂时没有数据")
+                        return
+                    }
+                    for item in datas {
+                        
+                        self.figureSpecialList.append(XYFigureSpecial(dict: item, responseInfo: info!))
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    /// 获取头条数据
+    func getHeaderLineFromNetwork() -> Void {
+        
+        WUOHTTPRequest.setActivityIndicator(true)
+        WUOHTTPRequest.invest_getHeaderLine(fromType: 1) { (task, responseObj, error) in
+            
+            WUOHTTPRequest.setActivityIndicator(false)
+            
+            if error != nil {
+                self.xy_showMessage("网络请求失败")
+                return
+            }
+            
+            guard let responseObj = responseObj as? [String: Any] else {
+                print("找不到responseObj")
+                return
+            }
+            
+            guard let code = responseObj["code"] as? Int else {
+                print("找不到code")
+                return
+            }
+            let info = XYHTTPResponseInfo(dict: responseObj)
+            if code == 0 {
+                if let datas = responseObj["datas"] as? [[String: Any]] {
+                    
+                    if datas.count == 0 {
+                        self.xy_showMessage("暂时没有数据")
+                        return
+                    }
+                    for item in datas {
+                        
+                        self.figureSpecialList.append(XYFigureSpecial(dict: item, responseInfo: info!))
+                    }
+                    
+                }
+            }
+            
+        }
+    }
+    
     func prepareForLoadDataFromNetwork() -> Void {
         // 避免没有网络时，未获取到searchLaebl时，就去请求user数据，会导致确实searchLabel参数，请求失败
         let group = DispatchGroup()
@@ -171,7 +284,7 @@ extension XYInvestViewController {
             if self.tableView.mj_footer.isRefreshing() {
                 self.tableView.mj_footer.endRefreshing()
             }
-            
+            WUOHTTPRequest.setActivityIndicator(false)
             
             if error != nil {
                 self.xy_showMessage("网络请求失败")
@@ -243,7 +356,7 @@ extension XYInvestViewController {
                 }
                 for obj in datas {
                 
-                    self.dataList[searchLabel]?.append(XYFoundUser(dict: obj, info: info!))
+                    self.dataList[searchLabel]?.append(XYFoundUser(dict: obj, responseInfo: info!))
                 }
             }
             

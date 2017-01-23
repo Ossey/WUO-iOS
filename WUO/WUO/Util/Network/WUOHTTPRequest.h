@@ -117,4 +117,16 @@
  *
  */
 + (void)invest_getFoundUserLabelFinishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 获取投资界面的人物专刊
+ *
+ */
++ (void)invest_getAllNewFromIdstamp:(NSInteger)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 获取投资界面 头条数据
+ *
+ */
++ (void)invest_getHeaderLineFromType:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end

@@ -87,6 +87,9 @@
 		1810AFCD1E26200300918A2C /* XYPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCB1E26200300918A2C /* XYPlayerViewController.m */; };
 		1810AFD01E26319F00918A2C /* XYPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810AFCF1E26319F00918A2C /* XYPlayerView.m */; };
 		181381761E1B38C2001E8264 /* XYRefreshGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */; };
+		181861E61E35907F001B8C3E /* XYInvestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181861E51E35907F001B8C3E /* XYInvestHeaderView.swift */; };
+		181861E81E3599DE001B8C3E /* XYFigureSpecial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181861E71E3599DE001B8C3E /* XYFigureSpecial.swift */; };
+		181861EA1E35A2AB001B8C3E /* XYEarningsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181861E91E35A2AB001B8C3E /* XYEarningsItem.swift */; };
 		18261A321E33117C004BE95D /* XYFoundUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18261A311E33117C004BE95D /* XYFoundUser.swift */; };
 		182F155E1E305A3D00FA12C9 /* XYHTTPResponseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F154C1E305A3D00FA12C9 /* XYHTTPResponseInfo.m */; };
 		182F155F1E305A3D00FA12C9 /* XYTrendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F154E1E305A3D00FA12C9 /* XYTrendItem.m */; };
@@ -493,6 +496,9 @@
 		1810AFCF1E26319F00918A2C /* XYPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPlayerView.m; sourceTree = "<group>"; };
 		181381741E1B38C2001E8264 /* XYRefreshGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifFooter.h; sourceTree = "<group>"; };
 		181381751E1B38C2001E8264 /* XYRefreshGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifFooter.m; sourceTree = "<group>"; };
+		181861E51E35907F001B8C3E /* XYInvestHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYInvestHeaderView.swift; sourceTree = "<group>"; };
+		181861E71E3599DE001B8C3E /* XYFigureSpecial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYFigureSpecial.swift; sourceTree = "<group>"; };
+		181861E91E35A2AB001B8C3E /* XYEarningsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYEarningsItem.swift; sourceTree = "<group>"; };
 		18261A311E33117C004BE95D /* XYFoundUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYFoundUser.swift; sourceTree = "<group>"; };
 		182F154B1E305A3D00FA12C9 /* XYHTTPResponseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYHTTPResponseInfo.h; sourceTree = "<group>"; };
 		182F154C1E305A3D00FA12C9 /* XYHTTPResponseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYHTTPResponseInfo.m; sourceTree = "<group>"; };
@@ -1432,6 +1438,7 @@
 			children = (
 				189301DA1E3267CB005C6233 /* XYInvestViewController.swift */,
 				189301DC1E327A48005C6233 /* XYInvestViewCell.swift */,
+				181861E51E35907F001B8C3E /* XYInvestHeaderView.swift */,
 				189301DD1E327A48005C6233 /* XYInvestViewCell.xib */,
 				18046FEE1E33BC8A00C8370E /* XYInvestPicView.swift */,
 			);
@@ -1751,6 +1758,8 @@
 			isa = PBXGroup;
 			children = (
 				18261A311E33117C004BE95D /* XYFoundUser.swift */,
+				181861E71E3599DE001B8C3E /* XYFigureSpecial.swift */,
+				181861E91E35A2AB001B8C3E /* XYEarningsItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2666,6 +2675,7 @@
 				18B0B93F1E29CF3A004CD3C8 /* MWTapDetectingView.m in Sources */,
 				1810AF851E260A7A00918A2C /* XYTrendTableView.m in Sources */,
 				18B0B9851E29CF3A004CD3C8 /* EaseChatToolbarItem.m in Sources */,
+				181861E61E35907F001B8C3E /* XYInvestHeaderView.swift in Sources */,
 				18B0B91B1E29CF3A004CD3C8 /* EMCDDeviceManager+Microphone.m in Sources */,
 				182F15621E305A3D00FA12C9 /* WUOToolView.m in Sources */,
 				1810AFD01E26319F00918A2C /* XYPlayerView.m in Sources */,
@@ -2674,6 +2684,7 @@
 				18B0B96A1E29CF3A004CD3C8 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				18B0B98A1E29CF3A004CD3C8 /* EaseChatBarMoreView.m in Sources */,
 				183F94021E19182500875416 /* XYConstant.m in Sources */,
+				181861EA1E35A2AB001B8C3E /* XYEarningsItem.swift in Sources */,
 				18046FEF1E33BC8A00C8370E /* XYInvestPicView.swift in Sources */,
 				18B0B9591E29CF3A004CD3C8 /* PSTCollectionViewLayout.m in Sources */,
 				18B0B9811E29CF3A004CD3C8 /* EaseBubbleView+Video.m in Sources */,
@@ -2811,6 +2822,7 @@
 				182F15B31E30B85500FA12C9 /* XYTrendDetailTableView.swift in Sources */,
 				18B0B95E1E29CF3A004CD3C8 /* PSTGridLayoutSection.m in Sources */,
 				1810AF931E2616C800918A2C /* XYDynamicTableView.m in Sources */,
+				181861E81E3599DE001B8C3E /* XYFigureSpecial.swift in Sources */,
 				18CA21F71E1A1EE4005F1C87 /* NSString+MD5.m in Sources */,
 				18B0B9631E29CF3A004CD3C8 /* EaseUserModel.m in Sources */,
 				18B0B9681E29CF3A004CD3C8 /* UIViewController+HUD.m in Sources */,

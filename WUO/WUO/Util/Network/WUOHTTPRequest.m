@@ -255,6 +255,35 @@ static id _instance;
     [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:nil progress:nil finished:finishedCallBack];
 }
 
+// 获取投资界面的人物专刊
++ (void)invest_getAllNewFromIdstamp:(NSInteger)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/dataInfo/getAllNew";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@(idstamp) forKey:@"idstamp"];
+    [parameters setObject:@24 forKey:@"pageNum"];
+    
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
+// 获取投资界面 头条数据
++ (void)invest_getHeaderLineFromType:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/topic/getHeadLine";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@(type) forKey:@"type"];
+    
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+}
+
 
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfo *)userLoginInfoItem {
@@ -263,6 +292,8 @@ static id _instance;
     
     return [XYLoginInfo loginInfoItemWithDict:loginInfoDict];
 }
+
+
 
 // 每次请求网络时，检测登录状态，如果发现已经在其他地方登录，当前账户就要强制退出，并提醒用户
 + (void)checkLoginStatusFromResponseCode:(NSInteger)code {

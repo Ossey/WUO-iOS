@@ -4,7 +4,7 @@
 //
 //  Created by mofeini on 17/1/21.
 //  Copyright © 2017年 com.test.demo. All rights reserved.
-//
+//  所有用户
 
 import UIKit
 
@@ -60,11 +60,11 @@ class XYFoundUser: NSObject {
         }
     }
     
-    convenience init(dict: [String: Any], info: XYHTTPResponseInfo) {
+    convenience init(dict: [String: Any], responseInfo: XYHTTPResponseInfo) {
         self.init()
         
         setValuesForKeys(dict)
-        responseInfo = info
+        self.responseInfo = responseInfo
         // 使用setValuesForKeys转换模型，Int CGFloat数据类型尽然转换失败，郁闷，手动再转换下
         beGmCount = dict["beGmCount"] as? Int
         earningsGoldCoin = dict["earningsGoldCoin"] as? CGFloat
@@ -76,7 +76,7 @@ class XYFoundUser: NSObject {
         if let imgList = dict["imgList"] as? [[String: Any]] {
             var tempArr = [XYTrendImgItem]()
             for obj in imgList {
-               tempArr.append(XYTrendImgItem(dict: obj, responseInfo: info))
+               tempArr.append(XYTrendImgItem(dict: obj, responseInfo: responseInfo))
             }
             self.imgList = tempArr
         }
