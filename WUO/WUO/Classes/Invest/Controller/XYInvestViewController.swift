@@ -93,7 +93,7 @@ class XYInvestViewController: UIViewController {
         selectView?.backgroundColor = UIColor.white
         selectView?.trendLabelView.backgroundColor = UIColor.white
         selectView?.trendLabelView.itemScale = 0.0
-        selectView?.trendLabelView.underLineImage = UIImage()
+        selectView?.trendLabelView.underLineBackgroundColor = UIColor.black
         return selectView
     }()
     
