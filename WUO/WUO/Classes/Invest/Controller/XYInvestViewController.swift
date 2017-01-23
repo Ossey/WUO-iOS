@@ -28,11 +28,16 @@ class XYInvestViewController: UIViewController {
             if figureSpecialList.count > 0 && self.tableView.tableHeaderView == nil {
                 self.tableView.tableHeaderView = headerView
             }
-            
+            headerView?.figureSpecialList = figureSpecialList
         }
     }
     /// 头条
-    lazy var headerLineList = [[String: Any]]()
+    var headerLineItem : XYHeaderLineItem? {
+        didSet {
+            headerView?.headerLineItem = headerLineItem
+        }
+    }
+    
     /// TrendLabel数据源
     var labelNameList : NSArray? {
         didSet {
@@ -154,7 +159,7 @@ class XYInvestViewController: UIViewController {
             if weakSelf?.figureSpecialList.count == 0 {
                 weakSelf?.getFigureSpecialFromNetwork()
             }
-            if weakSelf?.headerLineList.count == 0 {
+            if weakSelf?.headerLineItem == nil {
                 weakSelf?.getHeaderLineFromNetwork()
             }
             weakSelf?.prepareForLoadDataFromNetwork()
@@ -163,6 +168,7 @@ class XYInvestViewController: UIViewController {
         // 获取头部的数据
         getFigureSpecialFromNetwork()
         getHeaderLineFromNetwork()
+        
         
     }
 
@@ -234,17 +240,13 @@ extension XYInvestViewController {
             }
             let info = XYHTTPResponseInfo(dict: responseObj)
             if code == 0 {
-                if let datas = responseObj["datas"] as? [[String: Any]] {
+                if let datas = responseObj["datas"] as? [String : [String : Any]] {
                     
                     if datas.count == 0 {
                         self.xy_showMessage("暂时没有数据")
                         return
                     }
-                    for item in datas {
-                        
-                        self.figureSpecialList.append(XYFigureSpecial(dict: item, responseInfo: info!))
-                    }
-                    
+                    self.headerLineItem = XYHeaderLineItem(dict: datas, info: info!)
                 }
             }
             
