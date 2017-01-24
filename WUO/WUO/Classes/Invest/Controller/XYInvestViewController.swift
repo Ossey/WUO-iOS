@@ -381,6 +381,8 @@ extension XYInvestViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "nav_backgroundWhile"), for: .defaultPrompt)
         
         let searchBtn = UIButton(type: .custom)
+        searchBtn.layer.cornerRadius = 3.0
+        searchBtn.layer.masksToBounds = true
         searchBtn.frame.size = CGSize(width: SCREENT_W(), height: 30)
         searchBtn.setTitle("请输入昵称", for: .normal)
         searchBtn.setImage(UIImage.init(named: "Nav_search"), for: .normal)

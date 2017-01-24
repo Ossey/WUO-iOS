@@ -285,6 +285,23 @@ static id _instance;
 }
 
 
+// 搜索用户
++ (void)invest_getAllFoundUserSerachFromSearchName:(NSString *)serachName idstamp:(NSInteger)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack {
+    
+    XYLoginInfo *info = [WUOHTTPRequest userLoginInfoItem];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:[NSString stringWithFormat:@"%ld", info.userInfo.uid] forHTTPHeaderField:@"uid"];
+    [[XYNetworkRequest shareInstance].manager.requestSerializer setValue:info.userInfo.token forHTTPHeaderField:@"token"];
+    NSString *urlStr = @"http://me.api.kfit.com.cn/me-api/rest/api/trend/getAllFoundUserSerach";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@(idstamp) forKey:@"idstamp"];
+    [parameters setObject:@15 forKey:@"pageNum"];
+    [parameters setObject:serachName forKey:@"serachName"];
+    
+    [[XYNetworkRequest shareInstance] request:XYNetworkRequestTypePOST url:urlStr parameters:parameters progress:nil finished:finishedCallBack];
+    
+}
+
+
 // 获取用户登录的信息，并转换为模型
 + (XYLoginInfo *)userLoginInfoItem {
     

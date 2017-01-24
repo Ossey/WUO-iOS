@@ -15,6 +15,12 @@
 @implementation MainNavigationController
 
 
++ (void)initialize {
+//    if (self == [MainNavigationController class]) {
+//        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_backgroundWhile"] forBarMetrics:UIBarMetricsDefault];
+//    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

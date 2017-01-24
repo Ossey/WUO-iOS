@@ -129,4 +129,10 @@
  *
  */
 + (void)invest_getHeaderLineFromType:(NSInteger)type finishedCallBack:(FinishedCallBack)finishedCallBack;
+
+/**
+ * @explain 搜索用户
+ *
+ */
++ (void)invest_getAllFoundUserSerachFromSearchName:(NSString *)serachName idstamp:(NSInteger)idstamp finishedCallBack:(FinishedCallBack)finishedCallBack;
 @end
