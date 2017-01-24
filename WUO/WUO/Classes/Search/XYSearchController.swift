@@ -161,6 +161,19 @@ extension XYSearchController: UITableViewDelegate, UITableViewDataSource {
         
         return item.cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let item = searchResultDataList[indexPath.row]
+        if let uid = item.uid {
+            // 跳转到用户详情页
+            let vc = XYUserDetailController(uid: uid, username: item.name)
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        
+    }
+    
 }
 
 // MARK: - UISearchBarDelegate
@@ -185,6 +198,13 @@ extension XYSearchController: UISearchBarDelegate {
         }
         
         getAllFoundUserSerach()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchResultDataList.count != 0 {
+            searchResultDataList.removeAll()
+            searchResultView.reloadData()   
+        }
     }
     
 }
@@ -246,16 +266,5 @@ extension XYSearchController {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let item = searchResultDataList[indexPath.row]
-        if let uid = item.uid {
-            // 跳转到用户详情页
-            let vc = XYUserDetailController(uid: uid, username: item.name)
-            
-            self.navigationController?.pushViewController(vc!, animated: true)
-        }
-        
-    }
-    
+
 }
