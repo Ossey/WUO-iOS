@@ -38,8 +38,6 @@ typedef NS_ENUM(NSInteger, XYUserDetailRequestType) {
     NSMutableDictionary<NSNumber *,NSMutableArray<NSObject *> *> *_dataList;
     NSInteger _page;
     NSMutableArray<XYUserImgItem *> *_albumList;
-    /** 是不是第一次进入请求userInfo数据 */
-    bool _isFristRequestUserInfo;
 }
 
 static NSString * const infoCellIdentifier = @"XYUserHomePageView";
@@ -92,11 +90,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             
             
         }];
-        
-        __weak typeof(self) weakSelf = self;
-        self.loadingClick = ^{
-            [weakSelf loadNewData];
-        };
+
         
     }
     return self;
@@ -106,15 +100,22 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     switch (self.requestType) {
         case XYUserDetailRequestTypeAlbum:
             _page = 1;
-            [_albumList removeAllObjects];
+            if (_albumList.count != 0) {
+                [_albumList removeAllObjects];
+            }
             [self loadUserAlbum];
             break;
         case XYUserDetailRequestTypeTopic:
             _idStamp = 0;
-            [_dataList[@(XYUserDetailRequestTypeTopic)] removeAllObjects];
+            if (_dataList[@(XYUserDetailRequestTypeTopic)].count != 0) {
+                [_dataList[@(XYUserDetailRequestTypeTopic)] removeAllObjects];
+            }
             [self loadUserTopic];
             break;
         case XYUserDetailRequestTypeInfo:
+            if (_dataList[@(XYUserDetailRequestTypeInfo)].count != 0) {
+                [_dataList[@(XYUserDetailRequestTypeInfo)] removeAllObjects];
+            }
             [_dataList[@(XYUserDetailRequestTypeInfo)] removeAllObjects];
             [self loadUserInfo];
             break;
@@ -127,12 +128,9 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)setUserInfo:(XYUserInfo *)userInfo {
     _userInfo = userInfo;
     _headerView.userInfo = userInfo;
-    _isFristRequestUserInfo = YES;
-    
-    if (_isFristRequestUserInfo == YES) {
-        
-        [self loadUserTopic];
-        _isFristRequestUserInfo = NO;
+
+    if (_dataList[@(self.requestType)].count == 0) {
+        [self loadNewData];
     }
 }
 
@@ -141,7 +139,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserInfo {
     
     [WUOHTTPRequest setActivityIndicator:YES];
-    self.loading = true;
     [WUOHTTPRequest userDetail_getUserInfoWithtargetUid:self.userInfo.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         [WUOHTTPRequest setActivityIndicator:NO];
@@ -151,7 +148,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
             [self reloadData];
-            self.loading = false;
             return;
         }
         
@@ -171,7 +167,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserAlbum {
     
     [WUOHTTPRequest setActivityIndicator:YES];
-    self.loading = true;
     [WUOHTTPRequest userDetail_getUserAlbumWithPage:_page targetUid:self.userInfo.uid finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
         [WUOHTTPRequest setActivityIndicator:NO];
@@ -182,7 +177,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
             [self reloadData];
-            self.loading = false;
             if (_page > 0) {
                 _page--;
             }
@@ -216,7 +210,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
 - (void)loadUserTopic {
     
     [WUOHTTPRequest setActivityIndicator:YES];
-    self.loading = true;
     
     [WUOHTTPRequest userDetail_getUserTopicByUid:self.userInfo.uid idstamp:[NSString stringWithFormat:@"%ld", (long)_idStamp] finishedCallBack:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
         
@@ -228,7 +221,6 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
             NSLog(@"%@", error.localizedDescription);
             [self xy_showMessage:@"网络请求失败"];
             [self reloadData];
-            self.loading = false;
             return;
         }
         

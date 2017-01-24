@@ -66,6 +66,10 @@
     }
     
     [self loadUserInfo];
+    
+    [_tableView gzwLoading:^{
+        [self loadUserInfo];
+    }];
 }
 
 
