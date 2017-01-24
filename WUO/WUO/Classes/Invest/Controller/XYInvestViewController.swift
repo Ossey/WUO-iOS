@@ -71,7 +71,7 @@ class XYInvestViewController: UIViewController {
             
             // 当数据源中没有数据时再去服务器请求数据，不然就只刷新数据源即可
             if dataList[searchLabel]?.count == 0 {
-                
+                self.xy_showHud()
                 getAllFoundUser(idstamp: 0)
             } else {
                 tableView.reloadData()
@@ -362,7 +362,7 @@ extension XYInvestViewController {
             }
             
             self.tableView.reloadData()
-            
+            self.xy_hideHud()
         })
     }
 }
@@ -496,7 +496,4 @@ extension XYInvestViewController: XYCateTitleViewDelegate {
         searchLabel = cname
     }
     
-    func cateTitleView(_ view: XYCateTitleView, cateTitleItemDidCreated itemCount: Int) {
-        print(itemCount)
-    }
 }

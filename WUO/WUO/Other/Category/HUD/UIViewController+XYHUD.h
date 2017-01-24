@@ -33,7 +33,12 @@
 /**
  * @explain 隐藏hud
  */
-- (void)hideHud;
+- (void)xy_hideHud;
 
+/**
+ * @explain 提示框
+ *
+ */
+- (void)xy_showHud;
 
 @end

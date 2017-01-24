@@ -16,8 +16,6 @@ static const void *hudKey = &hudKey;
 
 #pragma mark - 动态绑定
 - (void)setHud:(MBProgressHUD *)hud {
-
-    
     objc_setAssociatedObject(self, hudKey, hud, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -27,10 +25,23 @@ static const void *hudKey = &hudKey;
 }
 
 
-- (void)hideHud {
+- (void)xy_hideHud {
 
     [self.hud hideAnimated:YES];
+    self.hud = nil;
 }
+
+- (void)xy_showHud {
+    
+    // 转菊花
+    //初始化进度框，置于当前的View当中
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.color = [UIColor blackColor];
+    self.hud.backgroundColor = self.view.backgroundColor;
+    //如果设置此属性则当前的view置于后台
+    self.hud.dimBackground = YES;
+}
+
 
 - (void)xy_showMessage:(NSString *)meeeage {
 

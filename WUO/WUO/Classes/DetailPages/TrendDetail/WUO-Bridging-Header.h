@@ -21,3 +21,4 @@
 #import "XYRefreshGifHeader.h"
 #import "XYRefreshGifFooter.h"
 #import "XYActiveTopicDetailSelectView.h"
+#import "UIViewController+XYHUD.h"
