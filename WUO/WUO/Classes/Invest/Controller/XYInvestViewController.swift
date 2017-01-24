@@ -133,6 +133,11 @@ class XYInvestViewController: UIViewController {
 
         setupUI()
         
+        loadDatas()
+        
+    }
+    
+    func loadDatas() -> Void {
         weak var weakSelf = self
         // 进入投资界面后先加载LabelName，获取完成后再用对应的值去请求数据
         getFoundUserLabel() {
@@ -167,8 +172,7 @@ class XYInvestViewController: UIViewController {
         // 获取头部的数据
         getFigureSpecialFromNetwork()
         getHeaderLineFromNetwork()
-        
-        
+
     }
 
 }
@@ -273,7 +277,7 @@ extension XYInvestViewController {
         }))
     }
     
-    func getFoundUserLabel(completeCallBack: @escaping () -> ()) -> Void {
+    func getFoundUserLabel(completion: (() -> Swift.Void)? = nil) -> Void {
         
         WUOHTTPRequest.setActivityIndicator(true)
         self.tableView.loading = true
@@ -307,7 +311,7 @@ extension XYInvestViewController {
                         return
                     }
                     self.labelNameList = NSArray(array: datas)
-                    if let callBack: () -> () = completeCallBack {
+                    if let callBack: () -> () = completion {
                         callBack()
                     }
                 }
@@ -374,6 +378,7 @@ extension XYInvestViewController {
     
     func setupUI() -> Void {
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "nav_backgroundWhile"), for: .defaultPrompt)
         
         let searchBtn = UIButton(type: .custom)
         searchBtn.frame.size = CGSize(width: SCREENT_W(), height: 30)
@@ -408,7 +413,10 @@ extension XYInvestViewController {
     }
     
     func jumpToSearch() -> Void {
-        
+     
+        let searchVc = XYSearchController()
+//        searchVc.modalPresentationStyle = .custom
+        self.present(MainNavigationController.init(rootViewController: searchVc), animated: true, completion: nil)
     }
 }
 

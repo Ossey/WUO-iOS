@@ -153,6 +153,7 @@
 		1862E69E1E21DB530031D063 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862E6991E21DB530031D063 /* UIScrollView+EmptyDataSet.m */; };
 		1862E69F1E21DB530031D063 /* UITableView+Gzw.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862E69B1E21DB530031D063 /* UITableView+Gzw.m */; };
 		189301DB1E3267CB005C6233 /* XYInvestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189301DA1E3267CB005C6233 /* XYInvestViewController.swift */; };
+		18AC341A1E37545F00A82F39 /* XYSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AC34191E37545F00A82F39 /* XYSearchController.swift */; };
 		18B0B7EE1E29CEFB004CD3C8 /* Hyphenate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184560821E29CEB00065D991 /* Hyphenate.framework */; };
 		18B0B7EF1E29CEFB004CD3C8 /* Hyphenate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 184560821E29CEB00065D991 /* Hyphenate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18B0B9171E29CF3A004CD3C8 /* EaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0B7F31E29CF3A004CD3C8 /* EaseUI.m */; };
@@ -602,6 +603,7 @@
 		1862E69A1E21DB530031D063 /* UITableView+Gzw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Gzw.h"; sourceTree = "<group>"; };
 		1862E69B1E21DB530031D063 /* UITableView+Gzw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Gzw.m"; sourceTree = "<group>"; };
 		189301DA1E3267CB005C6233 /* XYInvestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYInvestViewController.swift; sourceTree = "<group>"; };
+		18AC34191E37545F00A82F39 /* XYSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYSearchController.swift; sourceTree = "<group>"; };
 		18B0B7F11E29CF3A004CD3C8 /* EaseUI-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EaseUI-Prefix.pch"; sourceTree = "<group>"; };
 		18B0B7F21E29CF3A004CD3C8 /* EaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseUI.h; sourceTree = "<group>"; };
 		18B0B7F31E29CF3A004CD3C8 /* EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseUI.m; sourceTree = "<group>"; };
@@ -1684,6 +1686,7 @@
 		183F93C41E18F2A400875416 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				18AC34181E37543500A82F39 /* Search */,
 				182F156B1E305D2900FA12C9 /* DetailPages */,
 				182F15491E305A3D00FA12C9 /* Trend */,
 				1804396D1E2CA87E0064B5EE /* Setting */,
@@ -1925,6 +1928,14 @@
 				1862E69B1E21DB530031D063 /* UITableView+Gzw.m */,
 			);
 			path = GzwTableViewLoading;
+			sourceTree = "<group>";
+		};
+		18AC34181E37543500A82F39 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				18AC34191E37545F00A82F39 /* XYSearchController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		18B0B7F01E29CF3A004CD3C8 /* EaseUI */ = {
@@ -2747,6 +2758,7 @@
 				18B0B9571E29CF3A004CD3C8 /* PSTCollectionViewFlowLayout.m in Sources */,
 				18E2954E1E251B4C006145E3 /* XYProfileBaseController.m in Sources */,
 				18B0B94C1E29CF3A004CD3C8 /* UIImage+EMGIF.m in Sources */,
+				18AC341A1E37545F00A82F39 /* XYSearchController.swift in Sources */,
 				189301DB1E3267CB005C6233 /* XYInvestViewController.swift in Sources */,
 				18B0B97F1E29CF3A004CD3C8 /* EaseBubbleView+Location.m in Sources */,
 				18B0B97D1E29CF3A004CD3C8 /* EaseBubbleView+Gif.m in Sources */,

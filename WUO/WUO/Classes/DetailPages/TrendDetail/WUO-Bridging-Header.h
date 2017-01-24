@@ -22,3 +22,4 @@
 #import "XYRefreshGifFooter.h"
 #import "XYActiveTopicDetailSelectView.h"
 #import "UIViewController+XYHUD.h"
+#import "MainNavigationController.h"

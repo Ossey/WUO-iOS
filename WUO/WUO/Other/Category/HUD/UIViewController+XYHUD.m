@@ -27,8 +27,10 @@ static const void *hudKey = &hudKey;
 
 - (void)xy_hideHud {
 
-    [self.hud hideAnimated:YES];
-    self.hud = nil;
+    if (self.hud) {
+        [self.hud hideAnimated:YES];
+        self.hud = nil;
+    }
 }
 
 - (void)xy_showHud {

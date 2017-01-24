@@ -35,8 +35,7 @@ class XYTrendDetailController: XYProfileBaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        view.addSubview(tableView)
-        tableView.frame = self.view.bounds
+        
         setupUI()
     }
     
@@ -51,7 +50,8 @@ extension XYTrendDetailController {
 
     func setupUI() -> Void {
         
-        
+        view.addSubview(tableView)
+        tableView.frame = self.view.bounds
         
         let rightBtn = UIButton(type: .custom)
         rightBtn .setImage(UIImage.init(named: "Nav_more"), for: .normal)
