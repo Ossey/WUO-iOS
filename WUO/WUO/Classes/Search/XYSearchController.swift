@@ -135,6 +135,7 @@ extension XYSearchController {
 
 }
 
+// MARK: - TableView数据源和代理方法
 extension XYSearchController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -254,7 +255,7 @@ extension XYSearchController {
                     return
                 }
                 for obj in datas {
-                    
+                    print(obj)
                     self.searchResultDataList.append(XYFoundUser(dict: obj, responseInfo: info!))
                 }
             }
