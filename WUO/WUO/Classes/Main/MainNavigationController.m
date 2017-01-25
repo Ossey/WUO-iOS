@@ -16,9 +16,9 @@
 
 
 + (void)initialize {
-//    if (self == [MainNavigationController class]) {
-//        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_backgroundWhile"] forBarMetrics:UIBarMetricsDefault];
-//    }
+    if (self == [MainNavigationController class]) {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_backgroundWhile"] forBarMetrics:UIBarMetricsDefaultPrompt];
+    }
 }
 
 - (void)viewDidLoad {

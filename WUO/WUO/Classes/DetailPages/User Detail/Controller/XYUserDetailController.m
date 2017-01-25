@@ -70,6 +70,8 @@
     [_tableView gzwLoading:^{
         [self loadUserInfo];
     }];
+    _tableView.loadedImageName = @"";
+    _tableView.descriptionText =@"没有数据!";
 }
 
 
@@ -87,12 +89,12 @@
             
             NSLog(@"%@", error.localizedDescription);
             [weakSelf xy_showMessage:@"网络请求失败"];
-    
             _tableView.loading = NO;
             return;
         }
         
         if ([responseObject[@"code"] integerValue] == 0) {
+            
             XYHTTPResponseInfo *info = [XYHTTPResponseInfo responseInfoWithDict:responseObject];
             if (responseObject[@"userInfo"] && [responseObject[@"userInfo"] isKindOfClass:[NSDictionary class]]) {
                 weakSelf.userInfo = [XYUserInfo userInfoWithDict:responseObject[@"userInfo"] responseInfo:info];

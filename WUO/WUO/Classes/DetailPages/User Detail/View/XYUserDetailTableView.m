@@ -206,7 +206,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     }];
 }
 
-// 请求用户作品
+// 请求用户Trend
 - (void)loadUserTopic {
     
     [WUOHTTPRequest setActivityIndicator:YES];
@@ -238,6 +238,7 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
                 }
             } else {
                 self.mj_footer.hidden = YES;
+                self.loading = NO;
             }
         }
         
