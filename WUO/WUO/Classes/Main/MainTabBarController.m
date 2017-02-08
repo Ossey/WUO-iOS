@@ -21,7 +21,7 @@
 #define standOutHeight 12.0f // 中间突出部分的高度
 
 
-@interface MainTabBarController ()
+@interface MainTabBarController () <XYBlurEffectViewDelegate>
 {
 
 }
@@ -81,14 +81,13 @@
     }
     
     // 点击compose发布时，先弹出XYBlurEffect页面，用户选择完发布的类型，再跳转到对应的发布界面：（图文）、（视频）
-//    __block XYBlurEffectView *blurEffectView = nil;
+    __block XYBlurEffectView *blurEffectView = nil;
+    __weak typeof(self) weakSelf = self;
     [tabBar setCmposeClickBlock:^{
         XYBlurItem *item1 = [XYBlurItem blurItemWithImageNamed:@"message_call_connect" title:@"图文"];
         XYBlurItem *item2 = [XYBlurItem blurItemWithImageNamed:@"message_call_connect" title:@"视频"];
-        [XYBlurEffectView showWithMenuItemList:@[item1, item2]];
-//        blurEffectView = [[XYBlurEffectView alloc] init];
-//        blurEffectView.frame = self.view.bounds;
-//        [blurEffectView showToView:[UIApplication sharedApplication].keyWindow menuItemList:@[item1, item2]];
+        blurEffectView = [XYBlurEffectView showWithMenuItemList:@[item1, item2]];
+        blurEffectView.delegate = weakSelf;
     }];
     
 }
@@ -136,6 +135,25 @@
     // 在要画背景的view上 addSublayer:
     [imageView.layer addSublayer:layer];
     return imageView;
+}
+
+#pragma mark - XYBlurEffectViewDelegate
+- (void)blurEffectView:(XYBlurEffectView *)view didSelectItemWithType:(XYBlurEffectItemType)type {
+    XYComposeViewController *composeVc = nil;
+    switch (type) {
+        case XYBlurEffectItemTypeComposeImageOrText:
+            [XYBlurEffectView dismiss];
+            composeVc = [[XYComposeViewController alloc] init];
+            [self presentViewController:composeVc animated:YES completion:nil];
+            break;
+        case XYBlurEffectItemTypeComposeVideo:
+            
+            break;
+            
+        default:
+            
+            break;
+    }
 }
 
 - (void)dealloc {
