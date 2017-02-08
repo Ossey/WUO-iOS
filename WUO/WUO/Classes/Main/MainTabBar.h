@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface MainTabBar : UITabBar
+
+@property (nonatomic, copy) void (^cmposeClickBlock)();
 
 @end

@@ -29,9 +29,9 @@
     self.imageView.xy_x = 0;
     
     self.titleLabel.xy_y = CGRectGetMaxY(self.imageView.frame);
-    // 当设置为imageView的中心点x值为button的中心点x值时，点击按钮后，imageView会向左偏移
+    /// 当设置为imageView的中心点x值为button的中心点x值时，点击按钮后，imageView会向左偏移
     self.titleLabel.xy_centerX = self.imageView.xy_centerX;
-    //    self.imageView.xy_centerX = self.titleLabel.xy_centerX;
+    /// self.imageView.xy_centerX = self.titleLabel.xy_centerX;
     
     [self sizeToFit];
 

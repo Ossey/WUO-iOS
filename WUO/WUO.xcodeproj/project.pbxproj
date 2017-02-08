@@ -270,6 +270,7 @@
 		18CA22021E1A24A7005F1C87 /* UIViewController+XYHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22001E1A24A7005F1C87 /* UIViewController+XYHUD.m */; };
 		18CA22061E1A258B005F1C87 /* UIImageView+XYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA22051E1A258B005F1C87 /* UIImageView+XYExtension.m */; };
 		18CA222B1E1ACA0A005F1C87 /* XYRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */; };
+		18CD946B1E4AEE9D00779472 /* XYBlurEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CD946A1E4AEE9D00779472 /* XYBlurEffectView.m */; };
 		18E294F61E248EBA006145E3 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E294F51E248EBA006145E3 /* NSString+Date.m */; };
 		18E2954E1E251B4C006145E3 /* XYProfileBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E2954D1E251B4C006145E3 /* XYProfileBaseController.m */; };
 		18F404FB1E1F26FD00E0837A /* XYCateTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F404F91E1F26FD00E0837A /* XYCateTitleView.m */; };
@@ -847,6 +848,8 @@
 		18CA22051E1A258B005F1C87 /* UIImageView+XYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+XYExtension.m"; sourceTree = "<group>"; };
 		18CA22291E1ACA0A005F1C87 /* XYRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRefreshGifHeader.h; sourceTree = "<group>"; };
 		18CA222A1E1ACA0A005F1C87 /* XYRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRefreshGifHeader.m; sourceTree = "<group>"; };
+		18CD94691E4AEE9D00779472 /* XYBlurEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBlurEffectView.h; sourceTree = "<group>"; };
+		18CD946A1E4AEE9D00779472 /* XYBlurEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBlurEffectView.m; sourceTree = "<group>"; };
 		18E294F41E248EBA006145E3 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		18E294F51E248EBA006145E3 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
 		18E2954C1E251B4C006145E3 /* XYProfileBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYProfileBaseController.h; sourceTree = "<group>"; };
@@ -1722,6 +1725,8 @@
 		183F93C71E18F2A400875416 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18CD94691E4AEE9D00779472 /* XYBlurEffectView.h */,
+				18CD946A1E4AEE9D00779472 /* XYBlurEffectView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2852,6 +2857,7 @@
 				183F94051E191CBA00875416 /* MainNavigationController.m in Sources */,
 				180439701E2CA8A00064B5EE /* XYSettingViewController.m in Sources */,
 				181861F51E35AD5F001B8C3E /* XYFigureSpecialView.swift in Sources */,
+				18CD946B1E4AEE9D00779472 /* XYBlurEffectView.m in Sources */,
 				182F15A11E3078C600FA12C9 /* XYConstant-Swift.swift in Sources */,
 				18B0B9561E29CF3A004CD3C8 /* PSTCollectionViewData.m in Sources */,
 				18B0B9501E29CF3A004CD3C8 /* UIImageView+EMWebCache.m in Sources */,

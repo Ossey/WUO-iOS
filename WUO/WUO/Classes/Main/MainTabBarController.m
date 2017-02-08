@@ -15,6 +15,7 @@
 #import "MainTabBar.h"
 #import "XYCustomNavController.h"
 #import "WUO-Swift.h"
+#import "XYBlurEffectView.h"
 
 #define tabBarHeight CGRectGetHeight(self.tabBar.bounds)
 #define standOutHeight 12.0f // 中间突出部分的高度
@@ -78,6 +79,18 @@
         tabBarItem.selectedImage = [[UIImage imageNamed:selectImage[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [tabBarItem setTitle:itemName[i]];
     }
+    
+    // 点击compose发布时，先弹出XYBlurEffect页面，用户选择完发布的类型，再跳转到对应的发布界面：（图文）、（视频）
+//    __block XYBlurEffectView *blurEffectView = nil;
+    [tabBar setCmposeClickBlock:^{
+        XYBlurItem *item1 = [XYBlurItem blurItemWithImageNamed:@"message_call_connect" title:@"图文"];
+        XYBlurItem *item2 = [XYBlurItem blurItemWithImageNamed:@"message_call_connect" title:@"视频"];
+        [XYBlurEffectView showWithMenuItemList:@[item1, item2]];
+//        blurEffectView = [[XYBlurEffectView alloc] init];
+//        blurEffectView.frame = self.view.bounds;
+//        [blurEffectView showToView:[UIApplication sharedApplication].keyWindow menuItemList:@[item1, item2]];
+    }];
+    
 }
 
 - (void)setupChildViewController:(UIViewController *)vc  {

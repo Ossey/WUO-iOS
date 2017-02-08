@@ -95,10 +95,9 @@
 
 - (void)composeBtnClick {
     
-    // modal到发布控制器
-//    XYPubishViewController *pubishVc = [[XYPubishViewController alloc] init];
-//    [app.keyWindow.rootViewController presentViewController:pubishVc animated:YES completion:nil];
-    
+    if (self.cmposeClickBlock) {
+        self.cmposeClickBlock();
+    }
 }
 
 @end

@@ -392,7 +392,7 @@ static NSString * const selectViewIdentifier = @"XYActiveTopicDetailSelectView";
     
     // 创建数据源容器：根据用户选择的标题信息，创建对应的容器
     if (_dataList.count == 0) {
-        // 不包含就创建一个容器存放数据，然后再将容器添加到大数组dataList中
+        // 不包含就创建一个容器存放数据，然后再将容器添加到dataList中
         NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:0];
         [_dataList setObject:arrM forKey:@(currentType)];
         
