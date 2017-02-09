@@ -9,10 +9,6 @@
 #import "XYCateTitleView.h"
 #import <objc/runtime.h>
 
-//NSString *const cname = @"cname";
-//NSString *const ename = @"ename";
-
-
 @interface XYCateTitleView () <UIScrollViewDelegate>
 
 /** 右侧按钮 */
@@ -74,9 +70,21 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate cateList:(NSArray<XYCateButtonItem *> *)cateList rightBtnWidth:(CGFloat)rightBtnWidth {
+    if (self = [super initWithFrame:frame]) {
+        self.delegate = delegate;
+        self.rightBtnWidth = rightBtnWidth;
+        self.cateList = [cateList mutableCopy];
+        self.separatorView.hidden = NO;
+    }
+    
+    return self;
+
+}
+
 
 #pragma mark - 设置所有的子标题
-- (void)reloadSubviews {
+- (void)reloadSubviews:(NSArray *)list {
     
     self.cateTitleView.hidden = NO;
     self.rightButton.hidden = NO;
@@ -96,9 +104,13 @@
     [self.underLine removeFromSuperview];
     [self.items removeAllObjects];
     
-    NSInteger count = self.channelCates.count;
-    CGFloat x = 0;
+    [self initSubViews:list];
     
+}
+
+- (void)initSubViews:(NSArray *)channelCates {
+    CGFloat x = 0;
+    NSInteger count = channelCates.count;
     for (NSInteger i = 0; i < count; i++) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -106,25 +118,25 @@
         button.frame = CGRectMake(x, 0, self.itemWidth, CGRectGetHeight(self.cateTitleView.frame));
         button.titleEdgeInsets = self.titleEdgeInsets;
         button.imageEdgeInsets = self.imageEdgeInsets;
-        NSDictionary *dict = self.channelCates[i];
-        button.ename = dict[self.itemImageNameKey];
-        button.cname = dict[self.itemNameKey];
-        [button setTitle:dict[self.itemNameKey] forState:UIControlStateNormal];
-        [button setImage:dict[self.itemImageNameKey] forState:UIControlStateNormal];
-        if ((!button.ename || !button.ename.length) && (!button.cname || !button.cname.length)) {
-            button.userInteractionEnabled = NO;
-        }
-//        UIImage *image = [UIImage imageNamed:imageName];
-//        if (!image) {
-//            image = [UIImage imageNamed:@"boardgames"];
-//        }
-//        UIImage *image_h = [UIImage imageNamed:[imageName stringByAppendingString:@"_h"]];
-//        if (!image_h) {
-//            image_h = [UIImage imageNamed:@"boardgames_h"];
-//        }
         
-//        [button setImage:image forState:UIControlStateNormal];
-//        [button setImage:image_h forState:UIControlStateSelected];
+        id obj = channelCates[i];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            button.ename = obj[self.itemImageNameKey];
+            button.cname = obj[self.itemNameKey];
+            [button setTitle:obj[self.itemNameKey] forState:UIControlStateNormal];
+            [button setImage:obj[self.itemImageNameKey] forState:UIControlStateNormal];
+            if ((!button.ename || !button.ename.length) && (!button.cname || !button.cname.length)) {
+                button.userInteractionEnabled = NO;
+            }
+        } else if ([obj isKindOfClass:[XYCateButtonItem class]]) {
+            XYCateButtonItem *item = (XYCateButtonItem *)obj;
+            [button setTitle:item.title forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:item.imageNamed] forState:UIControlStateNormal];
+            if ((!item.imageNamed || !item.imageNamed.length) && (!item.title || !item.title.length)) {
+                button.userInteractionEnabled = NO;
+            }
+        }
+
         button.titleLabel.font = self.titleItemFont;
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.tag = i;
@@ -143,8 +155,6 @@
     // 让默认选择的按钮
     [self selecteTitleItemWithIndex:self.selectedIndex];
     [self creatUnderLine];
-    
-    
 }
 
 #pragma mark - set \ get
@@ -161,7 +171,13 @@
 
 - (CGFloat)itemWidth {
     
-    return _itemWidth ?: self.channelCates.count < 5 ? CGRectGetWidth(self.cateTitleView.frame) / self.channelCates.count : 110;
+    NSInteger count = 0;
+    if ([[self cateList] count]) {
+        count = self.cateList.count;
+    } else if ([[self channelCates] count]) {
+        count = self.channelCates.count;
+    }
+    return _itemWidth ?: count < 5 ? CGRectGetWidth(self.cateTitleView.frame) / count : 110;
 }
 
 
@@ -196,7 +212,18 @@
     // 当数据发送改变时，重新布局button
     if (_channelCates.count) {
         
-        [self reloadSubviews];
+        [self reloadSubviews:channelCates];
+    }
+}
+
+- (void)setCateList:(NSMutableArray<XYCateButtonItem *> *)cateList {
+    
+    _cateList = cateList;
+    
+    // 当数据发送改变时，重新布局button
+    if (_cateList.count) {
+        
+        [self reloadSubviews:cateList];
     }
 }
 
@@ -405,7 +432,13 @@
 
 - (NSInteger)selectedIndex {
     
-    return  _selectedIndex == 0 || _selectedIndex > self.channelCates.count ? self.previousSelectItemIndex : _selectedIndex;
+    NSInteger count = 0;
+    if ([[self cateList] count]) {
+        count = self.cateList.count;
+    } else if ([[self channelCates] count]) {
+        count = self.channelCates.count;
+    }
+    return  _selectedIndex == 0 || _selectedIndex > count ? self.previousSelectItemIndex : _selectedIndex;
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
@@ -555,6 +588,11 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(cateTitleView:didSelectedItem:cname:)]) {
         [self.delegate cateTitleView:self didSelectedItem:button cname:button.cname];
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cateTitleView:didSelectedItem:atIndex:)]) {
+        [self.delegate cateTitleView:self didSelectedItem:self.cateList[button.tag] atIndex:button.tag];
+    }
+    
     self.previousSelectedBtn = button; /// 记录上次选中的按钮
     
 }
@@ -684,4 +722,19 @@ char *const CNAME_KEY = "cnameKey";
 
 @end
 
+@implementation XYCateButtonItem
+
++ (instancetype)cateButtonItemWithImgNamed:(NSString *)imgNamed title:(NSString *)title {
+    return [[XYCateButtonItem alloc] initWithImgNamed:imgNamed title:title];
+}
+
+- (instancetype)initWithImgNamed:(NSString *)imgNamed title:(NSString *)title {
+    if (self = [super init]) {
+        self.title = title;
+        self.imageNamed = imgNamed;
+    }
+    return self;
+}
+
+@end
 

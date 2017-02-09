@@ -9,7 +9,7 @@
 import UIKit
 
 class XYTrendDetailLabelView: XYCateTitleView {
-
+    
     override init(frame: CGRect, delegate: Any?, channelCates: [[AnyHashable : Any]]?, rightBtnWidth: CGFloat) {
         super.init(frame: frame, delegate: delegate, channelCates: channelCates, rightBtnWidth: rightBtnWidth)
         

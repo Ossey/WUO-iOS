@@ -223,9 +223,7 @@ CGFloat const itemWH = 80;
         if (self.delegate && [self.delegate respondsToSelector:@selector(blurEffectView:didSelectItemWithType:)]) {
             [self.delegate blurEffectView:self didSelectItemWithType:XYBlurEffectItemTypeClose];
         }
-        
     }];
-    
 }
 
 
