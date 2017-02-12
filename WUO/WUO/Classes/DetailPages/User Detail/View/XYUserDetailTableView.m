@@ -546,13 +546,17 @@ static NSString * const pageViewIdentifier = @"pageViewIdentifier";
     
     
 }
-- (void)dealloc {
-    
-    [super removeFromSuperview];
+
+- (void)removeFromSuperview {
     [_dataList removeAllObjects];
     [_needLoadList removeAllObjects];
     _needLoadList = nil;
     _dataList = nil;
+    self.delegate = nil;
+    self.dataSource = nil;
+    [super removeFromSuperview];
+}
+- (void)dealloc {
     NSLog(@"%s", __func__);
 }
 

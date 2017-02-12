@@ -73,6 +73,16 @@ class XYTrendDetailTableView: UITableView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func removeFromSuperview() {
+        trendDetailViewModel = nil
+        selectView.removeFromSuperview()
+        self.delegate = nil
+        self.dataSource = nil
+        self.headerView.removeFromSuperview()
+        super.removeFromSuperview()
+    }
+    
 }
 
 // MARK: - 设置UI界面

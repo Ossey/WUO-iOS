@@ -83,7 +83,6 @@
 
 
 - (void)dealloc {
-    
     [_tableView removeFromSuperview];
     _tableView = nil;
     NSLog(@"%s", __func__);

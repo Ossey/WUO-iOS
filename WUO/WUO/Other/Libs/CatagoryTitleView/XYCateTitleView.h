@@ -10,8 +10,6 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-//extern NSString *const cname; // 文字名称
-//extern NSString *const ename; // 图片名称
 
 
 @class XYCateTitleView, XYCateButtonItem;

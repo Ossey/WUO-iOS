@@ -510,14 +510,26 @@ static NSString * const cellIdentifier = @"XYTrendViewCell";
     return _serachLabel ?: @"";
 }
 
-- (void)dealloc {
+- (void)removeFromSuperview {
+    for (UIView *temp in self.subviews) {
+        for (XYTrendViewCell *cell in temp.subviews) {
+            if ([cell isKindOfClass:[XYTrendViewCell class]]) {
+                [cell releaseMemory];
+            }
+        }
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_dataList removeAllObjects];
-    [_cnameDict removeAllObjects];
+    _dataList = nil;
+    [self reloadData];
+    self.delegate = nil;
     [_needLoadList removeAllObjects];
     _needLoadList = nil;
-    _dataList = nil;
-    _cnameDict = nil;
+    [super removeFromSuperview];
+}
+
+- (void)dealloc {
+
     NSLog(@"%s", __func__);
 }
 
